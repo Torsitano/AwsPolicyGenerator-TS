@@ -1,0 +1,1306 @@
+{
+    "batchUpdateClusters": {
+        "privilege": "BatchUpdateClusters",
+        "description": "Grants permissions to apply service updates",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_BatchUpdateClusters.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs",
+            "s3:GetObject"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "copySnapshot": {
+        "privilege": "CopySnapshot",
+        "description": "Grants permissions to make a copy of an existing snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CopySnapshot.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "memorydb:TagResource",
+            "s3:DeleteObject",
+            "s3:GetBucketAcl",
+            "s3:PutObject"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAcl": {
+        "privilege": "CreateAcl",
+        "description": "Grants permissions to create a new access control list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CreateAcl.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "memorydb:TagResource"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createCluster": {
+        "privilege": "CreateCluster",
+        "description": "Grants permissions to create a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CreateCluster.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs",
+            "memorydb:TagResource",
+            "s3:GetObject"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createParameterGroup": {
+        "privilege": "CreateParameterGroup",
+        "description": "Grants permissions to create a new parameter group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CreateParameterGroup.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createSnapshot": {
+        "privilege": "CreateSnapshot",
+        "description": "Grants permissions to create a backup of a cluster at the current point in time",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CreateSnapshot.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "memorydb:TagResource",
+            "s3:DeleteObject",
+            "s3:GetBucketAcl",
+            "s3:PutObject"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createSubnetGroup": {
+        "privilege": "CreateSubnetGroup",
+        "description": "Grants permissions to create a new subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CreateSubnetGroup.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createUser": {
+        "privilege": "CreateUser",
+        "description": "Grants permissions to create a new user",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_CreateUser.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "deleteAcl": {
+        "privilege": "DeleteAcl",
+        "description": "Grants permissions to delete an access control list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DeleteAcl.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteCluster": {
+        "privilege": "DeleteCluster",
+        "description": "Grants permissions to delete a previously provisioned cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DeleteCluster.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteParameterGroup": {
+        "privilege": "DeleteParameterGroup",
+        "description": "Grants permissions to delete a parameter group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DeleteParameterGroup.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSnapshot": {
+        "privilege": "DeleteSnapshot",
+        "description": "Grants permissions to delete a snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DeleteSnapshot.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSubnetGroup": {
+        "privilege": "DeleteSubnetGroup",
+        "description": "Grants permissions to delete a subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DeleteSubnetGroup.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUser": {
+        "privilege": "DeleteUser",
+        "description": "Grants permissions to delete a user",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DeleteUser.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAcls": {
+        "privilege": "DescribeAcls",
+        "description": "Grants permissions to retrieve information about access control lists",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeAcls.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeClusters": {
+        "privilege": "DescribeClusters",
+        "description": "Grants permissions to retrieve information about all provisioned clusters if no cluster identifier is specified, or about a specific cluster if a cluster identifier is supplied",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeClusters.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEngineVersions": {
+        "privilege": "DescribeEngineVersions",
+        "description": "Grants permissions to list of the available engines and their versions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeEngineVersions.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEvents": {
+        "privilege": "DescribeEvents",
+        "description": "Grants permissions to retrieve events related to clusters, subnet groups, and parameter groups",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeEvents.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeParameterGroups": {
+        "privilege": "DescribeParameterGroups",
+        "description": "Grants permissions to retrieve information about parameter groups",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeParameterGroups.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeParameters": {
+        "privilege": "DescribeParameters",
+        "description": "Grants permissions to retrieve a detailed parameter list for a particular parameter group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeParameters.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeServiceUpdates": {
+        "privilege": "DescribeServiceUpdates",
+        "description": "Grants permissions to retrieve details of the service updates",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeServiceUpdates.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSnapshots": {
+        "privilege": "DescribeSnapshots",
+        "description": "Grants permissions to retrieve information about cluster snapshots",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeSnapshots.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSubnetGroups": {
+        "privilege": "DescribeSubnetGroups",
+        "description": "Grants permissions to retrieve a list of subnet group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeSubnetGroups.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeUsers": {
+        "privilege": "DescribeUsers",
+        "description": "Grants permissions to retrieve information about users",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_DescribeUsers.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "failoverShard": {
+        "privilege": "FailoverShard",
+        "description": "Grants permissions to test automatic failover on a specified shard in a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_FailoverShard.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listNodeTypeUpdates": {
+        "privilege": "ListNodeTypeUpdates",
+        "description": "Grants permissions to list available node type updates",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_ListNodeTypeUpdates.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTags": {
+        "privilege": "ListTags",
+        "description": "Grants permissions to list cost allocation tags",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_ListTags.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resetParameterGroup": {
+        "privilege": "ResetParameterGroup",
+        "description": "Grants permissions to modify the parameters of a parameter group to the engine or system default value",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_ResetParameterGroup.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permissions to add up to 10 cost allocation tags to the named resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_TagResource.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permissions to remove the tags identified by the TagKeys list from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_UntagResource.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:snapshot/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateAcl": {
+        "privilege": "UpdateAcl",
+        "description": "Grants permissions to update an access control list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_UpdateAcl.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateCluster": {
+        "privilege": "UpdateCluster",
+        "description": "Grants permissions to update the settings for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_UpdateCluster.html",
+        "service": "memorydb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:cluster/${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "acl": {
+                "resourceName": "acl",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:acl/${AclName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateParameterGroup": {
+        "privilege": "UpdateParameterGroup",
+        "description": "Grants permissions to update parameters in a parameter group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_UpdateParameterGroup.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:parametergroup/${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSubnetGroup": {
+        "privilege": "UpdateSubnetGroup",
+        "description": "Grants permissions to update a subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_UpdateSubnetGroup.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:subnetgroup/${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateUser": {
+        "privilege": "UpdateUser",
+        "description": "Grants permissions to update a user",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/memorydb/latest/APIReference/API_UpdateUser.html",
+        "service": "memorydb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:memorydb:${Region}:${Account}:user/${UserName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

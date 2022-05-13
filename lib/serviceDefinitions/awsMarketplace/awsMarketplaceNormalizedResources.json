@@ -1,0 +1,70 @@
+{
+    "entity": {
+        "resourceName": "Entity",
+        "service": "awsMarketplace",
+        "resourceArn": "arn:${Partition}:aws-marketplace:${Region}:${Account}:${Catalog}/${EntityType}/${ResourceId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeEntity": {
+                "privilege": "DescribeEntity",
+                "description": "Grants permission to return the details of an existing entity",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_DescribeEntity.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "StartChangeSet": {
+                "privilege": "StartChangeSet",
+                "description": "Grants permission to request a new change set. (Note: resource-level permissions for this action and condition context keys for this action are only supported when used with Catalog API and are not supported when used with AWS Marketplace Management Portal)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html",
+                "privConditions": {
+                    "catalog:ChangeType": {
+                        "condition": "catalog:ChangeType",
+                        "description": "Filters access by the change type in the StartChangeSet request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "changeSet": {
+        "resourceName": "ChangeSet",
+        "service": "awsMarketplace",
+        "resourceArn": "arn:${Partition}:aws-marketplace:${Region}:${Account}:${Catalog}/ChangeSet/${ResourceId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeChangeSet": {
+                "privilege": "DescribeChangeSet",
+                "description": "Grants permission to return the details of an existing change set",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_DescribeChangeSet.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CancelChangeSet": {
+                "privilege": "CancelChangeSet",
+                "description": "Grants permission to cancel a running change set",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_CancelChangeSet.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

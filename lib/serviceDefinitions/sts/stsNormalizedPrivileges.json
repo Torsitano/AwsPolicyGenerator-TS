@@ -1,0 +1,533 @@
+{
+    "assumeRole": {
+        "privilege": "AssumeRole",
+        "description": "Grants permission to obtain a set of temporary security credentials that you can use to access AWS resources that you might not normally have access to",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:PrincipalTag/${TagKey}": {
+                "condition": "aws:PrincipalTag/${TagKey}",
+                "description": "Filters access by the tag associated with the principal that is making the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "sts:TransitiveTagKeys": {
+                "condition": "sts:TransitiveTagKeys",
+                "description": "Filters access by the transitive tag keys that are passed in the request",
+                "type": "String"
+            },
+            "sts:ExternalId": {
+                "condition": "sts:ExternalId",
+                "description": "Filters access by the unique identifier required when you assume a role in another account",
+                "type": "String"
+            },
+            "sts:RoleSessionName": {
+                "condition": "sts:RoleSessionName",
+                "description": "Filters access by the role session name required when you assume a role",
+                "type": "String"
+            },
+            "iam:ResourceTag/${TagKey}": {
+                "condition": "iam:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags that are attached to the role that is being assumed",
+                "type": "String"
+            },
+            "sts:SourceIdentity": {
+                "condition": "sts:SourceIdentity",
+                "description": "Filters access by the source identity that is passed in the request",
+                "type": "String"
+            },
+            "aws:SourceIdentity": {
+                "condition": "aws:SourceIdentity",
+                "description": "Filters access by the source identity that is set on the caller",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "assumeRoleWithSAML": {
+        "privilege": "AssumeRoleWithSAML",
+        "description": "Grants permission to obtain a set of temporary security credentials for users who have been authenticated via a SAML authentication response",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithSAML.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "saml:namequalifier": {
+                "condition": "saml:namequalifier",
+                "description": "Filters access by the hash value of the issuer, account ID, and friendly name",
+                "type": "String"
+            },
+            "saml:sub": {
+                "condition": "saml:sub",
+                "description": "Filters access by the subject of the claim (the SAML user ID)",
+                "type": "String"
+            },
+            "saml:aud": {
+                "condition": "saml:aud",
+                "description": "Filters access by the endpoint URL to which SAML assertions are presented",
+                "type": "String"
+            },
+            "saml:iss": {
+                "condition": "saml:iss",
+                "description": "Filters access by on the issuer, which is represented by a URN",
+                "type": "String"
+            },
+            "saml:doc": {
+                "condition": "saml:doc",
+                "description": "Filters access by on the principal that was used to assume the role",
+                "type": "String"
+            },
+            "saml:cn": {
+                "condition": "saml:cn",
+                "description": "Filters access by the eduOrg attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:commonName": {
+                "condition": "saml:commonName",
+                "description": "Filters access by the commonName attribute",
+                "type": "String"
+            },
+            "saml:eduorghomepageuri": {
+                "condition": "saml:eduorghomepageuri",
+                "description": "Filters access by the eduOrg attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:eduorgidentityauthnpolicyuri": {
+                "condition": "saml:eduorgidentityauthnpolicyuri",
+                "description": "Filters access by the eduOrg attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:eduorglegalname": {
+                "condition": "saml:eduorglegalname",
+                "description": "Filters access by the eduOrg attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:eduorgsuperioruri": {
+                "condition": "saml:eduorgsuperioruri",
+                "description": "Filters access by the eduOrg attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:eduorgwhitepagesuri": {
+                "condition": "saml:eduorgwhitepagesuri",
+                "description": "Filters access by the eduOrg attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersonaffiliation": {
+                "condition": "saml:edupersonaffiliation",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersonassurance": {
+                "condition": "saml:edupersonassurance",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersonentitlement": {
+                "condition": "saml:edupersonentitlement",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersonnickname": {
+                "condition": "saml:edupersonnickname",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersonorgdn": {
+                "condition": "saml:edupersonorgdn",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "String"
+            },
+            "saml:edupersonorgunitdn": {
+                "condition": "saml:edupersonorgunitdn",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersonprimaryaffiliation": {
+                "condition": "saml:edupersonprimaryaffiliation",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "String"
+            },
+            "saml:edupersonprimaryorgunitdn": {
+                "condition": "saml:edupersonprimaryorgunitdn",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "String"
+            },
+            "saml:edupersonprincipalname": {
+                "condition": "saml:edupersonprincipalname",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "String"
+            },
+            "saml:edupersonscopedaffiliation": {
+                "condition": "saml:edupersonscopedaffiliation",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:edupersontargetedid": {
+                "condition": "saml:edupersontargetedid",
+                "description": "Filters access by the eduPerson attribute",
+                "type": "ArrayOfString"
+            },
+            "saml:givenName": {
+                "condition": "saml:givenName",
+                "description": "Filters access by the givenName attribute",
+                "type": "String"
+            },
+            "saml:mail": {
+                "condition": "saml:mail",
+                "description": "Filters access by the mail attribute",
+                "type": "String"
+            },
+            "saml:name": {
+                "condition": "saml:name",
+                "description": "Filters access by the name attribute",
+                "type": "String"
+            },
+            "saml:organizationStatus": {
+                "condition": "saml:organizationStatus",
+                "description": "Filters access by the organizationStatus attribute",
+                "type": "String"
+            },
+            "saml:primaryGroupSID": {
+                "condition": "saml:primaryGroupSID",
+                "description": "Filters access by the primaryGroupSID attribute",
+                "type": "String"
+            },
+            "saml:surname": {
+                "condition": "saml:surname",
+                "description": "Filters access by the surname attribute",
+                "type": "String"
+            },
+            "saml:uid": {
+                "condition": "saml:uid",
+                "description": "Filters access by the uid attribute",
+                "type": "String"
+            },
+            "saml:x500UniqueIdentifier": {
+                "condition": "saml:x500UniqueIdentifier",
+                "description": "Filters access by the uid attribute",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:PrincipalTag/${TagKey}": {
+                "condition": "aws:PrincipalTag/${TagKey}",
+                "description": "Filters access by the tag associated with the principal that is making the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "sts:TransitiveTagKeys": {
+                "condition": "sts:TransitiveTagKeys",
+                "description": "Filters access by the transitive tag keys that are passed in the request",
+                "type": "String"
+            },
+            "sts:SourceIdentity": {
+                "condition": "sts:SourceIdentity",
+                "description": "Filters access by the source identity that is passed in the request",
+                "type": "String"
+            },
+            "sts:RoleSessionName": {
+                "condition": "sts:RoleSessionName",
+                "description": "Filters access by the role session name required when you assume a role",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "assumeRoleWithWebIdentity": {
+        "privilege": "AssumeRoleWithWebIdentity",
+        "description": "Grants permission to obtain a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "graph.facebook.com:id": {
+                "condition": "graph.facebook.com:id",
+                "description": "Filters access by the Facebook user ID",
+                "type": "String"
+            },
+            "accounts.google.com:aud": {
+                "condition": "accounts.google.com:aud",
+                "description": "Filters access by the Google application ID",
+                "type": "String"
+            },
+            "accounts.google.com:oaud": {
+                "condition": "accounts.google.com:oaud",
+                "description": "Filters access by the Google audience",
+                "type": "String"
+            },
+            "accounts.google.com:sub": {
+                "condition": "accounts.google.com:sub",
+                "description": "Filters access by the subject of the claim (the Google user ID)",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:PrincipalTag/${TagKey}": {
+                "condition": "aws:PrincipalTag/${TagKey}",
+                "description": "Filters access by the tag associated with the principal that is making the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "sts:TransitiveTagKeys": {
+                "condition": "sts:TransitiveTagKeys",
+                "description": "Filters access by the transitive tag keys that are passed in the request",
+                "type": "String"
+            },
+            "sts:SourceIdentity": {
+                "condition": "sts:SourceIdentity",
+                "description": "Filters access by the source identity that is passed in the request",
+                "type": "String"
+            },
+            "sts:RoleSessionName": {
+                "condition": "sts:RoleSessionName",
+                "description": "Filters access by the role session name required when you assume a role",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "decodeAuthorizationMessage": {
+        "privilege": "DecodeAuthorizationMessage",
+        "description": "Grants permission to decode additional information about the authorization status of a request from an encoded message returned in response to an AWS request",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_DecodeAuthorizationMessage.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getAccessKeyInfo": {
+        "privilege": "GetAccessKeyInfo",
+        "description": "Grants permission to obtain details about the access key id passed as a parameter to the request",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetAccessKeyInfo.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getCallerIdentity": {
+        "privilege": "GetCallerIdentity",
+        "description": "Grants permission to obtain details about the IAM identity whose credentials are used to call the API",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetCallerIdentity.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getFederationToken": {
+        "privilege": "GetFederationToken",
+        "description": "Grants permission to obtain a set of temporary security credentials (consisting of an access key ID, a secret access key, and a security token) for a federated user",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetFederationToken.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:PrincipalTag/${TagKey}": {
+                "condition": "aws:PrincipalTag/${TagKey}",
+                "description": "Filters access by the tag associated with the principal that is making the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getServiceBearerToken": {
+        "privilege": "GetServiceBearerToken",
+        "description": "Grants permission to obtain a STS bearer token for an AWS root user, IAM role, or an IAM user",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_bearer.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "sts:AWSServiceName": {
+                "condition": "sts:AWSServiceName",
+                "description": "Filters access by the service that is obtaining a bearer token",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "getSessionToken": {
+        "privilege": "GetSessionToken",
+        "description": "Grants permission to obtain a set of temporary security credentials (consisting of an access key ID, a secret access key, and a security token) for an AWS account or IAM user",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "setSourceIdentity": {
+        "privilege": "SetSourceIdentity",
+        "description": "Grants permission to set a source identity on a STS session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html#id_credentials_temp_control-access_monitor-perms",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "sts:SourceIdentity": {
+                "condition": "sts:SourceIdentity",
+                "description": "Filters access by the source identity that is passed in the request",
+                "type": "String"
+            },
+            "aws:SourceIdentity": {
+                "condition": "aws:SourceIdentity",
+                "description": "Filters access by the source identity that is set on the caller",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "tagSession": {
+        "privilege": "TagSession",
+        "description": "Grants permission to add tags to a STS session",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html",
+        "service": "sts",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:PrincipalTag/${TagKey}": {
+                "condition": "aws:PrincipalTag/${TagKey}",
+                "description": "Filters access by the tag associated with the principal that is making the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "sts:TransitiveTagKeys": {
+                "condition": "sts:TransitiveTagKeys",
+                "description": "Filters access by the transitive tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,269 @@
+{
+    "repository": {
+        "resourceName": "repository",
+        "service": "ecrPublic",
+        "resourceArn": "arn:${Partition}:ecr-public::${Account}:repository/${RepositoryName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribeImageTags": {
+                "privilege": "DescribeImageTags",
+                "description": "Grants permission to describe all the image tags for a given repository",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_DescribeImageTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeRepositories": {
+                "privilege": "DescribeRepositories",
+                "description": "Grants permission to describe image repositories in a registry",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_DescribeRepositories.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "BatchCheckLayerAvailability": {
+                "privilege": "BatchCheckLayerAvailability",
+                "description": "Grants permission to check the availability of multiple image layers in a specified registry and repository",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_BatchCheckLayerAvailability.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeImages": {
+                "privilege": "DescribeImages",
+                "description": "Grants permission to get metadata about the images in a repository, including image size, image tags, and creation date",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_DescribeImages.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRepositoryCatalogData": {
+                "privilege": "GetRepositoryCatalogData",
+                "description": "Grants permission to retrieve the catalog data associated with a repository",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_GetRepositoryCatalogData.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRepositoryPolicy": {
+                "privilege": "GetRepositoryPolicy",
+                "description": "Grants permission to retrieve the repository policy for a specified repository",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_GetRepositoryPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for an Amazon ECR resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "BatchDeleteImage": {
+                "privilege": "BatchDeleteImage",
+                "description": "Grants permission to delete a list of specified images within a specified repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_BatchDeleteImage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CompleteLayerUpload": {
+                "privilege": "CompleteLayerUpload",
+                "description": "Grants permission to inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_CompleteLayerUpload.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateRepository": {
+                "privilege": "CreateRepository",
+                "description": "Grants permission to create an image repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_CreateRepository.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters create requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters create requests based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteRepository": {
+                "privilege": "DeleteRepository",
+                "description": "Grants permission to delete an existing image repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_DeleteRepository.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteRepositoryPolicy": {
+                "privilege": "DeleteRepositoryPolicy",
+                "description": "Grants permission to delete the repository policy from a specified repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_DeleteRepositoryPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "InitiateLayerUpload": {
+                "privilege": "InitiateLayerUpload",
+                "description": "Grants permission to notify Amazon ECR that you intend to upload an image layer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_InitiateLayerUpload.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutImage": {
+                "privilege": "PutImage",
+                "description": "Grants permission to create or update the image manifest associated with an image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_PutImage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutRepositoryCatalogData": {
+                "privilege": "PutRepositoryCatalogData",
+                "description": "Grants permission to update the catalog data associated with a repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_PutRepositoryCatalogData.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UploadLayerPart": {
+                "privilege": "UploadLayerPart",
+                "description": "Grants permission to upload an image layer part to Amazon ECR Public",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_UploadLayerPart.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "SetRepositoryPolicy": {
+                "privilege": "SetRepositoryPolicy",
+                "description": "Grants permission to apply a repository policy on a specified repository to control access permissions",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_SetRepositoryPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon ECR resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters create requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters create requests based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon ECR resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters create requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters create requests based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    },
+    "registry": {
+        "resourceName": "registry",
+        "service": "ecrPublic",
+        "resourceArn": "arn:${Partition}:ecr-public::${Account}:registry/${RegistryId}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "DescribeRegistries": {
+                "privilege": "DescribeRegistries",
+                "description": "Grants permission to retrieve the catalog data associated with a registry",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_DescribeRegistries.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetRegistryCatalogData": {
+                "privilege": "GetRegistryCatalogData",
+                "description": "Grants permission to retrieve the catalog data associated with a registry",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_GetRegistryCatalogData.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "PutRegistryCatalogData": {
+                "privilege": "PutRegistryCatalogData",
+                "description": "Grants permission to create and update the catalog data associated with a registry",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECRPublic/latest/APIReference/API_PutRegistryCatalogData.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

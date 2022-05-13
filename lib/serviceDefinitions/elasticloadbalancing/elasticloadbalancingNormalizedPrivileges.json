@@ -1,0 +1,1917 @@
+{
+    "addTags": {
+        "privilege": "AddTags",
+        "description": "Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_AddTags.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "A key that is present in the request the user makes to the ELB service",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "The list of all the tag key names associated with the resource in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "listenerRule/app": {
+                "resourceName": "listener-rule/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listenerRule/net": {
+                "resourceName": "listener-rule/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "applySecurityGroupsToLoadBalancer": {
+        "privilege": "ApplySecurityGroupsToLoadBalancer",
+        "description": "Associates one or more security groups with your load balancer in a virtual private cloud (VPC)",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_ApplySecurityGroupsToLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "attachLoadBalancerToSubnets": {
+        "privilege": "AttachLoadBalancerToSubnets",
+        "description": "Adds one or more subnets to the set of configured subnets for the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_AttachLoadBalancerToSubnets.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "configureHealthCheck": {
+        "privilege": "ConfigureHealthCheck",
+        "description": "Specifies the health check settings to use when evaluating the health state of your back-end instances",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_ConfigureHealthCheck.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAppCookieStickinessPolicy": {
+        "privilege": "CreateAppCookieStickinessPolicy",
+        "description": "Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_CreateAppCookieStickinessPolicy.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createLBCookieStickinessPolicy": {
+        "privilege": "CreateLBCookieStickinessPolicy",
+        "description": "Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_CreateLBCookieStickinessPolicy.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createLoadBalancer": {
+        "privilege": "CreateLoadBalancer",
+        "description": "Creates a load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "A key that is present in the request the user makes to the ELB service",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "The list of all the tag key names associated with the resource in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createLoadBalancerListeners": {
+        "privilege": "CreateLoadBalancerListeners",
+        "description": "Creates one or more listeners for the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_CreateLoadBalancerListeners.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createLoadBalancerPolicy": {
+        "privilege": "CreateLoadBalancerPolicy",
+        "description": "Creates a policy with the specified attributes for the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_CreateLoadBalancerPolicy.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLoadBalancer": {
+        "privilege": "DeleteLoadBalancer",
+        "description": "Deletes the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLoadBalancerListeners": {
+        "privilege": "DeleteLoadBalancerListeners",
+        "description": "Deletes the specified listeners from the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DeleteLoadBalancerListeners.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLoadBalancerPolicy": {
+        "privilege": "DeleteLoadBalancerPolicy",
+        "description": "Deletes the specified policy from the specified load balancer. This policy must not be enabled for any listeners",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DeleteLoadBalancerPolicy.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deregisterInstancesFromLoadBalancer": {
+        "privilege": "DeregisterInstancesFromLoadBalancer",
+        "description": "Deregisters the specified instances from the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DeregisterInstancesFromLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeInstanceHealth": {
+        "privilege": "DescribeInstanceHealth",
+        "description": "Describes the state of the specified instances with respect to the specified load balancer",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeInstanceHealth.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeLoadBalancerAttributes": {
+        "privilege": "DescribeLoadBalancerAttributes",
+        "description": "Describes the attributes for the specified load balancer",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancerAttributes.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeLoadBalancerPolicies": {
+        "privilege": "DescribeLoadBalancerPolicies",
+        "description": "Describes the specified policies",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerPolicies.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeLoadBalancerPolicyTypes": {
+        "privilege": "DescribeLoadBalancerPolicyTypes",
+        "description": "Describes the specified load balancer policy types",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerPolicyTypes.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeLoadBalancers": {
+        "privilege": "DescribeLoadBalancers",
+        "description": "Describes the specified the load balancers. If no load balancers are specified, the call describes all of your load balancers",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTags": {
+        "privilege": "DescribeTags",
+        "description": "Describes the tags associated with the specified resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTags.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listenerRule/app": {
+                "resourceName": "listener-rule/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listenerRule/net": {
+                "resourceName": "listener-rule/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "detachLoadBalancerFromSubnets": {
+        "privilege": "DetachLoadBalancerFromSubnets",
+        "description": "Removes the specified subnets from the set of configured subnets for the load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DetachLoadBalancerFromSubnets.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disableAvailabilityZonesForLoadBalancer": {
+        "privilege": "DisableAvailabilityZonesForLoadBalancer",
+        "description": "Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DisableAvailabilityZonesForLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "enableAvailabilityZonesForLoadBalancer": {
+        "privilege": "EnableAvailabilityZonesForLoadBalancer",
+        "description": "Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_EnableAvailabilityZonesForLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyLoadBalancerAttributes": {
+        "privilege": "ModifyLoadBalancerAttributes",
+        "description": "Modifies the attributes of the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyLoadBalancerAttributes.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "registerInstancesWithLoadBalancer": {
+        "privilege": "RegisterInstancesWithLoadBalancer",
+        "description": "Adds the specified instances to the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_RegisterInstancesWithLoadBalancer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "removeTags": {
+        "privilege": "RemoveTags",
+        "description": "Removes one or more tags from the specified load balancer",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_RemoveTags.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "A key that is present in the request the user makes to the ELB service",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "The list of all the tag key names associated with the resource in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "listenerRule/app": {
+                "resourceName": "listener-rule/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listenerRule/net": {
+                "resourceName": "listener-rule/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setLoadBalancerListenerSSLCertificate": {
+        "privilege": "SetLoadBalancerListenerSSLCertificate",
+        "description": "Sets the certificate that terminates the specified listener's SSL connections",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_SetLoadBalancerListenerSSLCertificate.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setLoadBalancerPoliciesForBackendServer": {
+        "privilege": "SetLoadBalancerPoliciesForBackendServer",
+        "description": "Replaces the set of policies associated with the specified port on which the back-end server is listening with a new set of policies",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_SetLoadBalancerPoliciesForBackendServer.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setLoadBalancerPoliciesOfListener": {
+        "privilege": "SetLoadBalancerPoliciesOfListener",
+        "description": "Replaces the current set of policies for the specified load balancer port with the specified set of policies",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_SetLoadBalancerPoliciesOfListener.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer": {
+                "resourceName": "loadbalancer",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/${LoadBalancerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "addListenerCertificates": {
+        "privilege": "AddListenerCertificates",
+        "description": "Adds the specified certificates to the specified secure listener",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_AddListenerCertificates.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createListener": {
+        "privilege": "CreateListener",
+        "description": "Creates a listener for the specified Application Load Balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateListener.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "A key that is present in the request the user makes to the ELB service",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "The list of all the tag key names associated with the resource in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createRule": {
+        "privilege": "CreateRule",
+        "description": "Creates a rule for the specified listener",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateRule.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "A key that is present in the request the user makes to the ELB service",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "The list of all the tag key names associated with the resource in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createTargetGroup": {
+        "privilege": "CreateTargetGroup",
+        "description": "Creates a target group.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "A key that is present in the request the user makes to the ELB service",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "The list of all the tag key names associated with the resource in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteListener": {
+        "privilege": "DeleteListener",
+        "description": "Deletes the specified listener",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteListener.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRule": {
+        "privilege": "DeleteRule",
+        "description": "Deletes the specified rule",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteRule.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listenerRule/app": {
+                "resourceName": "listener-rule/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listenerRule/net": {
+                "resourceName": "listener-rule/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTargetGroup": {
+        "privilege": "DeleteTargetGroup",
+        "description": "Deletes the specified target group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeleteTargetGroup.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deregisterTargets": {
+        "privilege": "DeregisterTargets",
+        "description": "Deregisters the specified targets from the specified target group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DeregisterTargets.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAccountLimits": {
+        "privilege": "DescribeAccountLimits",
+        "description": "Describes the Elastic Load Balancing resource limits for the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeAccountLimits.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeListenerCertificates": {
+        "privilege": "DescribeListenerCertificates",
+        "description": "Describes the certificates for the specified secure listener",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeListenerCertificates.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeListeners": {
+        "privilege": "DescribeListeners",
+        "description": "Describes the specified listeners or the listeners for the specified Application Load Balancer",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeListeners.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeRules": {
+        "privilege": "DescribeRules",
+        "description": "Describes the specified rules or the rules for the specified listener",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeRules.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSSLPolicies": {
+        "privilege": "DescribeSSLPolicies",
+        "description": "Describes the specified policies or all policies used for SSL negotiation",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeSSLPolicies.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTargetGroupAttributes": {
+        "privilege": "DescribeTargetGroupAttributes",
+        "description": "Describes the attributes for the specified target group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroupAttributes.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTargetGroups": {
+        "privilege": "DescribeTargetGroups",
+        "description": "Describes the specified target groups or all of your target groups",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTargetHealth": {
+        "privilege": "DescribeTargetHealth",
+        "description": "Describes the health of the specified targets or all of your targets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetHealth.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyListener": {
+        "privilege": "ModifyListener",
+        "description": "Modifies the specified properties of the specified listener",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyListener.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyRule": {
+        "privilege": "ModifyRule",
+        "description": "Modifies the specified rule",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyRule.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listenerRule/app": {
+                "resourceName": "listener-rule/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listenerRule/net": {
+                "resourceName": "listener-rule/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyTargetGroup": {
+        "privilege": "ModifyTargetGroup",
+        "description": "Modifies the health checks used when evaluating the health state of the targets in the specified target group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyTargetGroup.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyTargetGroupAttributes": {
+        "privilege": "ModifyTargetGroupAttributes",
+        "description": "Modifies the specified attributes of the specified target group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_ModifyTargetGroupAttributes.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "registerTargets": {
+        "privilege": "RegisterTargets",
+        "description": "Registers the specified targets with the specified target group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_RegisterTargets.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetgroup": {
+                "resourceName": "targetgroup",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:targetgroup/${TargetGroupName}/${TargetGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "removeListenerCertificates": {
+        "privilege": "RemoveListenerCertificates",
+        "description": "Removes the specified certificates of the specified secure listener",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_RemoveListenerCertificates.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listener/app": {
+                "resourceName": "listener/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listener/net": {
+                "resourceName": "listener/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setIpAddressType": {
+        "privilege": "SetIpAddressType",
+        "description": "Not found",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_SetIpAddressType.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setRulePriorities": {
+        "privilege": "SetRulePriorities",
+        "description": "Sets the priorities of the specified rules",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_SetRulePriorities.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "listenerRule/app": {
+                "resourceName": "listener-rule/app",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/app/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "listenerRule/net": {
+                "resourceName": "listener-rule/net",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:listener-rule/net/${LoadBalancerName}/${LoadBalancerId}/${ListenerId}/${ListenerRuleId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setSecurityGroups": {
+        "privilege": "SetSecurityGroups",
+        "description": "Associates the specified security groups with the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_SetSecurityGroups.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setSubnets": {
+        "privilege": "SetSubnets",
+        "description": "Enables the Availability Zone for the specified subnets for the specified load balancer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_SetSubnets.html",
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            },
+            "loadbalancer/net/": {
+                "resourceName": "loadbalancer/net/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/net/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Global tag key and value pair",
+                        "type": "String"
+                    },
+                    "elasticloadbalancing:ResourceTag/${TagKey}": {
+                        "condition": "elasticloadbalancing:ResourceTag/${TagKey}",
+                        "description": "A tag key and value pair",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setWebAcl": {
+        "privilege": "SetWebAcl",
+        "description": "Gives WebAcl permission to WAF",
+        "accessLevel": "Write",
+        "apiDocumentationLink": null,
+        "service": "elasticloadbalancing",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    }
+}

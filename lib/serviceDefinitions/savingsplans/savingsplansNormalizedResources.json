@@ -1,0 +1,112 @@
+{
+    "savingsplan": {
+        "resourceName": "savingsplan",
+        "service": "savingsplans",
+        "resourceArn": "arn:${Partition}:savingsplans::${Account}:savingsplan/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value assoicated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a savings plan",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/savingsplans/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeSavingsPlanRates": {
+                "privilege": "DescribeSavingsPlanRates",
+                "description": "Grants permission to describe the rates associated with customers savings plan",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/savingsplans/latest/APIReference/API_DescribeSavingsPlanRates.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag-value assoicated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeSavingsPlans": {
+                "privilege": "DescribeSavingsPlans",
+                "description": "Grants permission to describe the savings plans associated with customers account",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/savingsplans/latest/APIReference/API_DescribeSavingsPlans.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag-value assoicated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteQueuedSavingsPlan": {
+                "privilege": "DeleteQueuedSavingsPlan",
+                "description": "Grants permission to delete the queued savings plan associated with customers account",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/savingsplans/latest/APIReference/API_DeleteQueuedSavingsPlan.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag-value assoicated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a savings plan",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/savingsplans/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a savings plan",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/savingsplans/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    }
+}

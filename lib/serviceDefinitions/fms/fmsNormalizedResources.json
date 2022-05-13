@@ -1,0 +1,261 @@
+{
+    "policy": {
+        "resourceName": "policy",
+        "service": "fms",
+        "resourceArn": "arn:${Partition}:fms:${Region}:${Account}:policy/${Id}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value assoicated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListComplianceStatus": {
+                "privilege": "ListComplianceStatus",
+                "description": "Grants permission to retrieve an array of PolicyComplianceStatus objects in the response. Use PolicyComplianceStatus to get a summary of which member accounts are protected by the specified policy",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_ListComplianceStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetComplianceDetail": {
+                "privilege": "GetComplianceDetail",
+                "description": "Grants permission to retrieve detailed compliance information about the specified member account. Details include resources that are in and out of compliance with the specified policy",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_GetComplianceDetail.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPolicy": {
+                "privilege": "GetPolicy",
+                "description": "Grants permission to retrieve information about the specified AWS Firewall Manager policy",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_GetPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetProtectionStatus": {
+                "privilege": "GetProtectionStatus",
+                "description": "Grants permission to retrieve policy-level attack summary information in the event of a potential DDoS attack",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_GetProtectionStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetViolationDetails": {
+                "privilege": "GetViolationDetails",
+                "description": "Grants permission to retrieve violations for a resource based on the specified AWS Firewall Manager policy and AWS account",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_GetViolationDetails.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list Tags for a given resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeletePolicy": {
+                "privilege": "DeletePolicy",
+                "description": "Grants permission to permanently delete an AWS Firewall Manager policy",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_DeletePolicy.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag-value assoicated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PutPolicy": {
+                "privilege": "PutPolicy",
+                "description": "Grants permission to create an AWS Firewall Manager policy",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PutPolicy.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add a Tag to a given resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a Tag from a given resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    },
+    "applicationsList": {
+        "resourceName": "applications-list",
+        "service": "fms",
+        "resourceArn": "arn:${Partition}:fms:${Region}:${Account}:applications-list/${Id}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value assoicated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetAppsList": {
+                "privilege": "GetAppsList",
+                "description": "Grants permission to return information about the specified AWS Firewall Manager applications list",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_GetAppsList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteAppsList": {
+                "privilege": "DeleteAppsList",
+                "description": "Grants permission to permanently deletes an AWS Firewall Manager applications list",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_DeleteAppsList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutAppsList": {
+                "privilege": "PutAppsList",
+                "description": "Grants permission to create an AWS Firewall Manager applications list",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PutAppsList.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "protocolsList": {
+        "resourceName": "protocols-list",
+        "service": "fms",
+        "resourceArn": "arn:${Partition}:fms:${Region}:${Account}:protocols-list/${Id}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value assoicated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetProtocolsList": {
+                "privilege": "GetProtocolsList",
+                "description": "Grants permission to return information about the specified AWS Firewall Manager protocols list",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_GetProtocolsList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteProtocolsList": {
+                "privilege": "DeleteProtocolsList",
+                "description": "Grants permission to permanently deletes an AWS Firewall Manager protocols list",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_DeleteProtocolsList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutProtocolsList": {
+                "privilege": "PutProtocolsList",
+                "description": "Grants permission to creates an AWS Firewall Manager protocols list",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PutProtocolsList.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

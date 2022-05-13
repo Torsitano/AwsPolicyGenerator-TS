@@ -1,0 +1,944 @@
+{
+    "cluster": {
+        "resourceName": "cluster",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:cluster/${ClusterName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAttributes": {
+                "privilege": "ListAttributes",
+                "description": "Grants permission to lists the attributes for Amazon ECS resources within a specified target type and cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListAttributes.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListContainerInstances": {
+                "privilege": "ListContainerInstances",
+                "description": "Grants permission to get a list of container instances in a specified cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeClusters": {
+                "privilege": "DescribeClusters",
+                "description": "Grants permission to describes one or more of your clusters",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeClusters.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteCluster": {
+                "privilege": "DeleteCluster",
+                "description": "Grants permission to delete the specified cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeregisterContainerInstance": {
+                "privilege": "DeregisterContainerInstance",
+                "description": "Grants permission to deregister an Amazon ECS container instance from the specified cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ExecuteCommand": {
+                "privilege": "ExecuteCommand",
+                "description": "Grants permission to run a command remotely on an Amazon ECS container",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ExecuteCommand.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "ecs:task": {
+                        "condition": "ecs:task",
+                        "description": "Filters access by the ARN of an Amazon ECS task",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RegisterContainerInstance": {
+                "privilege": "RegisterContainerInstance",
+                "description": "Grants permission to register an EC2 instance into the specified cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RegisterContainerInstance.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "SubmitAttachmentStateChanges": {
+                "privilege": "SubmitAttachmentStateChanges",
+                "description": "Grants permission to send an acknowledgement that attachments changed states",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_SubmitAttachmentStateChanges.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SubmitContainerStateChange": {
+                "privilege": "SubmitContainerStateChange",
+                "description": "Grants permission to send an acknowledgement that a container changed states",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_SubmitContainerStateChange.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SubmitTaskStateChange": {
+                "privilege": "SubmitTaskStateChange",
+                "description": "Grants permission to send an acknowledgement that a task changed states",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_SubmitTaskStateChange.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateCluster": {
+                "privilege": "UpdateCluster",
+                "description": "Grants permission to modify the configuration or settings to use for a cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateClusterSettings": {
+                "privilege": "UpdateClusterSettings",
+                "description": "Grants permission to modify the settings to use for a cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateClusterSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "containerInstance": {
+        "resourceName": "container-instance",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:container-instance/${ClusterName}/${ContainerInstanceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTasks": {
+                "privilege": "ListTasks",
+                "description": "Grants permission to get a list of tasks for a specified cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeContainerInstances": {
+                "privilege": "DescribeContainerInstances",
+                "description": "Grants permission to describes Amazon ECS container instances",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteAttributes": {
+                "privilege": "DeleteAttributes",
+                "description": "Grants permission to delete one or more custom attributes from an Amazon ECS resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "Poll": {
+                "privilege": "Poll",
+                "description": "Grants permission to an agent to connect with the Amazon ECS service to report status and get commands",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PutAttributes": {
+                "privilege": "PutAttributes",
+                "description": "Grants permission to create or update an attribute on an Amazon ECS resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAttributes.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartTelemetrySession": {
+                "privilege": "StartTelemetrySession",
+                "description": "Grants permission to start a telemetry session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-metrics.html#enable_cloudwatch",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateContainerAgent": {
+                "privilege": "UpdateContainerAgent",
+                "description": "Grants permission to update the Amazon ECS container agent on a specified container instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerAgent.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateContainerInstancesState": {
+                "privilege": "UpdateContainerInstancesState",
+                "description": "Grants permission to the user to modify the status of an Amazon ECS container instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "service": {
+        "resourceName": "service",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:service/${ClusterName}/${ServiceName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeServices": {
+                "privilege": "DescribeServices",
+                "description": "Grants permission to describe the specified services running in your cluster",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServices.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateService": {
+                "privilege": "CreateService",
+                "description": "Grants permission to run and maintain a desired number of tasks from a specified task definition via service creation",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteService": {
+                "privilege": "DeleteService",
+                "description": "Grants permission to delete a specified service within a cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateService": {
+                "privilege": "UpdateService",
+                "description": "Grants permission to modify the parameters of a service",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateServicePrimaryTaskSet": {
+                "privilege": "UpdateServicePrimaryTaskSet",
+                "description": "Grants permission to modify the primary task set used in a service",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateServicePrimaryTaskSet.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "task": {
+        "resourceName": "task",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task/${ClusterName}/${TaskId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeTasks": {
+                "privilege": "DescribeTasks",
+                "description": "Grants permission to describe a specified task or tasks",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ExecuteCommand": {
+                "privilege": "ExecuteCommand",
+                "description": "Grants permission to run a command remotely on an Amazon ECS container",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ExecuteCommand.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "ecs:task": {
+                        "condition": "ecs:task",
+                        "description": "Filters access by the ARN of an Amazon ECS task",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "StopTask": {
+                "privilege": "StopTask",
+                "description": "Grants permission to stop a running task",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_StopTask.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "taskDefinition": {
+        "resourceName": "task-definition",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task-definition/${TaskDefinitionFamilyName}:${TaskDefinitionRevisionNumber}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "RunTask": {
+                "privilege": "RunTask",
+                "description": "Grants permission to start a task using random placement and the default Amazon ECS scheduler",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartTask": {
+                "privilege": "StartTask",
+                "description": "Grants permission to start a new task from the specified task definition on the specified container instance or instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_StartTask.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "capacityProvider": {
+        "resourceName": "capacity-provider",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:capacity-provider/${CapacityProviderName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeCapacityProviders": {
+                "privilege": "DescribeCapacityProviders",
+                "description": "Grants permission to describe one or more Amazon ECS capacity providers",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeCapacityProviders.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteCapacityProvider": {
+                "privilege": "DeleteCapacityProvider",
+                "description": "Grants permission to delete the specified capacity provider",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteCapacityProvider.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutClusterCapacityProviders": {
+                "privilege": "PutClusterCapacityProviders",
+                "description": "Grants permission to modify the available capacity providers and the default capacity provider strategy for a cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateCapacityProvider": {
+                "privilege": "UpdateCapacityProvider",
+                "description": "Grants permission to update the specified capacity provider",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateCapacityProvider.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "taskSet": {
+        "resourceName": "task-set",
+        "service": "ecs",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task-set/${ClusterName}/${ServiceName}/${TaskSetId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "ecs:ResourceTag/${TagKey}": {
+                "condition": "ecs:ResourceTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeTaskSets": {
+                "privilege": "DescribeTaskSets",
+                "description": "Grants permission to describe Amazon ECS task sets",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "ecs:service": {
+                        "condition": "ecs:service",
+                        "description": "Filters access by the ARN of an Amazon ECS service",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteTaskSet": {
+                "privilege": "DeleteTaskSet",
+                "description": "Grants permission to delete the specified task set",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskSet.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "ecs:service": {
+                        "condition": "ecs:service",
+                        "description": "Filters access by the ARN of an Amazon ECS service",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateTaskSet": {
+                "privilege": "UpdateTaskSet",
+                "description": "Grants permission to update the specified task set",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateTaskSet.html",
+                "privConditions": {
+                    "ecs:cluster": {
+                        "condition": "ecs:cluster",
+                        "description": "Filters access by the ARN of an Amazon ECS cluster",
+                        "type": "ARN"
+                    },
+                    "ecs:service": {
+                        "condition": "ecs:service",
+                        "description": "Filters access by the ARN of an Amazon ECS service",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

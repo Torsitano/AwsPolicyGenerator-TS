@@ -1,0 +1,857 @@
+{
+    "channel": {
+        "resourceName": "channel",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "The tag for a MediaLive resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeChannel": {
+                "privilege": "DescribeChannel",
+                "description": "Grants permission to get details about a channel",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-channel-configuration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeSchedule": {
+                "privilege": "DescribeSchedule",
+                "description": "Grants permission to view a list of actions scheduled on a channel",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-actions-schedule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "BatchUpdateSchedule": {
+                "privilege": "BatchUpdateSchedule",
+                "description": "Grants permission to add and remove actions from a channel's schedule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/batching-actions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateChannel": {
+                "privilege": "CreateChannel",
+                "description": "Grants permission to create a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-channel-scratch.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteChannel": {
+                "privilege": "DeleteChannel",
+                "description": "Grants permission to delete a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/editing-deleting-channel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteSchedule": {
+                "privilege": "DeleteSchedule",
+                "description": "Grants permission to delete all schedule actions for a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/schedule-using-console-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartChannel": {
+                "privilege": "StartChannel",
+                "description": "Grants permission to start a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-deleting-a-channel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopChannel": {
+                "privilege": "StopChannel",
+                "description": "Grants permission to stop a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-deleting-a-channel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateChannel": {
+                "privilege": "UpdateChannel",
+                "description": "Grants permission to update a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/editing-deleting-channel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateChannelClass": {
+                "privilege": "UpdateChannelClass",
+                "description": "Grants permission to update the class of a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/editing-deleting-channel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags from channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "input": {
+        "resourceName": "input",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "The tag for a MediaLive resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeInput": {
+                "privilege": "DescribeInput",
+                "description": "Grants permission to describe an input",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateChannel": {
+                "privilege": "CreateChannel",
+                "description": "Grants permission to create a channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-channel-scratch.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateInput": {
+                "privilege": "CreateInput",
+                "description": "Grants permission to create an input",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-input.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreatePartnerInput": {
+                "privilege": "CreatePartnerInput",
+                "description": "Grants permission to create a partner input",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/create-partner-input.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteInput": {
+                "privilege": "DeleteInput",
+                "description": "Grants permission to delete an input",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-input.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateInput": {
+                "privilege": "UpdateInput",
+                "description": "Grants permission to update an input",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags from channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "inputDevice": {
+        "resourceName": "input-device",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeInputDevice": {
+                "privilege": "DescribeInputDevice",
+                "description": "Grants permission to describe an input device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeInputDeviceThumbnail": {
+                "privilege": "DescribeInputDeviceThumbnail",
+                "description": "Grants permission to describe an input device thumbnail",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AcceptInputDeviceTransfer": {
+                "privilege": "AcceptInputDeviceTransfer",
+                "description": "Grants permission to accept an input device transfer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CancelInputDeviceTransfer": {
+                "privilege": "CancelInputDeviceTransfer",
+                "description": "Grants permission to cancel an input device transfer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ClaimDevice": {
+                "privilege": "ClaimDevice",
+                "description": "Grants permission to claim an input device",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RejectInputDeviceTransfer": {
+                "privilege": "RejectInputDeviceTransfer",
+                "description": "Grants permission to reject an input device transfer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "TransferInputDevice": {
+                "privilege": "TransferInputDevice",
+                "description": "Grants permission to transfer an input device",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateInputDevice": {
+                "privilege": "UpdateInputDevice",
+                "description": "Grants permission to update an input device",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "inputSecurityGroup": {
+        "resourceName": "input-security-group",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "The tag for a MediaLive resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeInputSecurityGroup": {
+                "privilege": "DescribeInputSecurityGroup",
+                "description": "Grants permission to describe an input security group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-security-group.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateInput": {
+                "privilege": "CreateInput",
+                "description": "Grants permission to create an input",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-input.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateInputSecurityGroup": {
+                "privilege": "CreateInputSecurityGroup",
+                "description": "Grants permission to create an input security group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/working-with-input-security-groups.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteInputSecurityGroup": {
+                "privilege": "DeleteInputSecurityGroup",
+                "description": "Grants permission to delete an input security group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-input-security-group.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateInputSecurityGroup": {
+                "privilege": "UpdateInputSecurityGroup",
+                "description": "Grants permission to update an input security group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-security-group.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags from channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "multiplex": {
+        "resourceName": "multiplex",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "The tag for a MediaLive resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeMultiplex": {
+                "privilege": "DescribeMultiplex",
+                "description": "Grants permission to describe a multiplex",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-multiplex-configuration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeMultiplexProgram": {
+                "privilege": "DescribeMultiplexProgram",
+                "description": "Grants permission to describe a multiplex program",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/monitoring-multiplex-console.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateMultiplex": {
+                "privilege": "CreateMultiplex",
+                "description": "Grants permission to create a multiplex",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-multiplex.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateMultiplexProgram": {
+                "privilege": "CreateMultiplexProgram",
+                "description": "Grants permission to create a multiplex program",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/multiplex-create.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteMultiplex": {
+                "privilege": "DeleteMultiplex",
+                "description": "Grants permission to delete a multiplex",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-multiplex.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteMultiplexProgram": {
+                "privilege": "DeleteMultiplexProgram",
+                "description": "Grants permission to delete a multiplex program",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-multiplex-program.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartMultiplex": {
+                "privilege": "StartMultiplex",
+                "description": "Grants permission to start a multiplex",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-a-multiplex.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopMultiplex": {
+                "privilege": "StopMultiplex",
+                "description": "Grants permission to stop a multiplex",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-a-multiplex.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateMultiplex": {
+                "privilege": "UpdateMultiplex",
+                "description": "Grants permission to update a multiplex",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateMultiplexProgram": {
+                "privilege": "UpdateMultiplexProgram",
+                "description": "Grants permission to update a multiplex program",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex-program-channel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags from channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "reservation": {
+        "resourceName": "reservation",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "The tag for a MediaLive resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeReservation": {
+                "privilege": "DescribeReservation",
+                "description": "Grants permission to get details about a reservation",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/view-reservations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteReservation": {
+                "privilege": "DeleteReservation",
+                "description": "Grants permission to delete an expired reservation",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/deleting-reservations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PurchaseOffering": {
+                "privilege": "PurchaseOffering",
+                "description": "Grants permission to purchase a reservation offering",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/purchasing-reservations.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateReservation": {
+                "privilege": "UpdateReservation",
+                "description": "Grants permission to update a reservation",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/reservations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags for channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags from channels, inputs, input security groups, multiplexes, and reservations",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "offering": {
+        "resourceName": "offering",
+        "service": "medialive",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:*",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeOffering": {
+                "privilege": "DescribeOffering",
+                "description": "Grants permission to get details about a reservation offering",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/purchasing-reservations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "PurchaseOffering": {
+                "privilege": "PurchaseOffering",
+                "description": "Grants permission to purchase a reservation offering",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/purchasing-reservations.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "The tag for a MediaLive request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "The tag keys for a MediaLive resource or request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

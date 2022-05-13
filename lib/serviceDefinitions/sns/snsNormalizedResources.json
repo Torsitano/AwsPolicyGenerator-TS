@@ -1,0 +1,189 @@
+{
+    "topic": {
+        "resourceName": "topic",
+        "service": "sns",
+        "resourceArn": "arn:${Partition}:sns:${Region}:${Account}:${TopicName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tags associated with the restource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListSubscriptionsByTopic": {
+                "privilege": "ListSubscriptionsByTopic",
+                "description": "Grants permission to return a list of the subscriptions to a specific topic",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_ListSubscriptionsByTopic.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetTopicAttributes": {
+                "privilege": "GetTopicAttributes",
+                "description": "Grants permission to return all of the properties of a topic",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_GetTopicAttributes.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags added to the specified Amazon SNS topic",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ConfirmSubscription": {
+                "privilege": "ConfirmSubscription",
+                "description": "Grants permission to verify an endpoint owner's intent to receive messages by validating the token sent to the endpoint by an earlier Subscribe action",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_ConfirmSubscription.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteTopic": {
+                "privilege": "DeleteTopic",
+                "description": "Grants permission to delete a topic and all its subscriptions",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_DeleteTopic.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "Publish": {
+                "privilege": "Publish",
+                "description": "Grants permission to send a message to all of a topic's subscribed endpoints",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_Publish.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "Subscribe": {
+                "privilege": "Subscribe",
+                "description": "Grants permission to prepare to subscribe an endpoint by sending the endpoint a confirmation message",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html",
+                "privConditions": {
+                    "sns:Endpoint": {
+                        "condition": "sns:Endpoint",
+                        "description": "Filters access by the URL, email address, or ARN from a Subscribe request or a previously confirmed subscription",
+                        "type": "String"
+                    },
+                    "sns:Protocol": {
+                        "condition": "sns:Protocol",
+                        "description": "Filters access by the protocol value from a Subscribe request or a previously confirmed subscription",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "AddPermission": {
+                "privilege": "AddPermission",
+                "description": "Grants permission to add a statement to a topic's access control policy, granting access for the specified AWS accounts to the specified actions",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_AddPermission.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateTopic": {
+                "privilege": "CreateTopic",
+                "description": "Grants permission to create a topic to which notifications can be published",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by tags from request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys from request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "RemovePermission": {
+                "privilege": "RemovePermission",
+                "description": "Grants permission to remove a statement from a topic's access control policy",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_RemovePermission.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SetTopicAttributes": {
+                "privilege": "SetTopicAttributes",
+                "description": "Grants permission to allow a topic owner to set an attribute of the topic to a new value",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_SetTopicAttributes.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to the specified Amazon SNS topic",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by tags from request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys from request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from the specified Amazon SNS topic",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/sns/latest/api/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by tags from request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys from request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

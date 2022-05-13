@@ -1,0 +1,843 @@
+{
+    "associateCustomDomain": {
+        "privilege": "AssociateCustomDomain",
+        "description": "Grants permission to associate your own domain name with the AWS App Runner subdomain URL of your App Runner service",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_AssociateCustomDomain.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAutoScalingConfiguration": {
+        "privilege": "CreateAutoScalingConfiguration",
+        "description": "Grants permission to create an AWS App Runner automatic scaling configuration resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_CreateAutoScalingConfiguration.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createConnection": {
+        "privilege": "CreateConnection",
+        "description": "Grants permission to create an AWS App Runner connection resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_CreateConnection.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createService": {
+        "privilege": "CreateService",
+        "description": "Grants permission to create an AWS App Runner service resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "String"
+            },
+            "apprunner:ConnectionArn": {
+                "condition": "apprunner:ConnectionArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated Connection resource",
+                "type": "ARN"
+            },
+            "apprunner:AutoScalingConfigurationArn": {
+                "condition": "apprunner:AutoScalingConfigurationArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated AutoScalingConfiguration resource",
+                "type": "ARN"
+            },
+            "apprunner:VpcConnectorArn": {
+                "condition": "apprunner:VpcConnectorArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated VpcConnector resource",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createVpcConnector": {
+        "privilege": "CreateVpcConnector",
+        "description": "Grants permission to create an AWS App Runner VPC connector resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_CreateVpcConnector.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteAutoScalingConfiguration": {
+        "privilege": "DeleteAutoScalingConfiguration",
+        "description": "Grants permission to delete an AWS App Runner automatic scaling configuration resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteAutoScalingConfiguration.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteConnection": {
+        "privilege": "DeleteConnection",
+        "description": "Grants permission to delete an AWS App Runner connection resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteConnection.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteService": {
+        "privilege": "DeleteService",
+        "description": "Grants permission to delete an AWS App Runner service resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteVpcConnector": {
+        "privilege": "DeleteVpcConnector",
+        "description": "Grants permission to delete an AWS App Runner VPC connector resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteVpcConnector.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAutoScalingConfiguration": {
+        "privilege": "DescribeAutoScalingConfiguration",
+        "description": "Grants permission to retrieve the description of an AWS App Runner automatic scaling configuration resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeAutoScalingConfiguration.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeCustomDomains": {
+        "privilege": "DescribeCustomDomains",
+        "description": "Grants permission to retrieve descriptions of custom domain names associated with an AWS App Runner service",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeCustomDomains.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeOperation": {
+        "privilege": "DescribeOperation",
+        "description": "Grants permission to retrieve the description of an operation that occurred on an AWS App Runner service",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeOperation.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeService": {
+        "privilege": "DescribeService",
+        "description": "Grants permission to retrieve the description of an AWS App Runner service resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeVpcConnector": {
+        "privilege": "DescribeVpcConnector",
+        "description": "Grants permission to retrieve the description of an AWS App Runner VPC connector resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeVpcConnector.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateCustomDomain": {
+        "privilege": "DisassociateCustomDomain",
+        "description": "Grants permission to disassociate a custom domain name from an AWS App Runner service",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DisassociateCustomDomain.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listAutoScalingConfigurations": {
+        "privilege": "ListAutoScalingConfigurations",
+        "description": "Grants permission to retrieve a list of AWS App Runner automatic scaling configurations in your AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListAutoScalingConfigurations.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listConnections": {
+        "privilege": "ListConnections",
+        "description": "Grants permission to retrieve a list of AWS App Runner connections in your AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListConnections.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listOperations": {
+        "privilege": "ListOperations",
+        "description": "Grants permission to retrieve a list of operations that occurred on an AWS App Runner service resource",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listServices": {
+        "privilege": "ListServices",
+        "description": "Grants permission to retrieve a list of running AWS App Runner services in your AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags associated with an AWS App Runner resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListTagsForResource.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listVpcConnectors": {
+        "privilege": "ListVpcConnectors",
+        "description": "Grants permission to retrieve a list of AWS App Runner VPC connectors in your AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListVpcConnectors.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "pauseService": {
+        "privilege": "PauseService",
+        "description": "Grants permission to pause an active AWS App Runner service",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_PauseService.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resumeService": {
+        "privilege": "ResumeService",
+        "description": "Grants permission to resume an active AWS App Runner service",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ResumeService.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startDeployment": {
+        "privilege": "StartDeployment",
+        "description": "Grants permission to initiate a manual deployemnt to an AWS App Runner service",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_StartDeployment.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add tags to, or update tag values of, an AWS App Runner resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_TagResource.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tags from an AWS App Runner resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_UntagResource.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateService": {
+        "privilege": "UpdateService",
+        "description": "Grants permission to update an AWS App Runner service resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_UpdateService.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "apprunner:ConnectionArn": {
+                "condition": "apprunner:ConnectionArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated Connection resource",
+                "type": "ARN"
+            },
+            "apprunner:AutoScalingConfigurationArn": {
+                "condition": "apprunner:AutoScalingConfigurationArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated AutoScalingConfiguration resource",
+                "type": "ARN"
+            },
+            "apprunner:VpcConnectorArn": {
+                "condition": "apprunner:VpcConnectorArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated VpcConnector resource",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "service": {
+                "resourceName": "service",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "autoscalingconfiguration": {
+                "resourceName": "autoscalingconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:autoscalingconfiguration/${AutoscalingConfigurationName}/${AutoscalingConfigurationVersion}/${AutoscalingConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vpcconnector": {
+                "resourceName": "vpcconnector",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

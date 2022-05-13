@@ -1,0 +1,906 @@
+{
+    "backup": {
+        "privilege": "Backup",
+        "description": "Grants permission to start a backup job for an existing file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/efs-backup-solutions.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "clientMount": {
+        "privilege": "ClientMount",
+        "description": "Grants permission to allow an NFS client read-access to a file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/efs-client-authorization.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "elasticfilesystem:AccessPointArn": {
+                "condition": "elasticfilesystem:AccessPointArn",
+                "description": "Filters access by the ARN of the access point used to mount the file system",
+                "type": "String"
+            },
+            "elasticfilesystem:AccessedViaMountTarget": {
+                "condition": "elasticfilesystem:AccessedViaMountTarget",
+                "description": "Filters access by whether the file system is accessed via mount targets",
+                "type": "Bool"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "clientRootAccess": {
+        "privilege": "ClientRootAccess",
+        "description": "Grants permission to allow an NFS client root-access to a file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/efs-client-authorization.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "elasticfilesystem:AccessPointArn": {
+                "condition": "elasticfilesystem:AccessPointArn",
+                "description": "Filters access by the ARN of the access point used to mount the file system",
+                "type": "String"
+            },
+            "elasticfilesystem:AccessedViaMountTarget": {
+                "condition": "elasticfilesystem:AccessedViaMountTarget",
+                "description": "Filters access by whether the file system is accessed via mount targets",
+                "type": "Bool"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "clientWrite": {
+        "privilege": "ClientWrite",
+        "description": "Grants permission to allow an NFS client write-access to a file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/efs-client-authorization.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "elasticfilesystem:AccessPointArn": {
+                "condition": "elasticfilesystem:AccessPointArn",
+                "description": "Filters access by the ARN of the access point used to mount the file system",
+                "type": "String"
+            },
+            "elasticfilesystem:AccessedViaMountTarget": {
+                "condition": "elasticfilesystem:AccessedViaMountTarget",
+                "description": "Filters access by whether the file system is accessed via mount targets",
+                "type": "Bool"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAccessPoint": {
+        "privilege": "CreateAccessPoint",
+        "description": "Grants permission to create an access point for the specified file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_CreateAccessPoint.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFileSystem": {
+        "privilege": "CreateFileSystem",
+        "description": "Grants permission to create a new, empty file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_CreateFileSystem.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "elasticfilesystem:Encrypted": {
+                "condition": "elasticfilesystem:Encrypted",
+                "description": "Filters access by whether users can create only encrypted or unencrypted file systems",
+                "type": "Bool"
+            }
+        },
+        "resources": {}
+    },
+    "createMountTarget": {
+        "privilege": "CreateMountTarget",
+        "description": "Grants permission to create a mount target for a file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_CreateMountTarget.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createReplicationConfiguration": {
+        "privilege": "CreateReplicationConfiguration",
+        "description": "Grants permission to create a new replication configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_CreateReplicationConfiguration.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createTags": {
+        "privilege": "CreateTags",
+        "description": "Grants permission to create or overwrite tags associated with a file system; deprecated, see TagResource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_CreateTags.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteAccessPoint": {
+        "privilege": "DeleteAccessPoint",
+        "description": "Grants permission to delete the specified access point",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DeleteAccessPoint.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "accessPoint": {
+                "resourceName": "access-point",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:access-point/${AccessPointId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFileSystem": {
+        "privilege": "DeleteFileSystem",
+        "description": "Grants permission to delete a file system, permanently severing access to its contents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DeleteFileSystem.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFileSystemPolicy": {
+        "privilege": "DeleteFileSystemPolicy",
+        "description": "Grants permission to delete the resource-level policy for a file system",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DeleteFileSystemPolicy.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteMountTarget": {
+        "privilege": "DeleteMountTarget",
+        "description": "Grants permission to delete the specified mount target",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DeleteMountTarget.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteReplicationConfiguration": {
+        "privilege": "DeleteReplicationConfiguration",
+        "description": "Grants permission to delete a replication configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DeleteReplicationConfiguration.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTags": {
+        "privilege": "DeleteTags",
+        "description": "Grants permission to delete the specified tags from a file system; deprecated, see UntagResource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DeleteTags.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAccessPoints": {
+        "privilege": "DescribeAccessPoints",
+        "description": "Grants permission to view the descriptions of Amazon EFS access points",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeAccessPoints.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "accessPoint": {
+                "resourceName": "access-point",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:access-point/${AccessPointId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAccountPreferences": {
+        "privilege": "DescribeAccountPreferences",
+        "description": "Grants permission to view the account preferences in effect for an account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeAccountPreferences.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeBackupPolicy": {
+        "privilege": "DescribeBackupPolicy",
+        "description": "Grants permission to view the BackupPolicy object for an Amazon EFS file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeBackupPolicy.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFileSystemPolicy": {
+        "privilege": "DescribeFileSystemPolicy",
+        "description": "Grants permission to view the resource-level policy for an Amazon EFS file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystemPolicy.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFileSystems": {
+        "privilege": "DescribeFileSystems",
+        "description": "Grants permission to view the description of an Amazon EFS file system specified by file system CreationToken or FileSystemId; or to view the description of all file systems owned by the caller's AWS account in the AWS region of the endpoint that is being called",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeLifecycleConfiguration": {
+        "privilege": "DescribeLifecycleConfiguration",
+        "description": "Grants permission to view the LifecycleConfiguration object for an Amazon EFS file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeLifecycleConfiguration.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeMountTargetSecurityGroups": {
+        "privilege": "DescribeMountTargetSecurityGroups",
+        "description": "Grants permission to view the security groups in effect for a mount target",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeMountTargetSecurityGroups.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeMountTargets": {
+        "privilege": "DescribeMountTargets",
+        "description": "Grants permission to view the descriptions of all mount targets, or a specific mount target, for a file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeMountTargets.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "accessPoint": {
+                "resourceName": "access-point",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:access-point/${AccessPointId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeReplicationConfigurations": {
+        "privilege": "DescribeReplicationConfigurations",
+        "description": "Grants permission to view the description of an Amazon EFS replication configuration specified by FileSystemId; or to view the description of all replication configurations owned by the caller's AWS account in the AWS region of the endpoint that is being called",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeReplicationConfigurations.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeTags": {
+        "privilege": "DescribeTags",
+        "description": "Grants permission to view the tags associated with a file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeTags.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to view the tags associated with the specified Amazon EFS resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_ListTagsForResource.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "accessPoint": {
+                "resourceName": "access-point",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:access-point/${AccessPointId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyMountTargetSecurityGroups": {
+        "privilege": "ModifyMountTargetSecurityGroups",
+        "description": "Grants permission to modify the set of security groups in effect for a mount target",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_ModifyMountTargetSecurityGroups.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "putAccountPreferences": {
+        "privilege": "PutAccountPreferences",
+        "description": "Grants permission to set the account preferences of an account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_PutAccountPreferences.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "putBackupPolicy": {
+        "privilege": "PutBackupPolicy",
+        "description": "Grants permission to enable or disable automatic backups with AWS Backup by creating a new BackupPolicy object",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_PutBackupPolicy.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putFileSystemPolicy": {
+        "privilege": "PutFileSystemPolicy",
+        "description": "Grants permission to apply a resource-level policy that defines the actions allowed or denied from given actors for the specified file system",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_PutFileSystemPolicy.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putLifecycleConfiguration": {
+        "privilege": "PutLifecycleConfiguration",
+        "description": "Grants permission to enable lifecycle management by creating a new LifecycleConfiguration object",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_PutLifecycleConfiguration.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "restore": {
+        "privilege": "Restore",
+        "description": "Grants permission to start a restore job for a backup of a file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/efs-backup-solutions.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to create or overwrite tags associated with the specified Amazon EFS resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_TagResource.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "accessPoint": {
+                "resourceName": "access-point",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:access-point/${AccessPointId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to delete the specified tags from an Amazon EFS resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_UntagResource.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "accessPoint": {
+                "resourceName": "access-point",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:access-point/${AccessPointId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFileSystem": {
+        "privilege": "UpdateFileSystem",
+        "description": "Grants permission to update the throughput mode or the amount of provisioned throughput of an existing file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/efs/latest/ug/API_UpdateFileSystem.html",
+        "service": "elasticfilesystem",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:elasticfilesystem:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

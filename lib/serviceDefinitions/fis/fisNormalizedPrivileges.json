@@ -1,0 +1,620 @@
+{
+    "createExperimentTemplate": {
+        "privilege": "CreateExperimentTemplate",
+        "description": "Grants permission to create an AWS FIS experiment template",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_CreateExperimentTemplate.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "action": {
+                "resourceName": "action",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:action/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteExperimentTemplate": {
+        "privilege": "DeleteExperimentTemplate",
+        "description": "Grants permission to delete the AWS FIS experiment template",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_DeleteExperimentTemplate.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getAction": {
+        "privilege": "GetAction",
+        "description": "Grants permission to retrieve an AWS FIS action",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_GetAction.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "action": {
+                "resourceName": "action",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:action/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getExperiment": {
+        "privilege": "GetExperiment",
+        "description": "Grants permission to retrieve an AWS FIS experiment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_GetExperiment.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getExperimentTemplate": {
+        "privilege": "GetExperimentTemplate",
+        "description": "Grants permission to retrieve an AWS FIS Experiment Template",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_GetExperimentTemplate.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getTargetResourceType": {
+        "privilege": "GetTargetResourceType",
+        "description": "Grants permission to get information about the specified resource type",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_GetTargetResourceType.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "injectApiInternalError": {
+        "privilege": "InjectApiInternalError",
+        "description": "Grants permission to inject an API internal error on the provided AWS service from an FIS Experiment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/Welcome.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "fis:Service": {
+                "condition": "fis:Service",
+                "description": "Filters access by the AWS service that is being affected by the AWS FIS action",
+                "type": "String"
+            },
+            "fis:Operations": {
+                "condition": "fis:Operations",
+                "description": "Filters access by the list of operations on the AWS service that is being affected by the AWS FIS action",
+                "type": "ArrayOfString"
+            },
+            "fis:Percentage": {
+                "condition": "fis:Percentage",
+                "description": "Filters access by the percentage of calls being affected by the AWS FIS action",
+                "type": "Numeric"
+            },
+            "fis:Targets": {
+                "condition": "fis:Targets",
+                "description": "Filters access by the list of resource ARNs being targeted by the AWS FIS action",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "injectApiThrottleError": {
+        "privilege": "InjectApiThrottleError",
+        "description": "Grants permission to inject an API throttle error on the provided AWS service from an FIS Experiment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/Welcome.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "fis:Service": {
+                "condition": "fis:Service",
+                "description": "Filters access by the AWS service that is being affected by the AWS FIS action",
+                "type": "String"
+            },
+            "fis:Operations": {
+                "condition": "fis:Operations",
+                "description": "Filters access by the list of operations on the AWS service that is being affected by the AWS FIS action",
+                "type": "ArrayOfString"
+            },
+            "fis:Percentage": {
+                "condition": "fis:Percentage",
+                "description": "Filters access by the percentage of calls being affected by the AWS FIS action",
+                "type": "Numeric"
+            },
+            "fis:Targets": {
+                "condition": "fis:Targets",
+                "description": "Filters access by the list of resource ARNs being targeted by the AWS FIS action",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "injectApiUnavailableError": {
+        "privilege": "InjectApiUnavailableError",
+        "description": "Grants permission to inject an API unavailable error on the provided AWS service from an FIS Experiment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/Welcome.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "fis:Service": {
+                "condition": "fis:Service",
+                "description": "Filters access by the AWS service that is being affected by the AWS FIS action",
+                "type": "String"
+            },
+            "fis:Operations": {
+                "condition": "fis:Operations",
+                "description": "Filters access by the list of operations on the AWS service that is being affected by the AWS FIS action",
+                "type": "ArrayOfString"
+            },
+            "fis:Percentage": {
+                "condition": "fis:Percentage",
+                "description": "Filters access by the percentage of calls being affected by the AWS FIS action",
+                "type": "Numeric"
+            },
+            "fis:Targets": {
+                "condition": "fis:Targets",
+                "description": "Filters access by the list of resource ARNs being targeted by the AWS FIS action",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listActions": {
+        "privilege": "ListActions",
+        "description": "Grants permission to list all available AWS FIS actions",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_ListActions.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listExperimentTemplates": {
+        "privilege": "ListExperimentTemplates",
+        "description": "Grants permission to list all available AWS FIS experiment templates",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_ListExperimentTemplates.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listExperiments": {
+        "privilege": "ListExperiments",
+        "description": "Grants permission to list all available AWS FIS experiments",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_ListExperiments.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list the tags for an AWS FIS resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_ListTagsForResource.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "action": {
+                "resourceName": "action",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:action/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTargetResourceTypes": {
+        "privilege": "ListTargetResourceTypes",
+        "description": "Grants permission to list the resource types",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_ListTargetResourceTypes.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "startExperiment": {
+        "privilege": "StartExperiment",
+        "description": "Grants permission to run an AWS FIS experiment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_StartExperiment.html",
+        "service": "fis",
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopExperiment": {
+        "privilege": "StopExperiment",
+        "description": "Grants permission to stop an AWS FIS experiment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_StopExperiment.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag AWS FIS resources",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_TagResource.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "action": {
+                "resourceName": "action",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:action/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag AWS FIS resources",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_UntagResource.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "action": {
+                "resourceName": "action",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:action/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experiment": {
+                "resourceName": "experiment",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateExperimentTemplate": {
+        "privilege": "UpdateExperimentTemplate",
+        "description": "Grants permission to update the specified AWS FIS experiment template",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fis/latest/APIReference/API_UpdateExperimentTemplate.html",
+        "service": "fis",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "experimentTemplate": {
+                "resourceName": "experiment-template",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:experiment-template/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "action": {
+                "resourceName": "action",
+                "resourceArn": "arn:${Partition}:fis:${Region}:${Account}:action/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

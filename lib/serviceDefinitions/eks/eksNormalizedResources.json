@@ -1,0 +1,667 @@
+{
+    "cluster": {
+        "resourceName": "cluster",
+        "service": "eks",
+        "resourceArn": "arn:${Partition}:eks:${Region}:${Account}:cluster/${ClusterName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAddons": {
+                "privilege": "ListAddons",
+                "description": "Grants permission to list the Amazon EKS add-ons in your AWS account (in the specified or default region) for a given cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListFargateProfiles": {
+                "privilege": "ListFargateProfiles",
+                "description": "Grants permission to list the AWS Fargate profiles in your AWS account (in the specified or default region) associated with a given cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListFargateProfiles.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListIdentityProviderConfigs": {
+                "privilege": "ListIdentityProviderConfigs",
+                "description": "Grants permission to list the Idp configs in your AWS account (in the specified or default region) associated with a given cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListIdentityProviderConfigs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListNodegroups": {
+                "privilege": "ListNodegroups",
+                "description": "Grants permission to list the Amazon EKS nodegroups in your AWS account (in the specified or default region) attached to given cluster",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListNodegroups.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListUpdates": {
+                "privilege": "ListUpdates",
+                "description": "Grants permission to list the updates for a given Amazon EKS cluster/nodegroup/add-on (in the specified or default region)",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListUpdates.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "AccessKubernetesApi": {
+                "privilege": "AccessKubernetesApi",
+                "description": "Grants permission to view Kubernetes objects via AWS EKS console",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/userguide/view-workloads.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeCluster": {
+                "privilege": "DescribeCluster",
+                "description": "Grants permission to retrieve descriptive information about an Amazon EKS cluster",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeUpdate": {
+                "privilege": "DescribeUpdate",
+                "description": "Grants permission to retrieve a given update for a given Amazon EKS cluster/nodegroup/add-on (in the specified or default region)",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "AssociateEncryptionConfig": {
+                "privilege": "AssociateEncryptionConfig",
+                "description": "Grants permission to associate encryption configuration to a cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_AssociateEncryptionConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociateIdentityProviderConfig": {
+                "privilege": "AssociateIdentityProviderConfig",
+                "description": "Grants permission to associate an identity provider configuration to a cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_AssociateIdentityProviderConfig.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    },
+                    "eks:clientId": {
+                        "condition": "eks:clientId",
+                        "description": "Filters access by the clientId present in the associateIdentityProviderConfig request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "eks:issuerUrl": {
+                        "condition": "eks:issuerUrl",
+                        "description": "Filters access by the issuerUrl present in the associateIdentityProviderConfig request the user makes to the EKS service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateAddon": {
+                "privilege": "CreateAddon",
+                "description": "Grants permission to create an Amazon EKS add-on",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_CreateAddon.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateFargateProfile": {
+                "privilege": "CreateFargateProfile",
+                "description": "Grants permission to create an AWS Fargate profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_CreateFargateProfile.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateNodegroup": {
+                "privilege": "CreateNodegroup",
+                "description": "Grants permission to create an Amazon EKS Nodegroup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_CreateNodegroup.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCluster": {
+                "privilege": "DeleteCluster",
+                "description": "Grants permission to delete an Amazon EKS cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DeleteCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeregisterCluster": {
+                "privilege": "DeregisterCluster",
+                "description": "Grants permission to deregister an External cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DeregisterCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateClusterConfig": {
+                "privilege": "UpdateClusterConfig",
+                "description": "Grants permission to update Amazon EKS cluster configurations (eg: API server endpoint access)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateClusterConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateClusterVersion": {
+                "privilege": "UpdateClusterVersion",
+                "description": "Grants permission to update the Kubernetes version of an Amazon EKS cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateClusterVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "nodegroup": {
+        "resourceName": "nodegroup",
+        "service": "eks",
+        "resourceArn": "arn:${Partition}:eks:${Region}:${Account}:nodegroup/${ClusterName}/${NodegroupName}/${UUID}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListUpdates": {
+                "privilege": "ListUpdates",
+                "description": "Grants permission to list the updates for a given Amazon EKS cluster/nodegroup/add-on (in the specified or default region)",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListUpdates.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeNodegroup": {
+                "privilege": "DescribeNodegroup",
+                "description": "Grants permission to retrieve descriptive information about an Amazon EKS nodegroup",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeNodegroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeUpdate": {
+                "privilege": "DescribeUpdate",
+                "description": "Grants permission to retrieve a given update for a given Amazon EKS cluster/nodegroup/add-on (in the specified or default region)",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteNodegroup": {
+                "privilege": "DeleteNodegroup",
+                "description": "Grants permission to delete an Amazon EKS Nodegroup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DeleteNodegroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateNodegroupConfig": {
+                "privilege": "UpdateNodegroupConfig",
+                "description": "Grants permission to update Amazon EKS nodegroup configurations (eg: min/max/desired capacity or labels)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateNodegroupConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateNodegroupVersion": {
+                "privilege": "UpdateNodegroupVersion",
+                "description": "Grants permission to update the Kubernetes version of an Amazon EKS nodegroup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateNodegroupVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "addon": {
+        "resourceName": "addon",
+        "service": "eks",
+        "resourceArn": "arn:${Partition}:eks:${Region}:${Account}:addon/${ClusterName}/${AddonName}/${UUID}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListUpdates": {
+                "privilege": "ListUpdates",
+                "description": "Grants permission to list the updates for a given Amazon EKS cluster/nodegroup/add-on (in the specified or default region)",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListUpdates.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAddon": {
+                "privilege": "DescribeAddon",
+                "description": "Grants permission to retrieve descriptive information about an Amazon EKS add-on",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddon.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeUpdate": {
+                "privilege": "DescribeUpdate",
+                "description": "Grants permission to retrieve a given update for a given Amazon EKS cluster/nodegroup/add-on (in the specified or default region)",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteAddon": {
+                "privilege": "DeleteAddon",
+                "description": "Grants permission to delete an Amazon EKS add-on",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DeleteAddon.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAddon": {
+                "privilege": "UpdateAddon",
+                "description": "Grants permission to update Amazon EKS add-on configurations, such as the VPC-CNI version",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "fargateprofile": {
+        "resourceName": "fargateprofile",
+        "service": "eks",
+        "resourceArn": "arn:${Partition}:eks:${Region}:${Account}:fargateprofile/${ClusterName}/${FargateProfileName}/${UUID}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeFargateProfile": {
+                "privilege": "DescribeFargateProfile",
+                "description": "Grants permission to retrieve descriptive information about an AWS Fargate profile associated with a cluster",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeFargateProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteFargateProfile": {
+                "privilege": "DeleteFargateProfile",
+                "description": "Grants permission to delete an AWS Fargate profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DeleteFargateProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "identityproviderconfig": {
+        "resourceName": "identityproviderconfig",
+        "service": "eks",
+        "resourceArn": "arn:${Partition}:eks:${Region}:${Account}:identityproviderconfig/${ClusterName}/${IdentityProviderType}/${IdentityProviderConfigName}/${UUID}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeIdentityProviderConfig": {
+                "privilege": "DescribeIdentityProviderConfig",
+                "description": "Grants permission to retrieve descriptive information about an Idp config associated with a cluster",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeIdentityProviderConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DisassociateIdentityProviderConfig": {
+                "privilege": "DisassociateIdentityProviderConfig",
+                "description": "Grants permission to delete an asssociated Idp config",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_DisassociateIdentityProviderConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the EKS service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eks/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the EKS service",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

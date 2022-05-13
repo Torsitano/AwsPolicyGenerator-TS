@@ -1,0 +1,92 @@
+{
+    "appMonitorResource": {
+        "resourceName": "AppMonitorResource",
+        "service": "rum",
+        "resourceArn": "arn:${Partition}:rum:${Region}:${Account}:appmonitor/${Name}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetAppMonitor": {
+                "privilege": "GetAppMonitor",
+                "description": "Grants permission to get appMonitor metadata",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rum/latest/APIReference/API_GetAppMonitor.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAppMonitorData": {
+                "privilege": "GetAppMonitorData",
+                "description": "Grants permission to get appMonitor data",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rum/latest/APIReference/API_GetAppMonitorData.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateAppMonitor": {
+                "privilege": "CreateAppMonitor",
+                "description": "Grants permission to create appMonitor metadata",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rum/latest/APIReference/API_CreateAppMonitor.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed the request on behalf of the IAM principal",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "iam:GetRole"
+                ],
+                "required": true
+            },
+            "DeleteAppMonitor": {
+                "privilege": "DeleteAppMonitor",
+                "description": "Grants permission to delete appMonitor metadata",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rum/latest/APIReference/API_DeleteAppMonitor.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutRumEvents": {
+                "privilege": "PutRumEvents",
+                "description": "Grants permission to put RUM events for appmonitor",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rum/latest/APIReference/API_PutRumEvents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAppMonitor": {
+                "privilege": "UpdateAppMonitor",
+                "description": "Grants permission to update appmonitor metadata",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rum/latest/APIReference/API_UpdateAppMonitor.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "iam:GetRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

@@ -1,0 +1,254 @@
+{
+    "brokers": {
+        "resourceName": "brokers",
+        "service": "mq",
+        "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to return a list of tags",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListUsers": {
+                "privilege": "ListUsers",
+                "description": "Grants permission to return a list of all ActiveMQ users",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-users.html#rest-api-users-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeBroker": {
+                "privilege": "DescribeBroker",
+                "description": "Grants permission to return information about the specified broker",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-broker.html#rest-api-broker-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeUser": {
+                "privilege": "DescribeUser",
+                "description": "Grants permission to return information about an ActiveMQ user",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateUser": {
+                "privilege": "CreateUser",
+                "description": "Grants permission to create an ActiveMQ user",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-post",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteBroker": {
+                "privilege": "DeleteBroker",
+                "description": "Grants permission to delete a broker",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-broker.html#rest-api-broker-methods-delete",
+                "privConditions": {},
+                "dependentActions": [
+                    "ec2:DeleteNetworkInterface",
+                    "ec2:DeleteNetworkInterfacePermission",
+                    "ec2:DeleteVpcEndpoints",
+                    "ec2:DetachNetworkInterface"
+                ],
+                "required": true
+            },
+            "DeleteUser": {
+                "privilege": "DeleteUser",
+                "description": "Grants permission to delete an ActiveMQ user",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-delete",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RebootBroker": {
+                "privilege": "RebootBroker",
+                "description": "Grants permission to reboot a broker",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-restart.html#rest-api-reboot-methods-post",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateBroker": {
+                "privilege": "UpdateBroker",
+                "description": "Grants permission to add a pending configuration change to a broker",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-broker.html#rest-api-broker-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateUser": {
+                "privilege": "UpdateUser",
+                "description": "Grants permission to update the information for an ActiveMQ user",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-put",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-post",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-delete",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "configurations": {
+        "resourceName": "configurations",
+        "service": "mq",
+        "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListConfigurationRevisions": {
+                "privilege": "ListConfigurationRevisions",
+                "description": "Grants permission to return a list of all existing revisions for the specified configuration",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-revisions.html#rest-api-revisions-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to return a list of tags",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeConfiguration": {
+                "privilege": "DescribeConfiguration",
+                "description": "Grants permission to return information about the specified configuration",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configuration.html#rest-api-configuration-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeConfigurationRevision": {
+                "privilege": "DescribeConfigurationRevision",
+                "description": "Grants permission to return the specified configuration revision for the specified configuration",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configuration-revision.html#rest-api-configuration-revision-methods-get",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "UpdateConfiguration": {
+                "privilege": "UpdateConfiguration",
+                "description": "Grants permission to update the specified configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configuration.html#rest-api-configuration-methods-put",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "CreateTags": {
+                "privilege": "CreateTags",
+                "description": "Grants permission to create tags",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-post",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteTags": {
+                "privilege": "DeleteTags",
+                "description": "Grants permission to delete tags",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-delete",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

@@ -1,0 +1,1557 @@
+{
+    "association": {
+        "resourceName": "association",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeAssociation": {
+                "privilege": "DescribeAssociation",
+                "description": "Grants permission to view details about the specified association for a specified instance or target",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteAssociation": {
+                "privilege": "DeleteAssociation",
+                "description": "Grants permission to disassociate a specified SSM document from a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "StartAssociationsOnce": {
+                "privilege": "StartAssociationsOnce",
+                "description": "Grants permission to run a specified association manually",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartAssociationsOnce.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAssociation": {
+                "privilege": "UpdateAssociation",
+                "description": "Grants permission to update an association and immediately run the association on the specified targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateInstanceAssociationStatus": {
+                "privilege": "UpdateInstanceAssociationStatus",
+                "description": "Grants permission to SSM Agent to update the status of the association that it is currently running (internal Systems Manager call)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": null,
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "automationExecution": {
+        "resourceName": "automation-execution",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "automationDefinition": {
+        "resourceName": "automation-definition",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-definition/${AutomationDefinitionName}:${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "StartAutomationExecution": {
+                "privilege": "StartAutomationExecution",
+                "description": "Grants permission to initiate the execution of an Automation document",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartAutomationExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartChangeRequestExecution": {
+                "privilege": "StartChangeRequestExecution",
+                "description": "Grants permission to initiate the execution of an Automation Change Template document",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartChangeRequestExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "bucket": {
+        "resourceName": "bucket",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:s3:::${BucketName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "SendCommand": {
+                "privilege": "SendCommand",
+                "description": "Grants permission to run commands on one or more specified managed instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_SendCommand.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "document": {
+        "resourceName": "document",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListDocumentMetadataHistory": {
+                "privilege": "ListDocumentMetadataHistory",
+                "description": "Grants permission to view metadata history about a specified SSM document",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListDocumentMetadataHistory.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListDocumentVersions": {
+                "privilege": "ListDocumentVersions",
+                "description": "Grants permission to list all versions of a specified document",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListDocumentVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAssociation": {
+                "privilege": "DescribeAssociation",
+                "description": "Grants permission to view details about the specified association for a specified instance or target",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeDocument": {
+                "privilege": "DescribeDocument",
+                "description": "Grants permission to view details about a specified SSM document",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeDocument.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeDocumentParameters": {
+                "privilege": "DescribeDocumentParameters",
+                "description": "Grants permission to display information about SSM document parameters in the Systems Manager console (internal Systems Manager action)",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeDocumentPermission": {
+                "privilege": "DescribeDocumentPermission",
+                "description": "Grants permission to view the permissions for a specified SSM document",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeDocumentPermission.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetCalendarState": {
+                "privilege": "GetCalendarState",
+                "description": "Grants permission to view the calendar state for a change calendar or a list of change calendars",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetCalendarState.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDocument": {
+                "privilege": "GetDocument",
+                "description": "Grants permission to view the contents of a specified SSM document",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetDocument.html",
+                "privConditions": {
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateAssociation": {
+                "privilege": "CreateAssociation",
+                "description": "Grants permission to associate a specified Systems Manager document with specified instances or other targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateAssociationBatch": {
+                "privilege": "CreateAssociationBatch",
+                "description": "Grants permission to combine entries for multiple CreateAssociation operations in a single command",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociationBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateDocument": {
+                "privilege": "CreateDocument",
+                "description": "Grants permission to create a Systems Manager SSM document",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateDocument.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "DeleteAssociation": {
+                "privilege": "DeleteAssociation",
+                "description": "Grants permission to disassociate a specified SSM document from a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteDocument": {
+                "privilege": "DeleteDocument",
+                "description": "Grants permission to delete a specified SSM document and its instance associations",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteDocument.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SendCommand": {
+                "privilege": "SendCommand",
+                "description": "Grants permission to run commands on one or more specified managed instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_SendCommand.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "StartSession": {
+                "privilege": "StartSession",
+                "description": "Grants permission to initiate a connection to a specified target for a Session Manager session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartSession.html",
+                "privConditions": {
+                    "ssm:SessionDocumentAccessCheck": {
+                        "condition": "ssm:SessionDocumentAccessCheck",
+                        "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
+                        "type": "Bool"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateAssociation": {
+                "privilege": "UpdateAssociation",
+                "description": "Grants permission to update an association and immediately run the association on the specified targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateAssociationStatus": {
+                "privilege": "UpdateAssociationStatus",
+                "description": "Grants permission to update the status of the SSM document associated with a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateDocument": {
+                "privilege": "UpdateDocument",
+                "description": "Grants permission to update one or more values for an SSM document",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateDocument.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDocumentDefaultVersion": {
+                "privilege": "UpdateDocumentDefaultVersion",
+                "description": "Grants permission to change the default version of an SSM document",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateDocumentDefaultVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDocumentMetadata": {
+                "privilege": "UpdateDocumentMetadata",
+                "description": "Grants permission to update the metadata of an SSM document",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateDocumentMetadata.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "ModifyDocumentPermission": {
+                "privilege": "ModifyDocumentPermission",
+                "description": "Grants permission to share a custom SSM document publicly or privately with specified AWS accounts",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ModifyDocumentPermission.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "instance": {
+        "resourceName": "instance",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListInstanceAssociations": {
+                "privilege": "ListInstanceAssociations",
+                "description": "Grants permission to SSM Agent to check for new State Manager associations (internal Systems Manager call)",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAssociation": {
+                "privilege": "DescribeAssociation",
+                "description": "Grants permission to view details about the specified association for a specified instance or target",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEffectiveInstanceAssociations": {
+                "privilege": "DescribeEffectiveInstanceAssociations",
+                "description": "Grants permission to view all current associations for a specified instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeEffectiveInstanceAssociations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeInstanceAssociationsStatus": {
+                "privilege": "DescribeInstanceAssociationsStatus",
+                "description": "Grants permission to view the status of the associations for a specified instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeInstanceAssociationsStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateAssociation": {
+                "privilege": "CreateAssociation",
+                "description": "Grants permission to associate a specified Systems Manager document with specified instances or other targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateAssociationBatch": {
+                "privilege": "CreateAssociationBatch",
+                "description": "Grants permission to combine entries for multiple CreateAssociation operations in a single command",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociationBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteAssociation": {
+                "privilege": "DeleteAssociation",
+                "description": "Grants permission to disassociate a specified SSM document from a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "PutComplianceItems": {
+                "privilege": "PutComplianceItems",
+                "description": "Grants permission to register a compliance type and other compliance details on a specified resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PutComplianceItems.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "SendCommand": {
+                "privilege": "SendCommand",
+                "description": "Grants permission to run commands on one or more specified managed instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_SendCommand.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "StartSession": {
+                "privilege": "StartSession",
+                "description": "Grants permission to initiate a connection to a specified target for a Session Manager session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartSession.html",
+                "privConditions": {
+                    "ssm:SessionDocumentAccessCheck": {
+                        "condition": "ssm:SessionDocumentAccessCheck",
+                        "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
+                        "type": "Bool"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateAssociation": {
+                "privilege": "UpdateAssociation",
+                "description": "Grants permission to update an association and immediately run the association on the specified targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateAssociationStatus": {
+                "privilege": "UpdateAssociationStatus",
+                "description": "Grants permission to update the status of the SSM document associated with a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateInstanceAssociationStatus": {
+                "privilege": "UpdateInstanceAssociationStatus",
+                "description": "Grants permission to SSM Agent to update the status of the association that it is currently running (internal Systems Manager call)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": null,
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "maintenancewindow": {
+        "resourceName": "maintenancewindow",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:maintenancewindow/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribeMaintenanceWindowExecutions": {
+                "privilege": "DescribeMaintenanceWindowExecutions",
+                "description": "Grants permission to view the executions of a specified maintenance window",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeMaintenanceWindowExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeMaintenanceWindowTargets": {
+                "privilege": "DescribeMaintenanceWindowTargets",
+                "description": "Grants permission to view a list of the targets associated with a specified maintenance window",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeMaintenanceWindowTargets.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeMaintenanceWindowTasks": {
+                "privilege": "DescribeMaintenanceWindowTasks",
+                "description": "Grants permission to view a list of the tasks associated with a specified maintenance window",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeMaintenanceWindowTasks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetMaintenanceWindow": {
+                "privilege": "GetMaintenanceWindow",
+                "description": "Grants permission to view details about a specified maintenance window",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetMaintenanceWindowTask": {
+                "privilege": "GetMaintenanceWindowTask",
+                "description": "Grants permission to view details about tasks registered with a specified maintenance window",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetMaintenanceWindowTask.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteMaintenanceWindow": {
+                "privilege": "DeleteMaintenanceWindow",
+                "description": "Grants permission to delete a specified maintenance window",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeregisterTargetFromMaintenanceWindow": {
+                "privilege": "DeregisterTargetFromMaintenanceWindow",
+                "description": "Grants permission to deregister a specified target from a maintenance window",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeregisterTargetFromMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeregisterTaskFromMaintenanceWindow": {
+                "privilege": "DeregisterTaskFromMaintenanceWindow",
+                "description": "Grants permission to deregister a specified task from a maintenance window",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeregisterTaskFromMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RegisterTargetWithMaintenanceWindow": {
+                "privilege": "RegisterTargetWithMaintenanceWindow",
+                "description": "Grants permission to register a target with a specified maintenance window",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RegisterTargetWithMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RegisterTaskWithMaintenanceWindow": {
+                "privilege": "RegisterTaskWithMaintenanceWindow",
+                "description": "Grants permission to register a task with a specified maintenance window",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RegisterTaskWithMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateMaintenanceWindow": {
+                "privilege": "UpdateMaintenanceWindow",
+                "description": "Grants permission to update a specified maintenance window",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateMaintenanceWindow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateMaintenanceWindowTarget": {
+                "privilege": "UpdateMaintenanceWindowTarget",
+                "description": "Grants permission to update a specified maintenance window target",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateMaintenanceWindowTarget.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateMaintenanceWindowTask": {
+                "privilege": "UpdateMaintenanceWindowTask",
+                "description": "Grants permission to update a specified maintenance window task",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateMaintenanceWindowTask.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "managedInstance": {
+        "resourceName": "managed-instance",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:managed-instance/${InstanceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListInstanceAssociations": {
+                "privilege": "ListInstanceAssociations",
+                "description": "Grants permission to SSM Agent to check for new State Manager associations (internal Systems Manager call)",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAssociation": {
+                "privilege": "DescribeAssociation",
+                "description": "Grants permission to view details about the specified association for a specified instance or target",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEffectiveInstanceAssociations": {
+                "privilege": "DescribeEffectiveInstanceAssociations",
+                "description": "Grants permission to view all current associations for a specified instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeEffectiveInstanceAssociations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeInstanceAssociationsStatus": {
+                "privilege": "DescribeInstanceAssociationsStatus",
+                "description": "Grants permission to view the status of the associations for a specified instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeInstanceAssociationsStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateAssociation": {
+                "privilege": "CreateAssociation",
+                "description": "Grants permission to associate a specified Systems Manager document with specified instances or other targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateAssociationBatch": {
+                "privilege": "CreateAssociationBatch",
+                "description": "Grants permission to combine entries for multiple CreateAssociation operations in a single command",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociationBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteAssociation": {
+                "privilege": "DeleteAssociation",
+                "description": "Grants permission to disassociate a specified SSM document from a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DeregisterManagedInstance": {
+                "privilege": "DeregisterManagedInstance",
+                "description": "Grants permission to deregister a specified on-premises server or virtual machine (VM) from Systems Manager",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeregisterManagedInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutComplianceItems": {
+                "privilege": "PutComplianceItems",
+                "description": "Grants permission to register a compliance type and other compliance details on a specified resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PutComplianceItems.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "SendCommand": {
+                "privilege": "SendCommand",
+                "description": "Grants permission to run commands on one or more specified managed instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_SendCommand.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "StartSession": {
+                "privilege": "StartSession",
+                "description": "Grants permission to initiate a connection to a specified target for a Session Manager session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartSession.html",
+                "privConditions": {
+                    "ssm:SessionDocumentAccessCheck": {
+                        "condition": "ssm:SessionDocumentAccessCheck",
+                        "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
+                        "type": "Bool"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateAssociation": {
+                "privilege": "UpdateAssociation",
+                "description": "Grants permission to update an association and immediately run the association on the specified targets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateAssociationStatus": {
+                "privilege": "UpdateAssociationStatus",
+                "description": "Grants permission to update the status of the SSM document associated with a specified instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateInstanceAssociationStatus": {
+                "privilege": "UpdateInstanceAssociationStatus",
+                "description": "Grants permission to SSM Agent to update the status of the association that it is currently running (internal Systems Manager call)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": null,
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateManagedInstanceRole": {
+                "privilege": "UpdateManagedInstanceRole",
+                "description": "Grants permission to assign or change the IAM role assigned to a specified managed instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateManagedInstanceRole.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "managedInstanceInventory": {
+        "resourceName": "managed-instance-inventory",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:managed-instance-inventory/${InstanceId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "opsitem": {
+        "resourceName": "opsitem",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:opsitem/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetOpsItem": {
+                "privilege": "GetOpsItem",
+                "description": "Grants permission to view information about a specified OpsItem",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetOpsItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AssociateOpsItemRelatedItem": {
+                "privilege": "AssociateOpsItemRelatedItem",
+                "description": "Grants permission to associate RelatedItem to an OpsItem",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AssociateOpsItemRelatedItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateOpsItemRelatedItem": {
+                "privilege": "DisassociateOpsItemRelatedItem",
+                "description": "Grants permission to disassociate RelatedItem from an OpsItem",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DisassociateOpsItemRelatedItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateOpsItem": {
+                "privilege": "UpdateOpsItem",
+                "description": "Grants permission to edit or change an OpsItem",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateOpsItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "opsmetadata": {
+        "resourceName": "opsmetadata",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:opsmetadata/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetOpsMetadata": {
+                "privilege": "GetOpsMetadata",
+                "description": "Grants permission to retrieve an OpsMetadata object",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetOpsMetadata.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteOpsMetadata": {
+                "privilege": "DeleteOpsMetadata",
+                "description": "Grants permission to delete an OpsMetadata object",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteOpsMetadata.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateOpsMetadata": {
+                "privilege": "UpdateOpsMetadata",
+                "description": "Grants permission to update an OpsMetadata object",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateOpsMetadata.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "parameter": {
+        "resourceName": "parameter",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:parameter/${ParameterNameWithoutLeadingSlash}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetParameter": {
+                "privilege": "GetParameter",
+                "description": "Grants permission to view information about a specified parameter",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameter.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetParameterHistory": {
+                "privilege": "GetParameterHistory",
+                "description": "Grants permission to view details and changes for a specified parameter",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameterHistory.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetParameters": {
+                "privilege": "GetParameters",
+                "description": "Grants permission to view information about multiple specified parameters",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameters.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetParametersByPath": {
+                "privilege": "GetParametersByPath",
+                "description": "Grants permission to view information about parameters in a specified hierarchy",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParametersByPath.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteParameter": {
+                "privilege": "DeleteParameter",
+                "description": "Grants permission to delete a specified SSM parameter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteParameter.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteParameters": {
+                "privilege": "DeleteParameters",
+                "description": "Grants permission to delete multiple specified SSM parameters",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteParameters.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "LabelParameterVersion": {
+                "privilege": "LabelParameterVersion",
+                "description": "Grants permission to apply an identifying label to a specified version of a parameter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_LabelParameterVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutParameter": {
+                "privilege": "PutParameter",
+                "description": "Grants permission to create an SSM parameter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PutParameter.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UnlabelParameterVersion": {
+                "privilege": "UnlabelParameterVersion",
+                "description": "Grants permission to remove an identifying label from a specified version of a parameter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UnlabelParameterVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "patchbaseline": {
+        "resourceName": "patchbaseline",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:patchbaseline/${PatchBaselineIdResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeEffectivePatchesForPatchBaseline": {
+                "privilege": "DescribeEffectivePatchesForPatchBaseline",
+                "description": "Grants permission to view details about the patches currently associated with the specified patch baseline (Windows only)",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeEffectivePatchesForPatchBaseline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDefaultPatchBaseline": {
+                "privilege": "GetDefaultPatchBaseline",
+                "description": "Grants permission to view the current default patch baseline for a specified operating system type",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetDefaultPatchBaseline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPatchBaseline": {
+                "privilege": "GetPatchBaseline",
+                "description": "Grants permission to view information about a specified patch baseline",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetPatchBaseline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPatchBaselineForPatchGroup": {
+                "privilege": "GetPatchBaselineForPatchGroup",
+                "description": "Grants permission to view the ID of the current patch baseline for a specified patch group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetPatchBaselineForPatchGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeletePatchBaseline": {
+                "privilege": "DeletePatchBaseline",
+                "description": "Grants permission to delete a specified patch baseline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeletePatchBaseline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeregisterPatchBaselineForPatchGroup": {
+                "privilege": "DeregisterPatchBaselineForPatchGroup",
+                "description": "Grants permission to deregister a specified patch baseline from being the default patch baseline for a specified patch group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeregisterPatchBaselineForPatchGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RegisterDefaultPatchBaseline": {
+                "privilege": "RegisterDefaultPatchBaseline",
+                "description": "Grants permission to specify the default patch baseline for an operating system type",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RegisterDefaultPatchBaseline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RegisterPatchBaselineForPatchGroup": {
+                "privilege": "RegisterPatchBaselineForPatchGroup",
+                "description": "Grants permission to specify the default patch baseline for a specified patch group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RegisterPatchBaselineForPatchGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePatchBaseline": {
+                "privilege": "UpdatePatchBaseline",
+                "description": "Grants permission to update a specified patch baseline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdatePatchBaseline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "session": {
+        "resourceName": "session",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:session/${SessionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "ResumeSession": {
+                "privilege": "ResumeSession",
+                "description": "Grants permission to reconnect a Session Manager session to a managed instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ResumeSession.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "TerminateSession": {
+                "privilege": "TerminateSession",
+                "description": "Grants permission to permanently end a Session Manager connection to an instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_TerminateSession.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "resourcedatasync": {
+        "resourceName": "resourcedatasync",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:resource-data-sync/${SyncName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetOpsSummary": {
+                "privilege": "GetOpsSummary",
+                "description": "Grants permission to view summary information about OpsItems based on specified filters and aggregators",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetOpsSummary.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateResourceDataSync": {
+                "privilege": "CreateResourceDataSync",
+                "description": "Grants permission to create a resource data sync configuration, which regularly collects inventory data from managed instances and updates the data in an Amazon S3 bucket",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateResourceDataSync.html",
+                "privConditions": {
+                    "ssm:SyncType": {
+                        "condition": "ssm:SyncType",
+                        "description": "Filters access by verifying that a user also has access to the ResourceDataSync SyncType specified in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteResourceDataSync": {
+                "privilege": "DeleteResourceDataSync",
+                "description": "Grants permission to delete a specified resource data sync",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeleteResourceDataSync.html",
+                "privConditions": {
+                    "ssm:SyncType": {
+                        "condition": "ssm:SyncType",
+                        "description": "Filters access by verifying that a user also has access to the ResourceDataSync SyncType specified in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateResourceDataSync": {
+                "privilege": "UpdateResourceDataSync",
+                "description": "Grants permission to update a resource data sync",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateResourceDataSync.html",
+                "privConditions": {
+                    "ssm:SyncType": {
+                        "condition": "ssm:SyncType",
+                        "description": "Filters access by verifying that a user also has access to the ResourceDataSync SyncType specified in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "servicesetting": {
+        "resourceName": "servicesetting",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:servicesetting/${ResourceId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetServiceSetting": {
+                "privilege": "GetServiceSetting",
+                "description": "Grants permission to view the account-level setting for an AWS service",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetServiceSetting.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "ResetServiceSetting": {
+                "privilege": "ResetServiceSetting",
+                "description": "Grants permission to reset the service setting for an AWS account to the default value",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ResetServiceSetting.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateServiceSetting": {
+                "privilege": "UpdateServiceSetting",
+                "description": "Grants permission to update the service setting for an AWS account",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateServiceSetting.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "windowtarget": {
+        "resourceName": "windowtarget",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:windowtarget/${WindowTargetId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "windowtask": {
+        "resourceName": "windowtask",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:windowtask/${WindowTaskId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "task": {
+        "resourceName": "task",
+        "service": "ssm",
+        "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task/${TaskId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "StartSession": {
+                "privilege": "StartSession",
+                "description": "Grants permission to initiate a connection to a specified target for a Session Manager session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartSession.html",
+                "privConditions": {
+                    "ssm:SessionDocumentAccessCheck": {
+                        "condition": "ssm:SessionDocumentAccessCheck",
+                        "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
+                        "type": "Bool"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

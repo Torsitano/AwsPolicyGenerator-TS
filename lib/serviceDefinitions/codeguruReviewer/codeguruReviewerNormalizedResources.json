@@ -1,0 +1,299 @@
+{
+    "association": {
+        "resourceName": "association",
+        "service": "codeguruReviewer",
+        "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListRecommendationFeedback": {
+                "privilege": "ListRecommendationFeedback",
+                "description": "Grants permission to list summary of recommendation feedback on a code review",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRecommendationFeedback.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListRecommendations": {
+                "privilege": "ListRecommendations",
+                "description": "Grants permission to list summary of recommendations on a code review",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRecommendations.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the resource attached to a associated repository ARN",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeCodeReview": {
+                "privilege": "DescribeCodeReview",
+                "description": "Grants permission to describe a code review",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeCodeReview.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeRecommendationFeedback": {
+                "privilege": "DescribeRecommendationFeedback",
+                "description": "Grants permission to describe a recommendation feedback on a code review",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRecommendationFeedback.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeRepositoryAssociation": {
+                "privilege": "DescribeRepositoryAssociation",
+                "description": "Grants permission to describe a repository association",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AssociateRepository": {
+                "privilege": "AssociateRepository",
+                "description": "Grants permission to associates a repository with Amazon CodeGuru Reviewer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_AssociateRepository.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateCodeReview": {
+                "privilege": "CreateCodeReview",
+                "description": "Grants permission to create a code review",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "s3:GetObject"
+                ],
+                "required": true
+            },
+            "DisassociateRepository": {
+                "privilege": "DisassociateRepository",
+                "description": "Grants permission to disassociate a repository with Amazon CodeGuru Reviewer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DisassociateRepository.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "codecommit:UntagResource",
+                    "events:DeleteRule",
+                    "events:RemoveTargets"
+                ],
+                "required": true
+            },
+            "PutRecommendationFeedback": {
+                "privilege": "PutRecommendationFeedback",
+                "description": "Grants permission to put feedback for a recommendation on a code review",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_PutRecommendationFeedback.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to attach resource tags to an associated repository ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UnTagResource": {
+                "privilege": "UnTagResource",
+                "description": "Grants permission to disassociate resource tags from an associated repository ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_UnTagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    },
+    "codereview": {
+        "resourceName": "codereview",
+        "service": "codeguruReviewer",
+        "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}:codereview:${CodeReviewId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "repository": {
+        "resourceName": "repository",
+        "service": "codeguruReviewer",
+        "resourceArn": "arn:${Partition}:codecommit:${Region}:${Account}:${RepositoryName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "AssociateRepository": {
+                "privilege": "AssociateRepository",
+                "description": "Grants permission to associates a repository with Amazon CodeGuru Reviewer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_AssociateRepository.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "connection": {
+        "resourceName": "connection",
+        "service": "codeguruReviewer",
+        "resourceArn": "arn:${Partition}:codestar-connections:${Region}:${Account}:connection/${ConnectionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "AssociateRepository": {
+                "privilege": "AssociateRepository",
+                "description": "Grants permission to associates a repository with Amazon CodeGuru Reviewer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_AssociateRepository.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

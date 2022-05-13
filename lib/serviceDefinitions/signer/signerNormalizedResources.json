@@ -1,0 +1,208 @@
+{
+    "signingProfile": {
+        "resourceName": "signing-profile",
+        "service": "signer",
+        "resourceArn": "arn:${Partition}:signer:${Region}:${Account}:/signing-profiles/${ProfileName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetSigningProfile": {
+                "privilege": "GetSigningProfile",
+                "description": "Grants permission to return information about a specific Signing Profile",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_GetSigningProfile.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListProfilePermissions": {
+                "privilege": "ListProfilePermissions",
+                "description": "Grants permission to list the cross-account permissions associated with a Signing Profile",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_ListProfilePermissions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags associated with a Signing Profile",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CancelSigningProfile": {
+                "privilege": "CancelSigningProfile",
+                "description": "Grants permission to change the state of a Signing Profile to CANCELED",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_CancelSigningProfile.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "RevokeSigningProfile": {
+                "privilege": "RevokeSigningProfile",
+                "description": "Grants permission to change the state of a Signing Profile to REVOKED",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_RevokeSigningProfile.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartSigningJob": {
+                "privilege": "StartSigningJob",
+                "description": "Grants permission to initiate a Signing Job on the provided code",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_StartSigningJob.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "AddProfilePermission": {
+                "privilege": "AddProfilePermission",
+                "description": "Grants permission to add cross-account permissions to a Signing Profile",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_AddProfilePermission.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "RemoveProfilePermission": {
+                "privilege": "RemoveProfilePermission",
+                "description": "Grants permission to remove cross-account permissions from a Signing Profile",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_RemoveProfilePermission.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add one or more tags to a Signing Profile",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by allowed set of values for each of the tags",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove one or more tags from a Signing Profile",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by allowed set of values for each of the tags",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    },
+    "signingJob": {
+        "resourceName": "signing-job",
+        "service": "signer",
+        "resourceArn": "arn:${Partition}:signer:${Region}:${Account}:/signing-jobs/${JobId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeSigningJob": {
+                "privilege": "DescribeSigningJob",
+                "description": "Grants permission to return information about a specific Signing Job",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_DescribeSigningJob.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "RevokeSignature": {
+                "privilege": "RevokeSignature",
+                "description": "Grants permission to change the state of a Signing Job to REVOKED",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/signer/latest/api/API_RevokeSignature.html",
+                "privConditions": {
+                    "signer:ProfileVersion": {
+                        "condition": "signer:ProfileVersion",
+                        "description": "Filters access by version of the Signing Profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

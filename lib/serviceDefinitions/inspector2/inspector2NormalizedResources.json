@@ -1,0 +1,80 @@
+{
+    "filter": {
+        "resourceName": "Filter",
+        "service": "inspector2",
+        "resourceArn": "arn:${Partition}:inspector2:${Region}:${Account}:owner/${OwnerId}/filter/${FilterId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "CreateFilter": {
+                "privilege": "CreateFilter",
+                "description": "Grants permission to create and define the settings for a findings filter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/inspector/v2/APIReference/API_CreateFilter.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteFilter": {
+                "privilege": "DeleteFilter",
+                "description": "Grants permission to delete a findings filter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/inspector/v2/APIReference/API_DeleteFilter.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateFilter": {
+                "privilege": "UpdateFilter",
+                "description": "Grants permission to update the settings for a findings filter",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/inspector/v2/APIReference/API_UpdateFilter.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "finding": {
+        "resourceName": "Finding",
+        "service": "inspector2",
+        "resourceArn": "arn:${Partition}:inspector2:${Region}:${Account}:finding/${FindingId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

@@ -1,0 +1,1090 @@
+{
+    "application": {
+        "resourceName": "application",
+        "service": "elasticbeanstalk",
+        "resourceArn": "arn:${Partition}:elasticbeanstalk:${Region}:${Account}:application/${ApplicationName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribeApplications": {
+                "privilege": "DescribeApplications",
+                "description": "Grants permission to retrieve the descriptions of existing applications",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeApplications.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeEvents": {
+                "privilege": "DescribeEvents",
+                "description": "Grants permission to retrieve a list of event descriptions matching a set of criteria",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEvents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags of an Elastic Beanstalk resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ComposeEnvironments": {
+                "privilege": "ComposeEnvironments",
+                "description": "Grants permission to create or update a group of environments, each running a separate component of a single application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ComposeEnvironments.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateApplication": {
+                "privilege": "CreateApplication",
+                "description": "Grants permission to create a new application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_CreateApplication.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateApplicationVersion": {
+                "privilege": "CreateApplicationVersion",
+                "description": "Grants permission to create an application version for an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_CreateApplicationVersion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteApplication": {
+                "privilege": "DeleteApplication",
+                "description": "Grants permission to delete an application along with all associated versions and configurations",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DeleteApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutInstanceStatistics": {
+                "privilege": "PutInstanceStatistics",
+                "description": "Grants permission to submit instance statistics for enhanced health",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html#health-enhanced-authz",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateApplication": {
+                "privilege": "UpdateApplication",
+                "description": "Grants permission to update an application with specified properties",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateApplicationResourceLifecycle": {
+                "privilege": "UpdateApplicationResourceLifecycle",
+                "description": "Grants permission to update the application version lifecycle policy associated with the application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateApplicationResourceLifecycle.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Elastic Beanstalk resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateTagsForResource": {
+                "privilege": "UpdateTagsForResource",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource, remove tags, and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "applicationversion": {
+        "resourceName": "applicationversion",
+        "service": "elasticbeanstalk",
+        "resourceArn": "arn:${Partition}:elasticbeanstalk:${Region}:${Account}:applicationversion/${ApplicationName}/${VersionLabel}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "elasticbeanstalk:InApplication": {
+                "condition": "elasticbeanstalk:InApplication",
+                "description": "Filters access by the application that contains the resource that the action operates on",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {
+            "DescribeApplicationVersions": {
+                "privilege": "DescribeApplicationVersions",
+                "description": "Grants permission to retrieve a list of application versions stored in an AWS Elastic Beanstalk storage bucket",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeApplicationVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeEvents": {
+                "privilege": "DescribeEvents",
+                "description": "Grants permission to retrieve a list of event descriptions matching a set of criteria",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEvents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags of an Elastic Beanstalk resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ComposeEnvironments": {
+                "privilege": "ComposeEnvironments",
+                "description": "Grants permission to create or update a group of environments, each running a separate component of a single application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ComposeEnvironments.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateApplicationVersion": {
+                "privilege": "CreateApplicationVersion",
+                "description": "Grants permission to create an application version for an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_CreateApplicationVersion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteApplicationVersion": {
+                "privilege": "DeleteApplicationVersion",
+                "description": "Grants permission to delete an application version from an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DeleteApplicationVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateApplicationVersion": {
+                "privilege": "UpdateApplicationVersion",
+                "description": "Grants permission to update an application version with specified properties",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateApplicationVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Elastic Beanstalk resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateTagsForResource": {
+                "privilege": "UpdateTagsForResource",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource, remove tags, and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "configurationtemplate": {
+        "resourceName": "configurationtemplate",
+        "service": "elasticbeanstalk",
+        "resourceArn": "arn:${Partition}:elasticbeanstalk:${Region}:${Account}:configurationtemplate/${ApplicationName}/${TemplateName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "elasticbeanstalk:InApplication": {
+                "condition": "elasticbeanstalk:InApplication",
+                "description": "Filters access by the application that contains the resource that the action operates on",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeConfigurationOptions": {
+                "privilege": "DescribeConfigurationOptions",
+                "description": "Grants permission to retrieve descriptions of environment configuration options",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeConfigurationOptions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeConfigurationSettings": {
+                "privilege": "DescribeConfigurationSettings",
+                "description": "Grants permission to retrieve a description of the settings for a configuration set",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeConfigurationSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEvents": {
+                "privilege": "DescribeEvents",
+                "description": "Grants permission to retrieve a list of event descriptions matching a set of criteria",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEvents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags of an Elastic Beanstalk resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ValidateConfigurationSettings": {
+                "privilege": "ValidateConfigurationSettings",
+                "description": "Grants permission to check the validity of a set of configuration settings for a configuration template or an environment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ValidateConfigurationSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateConfigurationTemplate": {
+                "privilege": "CreateConfigurationTemplate",
+                "description": "Grants permission to create a configuration template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_CreateConfigurationTemplate.html",
+                "privConditions": {
+                    "elasticbeanstalk:FromApplication": {
+                        "condition": "elasticbeanstalk:FromApplication",
+                        "description": "Filters access by an application as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromApplicationVersion": {
+                        "condition": "elasticbeanstalk:FromApplicationVersion",
+                        "description": "Filters access by an application version as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromConfigurationTemplate": {
+                        "condition": "elasticbeanstalk:FromConfigurationTemplate",
+                        "description": "Filters access by a configuration template as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromEnvironment": {
+                        "condition": "elasticbeanstalk:FromEnvironment",
+                        "description": "Filters access by an environment as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromSolutionStack": {
+                        "condition": "elasticbeanstalk:FromSolutionStack",
+                        "description": "Filters access by a solution stack as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromPlatform": {
+                        "condition": "elasticbeanstalk:FromPlatform",
+                        "description": "Filters access by a platform as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteConfigurationTemplate": {
+                "privilege": "DeleteConfigurationTemplate",
+                "description": "Grants permission to delete a configuration template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DeleteConfigurationTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateConfigurationTemplate": {
+                "privilege": "UpdateConfigurationTemplate",
+                "description": "Grants permission to update a configuration template with specified properties or configuration option values",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateConfigurationTemplate.html",
+                "privConditions": {
+                    "elasticbeanstalk:FromApplication": {
+                        "condition": "elasticbeanstalk:FromApplication",
+                        "description": "Filters access by an application as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromApplicationVersion": {
+                        "condition": "elasticbeanstalk:FromApplicationVersion",
+                        "description": "Filters access by an application version as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromConfigurationTemplate": {
+                        "condition": "elasticbeanstalk:FromConfigurationTemplate",
+                        "description": "Filters access by a configuration template as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromEnvironment": {
+                        "condition": "elasticbeanstalk:FromEnvironment",
+                        "description": "Filters access by an environment as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromSolutionStack": {
+                        "condition": "elasticbeanstalk:FromSolutionStack",
+                        "description": "Filters access by a solution stack as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromPlatform": {
+                        "condition": "elasticbeanstalk:FromPlatform",
+                        "description": "Filters access by a platform as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Elastic Beanstalk resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateTagsForResource": {
+                "privilege": "UpdateTagsForResource",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource, remove tags, and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "environment": {
+        "resourceName": "environment",
+        "service": "elasticbeanstalk",
+        "resourceArn": "arn:${Partition}:elasticbeanstalk:${Region}:${Account}:environment/${ApplicationName}/${EnvironmentName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "elasticbeanstalk:InApplication": {
+                "condition": "elasticbeanstalk:InApplication",
+                "description": "Filters access by the application that contains the resource that the action operates on",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {
+            "DescribeEnvironments": {
+                "privilege": "DescribeEnvironments",
+                "description": "Grants permission to retrieve descriptions for existing environments",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeConfigurationOptions": {
+                "privilege": "DescribeConfigurationOptions",
+                "description": "Grants permission to retrieve descriptions of environment configuration options",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeConfigurationOptions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeConfigurationSettings": {
+                "privilege": "DescribeConfigurationSettings",
+                "description": "Grants permission to retrieve a description of the settings for a configuration set",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeConfigurationSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEnvironmentHealth": {
+                "privilege": "DescribeEnvironmentHealth",
+                "description": "Grants permission to retrieve information about the overall health of an environment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironmentHealth.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEnvironmentManagedActionHistory": {
+                "privilege": "DescribeEnvironmentManagedActionHistory",
+                "description": "Grants permission to retrieve a list of an environment's completed and failed managed actions",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironmentManagedActionHistory.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEnvironmentManagedActions": {
+                "privilege": "DescribeEnvironmentManagedActions",
+                "description": "Grants permission to retrieve a list of an environment's upcoming and in-progress managed actions",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironmentManagedActions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEnvironmentResources": {
+                "privilege": "DescribeEnvironmentResources",
+                "description": "Grants permission to retrieve a list of AWS resources for an environment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironmentResources.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeEvents": {
+                "privilege": "DescribeEvents",
+                "description": "Grants permission to retrieve a list of event descriptions matching a set of criteria",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEvents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeInstancesHealth": {
+                "privilege": "DescribeInstancesHealth",
+                "description": "Grants permission to retrieve more detailed information about the health of environment instances",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeInstancesHealth.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags of an Elastic Beanstalk resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RequestEnvironmentInfo": {
+                "privilege": "RequestEnvironmentInfo",
+                "description": "Grants permission to initiate a request to compile information of the deployed environment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_RequestEnvironmentInfo.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RetrieveEnvironmentInfo": {
+                "privilege": "RetrieveEnvironmentInfo",
+                "description": "Grants permission to retrieve the compiled information from a RequestEnvironmentInfo request",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_RetrieveEnvironmentInfo.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ValidateConfigurationSettings": {
+                "privilege": "ValidateConfigurationSettings",
+                "description": "Grants permission to check the validity of a set of configuration settings for a configuration template or an environment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ValidateConfigurationSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "AbortEnvironmentUpdate": {
+                "privilege": "AbortEnvironmentUpdate",
+                "description": "Grants permission to cancel in-progress environment configuration update or application version deployment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_AbortEnvironmentUpdate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ApplyEnvironmentManagedAction": {
+                "privilege": "ApplyEnvironmentManagedAction",
+                "description": "Grants permission to apply a scheduled managed action immediately",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ApplyEnvironmentManagedAction.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociateEnvironmentOperationsRole": {
+                "privilege": "AssociateEnvironmentOperationsRole",
+                "description": "Grants permission to associate an operations role with an environment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_AssociateEnvironmentOperationsRole.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateEnvironment": {
+                "privilege": "CreateEnvironment",
+                "description": "Grants permission to launch an environment for an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_CreateEnvironment.html",
+                "privConditions": {
+                    "elasticbeanstalk:FromApplicationVersion": {
+                        "condition": "elasticbeanstalk:FromApplicationVersion",
+                        "description": "Filters access by an application version as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromConfigurationTemplate": {
+                        "condition": "elasticbeanstalk:FromConfigurationTemplate",
+                        "description": "Filters access by a configuration template as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromSolutionStack": {
+                        "condition": "elasticbeanstalk:FromSolutionStack",
+                        "description": "Filters access by a solution stack as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromPlatform": {
+                        "condition": "elasticbeanstalk:FromPlatform",
+                        "description": "Filters access by a platform as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteEnvironmentConfiguration": {
+                "privilege": "DeleteEnvironmentConfiguration",
+                "description": "Grants permission to delete the draft configuration associated with the running environment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DeleteEnvironmentConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateEnvironmentOperationsRole": {
+                "privilege": "DisassociateEnvironmentOperationsRole",
+                "description": "Grants permission to disassociate an operations role with an environment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DisassociateEnvironmentOperationsRole.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutInstanceStatistics": {
+                "privilege": "PutInstanceStatistics",
+                "description": "Grants permission to submit instance statistics for enhanced health",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html#health-enhanced-authz",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RebuildEnvironment": {
+                "privilege": "RebuildEnvironment",
+                "description": "Grants permission to delete and recreate all of the AWS resources for an environment and to force a restart",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_RebuildEnvironment.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RestartAppServer": {
+                "privilege": "RestartAppServer",
+                "description": "Grants permission to request an environment to restart the application container server running on each Amazon EC2 instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_RestartAppServer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SwapEnvironmentCNAMEs": {
+                "privilege": "SwapEnvironmentCNAMEs",
+                "description": "Grants permission to swap the CNAMEs of two environments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_SwapEnvironmentCNAMEs.html",
+                "privConditions": {
+                    "elasticbeanstalk:FromEnvironment": {
+                        "condition": "elasticbeanstalk:FromEnvironment",
+                        "description": "Filters access by an environment as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "TerminateEnvironment": {
+                "privilege": "TerminateEnvironment",
+                "description": "Grants permission to terminate an environment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_TerminateEnvironment.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateEnvironment": {
+                "privilege": "UpdateEnvironment",
+                "description": "Grants permission to update an environment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateEnvironment.html",
+                "privConditions": {
+                    "elasticbeanstalk:FromApplicationVersion": {
+                        "condition": "elasticbeanstalk:FromApplicationVersion",
+                        "description": "Filters access by an application version as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromConfigurationTemplate": {
+                        "condition": "elasticbeanstalk:FromConfigurationTemplate",
+                        "description": "Filters access by a configuration template as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromSolutionStack": {
+                        "condition": "elasticbeanstalk:FromSolutionStack",
+                        "description": "Filters access by a solution stack as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    },
+                    "elasticbeanstalk:FromPlatform": {
+                        "condition": "elasticbeanstalk:FromPlatform",
+                        "description": "Filters access by a platform as a dependency or a constraint on an input parameter",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Elastic Beanstalk resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateTagsForResource": {
+                "privilege": "UpdateTagsForResource",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource, remove tags, and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "solutionstack": {
+        "resourceName": "solutionstack",
+        "service": "elasticbeanstalk",
+        "resourceArn": "arn:${Partition}:elasticbeanstalk:${Region}::solutionstack/${SolutionStackName}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListAvailableSolutionStacks": {
+                "privilege": "ListAvailableSolutionStacks",
+                "description": "Grants permission to retrieve a list of the available solution stack names",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeConfigurationOptions": {
+                "privilege": "DescribeConfigurationOptions",
+                "description": "Grants permission to retrieve descriptions of environment configuration options",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeConfigurationOptions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "platform": {
+        "resourceName": "platform",
+        "service": "elasticbeanstalk",
+        "resourceArn": "arn:${Partition}:elasticbeanstalk:${Region}::platform/${PlatformNameWithVersion}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListPlatformVersions": {
+                "privilege": "ListPlatformVersions",
+                "description": "Grants permission to retrieve a list of the available platforms",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListPlatformVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribePlatformVersion": {
+                "privilege": "DescribePlatformVersion",
+                "description": "Grants permission to retrieve a description of a platform version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribePlatformVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags of an Elastic Beanstalk resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreatePlatformVersion": {
+                "privilege": "CreatePlatformVersion",
+                "description": "Grants permission to create a new version of a custom platform",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_CreatePlatformVersion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePlatformVersion": {
+                "privilege": "DeletePlatformVersion",
+                "description": "Grants permission to delete a version of a custom platform",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DeletePlatformVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Elastic Beanstalk resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateTagsForResource": {
+                "privilege": "UpdateTagsForResource",
+                "description": "Grants permission to add tags to an Elastic Beanstalk resource, remove tags, and to update tag values",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_UpdateTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

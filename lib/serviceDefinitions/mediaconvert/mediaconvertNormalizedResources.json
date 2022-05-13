@@ -1,0 +1,451 @@
+{
+    "job": {
+        "resourceName": "Job",
+        "service": "mediaconvert",
+        "resourceArn": "arn:${Partition}:mediaconvert:${Region}:${Account}:jobs/${JobId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetJob": {
+                "privilege": "GetJob",
+                "description": "Grants permission to get an AWS Elemental MediaConvert job",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs-id.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CancelJob": {
+                "privilege": "CancelJob",
+                "description": "Grants permission to cancel an AWS Elemental MediaConvert job that is waiting in queue",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs-id.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "queue": {
+        "resourceName": "Queue",
+        "service": "mediaconvert",
+        "resourceArn": "arn:${Partition}:mediaconvert:${Region}:${Account}:queues/${QueueName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListJobs": {
+                "privilege": "ListJobs",
+                "description": "Grants permission to list AWS Elemental MediaConvert jobs",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetQueue": {
+                "privilege": "GetQueue",
+                "description": "Grants permission to get an AWS Elemental MediaConvert job queue",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/queues-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for a MediaConvert queue, preset, or job template",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags-arn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateJob": {
+                "privilege": "CreateJob",
+                "description": "Grants permission to create and submit an AWS Elemental MediaConvert job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateJobTemplate": {
+                "privilege": "CreateJobTemplate",
+                "description": "Grants permission to create an AWS Elemental MediaConvert custom job template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs-id.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteQueue": {
+                "privilege": "DeleteQueue",
+                "description": "Grants permission to delete an AWS Elemental MediaConvert job queue",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/queues-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateJobTemplate": {
+                "privilege": "UpdateJobTemplate",
+                "description": "Grants permission to update an AWS Elemental MediaConvert custom job template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobtemplates-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateQueue": {
+                "privilege": "UpdateQueue",
+                "description": "Grants permission to update an AWS Elemental MediaConvert job queue",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/queues-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a MediaConvert queue, preset, or job template",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a MediaConvert queue, preset, or job template",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags-arn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "preset": {
+        "resourceName": "Preset",
+        "service": "mediaconvert",
+        "resourceArn": "arn:${Partition}:mediaconvert:${Region}:${Account}:presets/${PresetName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetPreset": {
+                "privilege": "GetPreset",
+                "description": "Grants permission to get an AWS Elemental MediaConvert output preset",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/presets-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for a MediaConvert queue, preset, or job template",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags-arn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateJob": {
+                "privilege": "CreateJob",
+                "description": "Grants permission to create and submit an AWS Elemental MediaConvert job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateJobTemplate": {
+                "privilege": "CreateJobTemplate",
+                "description": "Grants permission to create an AWS Elemental MediaConvert custom job template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs-id.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeletePreset": {
+                "privilege": "DeletePreset",
+                "description": "Grants permission to delete an AWS Elemental MediaConvert custom output preset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/presets-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateJobTemplate": {
+                "privilege": "UpdateJobTemplate",
+                "description": "Grants permission to update an AWS Elemental MediaConvert custom job template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobtemplates-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdatePreset": {
+                "privilege": "UpdatePreset",
+                "description": "Grants permission to update an AWS Elemental MediaConvert custom output preset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/presets-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a MediaConvert queue, preset, or job template",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a MediaConvert queue, preset, or job template",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags-arn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "jobTemplate": {
+        "resourceName": "JobTemplate",
+        "service": "mediaconvert",
+        "resourceArn": "arn:${Partition}:mediaconvert:${Region}:${Account}:jobTemplates/${JobTemplateName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetJobTemplate": {
+                "privilege": "GetJobTemplate",
+                "description": "Grants permission to get an AWS Elemental MediaConvert job template",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobtemplates-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for a MediaConvert queue, preset, or job template",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags-arn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateJob": {
+                "privilege": "CreateJob",
+                "description": "Grants permission to create and submit an AWS Elemental MediaConvert job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteJobTemplate": {
+                "privilege": "DeleteJobTemplate",
+                "description": "Grants permission to delete an AWS Elemental MediaConvert custom job template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobtemplates-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateJobTemplate": {
+                "privilege": "UpdateJobTemplate",
+                "description": "Grants permission to update an AWS Elemental MediaConvert custom job template",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobtemplates-name.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a MediaConvert queue, preset, or job template",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a MediaConvert queue, preset, or job template",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediaconvert/latest/apireference/tags-arn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "certificateAssociation": {
+        "resourceName": "CertificateAssociation",
+        "service": "mediaconvert",
+        "resourceArn": "arn:${Partition}:mediaconvert:${Region}:${Account}:certificates/${CertificateArn}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

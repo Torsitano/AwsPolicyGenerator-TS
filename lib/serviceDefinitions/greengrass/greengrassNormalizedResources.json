@@ -1,0 +1,1516 @@
+{
+    "connectivityInfo": {
+        "resourceName": "connectivityInfo",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/things/${ThingName}/connectivityInfo",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetConnectivityInfo": {
+                "privilege": "GetConnectivityInfo",
+                "description": "Grants permission to retrieve the connectivity information for a Greengrass core device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetConnectivityInfo.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iot:GetThingShadow"
+                ],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "UpdateConnectivityInfo": {
+                "privilege": "UpdateConnectivityInfo",
+                "description": "Grants permission to update the connectivity information for a Greengrass core. Any devices that belong to the group that has this core will receive this information in order to find the location of the core and connect to it",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_UpdateConnectivityInfo.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iot:GetThingShadow",
+                    "iot:UpdateThingShadow"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "certificateAuthority": {
+        "resourceName": "certificateAuthority",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/groups/${GroupId}/certificateauthorities/${CertificateAuthorityId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetGroupCertificateAuthority": {
+                "privilege": "GetGroupCertificateAuthority",
+                "description": "Grants permission to return the public key of the CA associated with a group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getgroupcertificateauthority-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "deployment": {
+        "resourceName": "deployment",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:deployments:${DeploymentId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetDeploymentStatus": {
+                "privilege": "GetDeploymentStatus",
+                "description": "Grants permission to return the status of a deployment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getdeploymentstatus-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "GetDeployment": {
+                "privilege": "GetDeployment",
+                "description": "Grants permission to get a deployment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetDeployment.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iot:DescribeJob",
+                    "iot:DescribeThing",
+                    "iot:DescribeThingGroup",
+                    "iot:GetThingShadow"
+                ],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CancelDeployment": {
+                "privilege": "CancelDeployment",
+                "description": "Grants permission to cancel a deployment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CancelDeployment.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iot:CancelJob",
+                    "iot:DeleteThingShadow",
+                    "iot:DescribeJob",
+                    "iot:DescribeThing",
+                    "iot:DescribeThingGroup",
+                    "iot:GetThingShadow",
+                    "iot:UpdateJob",
+                    "iot:UpdateThingShadow"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "bulkDeployment": {
+        "resourceName": "bulkDeployment",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/bulk/deployments/${BulkDeploymentId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetBulkDeploymentStatus": {
+                "privilege": "GetBulkDeploymentStatus",
+                "description": "Grants permission to return the status of a bulk deployment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getbulkdeploymentstatus-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListBulkDeploymentDetailedReports": {
+                "privilege": "ListBulkDeploymentDetailedReports",
+                "description": "Grants permission to retrieve a paginated list of the deployments that have been started in a bulk deployment operation and their current deployment status",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listbulkdeploymentdetailedreports-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "StopBulkDeployment": {
+                "privilege": "StopBulkDeployment",
+                "description": "Grants permission to stop the execution of a bulk deployment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/stopbulkdeployment-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "group": {
+        "resourceName": "group",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/groups/${GroupId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListGroupCertificateAuthorities": {
+                "privilege": "ListGroupCertificateAuthorities",
+                "description": "Grants permission to retrieve a list of current CAs for a group",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listgroupcertificateauthorities-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListGroupVersions": {
+                "privilege": "ListGroupVersions",
+                "description": "Grants permission to list the versions of a group",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listgroupversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetAssociatedRole": {
+                "privilege": "GetAssociatedRole",
+                "description": "Grants permission to retrieve the role associated with a group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getassociatedrole-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDeploymentStatus": {
+                "privilege": "GetDeploymentStatus",
+                "description": "Grants permission to return the status of a deployment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getdeploymentstatus-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetGroup": {
+                "privilege": "GetGroup",
+                "description": "Grants permission to retrieve information about a group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getgroup-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetGroupCertificateAuthority": {
+                "privilege": "GetGroupCertificateAuthority",
+                "description": "Grants permission to return the public key of the CA associated with a group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getgroupcertificateauthority-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetGroupCertificateConfiguration": {
+                "privilege": "GetGroupCertificateConfiguration",
+                "description": "Grants permission to retrieve the current configuration for the CA used by a group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getgroupcertificateconfiguration-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetGroupVersion": {
+                "privilege": "GetGroupVersion",
+                "description": "Grants permission to retrieve information about a group version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getgroupversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AssociateRoleToGroup": {
+                "privilege": "AssociateRoleToGroup",
+                "description": "Grants permission to associate a role with a group. The role's permissions must allow Greengrass core Lambda functions and connectors to perform actions in other AWS services",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/associateroletogroup-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateGroupCertificateAuthority": {
+                "privilege": "CreateGroupCertificateAuthority",
+                "description": "Grants permission to create a CA for the group, or rotate the existing CA",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/creategroupcertificateauthority-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateGroupVersion": {
+                "privilege": "CreateGroupVersion",
+                "description": "Grants permission to create a version of a group that has already been defined",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/creategroupversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteGroup": {
+                "privilege": "DeleteGroup",
+                "description": "Grants permission to delete a group that is not currently in use in a deployment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deletegroup-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateRoleFromGroup": {
+                "privilege": "DisassociateRoleFromGroup",
+                "description": "Grants permission to disassociate the role from a group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/disassociaterolefromgroup-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ResetDeployments": {
+                "privilege": "ResetDeployments",
+                "description": "Grants permission to reset a group's deployments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/resetdeployments-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateGroup": {
+                "privilege": "UpdateGroup",
+                "description": "Grants permission to update a group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updategroup-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateGroupCertificateConfiguration": {
+                "privilege": "UpdateGroupCertificateConfiguration",
+                "description": "Grants permission to update the certificate expiry time for a group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updategroupcertificateconfiguration-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "groupVersion": {
+        "resourceName": "groupVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/groups/${GroupId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetGroupVersion": {
+                "privilege": "GetGroupVersion",
+                "description": "Grants permission to retrieve information about a group version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getgroupversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "coreDefinition": {
+        "resourceName": "coreDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/cores/${CoreDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListCoreDefinitionVersions": {
+                "privilege": "ListCoreDefinitionVersions",
+                "description": "Grants permission to list the versions of a core definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listcoredefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetCoreDefinition": {
+                "privilege": "GetCoreDefinition",
+                "description": "Grants permission to retrieve information about a core definition",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getcoredefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetCoreDefinitionVersion": {
+                "privilege": "GetCoreDefinitionVersion",
+                "description": "Grants permission to retrieve information about a core definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getcoredefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateCoreDefinitionVersion": {
+                "privilege": "CreateCoreDefinitionVersion",
+                "description": "Grants permission to create a version of an existing core definition. Greengrass groups must each contain exactly one Greengrass core",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createcoredefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCoreDefinition": {
+                "privilege": "DeleteCoreDefinition",
+                "description": "Grants permission to delete a core definition. Deleting a definition that is currently in use in a deployment affects future deployments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deletecoredefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateCoreDefinition": {
+                "privilege": "UpdateCoreDefinition",
+                "description": "Grants permission to update a core definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updatecoredefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "coreDefinitionVersion": {
+        "resourceName": "coreDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/cores/${CoreDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetCoreDefinitionVersion": {
+                "privilege": "GetCoreDefinitionVersion",
+                "description": "Grants permission to retrieve information about a core definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getcoredefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "deviceDefinition": {
+        "resourceName": "deviceDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/devices/${DeviceDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListDeviceDefinitionVersions": {
+                "privilege": "ListDeviceDefinitionVersions",
+                "description": "Grants permission to list the versions of a device definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listdevicedefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetDeviceDefinition": {
+                "privilege": "GetDeviceDefinition",
+                "description": "Grants permission to retrieve information about a device definition",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getdevicedefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDeviceDefinitionVersion": {
+                "privilege": "GetDeviceDefinitionVersion",
+                "description": "Grants permission to retrieve information about a device definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getdevicedefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateDeviceDefinitionVersion": {
+                "privilege": "CreateDeviceDefinitionVersion",
+                "description": "Grants permission to create a version of an existing device definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createdevicedefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteDeviceDefinition": {
+                "privilege": "DeleteDeviceDefinition",
+                "description": "Grants permission to delete a device definition. Deleting a definition that is currently in use in a deployment affects future deployments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deletedevicedefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDeviceDefinition": {
+                "privilege": "UpdateDeviceDefinition",
+                "description": "Grants permission to update a device definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updatedevicedefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "deviceDefinitionVersion": {
+        "resourceName": "deviceDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/devices/${DeviceDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetDeviceDefinitionVersion": {
+                "privilege": "GetDeviceDefinitionVersion",
+                "description": "Grants permission to retrieve information about a device definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getdevicedefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "functionDefinition": {
+        "resourceName": "functionDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/functions/${FunctionDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListFunctionDefinitionVersions": {
+                "privilege": "ListFunctionDefinitionVersions",
+                "description": "Grants permission to list the versions of a Lambda function definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listfunctiondefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetFunctionDefinition": {
+                "privilege": "GetFunctionDefinition",
+                "description": "Grants permission to retrieve information about a Lambda function definition, such as its creation time and latest version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getfunctiondefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetFunctionDefinitionVersion": {
+                "privilege": "GetFunctionDefinitionVersion",
+                "description": "Grants permission to retrieve information about a Lambda function definition version, such as which Lambda functions are included in the version and their configurations",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getfunctiondefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateFunctionDefinitionVersion": {
+                "privilege": "CreateFunctionDefinitionVersion",
+                "description": "Grants permission to create a version of an existing Lambda function definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createfunctiondefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteFunctionDefinition": {
+                "privilege": "DeleteFunctionDefinition",
+                "description": "Grants permission to delete a Lambda function definition. Deleting a definition that is currently in use in a deployment affects future deployments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deletefunctiondefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateFunctionDefinition": {
+                "privilege": "UpdateFunctionDefinition",
+                "description": "Grants permission to update a Lambda function definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updatefunctiondefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "functionDefinitionVersion": {
+        "resourceName": "functionDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/functions/${FunctionDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetFunctionDefinitionVersion": {
+                "privilege": "GetFunctionDefinitionVersion",
+                "description": "Grants permission to retrieve information about a Lambda function definition version, such as which Lambda functions are included in the version and their configurations",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getfunctiondefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "subscriptionDefinition": {
+        "resourceName": "subscriptionDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/subscriptions/${SubscriptionDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListSubscriptionDefinitionVersions": {
+                "privilege": "ListSubscriptionDefinitionVersions",
+                "description": "Grants permission to list the versions of a subscription definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listsubscriptiondefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetSubscriptionDefinition": {
+                "privilege": "GetSubscriptionDefinition",
+                "description": "Grants permission to retrieve information about a subscription definition",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getsubscriptiondefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetSubscriptionDefinitionVersion": {
+                "privilege": "GetSubscriptionDefinitionVersion",
+                "description": "Grants permission to retrieve information about a subscription definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getsubscriptiondefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateSubscriptionDefinitionVersion": {
+                "privilege": "CreateSubscriptionDefinitionVersion",
+                "description": "Grants permission to create a version of an existing subscription definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createsubscriptiondefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteSubscriptionDefinition": {
+                "privilege": "DeleteSubscriptionDefinition",
+                "description": "Grants permission to delete a subscription definition. Deleting a definition that is currently in use in a deployment affects future deployments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deletesubscriptiondefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateSubscriptionDefinition": {
+                "privilege": "UpdateSubscriptionDefinition",
+                "description": "Grants permission to update a subscription definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updatesubscriptiondefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "subscriptionDefinitionVersion": {
+        "resourceName": "subscriptionDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/subscriptions/${SubscriptionDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetSubscriptionDefinitionVersion": {
+                "privilege": "GetSubscriptionDefinitionVersion",
+                "description": "Grants permission to retrieve information about a subscription definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getsubscriptiondefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "loggerDefinition": {
+        "resourceName": "loggerDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/loggers/${LoggerDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListLoggerDefinitionVersions": {
+                "privilege": "ListLoggerDefinitionVersions",
+                "description": "Grants permission to list the versions of a logger definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listloggerdefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetLoggerDefinition": {
+                "privilege": "GetLoggerDefinition",
+                "description": "Grants permission to retrieve information about a logger definition",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getloggerdefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetLoggerDefinitionVersion": {
+                "privilege": "GetLoggerDefinitionVersion",
+                "description": "Grants permission to retrieve information about a logger definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getloggerdefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateLoggerDefinitionVersion": {
+                "privilege": "CreateLoggerDefinitionVersion",
+                "description": "Grants permission to create a version of an existing logger definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createloggerdefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteLoggerDefinition": {
+                "privilege": "DeleteLoggerDefinition",
+                "description": "Grants permission to delete a logger definition. Deleting a definition that is currently in use in a deployment affects future deployments",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deleteloggerdefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateLoggerDefinition": {
+                "privilege": "UpdateLoggerDefinition",
+                "description": "Grants permission to update a logger definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updateloggerdefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "loggerDefinitionVersion": {
+        "resourceName": "loggerDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/loggers/${LoggerDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetLoggerDefinitionVersion": {
+                "privilege": "GetLoggerDefinitionVersion",
+                "description": "Grants permission to retrieve information about a logger definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getloggerdefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "resourceDefinition": {
+        "resourceName": "resourceDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/resources/${ResourceDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListResourceDefinitionVersions": {
+                "privilege": "ListResourceDefinitionVersions",
+                "description": "Grants permission to list the versions of a resource definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listresourcedefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetResourceDefinition": {
+                "privilege": "GetResourceDefinition",
+                "description": "Grants permission to retrieve information about a resource definition, such as its creation time and latest version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getresourcedefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetResourceDefinitionVersion": {
+                "privilege": "GetResourceDefinitionVersion",
+                "description": "Grants permission to retrieve information about a resource definition version, such as which resources are included in the version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getresourcedefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateResourceDefinitionVersion": {
+                "privilege": "CreateResourceDefinitionVersion",
+                "description": "Grants permission to create a version of an existing resource definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createresourcedefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteResourceDefinition": {
+                "privilege": "DeleteResourceDefinition",
+                "description": "Grants permission to delete a resource definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deleteresourcedefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateResourceDefinition": {
+                "privilege": "UpdateResourceDefinition",
+                "description": "Grants permission to update a resource definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updateresourcedefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "resourceDefinitionVersion": {
+        "resourceName": "resourceDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/resources/${ResourceDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetResourceDefinitionVersion": {
+                "privilege": "GetResourceDefinitionVersion",
+                "description": "Grants permission to retrieve information about a resource definition version, such as which resources are included in the version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getresourcedefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "connectorDefinition": {
+        "resourceName": "connectorDefinition",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/connectors/${ConnectorDefinitionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListConnectorDefinitionVersions": {
+                "privilege": "ListConnectorDefinitionVersions",
+                "description": "Grants permission to list the versions of a connector definition",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/listconnectordefinitionversions-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetConnectorDefinition": {
+                "privilege": "GetConnectorDefinition",
+                "description": "Grants permission to retrieve information about a connector definition",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getconnectordefinition-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetConnectorDefinitionVersion": {
+                "privilege": "GetConnectorDefinitionVersion",
+                "description": "Grants permission to retrieve information about a connector definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getconnectordefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateConnectorDefinitionVersion": {
+                "privilege": "CreateConnectorDefinitionVersion",
+                "description": "Grants permission to create a version of an existing connector definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/createconnectordefinitionversion-post.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteConnectorDefinition": {
+                "privilege": "DeleteConnectorDefinition",
+                "description": "Grants permission to delete a connector definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/deleteconnectordefinition-delete.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateConnectorDefinition": {
+                "privilege": "UpdateConnectorDefinition",
+                "description": "Grants permission to update a connector definition",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updateconnectordefinition-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "connectorDefinitionVersion": {
+        "resourceName": "connectorDefinitionVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/definition/connectors/${ConnectorDefinitionId}/versions/${VersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetConnectorDefinitionVersion": {
+                "privilege": "GetConnectorDefinitionVersion",
+                "description": "Grants permission to retrieve information about a connector definition version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getconnectordefinitionversion-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "thing": {
+        "resourceName": "thing",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:iot:${Region}:${Account}:thing/${ThingName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "Discover": {
+                "privilege": "Discover",
+                "description": "Grants permission to retrieve information required to connect to a Greengrass core",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/developerguide/gg-discover-api.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "thingRuntimeConfig": {
+        "resourceName": "thingRuntimeConfig",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:/greengrass/things/${ThingName}/runtimeconfig",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetThingRuntimeConfiguration": {
+                "privilege": "GetThingRuntimeConfiguration",
+                "description": "Grants permission to retrieve runtime configuration of a thing",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/getthingruntimeconfiguration-get.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "UpdateThingRuntimeConfiguration": {
+                "privilege": "UpdateThingRuntimeConfiguration",
+                "description": "Grants permission to update runtime configuration of a thing",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/latest/apireference/updatethingruntimeconfiguration-put.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "component": {
+        "resourceName": "component",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:components:${ComponentName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListComponentVersions": {
+                "privilege": "ListComponentVersions",
+                "description": "Grants permission to retrieve a paginated list of all versions for a component",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListComponentVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateComponentVersion": {
+                "privilege": "CreateComponentVersion",
+                "description": "Grants permission to create a component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateComponentVersion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "componentVersion": {
+        "resourceName": "componentVersion",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:components:${ComponentName}:versions:${ComponentVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ResolveComponentCandidates": {
+                "privilege": "ResolveComponentCandidates",
+                "description": "Grants permission to list components that meet the component, version, and platform requirements of a deployment",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ResolveComponentCandidates.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeComponent": {
+                "privilege": "DescribeComponent",
+                "description": "Grants permission to retrieve metadata for a version of a component",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_DescribeComponent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetComponent": {
+                "privilege": "GetComponent",
+                "description": "Grants permission to get the recipe for a version of a component",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetComponentVersionArtifact": {
+                "privilege": "GetComponentVersionArtifact",
+                "description": "Grants permission to get the pre-signed URL to download a public component artifact",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponentVersionArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteComponent": {
+                "privilege": "DeleteComponent",
+                "description": "Grants permission to delete a component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_DeleteComponent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "coreDevice": {
+        "resourceName": "coreDevice",
+        "service": "greengrass",
+        "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:coreDevices:${CoreDeviceThingName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListClientDevicesAssociatedWithCoreDevice": {
+                "privilege": "ListClientDevicesAssociatedWithCoreDevice",
+                "description": "Grants permission to retrieve a paginated list of client devices associated to a AWS IoT Greengrass core device",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListClientDevicesAssociatedWithCoreDevice.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListEffectiveDeployments": {
+                "privilege": "ListEffectiveDeployments",
+                "description": "Grants permission to retrieves a paginated list of deployment jobs that AWS IoT Greengrass sends to AWS IoT Greengrass core devices",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListEffectiveDeployments.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iot:DescribeJob",
+                    "iot:DescribeJobExecution",
+                    "iot:DescribeThing",
+                    "iot:DescribeThingGroup",
+                    "iot:GetThingShadow"
+                ],
+                "required": true
+            },
+            "ListInstalledComponents": {
+                "privilege": "ListInstalledComponents",
+                "description": "Grants permission to retrieve a paginated list of the components that a AWS IoT Greengrass core device runs",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListInstalledComponents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "GetCoreDevice": {
+                "privilege": "GetCoreDevice",
+                "description": "Grants permission to retrieves metadata for a AWS IoT Greengrass core device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetCoreDevice.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "BatchAssociateClientDeviceWithCoreDevice": {
+                "privilege": "BatchAssociateClientDeviceWithCoreDevice",
+                "description": "Grants permission to associate a list of client devices with a core device",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchDisassociateClientDeviceFromCoreDevice": {
+                "privilege": "BatchDisassociateClientDeviceFromCoreDevice",
+                "description": "Grants permission to disassociate a list of client devices from a core device",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceFromCoreDevice.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCoreDevice": {
+                "privilege": "DeleteCoreDevice",
+                "description": "Grants permission to delete a AWS IoT Greengrass core device, which is an AWS IoT thing. This operation removes the core device from the list of core devices. This operation doesn't delete the AWS IoT thing",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_DeleteCoreDevice.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iot:DescribeJobExecution"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs included in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by checking tag keys passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

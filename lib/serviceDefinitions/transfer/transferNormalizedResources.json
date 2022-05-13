@@ -1,0 +1,412 @@
+{
+    "user": {
+        "resourceName": "user",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeUser": {
+                "privilege": "DescribeUser",
+                "description": "Grants permission to describe a user associated with a server",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeUser.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a server, a user, or a workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "TestIdentityProvider": {
+                "privilege": "TestIdentityProvider",
+                "description": "Grants permission to test a server's custom identity provider",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TestIdentityProvider.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteSshPublicKey": {
+                "privilege": "DeleteSshPublicKey",
+                "description": "Grants permission to delete an SSH public key from a user",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteSshPublicKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteUser": {
+                "privilege": "DeleteUser",
+                "description": "Grants permission to delete a user associated with a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteUser.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ImportSshPublicKey": {
+                "privilege": "ImportSshPublicKey",
+                "description": "Grants permission to add an SSH public key to a user",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ImportSshPublicKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateUser": {
+                "privilege": "UpdateUser",
+                "description": "Grants permission to update the configuration of a user",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateUser.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a server or a user",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a server, a user, or a workflow",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "server": {
+        "resourceName": "server",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListUsers": {
+                "privilege": "ListUsers",
+                "description": "Grants permission to list users associated with a server",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListUsers.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeAccess": {
+                "privilege": "DescribeAccess",
+                "description": "Grants permission to describe an access assigned to a server",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeAccess.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeServer": {
+                "privilege": "DescribeServer",
+                "description": "Grants permission to describe a server",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeServer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListAccesses": {
+                "privilege": "ListAccesses",
+                "description": "Grants permission to list accesses",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListAccesses.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a server, a user, or a workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateAccess": {
+                "privilege": "CreateAccess",
+                "description": "Grants permission to add an access associated with a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateAccess.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "CreateUser": {
+                "privilege": "CreateUser",
+                "description": "Grants permission to add a user associated with a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateUser.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "DeleteAccess": {
+                "privilege": "DeleteAccess",
+                "description": "Grants permission to delete access",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteAccess.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteServer": {
+                "privilege": "DeleteServer",
+                "description": "Grants permission to delete a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteServer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartServer": {
+                "privilege": "StartServer",
+                "description": "Grants permission to start a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_StartServer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopServer": {
+                "privilege": "StopServer",
+                "description": "Grants permission to stop a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_StopServer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateServer": {
+                "privilege": "UpdateServer",
+                "description": "Grants permission to update the configuration of a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a server or a user",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a server, a user, or a workflow",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "workflow": {
+        "resourceName": "workflow",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeExecution": {
+                "privilege": "DescribeExecution",
+                "description": "Grants permission to describe an execution associated with a workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeWorkflow": {
+                "privilege": "DescribeWorkflow",
+                "description": "Grants permission to describe a workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeWorkflow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListExecutions": {
+                "privilege": "ListExecutions",
+                "description": "Grants permission to list executions associated with a workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a server, a user, or a workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteWorkflow": {
+                "privilege": "DeleteWorkflow",
+                "description": "Grants permission to delete a workflow",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteWorkflow.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SendWorkflowStepState": {
+                "privilege": "SendWorkflowStepState",
+                "description": "Grants permission to send a callback for asynchronous custom steps",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_SendWorkflowStepState.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a server or a user",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a server, a user, or a workflow",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

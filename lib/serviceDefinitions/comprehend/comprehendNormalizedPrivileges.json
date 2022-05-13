@@ -1,0 +1,2222 @@
+{
+    "batchDetectDominantLanguage": {
+        "privilege": "BatchDetectDominantLanguage",
+        "description": "Grants permission to detect the language or languages present in the list of text documents",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_BatchDetectDominantLanguage.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "batchDetectEntities": {
+        "privilege": "BatchDetectEntities",
+        "description": "Grants permission to detect the named entities (\"People\", \"Places\", \"Locations\", etc) within the given list of text documents",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_BatchDetectEntities.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "batchDetectKeyPhrases": {
+        "privilege": "BatchDetectKeyPhrases",
+        "description": "Grants permission to detect the phrases in the list of text documents that are most indicative of the content",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_BatchDetectKeyPhrases.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "batchDetectSentiment": {
+        "privilege": "BatchDetectSentiment",
+        "description": "Grants permission to detect the sentiment of a text in the list of documents (Positive, Negative, Neutral, or Mixed)",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_BatchDetectSentiment.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "batchDetectSyntax": {
+        "privilege": "BatchDetectSyntax",
+        "description": "Grants permission to detect syntactic information (like Part of Speech, Tokens) in a list of text documents",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_BatchDetectSyntax.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "classifyDocument": {
+        "privilege": "ClassifyDocument",
+        "description": "Grants permission to create a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ClassifyDocument.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "containsPiiEntities": {
+        "privilege": "ContainsPiiEntities",
+        "description": "Grants permission to classify the personally identifiable information within given documents in real-time",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ContainsPiiEntities.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createDocumentClassifier": {
+        "privilege": "CreateDocumentClassifier",
+        "description": "Grants permission to create a new document classifier that you can use to categorize documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_CreateDocumentClassifier.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:ModelKmsKey": {
+                "condition": "comprehend:ModelKmsKey",
+                "description": "Filters access by the model KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createEndpoint": {
+        "privilege": "CreateEndpoint",
+        "description": "Grants permission to create a model-specific endpoint for synchronous inference for a previously trained custom model",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_CreateEndpoint.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createEntityRecognizer": {
+        "privilege": "CreateEntityRecognizer",
+        "description": "Grants permission to create an entity recognizer using submitted files",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_CreateEntityRecognizer.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:ModelKmsKey": {
+                "condition": "comprehend:ModelKmsKey",
+                "description": "Filters access by the model KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteDocumentClassifier": {
+        "privilege": "DeleteDocumentClassifier",
+        "description": "Grants permission to delete a previously created document classifier",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DeleteDocumentClassifier.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEndpoint": {
+        "privilege": "DeleteEndpoint",
+        "description": "Grants permission to delete a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DeleteEndpoint.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEntityRecognizer": {
+        "privilege": "DeleteEntityRecognizer",
+        "description": "Grants permission to delete a submitted entity recognizer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DeleteEntityRecognizer.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteResourcePolicy": {
+        "privilege": "DeleteResourcePolicy",
+        "description": "Grants permission to remove policy on resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DeleteResourcePolicy.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeDocumentClassificationJob": {
+        "privilege": "DescribeDocumentClassificationJob",
+        "description": "Grants permission to get the properties associated with a document classification job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeDocumentClassificationJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassificationJob": {
+                "resourceName": "document-classification-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classification-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeDocumentClassifier": {
+        "privilege": "DescribeDocumentClassifier",
+        "description": "Grants permission to get the properties associated with a document classifier",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeDocumentClassifier.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeDominantLanguageDetectionJob": {
+        "privilege": "DescribeDominantLanguageDetectionJob",
+        "description": "Grants permission to get the properties associated with a dominant language detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeDominantLanguageDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "dominantLanguageDetectionJob": {
+                "resourceName": "dominant-language-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:dominant-language-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEndpoint": {
+        "privilege": "DescribeEndpoint",
+        "description": "Grants permission to get the properties associated with a specific endpoint. Use this operation to get the status of an endpoint",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeEndpoint.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEntitiesDetectionJob": {
+        "privilege": "DescribeEntitiesDetectionJob",
+        "description": "Grants permission to get the properties associated with an entities detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeEntitiesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "entitiesDetectionJob": {
+                "resourceName": "entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entities-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEntityRecognizer": {
+        "privilege": "DescribeEntityRecognizer",
+        "description": "Grants permission to provide details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeEntityRecognizer.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEventsDetectionJob": {
+        "privilege": "DescribeEventsDetectionJob",
+        "description": "Grants permission to get the properties associated with an Events detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeEventsDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventsDetectionJob": {
+                "resourceName": "events-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:events-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeKeyPhrasesDetectionJob": {
+        "privilege": "DescribeKeyPhrasesDetectionJob",
+        "description": "Grants permission to get the properties associated with a key phrases detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeKeyPhrasesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "keyPhrasesDetectionJob": {
+                "resourceName": "key-phrases-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:key-phrases-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describePiiEntitiesDetectionJob": {
+        "privilege": "DescribePiiEntitiesDetectionJob",
+        "description": "Grants permission to get the properties associated with a PII entities detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribePiiEntitiesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "piiEntitiesDetectionJob": {
+                "resourceName": "pii-entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:pii-entities-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeResourcePolicy": {
+        "privilege": "DescribeResourcePolicy",
+        "description": "Grants permission to read attached policy on resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeResourcePolicy.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSentimentDetectionJob": {
+        "privilege": "DescribeSentimentDetectionJob",
+        "description": "Grants permission to get the properties associated with a sentiment detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeSentimentDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sentimentDetectionJob": {
+                "resourceName": "sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:sentiment-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeTargetedSentimentDetectionJob": {
+        "privilege": "DescribeTargetedSentimentDetectionJob",
+        "description": "Grants permission to get the properties associated with a targeted sentiment detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeTargetedSentimentDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetedSentimentDetectionJob": {
+                "resourceName": "targeted-sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:targeted-sentiment-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeTopicsDetectionJob": {
+        "privilege": "DescribeTopicsDetectionJob",
+        "description": "Grants permission to get the properties associated with a topic detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DescribeTopicsDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "topicsDetectionJob": {
+                "resourceName": "topics-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:topics-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "detectDominantLanguage": {
+        "privilege": "DetectDominantLanguage",
+        "description": "Grants permission to detect the language or languages present in the text",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "detectEntities": {
+        "privilege": "DetectEntities",
+        "description": "Grants permission to detect the named entities (\"People\", \"Places\", \"Locations\", etc) within the given text document",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectEntities.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "detectKeyPhrases": {
+        "privilege": "DetectKeyPhrases",
+        "description": "Grants permission to detect the phrases in the text that are most indicative of the content",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectKeyPhrases.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "detectPiiEntities": {
+        "privilege": "DetectPiiEntities",
+        "description": "Grants permission to detect the personally identifiable information entities (\"Name\", \"SSN\", \"PIN\", etc) within the given text document",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectPiiEntities.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "detectSentiment": {
+        "privilege": "DetectSentiment",
+        "description": "Grants permission to detect the sentiment of a text in a document (Positive, Negative, Neutral, or Mixed)",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectSentiment.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "detectSyntax": {
+        "privilege": "DetectSyntax",
+        "description": "Grants permission to detect syntactic information (like Part of Speech, Tokens) in a text document",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectSyntax.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "importModel": {
+        "privilege": "ImportModel",
+        "description": "Grants permission to import a trained Comprehend model",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ImportModel.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:ModelKmsKey": {
+                "condition": "comprehend:ModelKmsKey",
+                "description": "Filters access by the model KMS key associated with the resource in the request",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDocumentClassificationJobs": {
+        "privilege": "ListDocumentClassificationJobs",
+        "description": "Grants permission to get a list of the document classification jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListDocumentClassificationJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listDocumentClassifierSummaries": {
+        "privilege": "ListDocumentClassifierSummaries",
+        "description": "Grants permission to get a list of summaries of the document classifiers that you have created",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListDocumentClassifierSummaries.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listDocumentClassifiers": {
+        "privilege": "ListDocumentClassifiers",
+        "description": "Grants permission to get a list of the document classifiers that you have created",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListDocumentClassifiers.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listDominantLanguageDetectionJobs": {
+        "privilege": "ListDominantLanguageDetectionJobs",
+        "description": "Grants permission to get a list of the dominant language detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListDominantLanguageDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listEndpoints": {
+        "privilege": "ListEndpoints",
+        "description": "Grants permission to get a list of all existing endpoints that you've created",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListEndpoints.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listEntitiesDetectionJobs": {
+        "privilege": "ListEntitiesDetectionJobs",
+        "description": "Grants permission to get a list of the entity detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListEntitiesDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listEntityRecognizerSummaries": {
+        "privilege": "ListEntityRecognizerSummaries",
+        "description": "Grants permission to get a list of summaries for the entity recognizers that you have created",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListEntityRecognizerSummaries.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listEntityRecognizers": {
+        "privilege": "ListEntityRecognizers",
+        "description": "Grants permission to get a list of the properties of all entity recognizers that you created, including recognizers currently in training",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListEntityRecognizers.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listEventsDetectionJobs": {
+        "privilege": "ListEventsDetectionJobs",
+        "description": "Grants permission to get a list of Events detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListEventsDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listKeyPhrasesDetectionJobs": {
+        "privilege": "ListKeyPhrasesDetectionJobs",
+        "description": "Grants permission to get a list of key phrase detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListKeyPhrasesDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPiiEntitiesDetectionJobs": {
+        "privilege": "ListPiiEntitiesDetectionJobs",
+        "description": "Grants permission to get a list of PII entities detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListPiiEntitiesDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSentimentDetectionJobs": {
+        "privilege": "ListSentimentDetectionJobs",
+        "description": "Grants permission to get a list of sentiment detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListSentimentDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListTagsForResource.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassificationJob": {
+                "resourceName": "document-classification-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classification-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dominantLanguageDetectionJob": {
+                "resourceName": "dominant-language-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:dominant-language-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entitiesDetectionJob": {
+                "resourceName": "entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entities-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventsDetectionJob": {
+                "resourceName": "events-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:events-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "keyPhrasesDetectionJob": {
+                "resourceName": "key-phrases-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:key-phrases-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "piiEntitiesDetectionJob": {
+                "resourceName": "pii-entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:pii-entities-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sentimentDetectionJob": {
+                "resourceName": "sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:sentiment-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "targetedSentimentDetectionJob": {
+                "resourceName": "targeted-sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:targeted-sentiment-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "topicsDetectionJob": {
+                "resourceName": "topics-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:topics-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTargetedSentimentDetectionJobs": {
+        "privilege": "ListTargetedSentimentDetectionJobs",
+        "description": "Grants permission to get a list of targeted sentiment detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListTargetedSentimentDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTopicsDetectionJobs": {
+        "privilege": "ListTopicsDetectionJobs",
+        "description": "Grants permission to get a list of the topic detection jobs that you have submitted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_ListTopicsDetectionJobs.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "putResourcePolicy": {
+        "privilege": "PutResourcePolicy",
+        "description": "Grants permission to attach policy to resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_PutResourcePolicy.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startDocumentClassificationJob": {
+        "privilege": "StartDocumentClassificationJob",
+        "description": "Grants permission to start an asynchronous document classification job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartDocumentClassificationJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "documentClassificationJob": {
+                "resourceName": "document-classification-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classification-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startDominantLanguageDetectionJob": {
+        "privilege": "StartDominantLanguageDetectionJob",
+        "description": "Grants permission to start an asynchronous dominant language detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartDominantLanguageDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "dominantLanguageDetectionJob": {
+                "resourceName": "dominant-language-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:dominant-language-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startEntitiesDetectionJob": {
+        "privilege": "StartEntitiesDetectionJob",
+        "description": "Grants permission to start an asynchronous entity detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartEntitiesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "entitiesDetectionJob": {
+                "resourceName": "entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entities-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startEventsDetectionJob": {
+        "privilege": "StartEventsDetectionJob",
+        "description": "Grants permission to start an asynchronous Events detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartEventsDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "eventsDetectionJob": {
+                "resourceName": "events-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:events-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startKeyPhrasesDetectionJob": {
+        "privilege": "StartKeyPhrasesDetectionJob",
+        "description": "Grants permission to start an asynchronous key phrase detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartKeyPhrasesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "keyPhrasesDetectionJob": {
+                "resourceName": "key-phrases-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:key-phrases-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startPiiEntitiesDetectionJob": {
+        "privilege": "StartPiiEntitiesDetectionJob",
+        "description": "Grants permission to start an asynchronous PII entities detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartPiiEntitiesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "piiEntitiesDetectionJob": {
+                "resourceName": "pii-entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:pii-entities-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startSentimentDetectionJob": {
+        "privilege": "StartSentimentDetectionJob",
+        "description": "Grants permission to start an asynchronous sentiment detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartSentimentDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "sentimentDetectionJob": {
+                "resourceName": "sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:sentiment-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startTargetedSentimentDetectionJob": {
+        "privilege": "StartTargetedSentimentDetectionJob",
+        "description": "Grants permission to start an asynchronous targeted sentiment detection job for a collection of documents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartTargetedSentimentDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "targetedSentimentDetectionJob": {
+                "resourceName": "targeted-sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:targeted-sentiment-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startTopicsDetectionJob": {
+        "privilege": "StartTopicsDetectionJob",
+        "description": "Grants permission to start an asynchronous job to detect the most common topics in the collection of documents and the phrases associated with each topic",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StartTopicsDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VolumeKmsKey": {
+                "condition": "comprehend:VolumeKmsKey",
+                "description": "Filters access by the volume KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:OutputKmsKey": {
+                "condition": "comprehend:OutputKmsKey",
+                "description": "Filters access by the output KMS key associated with the resource in the request",
+                "type": "ARN"
+            },
+            "comprehend:VpcSecurityGroupIds": {
+                "condition": "comprehend:VpcSecurityGroupIds",
+                "description": "Filters access by the list of all VPC security group ids associated with the resource in the request",
+                "type": "ArrayOfString"
+            },
+            "comprehend:VpcSubnets": {
+                "condition": "comprehend:VpcSubnets",
+                "description": "Filters access by the list of all VPC subnets associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "topicsDetectionJob": {
+                "resourceName": "topics-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:topics-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopDominantLanguageDetectionJob": {
+        "privilege": "StopDominantLanguageDetectionJob",
+        "description": "Grants permission to stop a dominant language detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopDominantLanguageDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "dominantLanguageDetectionJob": {
+                "resourceName": "dominant-language-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:dominant-language-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopEntitiesDetectionJob": {
+        "privilege": "StopEntitiesDetectionJob",
+        "description": "Grants permission to stop an entity detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopEntitiesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "entitiesDetectionJob": {
+                "resourceName": "entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entities-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopEventsDetectionJob": {
+        "privilege": "StopEventsDetectionJob",
+        "description": "Grants permission to stop an Events detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopEventsDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventsDetectionJob": {
+                "resourceName": "events-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:events-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopKeyPhrasesDetectionJob": {
+        "privilege": "StopKeyPhrasesDetectionJob",
+        "description": "Grants permission to stop a key phrase detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopKeyPhrasesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "keyPhrasesDetectionJob": {
+                "resourceName": "key-phrases-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:key-phrases-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopPiiEntitiesDetectionJob": {
+        "privilege": "StopPiiEntitiesDetectionJob",
+        "description": "Grants permission to stop a PII entities detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopPiiEntitiesDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "piiEntitiesDetectionJob": {
+                "resourceName": "pii-entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:pii-entities-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopSentimentDetectionJob": {
+        "privilege": "StopSentimentDetectionJob",
+        "description": "Grants permission to stop a sentiment detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopSentimentDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sentimentDetectionJob": {
+                "resourceName": "sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:sentiment-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopTargetedSentimentDetectionJob": {
+        "privilege": "StopTargetedSentimentDetectionJob",
+        "description": "Grants permission to stop a targeted sentiment detection job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopTargetedSentimentDetectionJob.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "targetedSentimentDetectionJob": {
+                "resourceName": "targeted-sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:targeted-sentiment-detection-job/${JobId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopTrainingDocumentClassifier": {
+        "privilege": "StopTrainingDocumentClassifier",
+        "description": "Grants permission to stop a previously created document classifier training job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopTrainingDocumentClassifier.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopTrainingEntityRecognizer": {
+        "privilege": "StopTrainingEntityRecognizer",
+        "description": "Grants permission to stop a previously created entity recognizer training job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_StopTrainingEntityRecognizer.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag a resource with given key value pairs",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_TagResource.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by requiring tag values present in a resource creation request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "documentClassificationJob": {
+                "resourceName": "document-classification-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classification-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dominantLanguageDetectionJob": {
+                "resourceName": "dominant-language-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:dominant-language-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entitiesDetectionJob": {
+                "resourceName": "entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entities-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventsDetectionJob": {
+                "resourceName": "events-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:events-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "keyPhrasesDetectionJob": {
+                "resourceName": "key-phrases-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:key-phrases-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "piiEntitiesDetectionJob": {
+                "resourceName": "pii-entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:pii-entities-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sentimentDetectionJob": {
+                "resourceName": "sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:sentiment-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "topicsDetectionJob": {
+                "resourceName": "topics-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:topics-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag a resource with given key",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_UntagResource.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by requiring the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "documentClassificationJob": {
+                "resourceName": "document-classification-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classification-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifier": {
+                "resourceName": "document-classifier",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier/${DocumentClassifierName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dominantLanguageDetectionJob": {
+                "resourceName": "dominant-language-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:dominant-language-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entitiesDetectionJob": {
+                "resourceName": "entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entities-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizer": {
+                "resourceName": "entity-recognizer",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer/${EntityRecognizerName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventsDetectionJob": {
+                "resourceName": "events-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:events-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "keyPhrasesDetectionJob": {
+                "resourceName": "key-phrases-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:key-phrases-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "piiEntitiesDetectionJob": {
+                "resourceName": "pii-entities-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:pii-entities-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sentimentDetectionJob": {
+                "resourceName": "sentiment-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:sentiment-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "topicsDetectionJob": {
+                "resourceName": "topics-detection-job",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:topics-detection-job/${JobId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateEndpoint": {
+        "privilege": "UpdateEndpoint",
+        "description": "Grants permission to update information about the specified endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/comprehend/latest/dg/API_UpdateEndpoint.html",
+        "service": "comprehend",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "documentClassifierEndpoint": {
+                "resourceName": "document-classifier-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:document-classifier-endpoint/${DocumentClassifierEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "entityRecognizerEndpoint": {
+                "resourceName": "entity-recognizer-endpoint",
+                "resourceArn": "arn:${Partition}:comprehend:${Region}:${Account}:entity-recognizer-endpoint/${EntityRecognizerEndpointName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by requiring tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

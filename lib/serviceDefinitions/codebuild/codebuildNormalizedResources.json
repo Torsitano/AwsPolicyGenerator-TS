@@ -1,0 +1,512 @@
+{
+    "build": {
+        "resourceName": "build",
+        "service": "codebuild",
+        "resourceArn": "arn:${Partition}:codebuild:${Region}:${Account}:build/${BuildId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "buildBatch": {
+        "resourceName": "build-batch",
+        "service": "codebuild",
+        "resourceArn": "arn:${Partition}:codebuild:${Region}:${Account}:build-batch/${BuildBatchId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "project": {
+        "resourceName": "project",
+        "service": "codebuild",
+        "resourceArn": "arn:${Partition}:codebuild:${Region}:${Account}:project/${ProjectName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListBuildBatchesForProject": {
+                "privilege": "ListBuildBatchesForProject",
+                "description": "Gets a list of build batch IDs for the specified build project, with each build batch ID representing a single build batch",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListBuildBatchesForProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListBuildsForProject": {
+                "privilege": "ListBuildsForProject",
+                "description": "Gets a list of build IDs for the specified build project, with each build ID representing a single build",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListBuildsForProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "BatchGetBuildBatches": {
+                "privilege": "BatchGetBuildBatches",
+                "description": "Gets information about one or more build batches",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_BatchGetBuildBatches.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchGetBuilds": {
+                "privilege": "BatchGetBuilds",
+                "description": "Gets information about one or more builds",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_BatchGetBuilds.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchGetProjects": {
+                "privilege": "BatchGetProjects",
+                "description": "Gets information about one or more build projects",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_BatchGetProjects.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetResourcePolicy": {
+                "privilege": "GetResourcePolicy",
+                "description": "Returns a resource policy for the specified project or report group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_GetResourcePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "BatchDeleteBuilds": {
+                "privilege": "BatchDeleteBuilds",
+                "description": "Deletes one or more builds",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_BatchDeleteBuilds.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateProject": {
+                "privilege": "CreateProject",
+                "description": "Creates a build project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_CreateProject.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateWebhook": {
+                "privilege": "CreateWebhook",
+                "description": "For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_CreateWebhook.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteBuildBatch": {
+                "privilege": "DeleteBuildBatch",
+                "description": "Deletes a build batch",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteBuildBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteProject": {
+                "privilege": "DeleteProject",
+                "description": "Deletes a build project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteWebhook": {
+                "privilege": "DeleteWebhook",
+                "description": "For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteWebhook.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "InvalidateProjectCache": {
+                "privilege": "InvalidateProjectCache",
+                "description": "Resets the cache for a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_InvalidateProjectCache.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RetryBuild": {
+                "privilege": "RetryBuild",
+                "description": "Retries a build",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_RetryBuild.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RetryBuildBatch": {
+                "privilege": "RetryBuildBatch",
+                "description": "Retries a build batch",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_RetryBuildBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartBuild": {
+                "privilege": "StartBuild",
+                "description": "Starts running a build",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_StartBuild.html",
+                "privConditions": {
+                    "codebuild:RequestTag/${TagKey}": {
+                        "condition": "codebuild:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "codebuild:TagKeys": {
+                        "condition": "codebuild:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartBuildBatch": {
+                "privilege": "StartBuildBatch",
+                "description": "Starts running a build batch",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_StartBuildBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopBuild": {
+                "privilege": "StopBuild",
+                "description": "Attempts to stop running a build",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_StopBuild.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopBuildBatch": {
+                "privilege": "StopBuildBatch",
+                "description": "Attempts to stop running a build batch",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_StopBuildBatch.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateProject": {
+                "privilege": "UpdateProject",
+                "description": "Changes the settings of an existing build project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_UpdateProject.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateProjectVisibility": {
+                "privilege": "UpdateProjectVisibility",
+                "description": "Changes the public visibility of a project and its builds",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_UpdateProjectVisibility.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateWebhook": {
+                "privilege": "UpdateWebhook",
+                "description": "Updates the webhook associated with an AWS CodeBuild build project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_UpdateWebhook.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "DeleteResourcePolicy": {
+                "privilege": "DeleteResourcePolicy",
+                "description": "Deletes a resource policy for the associated project or report group",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteResourcePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "PutResourcePolicy": {
+                "privilege": "PutResourcePolicy",
+                "description": "Creates a resource policy for the associated project or report group",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_PutResourcePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "reportGroup": {
+        "resourceName": "report-group",
+        "service": "codebuild",
+        "resourceArn": "arn:${Partition}:codebuild:${Region}:${Account}:report-group/${ReportGroupName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListReportsForReportGroup": {
+                "privilege": "ListReportsForReportGroup",
+                "description": "Returns a list of report ARNs that belong to the specified report group. Each report ARN represents one report",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "BatchGetReportGroups": {
+                "privilege": "BatchGetReportGroups",
+                "description": "Returns an array of ReportGroup objects that are specified by the input reportGroupArns parameter",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_BatchGetReportGroups.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchGetReports": {
+                "privilege": "BatchGetReports",
+                "description": "Returns an array of the Report objects specified by the input reportArns parameter",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_BatchGetReports.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeCodeCoverages": {
+                "privilege": "DescribeCodeCoverages",
+                "description": "Returns an array of CodeCoverage objects",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DescribeCodeCoverages.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeTestCases": {
+                "privilege": "DescribeTestCases",
+                "description": "Returns an array of TestCase objects",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DescribeTestCases.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetReportGroupTrend": {
+                "privilege": "GetReportGroupTrend",
+                "description": "Analyzes and accumulates test report values for the test reports in the specified report group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_GetReportGroupTrend.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetResourcePolicy": {
+                "privilege": "GetResourcePolicy",
+                "description": "Returns a resource policy for the specified project or report group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_GetResourcePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "BatchPutCodeCoverages": {
+                "privilege": "BatchPutCodeCoverages",
+                "description": "Adds or updates information about a report",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#console-policies",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchPutTestCases": {
+                "privilege": "BatchPutTestCases",
+                "description": "Adds or updates information about a report",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#console-policies",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateReport": {
+                "privilege": "CreateReport",
+                "description": "Creates a report. A report is created when tests specified in the buildspec file for a report groups run during the build of a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#console-policies",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateReportGroup": {
+                "privilege": "CreateReportGroup",
+                "description": "Creates a report group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_CreateReportGroup.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteReport": {
+                "privilege": "DeleteReport",
+                "description": "Deletes a report",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteReportGroup": {
+                "privilege": "DeleteReportGroup",
+                "description": "Deletes a report group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReportGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateReport": {
+                "privilege": "UpdateReport",
+                "description": "Updates information about a report",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#console-policies",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateReportGroup": {
+                "privilege": "UpdateReportGroup",
+                "description": "Changes the settings of an existing report group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_UpdateReportGroup.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "DeleteResourcePolicy": {
+                "privilege": "DeleteResourcePolicy",
+                "description": "Deletes a resource policy for the associated project or report group",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteResourcePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "PutResourcePolicy": {
+                "privilege": "PutResourcePolicy",
+                "description": "Creates a resource policy for the associated project or report group",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codebuild/latest/APIReference/API_PutResourcePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "report": {
+        "resourceName": "report",
+        "service": "codebuild",
+        "resourceArn": "arn:${Partition}:codebuild:${Region}:${Account}:report/${ReportGroupName}:${ReportId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

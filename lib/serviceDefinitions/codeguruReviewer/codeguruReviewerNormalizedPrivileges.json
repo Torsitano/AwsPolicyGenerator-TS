@@ -1,0 +1,377 @@
+{
+    "associateRepository": {
+        "privilege": "AssociateRepository",
+        "description": "Grants permission to associates a repository with Amazon CodeGuru Reviewer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_AssociateRepository.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [
+            "codecommit:ListRepositories",
+            "codecommit:TagResource",
+            "events:PutRule",
+            "events:PutTargets",
+            "iam:CreateServiceLinkedRole",
+            "s3:CreateBucket",
+            "s3:ListBucket",
+            "s3:PutBucketPolicy",
+            "s3:PutLifecycleConfiguration"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:codestar-connections:${Region}:${Account}:connection/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "repository": {
+                "resourceName": "repository",
+                "resourceArn": "arn:${Partition}:codecommit:${Region}:${Account}:${RepositoryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createCodeReview": {
+        "privilege": "CreateCodeReview",
+        "description": "Grants permission to create a code review",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [
+            "s3:GetObject"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createConnectionToken": {
+        "privilege": "CreateConnectionToken",
+        "description": "Grants permission to perform webbased oauth handshake for 3rd party providers",
+        "accessLevel": "Read",
+        "apiDocumentationLink": null,
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeCodeReview": {
+        "privilege": "DescribeCodeReview",
+        "description": "Grants permission to describe a code review",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeCodeReview.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeRecommendationFeedback": {
+        "privilege": "DescribeRecommendationFeedback",
+        "description": "Grants permission to describe a recommendation feedback on a code review",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRecommendationFeedback.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeRepositoryAssociation": {
+        "privilege": "DescribeRepositoryAssociation",
+        "description": "Grants permission to describe a repository association",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "disassociateRepository": {
+        "privilege": "DisassociateRepository",
+        "description": "Grants permission to disassociate a repository with Amazon CodeGuru Reviewer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DisassociateRepository.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [
+            "codecommit:UntagResource",
+            "events:DeleteRule",
+            "events:RemoveTargets"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getMetricsData": {
+        "privilege": "GetMetricsData",
+        "description": "Grants permission to view pull request metrics in console",
+        "accessLevel": "Read",
+        "apiDocumentationLink": null,
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listCodeReviews": {
+        "privilege": "ListCodeReviews",
+        "description": "Grants permission to list summary of code reviews",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListCodeReviews.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listRecommendationFeedback": {
+        "privilege": "ListRecommendationFeedback",
+        "description": "Grants permission to list summary of recommendation feedback on a code review",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRecommendationFeedback.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listRecommendations": {
+        "privilege": "ListRecommendations",
+        "description": "Grants permission to list summary of recommendations on a code review",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRecommendations.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listRepositoryAssociations": {
+        "privilege": "ListRepositoryAssociations",
+        "description": "Grants permission to list summary of repository associations",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list the resource attached to a associated repository ARN",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListTagsForResource.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listThirdPartyRepositories": {
+        "privilege": "ListThirdPartyRepositories",
+        "description": "Grants permission to list 3rd party providers repositories in console",
+        "accessLevel": "Read",
+        "apiDocumentationLink": null,
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "putRecommendationFeedback": {
+        "privilege": "PutRecommendationFeedback",
+        "description": "Grants permission to put feedback for a recommendation on a code review",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_PutRecommendationFeedback.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to attach resource tags to an associated repository ARN",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_TagResource.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "unTagResource": {
+        "privilege": "UnTagResource",
+        "description": "Grants permission to disassociate resource tags from an associated repository ARN",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_UnTagResource.html",
+        "service": "codeguruReviewer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:codeguru-reviewer:${Region}:${Account}:association:${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    }
+}

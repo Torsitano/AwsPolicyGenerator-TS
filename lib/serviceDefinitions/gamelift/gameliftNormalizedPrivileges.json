@@ -1,0 +1,1985 @@
+{
+    "acceptMatch": {
+        "privilege": "AcceptMatch",
+        "description": "Grants permission to register player acceptance or rejection of a proposed FlexMatch match",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_AcceptMatch.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "claimGameServer": {
+        "privilege": "ClaimGameServer",
+        "description": "Grants permission to locate and reserve a game server to host a new game session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ClaimGameServer.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAlias": {
+        "privilege": "CreateAlias",
+        "description": "Grants permission to define a new alias for a fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateAlias.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createBuild": {
+        "privilege": "CreateBuild",
+        "description": "Grants permission to create a new game build using files stored in an Amazon S3 bucket",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateBuild.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createFleet": {
+        "privilege": "CreateFleet",
+        "description": "Grants permission to create a new fleet of computing resources to run your game servers",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createFleetLocations": {
+        "privilege": "CreateFleetLocations",
+        "description": "Grants permission to specify additional locations for a fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleetLocations.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createGameServerGroup": {
+        "privilege": "CreateGameServerGroup",
+        "description": "Grants permission to create a new game server group, set up a corresponding Auto Scaling group, and launche instances to host game servers",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameServerGroup.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createGameSession": {
+        "privilege": "CreateGameSession",
+        "description": "Grants permission to start a new game session on a specified fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSession.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createGameSessionQueue": {
+        "privilege": "CreateGameSessionQueue",
+        "description": "Grants permission to set up a new queue for processing game session placement requests",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createMatchmakingConfiguration": {
+        "privilege": "CreateMatchmakingConfiguration",
+        "description": "Grants permission to create a new FlexMatch matchmaker",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateMatchmakingConfiguration.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createMatchmakingRuleSet": {
+        "privilege": "CreateMatchmakingRuleSet",
+        "description": "Grants permission to create a new matchmaking rule set for FlexMatch",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateMatchmakingRuleSet.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createPlayerSession": {
+        "privilege": "CreatePlayerSession",
+        "description": "Grants permission to reserve an available game session slot for a player",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreatePlayerSession.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createPlayerSessions": {
+        "privilege": "CreatePlayerSessions",
+        "description": "Grants permission to reserve available game session slots for multiple players",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreatePlayerSessions.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createScript": {
+        "privilege": "CreateScript",
+        "description": "Grants permission to create a new Realtime Servers script",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateScript.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createVpcPeeringAuthorization": {
+        "privilege": "CreateVpcPeeringAuthorization",
+        "description": "Grants permission to allow GameLift to create or delete a peering connection between a GameLift fleet VPC and a VPC on another AWS account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createVpcPeeringConnection": {
+        "privilege": "CreateVpcPeeringConnection",
+        "description": "Grants permission to establish a peering connection between your GameLift fleet VPC and a VPC on another account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteAlias": {
+        "privilege": "DeleteAlias",
+        "description": "Grants permission to delete an alias",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteAlias.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteBuild": {
+        "privilege": "DeleteBuild",
+        "description": "Grants permission to delete a game build",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteBuild.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFleet": {
+        "privilege": "DeleteFleet",
+        "description": "Grants permission to delete an empty fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteFleet.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFleetLocations": {
+        "privilege": "DeleteFleetLocations",
+        "description": "Grants permission to delete locations for a fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteFleetLocations.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteGameServerGroup": {
+        "privilege": "DeleteGameServerGroup",
+        "description": "Grants permission to permanently delete a game server group and terminate FleetIQ activity for the corresponding Auto Scaling group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameServerGroup.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteGameSessionQueue": {
+        "privilege": "DeleteGameSessionQueue",
+        "description": "Grants permission to delete an existing game session queue",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameSessionQueue": {
+                "resourceName": "gameSessionQueue",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gamesessionqueue/${GameSessionQueueName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteMatchmakingConfiguration": {
+        "privilege": "DeleteMatchmakingConfiguration",
+        "description": "Grants permission to delete an existing FlexMatch matchmaker",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteMatchmakingConfiguration.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "matchmakingConfiguration": {
+                "resourceName": "matchmakingConfiguration",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingconfiguration/${MatchmakingConfigurationName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteMatchmakingRuleSet": {
+        "privilege": "DeleteMatchmakingRuleSet",
+        "description": "Grants permission to delete an existing FlexMatch matchmaking rule set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteMatchmakingRuleSet.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "matchmakingRuleSet": {
+                "resourceName": "matchmakingRuleSet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingruleset/${MatchmakingRuleSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteScalingPolicy": {
+        "privilege": "DeleteScalingPolicy",
+        "description": "Grants permission to delete a set of auto-scaling rules",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteScalingPolicy.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteScript": {
+        "privilege": "DeleteScript",
+        "description": "Grants permission to delete a Realtime Servers script",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteScript.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "script": {
+                "resourceName": "script",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:script/${ScriptId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteVpcPeeringAuthorization": {
+        "privilege": "DeleteVpcPeeringAuthorization",
+        "description": "Grants permission to cancel a VPC peering authorization",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteVpcPeeringAuthorization.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteVpcPeeringConnection": {
+        "privilege": "DeleteVpcPeeringConnection",
+        "description": "Grants permission to remove a peering connection between VPCs",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteVpcPeeringConnection.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deregisterGameServer": {
+        "privilege": "DeregisterGameServer",
+        "description": "Grants permission to remove a game server from a game server group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeregisterGameServer.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAlias": {
+        "privilege": "DescribeAlias",
+        "description": "Grants permission to retrieve properties for an alias",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeAlias.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeBuild": {
+        "privilege": "DescribeBuild",
+        "description": "Grants permission to retrieve properties for a game build",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeBuild.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEC2InstanceLimits": {
+        "privilege": "DescribeEC2InstanceLimits",
+        "description": "Grants permission to retrieve the maximum allowed and current usage for EC2 instance types",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeFleetAttributes": {
+        "privilege": "DescribeFleetAttributes",
+        "description": "Grants permission to retrieve general properties, including status, for fleets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetAttributes.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeFleetCapacity": {
+        "privilege": "DescribeFleetCapacity",
+        "description": "Grants permission to retrieve the current capacity setting for fleets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeFleetEvents": {
+        "privilege": "DescribeFleetEvents",
+        "description": "Grants permission to retrieve entries from a fleet's event log",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFleetLocationAttributes": {
+        "privilege": "DescribeFleetLocationAttributes",
+        "description": "Grants permission to retrieve general properties, including statuses, for a fleet's locations",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationAttributes.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFleetLocationCapacity": {
+        "privilege": "DescribeFleetLocationCapacity",
+        "description": "Grants permission to retrieve the current capacity setting for a fleet's location",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFleetLocationUtilization": {
+        "privilege": "DescribeFleetLocationUtilization",
+        "description": "Grants permission to retrieve utilization statistics for fleet's location",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationUtilization.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFleetPortSettings": {
+        "privilege": "DescribeFleetPortSettings",
+        "description": "Grants permission to retrieve the inbound connection permissions for a fleet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetPortSettings.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFleetUtilization": {
+        "privilege": "DescribeFleetUtilization",
+        "description": "Grants permission to retrieve utilization statistics for fleets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetUtilization.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeGameServer": {
+        "privilege": "DescribeGameServer",
+        "description": "Grants permission to retrieve properties for a game server",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameServer.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeGameServerGroup": {
+        "privilege": "DescribeGameServerGroup",
+        "description": "Grants permission to retrieve properties for a game server group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameServerGroup.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeGameServerInstances": {
+        "privilege": "DescribeGameServerInstances",
+        "description": "Grants permission to retrieve the status of EC2 instances in a game server group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameServerInstances.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeGameSessionDetails": {
+        "privilege": "DescribeGameSessionDetails",
+        "description": "Grants permission to retrieve properties for game sessions in a fleet, including the protection policy",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionDetails.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeGameSessionPlacement": {
+        "privilege": "DescribeGameSessionPlacement",
+        "description": "Grants permission to retrieve details of a game session placement request",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionPlacement.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeGameSessionQueues": {
+        "privilege": "DescribeGameSessionQueues",
+        "description": "Grants permission to retrieve properties for game session queues",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeGameSessions": {
+        "privilege": "DescribeGameSessions",
+        "description": "Grants permission to retrieve properties for game sessions in a fleet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeInstances": {
+        "privilege": "DescribeInstances",
+        "description": "Grants permission to retrieve information about instances in a fleet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeMatchmaking": {
+        "privilege": "DescribeMatchmaking",
+        "description": "Grants permission to retrieve details of matchmaking tickets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeMatchmaking.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeMatchmakingConfigurations": {
+        "privilege": "DescribeMatchmakingConfigurations",
+        "description": "Grants permission to retrieve properties for FlexMatch matchmakers",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeMatchmakingConfigurations.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeMatchmakingRuleSets": {
+        "privilege": "DescribeMatchmakingRuleSets",
+        "description": "Grants permission to retrieve properties for FlexMatch matchmaking rule sets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeMatchmakingRuleSets.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describePlayerSessions": {
+        "privilege": "DescribePlayerSessions",
+        "description": "Grants permission to retrieve properties for player sessions in a game session",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribePlayerSessions.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeRuntimeConfiguration": {
+        "privilege": "DescribeRuntimeConfiguration",
+        "description": "Grants permission to retrieve the current runtime configuration for a fleet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeRuntimeConfiguration.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeScalingPolicies": {
+        "privilege": "DescribeScalingPolicies",
+        "description": "Grants permission to retrieve all scaling policies that are applied to a fleet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeScalingPolicies.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeScript": {
+        "privilege": "DescribeScript",
+        "description": "Grants permission to retrieve properties for a Realtime Servers script",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeScript.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "script": {
+                "resourceName": "script",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:script/${ScriptId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeVpcPeeringAuthorizations": {
+        "privilege": "DescribeVpcPeeringAuthorizations",
+        "description": "Grants permission to retrieve valid VPC peering authorizations",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringAuthorizations.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeVpcPeeringConnections": {
+        "privilege": "DescribeVpcPeeringConnections",
+        "description": "Grants permission to retrieve details on active or pending VPC peering connections",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getGameSessionLogUrl": {
+        "privilege": "GetGameSessionLogUrl",
+        "description": "Grants permission to retrieve the location of stored logs for a game session",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getInstanceAccess": {
+        "privilege": "GetInstanceAccess",
+        "description": "Grants permission to request remote access to a specified fleet instance",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listAliases": {
+        "privilege": "ListAliases",
+        "description": "Grants permission to retrieve all aliases that are defined in the current region",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListAliases.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listBuilds": {
+        "privilege": "ListBuilds",
+        "description": "Grants permission to retrieve all game build in the current region",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListBuilds.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listFleets": {
+        "privilege": "ListFleets",
+        "description": "Grants permission to retrieve a list of fleet IDs for all fleets in the current region",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListFleets.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listGameServerGroups": {
+        "privilege": "ListGameServerGroups",
+        "description": "Grants permission to retrieve all game server groups that are defined in the current region",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListGameServerGroups.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listGameServers": {
+        "privilege": "ListGameServers",
+        "description": "Grants permission to retrieve all game servers that are currently running in a game server group",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListGameServers.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listScripts": {
+        "privilege": "ListScripts",
+        "description": "Grants permission to retrieve properties for all Realtime Servers scripts in the current region",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListScripts.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to retrieve tags for GameLift resources",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "gameSessionQueue": {
+                "resourceName": "gameSessionQueue",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gamesessionqueue/${GameSessionQueueName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "matchmakingConfiguration": {
+                "resourceName": "matchmakingConfiguration",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingconfiguration/${MatchmakingConfigurationName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "matchmakingRuleSet": {
+                "resourceName": "matchmakingRuleSet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingruleset/${MatchmakingRuleSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "script": {
+                "resourceName": "script",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:script/${ScriptId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putScalingPolicy": {
+        "privilege": "PutScalingPolicy",
+        "description": "Grants permission to create or update a fleet auto-scaling policy",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_PutScalingPolicy.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "registerGameServer": {
+        "privilege": "RegisterGameServer",
+        "description": "Grants permission to notify GameLift FleetIQ when a new game server is ready to host gameplay",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_RegisterGameServer.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "requestUploadCredentials": {
+        "privilege": "RequestUploadCredentials",
+        "description": "Grants permission to retrieve fresh upload credentials to use when uploading a new game build",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resolveAlias": {
+        "privilege": "ResolveAlias",
+        "description": "Grants permission to retrieve the fleet ID associated with an alias",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ResolveAlias.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resumeGameServerGroup": {
+        "privilege": "ResumeGameServerGroup",
+        "description": "Grants permission to reinstate suspended FleetIQ activity for a game server group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ResumeGameServerGroup.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "searchGameSessions": {
+        "privilege": "SearchGameSessions",
+        "description": "Grants permission to retrieve game sessions that match a set of search criteria",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_SearchGameSessions.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "startFleetActions": {
+        "privilege": "StartFleetActions",
+        "description": "Grants permission to resume auto-scaling activity on a fleet after it was suspended with StopFleetActions()",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartFleetActions.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startGameSessionPlacement": {
+        "privilege": "StartGameSessionPlacement",
+        "description": "Grants permission to send a game session placement request to a game session queue",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameSessionQueue": {
+                "resourceName": "gameSessionQueue",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gamesessionqueue/${GameSessionQueueName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startMatchBackfill": {
+        "privilege": "StartMatchBackfill",
+        "description": "Grants permission to request FlexMatch matchmaking to fill available player slots in an existing game session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "startMatchmaking": {
+        "privilege": "StartMatchmaking",
+        "description": "Grants permission to request FlexMatch matchmaking for one or a group of players and initiate game session placement",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "stopFleetActions": {
+        "privilege": "StopFleetActions",
+        "description": "Grants permission to suspend auto-scaling activity on a fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopGameSessionPlacement": {
+        "privilege": "StopGameSessionPlacement",
+        "description": "Grants permission to cancel a game session placement request that is in progress",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopGameSessionPlacement.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "stopMatchmaking": {
+        "privilege": "StopMatchmaking",
+        "description": "Grants permission to cancel a matchmaking or match backfill request that is in progress",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopMatchmaking.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "suspendGameServerGroup": {
+        "privilege": "SuspendGameServerGroup",
+        "description": "Grants permission to temporarily stop FleetIQ activity for a game server group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_SuspendGameServerGroup.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag GameLift resources",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "gameSessionQueue": {
+                "resourceName": "gameSessionQueue",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gamesessionqueue/${GameSessionQueueName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "matchmakingConfiguration": {
+                "resourceName": "matchmakingConfiguration",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingconfiguration/${MatchmakingConfigurationName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "matchmakingRuleSet": {
+                "resourceName": "matchmakingRuleSet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingruleset/${MatchmakingRuleSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "script": {
+                "resourceName": "script",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:script/${ScriptId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag GameLift resources",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "gameSessionQueue": {
+                "resourceName": "gameSessionQueue",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gamesessionqueue/${GameSessionQueueName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "matchmakingConfiguration": {
+                "resourceName": "matchmakingConfiguration",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingconfiguration/${MatchmakingConfigurationName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "matchmakingRuleSet": {
+                "resourceName": "matchmakingRuleSet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingruleset/${MatchmakingRuleSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "script": {
+                "resourceName": "script",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:script/${ScriptId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateAlias": {
+        "privilege": "UpdateAlias",
+        "description": "Grants permission to update the properties of an existing alias",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateAlias.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "alias": {
+                "resourceName": "alias",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}::alias/${AliasId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateBuild": {
+        "privilege": "UpdateBuild",
+        "description": "Grants permission to update an existing build's metadata",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateBuild.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "build": {
+                "resourceName": "build",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:build/${BuildId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFleetAttributes": {
+        "privilege": "UpdateFleetAttributes",
+        "description": "Grants permission to update the general properties of an existing fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetAttributes.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFleetCapacity": {
+        "privilege": "UpdateFleetCapacity",
+        "description": "Grants permission to adjust a fleet's capacity settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFleetPortSettings": {
+        "privilege": "UpdateFleetPortSettings",
+        "description": "Grants permission to adjust a fleet's port settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateGameServer": {
+        "privilege": "UpdateGameServer",
+        "description": "Grants permission to change game server properties, health status, or utilization status",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameServer.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateGameServerGroup": {
+        "privilege": "UpdateGameServerGroup",
+        "description": "Grants permission to update properties for game server group, including allowed instance types",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameServerGroup.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameServerGroup": {
+                "resourceName": "gameServerGroup",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gameservergroup/${GameServerGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateGameSession": {
+        "privilege": "UpdateGameSession",
+        "description": "Grants permission to update the properties of an existing game session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateGameSessionQueue": {
+        "privilege": "UpdateGameSessionQueue",
+        "description": "Grants permission to update properties of an existing game session queue",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gameSessionQueue": {
+                "resourceName": "gameSessionQueue",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:gamesessionqueue/${GameSessionQueueName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateMatchmakingConfiguration": {
+        "privilege": "UpdateMatchmakingConfiguration",
+        "description": "Grants permission to update properties of an existing FlexMatch matchmaking configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateMatchmakingConfiguration.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "matchmakingConfiguration": {
+                "resourceName": "matchmakingConfiguration",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:matchmakingconfiguration/${MatchmakingConfigurationName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateRuntimeConfiguration": {
+        "privilege": "UpdateRuntimeConfiguration",
+        "description": "Grants permission to update how server processes are configured on instances in an existing fleet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateRuntimeConfiguration.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fleet": {
+                "resourceName": "fleet",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${Account}:fleet/${FleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateScript": {
+        "privilege": "UpdateScript",
+        "description": "Grants permission to update the metadata and content of an existing Realtime Servers script",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "script": {
+                "resourceName": "script",
+                "resourceArn": "arn:${Partition}:gamelift:${Region}:${AccountId}:script/${ScriptId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "validateMatchmakingRuleSet": {
+        "privilege": "ValidateMatchmakingRuleSet",
+        "description": "Grants permission to validate the syntax of a FlexMatch matchmaking rule set",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamelift/latest/apireference/API_ValidateMatchmakingRuleSet.html",
+        "service": "gamelift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    }
+}

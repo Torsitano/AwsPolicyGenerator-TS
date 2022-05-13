@@ -1,0 +1,1071 @@
+{
+    "studio": {
+        "resourceName": "studio",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "nimble:studioId": {
+                "condition": "nimble:studioId",
+                "description": "Filters access by a specific studio",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetStudio": {
+                "privilege": "GetStudio",
+                "description": "Grants permission to get a studio",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStudio.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetStudioMember": {
+                "privilege": "GetStudioMember",
+                "description": "Grants permission to get a studio member",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStudioMember.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListLaunchProfiles": {
+                "privilege": "ListLaunchProfiles",
+                "description": "Grants permission to list launch profiles",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListLaunchProfiles.html",
+                "privConditions": {
+                    "nimble:principalId": {
+                        "condition": "nimble:principalId",
+                        "description": "Filters access by the principalId request parameter",
+                        "type": "String"
+                    },
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStreamingImages": {
+                "privilege": "ListStreamingImages",
+                "description": "Grants permission to list streaming images",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStreamingImages.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStreamingSessions": {
+                "privilege": "ListStreamingSessions",
+                "description": "Grants permission to list streaming sessions",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStreamingSessions.html",
+                "privConditions": {
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    },
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStudioComponents": {
+                "privilege": "ListStudioComponents",
+                "description": "Grants permission to list studio components",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStudioComponents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStudioMembers": {
+                "privilege": "ListStudioMembers",
+                "description": "Grants permission to list studio members",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStudioMembers.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags on a Nimble Studio resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateLaunchProfile": {
+                "privilege": "CreateLaunchProfile",
+                "description": "Grants permission to create a launch profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateLaunchProfile.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ec2:CreateNetworkInterface",
+                    "ec2:DescribeNatGateways",
+                    "ec2:DescribeNetworkAcls",
+                    "ec2:DescribeRouteTables",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeVpcEndpoints",
+                    "ec2:RunInstances"
+                ],
+                "required": true
+            },
+            "CreateStreamingImage": {
+                "privilege": "CreateStreamingImage",
+                "description": "Grants permission to create a streaming image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStreamingImage.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ec2:DescribeImages",
+                    "ec2:DescribeSnapshots",
+                    "ec2:ModifyInstanceAttribute",
+                    "ec2:ModifySnapshotAttribute",
+                    "ec2:RegisterImage"
+                ],
+                "required": true
+            },
+            "CreateStudio": {
+                "privilege": "CreateStudio",
+                "description": "Grants permission to create a studio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStudio.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole",
+                    "sso:CreateManagedApplicationInstance"
+                ],
+                "required": true
+            },
+            "CreateStudioComponent": {
+                "privilege": "CreateStudioComponent",
+                "description": "Grants permission to create a studio component. A studio component designates a network resource to which a launch profile will provide access",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStudioComponent.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ds:AuthorizeApplication",
+                    "ds:DescribeDirectories",
+                    "ec2:DescribeSecurityGroups",
+                    "fsx:DescribeFileSystems"
+                ],
+                "required": true
+            },
+            "DeleteStudio": {
+                "privilege": "DeleteStudio",
+                "description": "Grants permission to delete a studio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStudio.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso:DeleteManagedApplicationInstance"
+                ],
+                "required": true
+            },
+            "DeleteStudioMember": {
+                "privilege": "DeleteStudioMember",
+                "description": "Grants permission to delete a studio member",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStudioMember.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutStudioLogEvents": {
+                "privilege": "PutStudioLogEvents",
+                "description": "Grants permission to report metrics and logs for the Nimble Studio portal to monitor application health",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/userguide/security-iam-service-with-iam.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutStudioMembers": {
+                "privilege": "PutStudioMembers",
+                "description": "Grants permission to add/update studio members",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_PutStudioMembers.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso-directory:DescribeUsers"
+                ],
+                "required": true
+            },
+            "StartStudioSSOConfigurationRepair": {
+                "privilege": "StartStudioSSOConfigurationRepair",
+                "description": "Grants permission to repair the studio's AWS SSO configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_StartStudioSSOConfigurationRepair.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso:CreateManagedApplicationInstance",
+                    "sso:GetManagedApplicationInstance"
+                ],
+                "required": true
+            },
+            "UpdateStudio": {
+                "privilege": "UpdateStudio",
+                "description": "Grants permission to update a studio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateStudio.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or overwrite one or more tags for the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to disassociate one or more tags from the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "streamingImage": {
+        "resourceName": "streaming-image",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "nimble:studioId": {
+                "condition": "nimble:studioId",
+                "description": "Filters access by a specific studio",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetStreamingImage": {
+                "privilege": "GetStreamingImage",
+                "description": "Grants permission to get a streaming image",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStreamingImage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags on a Nimble Studio resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteStreamingImage": {
+                "privilege": "DeleteStreamingImage",
+                "description": "Grants permission to delete a streaming image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStreamingImage.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "ec2:DeleteSnapshot",
+                    "ec2:DeregisterImage",
+                    "ec2:ModifyInstanceAttribute",
+                    "ec2:ModifySnapshotAttribute"
+                ],
+                "required": true
+            },
+            "UpdateStreamingImage": {
+                "privilege": "UpdateStreamingImage",
+                "description": "Grants permission to update a streaming image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateStreamingImage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or overwrite one or more tags for the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to disassociate one or more tags from the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "studioComponent": {
+        "resourceName": "studio-component",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "nimble:studioId": {
+                "condition": "nimble:studioId",
+                "description": "Filters access by a specific studio",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetStudioComponent": {
+                "privilege": "GetStudioComponent",
+                "description": "Grants permission to get a studio component",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStudioComponent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags on a Nimble Studio resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteStudioComponent": {
+                "privilege": "DeleteStudioComponent",
+                "description": "Grants permission to delete a studio component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStudioComponent.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "ds:UnauthorizeApplication"
+                ],
+                "required": true
+            },
+            "UpdateStudioComponent": {
+                "privilege": "UpdateStudioComponent",
+                "description": "Grants permission to update a studio component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateStudioComponent.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "ds:AuthorizeApplication",
+                    "ds:DescribeDirectories",
+                    "ec2:DescribeSecurityGroups",
+                    "fsx:DescribeFileSystems"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or overwrite one or more tags for the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to disassociate one or more tags from the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "launchProfile": {
+        "resourceName": "launch-profile",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "nimble:studioId": {
+                "condition": "nimble:studioId",
+                "description": "Filters access by a specific studio",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetLaunchProfile": {
+                "privilege": "GetLaunchProfile",
+                "description": "Grants permission to get a launch profile",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetLaunchProfileDetails": {
+                "privilege": "GetLaunchProfileDetails",
+                "description": "Grants permission to get a launch profile's details, which includes the summary of studio components and streaming images used by the launch profile",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfileDetails.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetLaunchProfileInitialization": {
+                "privilege": "GetLaunchProfileInitialization",
+                "description": "Grants permission to get a launch profile initialization. A launch profile initialization is a dereferenced version of a launch profile, including attached studio component connection information",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfileInitialization.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "ds:DescribeDirectories",
+                    "ec2:DescribeSecurityGroups",
+                    "fsx:DescribeFileSystems"
+                ],
+                "required": true
+            },
+            "GetLaunchProfileMember": {
+                "privilege": "GetLaunchProfileMember",
+                "description": "Grants permission to get a launch profile member",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfileMember.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListLaunchProfileMembers": {
+                "privilege": "ListLaunchProfileMembers",
+                "description": "Grants permission to list launch profile members",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListLaunchProfileMembers.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags on a Nimble Studio resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateStreamingSession": {
+                "privilege": "CreateStreamingSession",
+                "description": "Grants permission to create a streaming session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStreamingSession.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ec2:CreateNetworkInterface",
+                    "ec2:CreateNetworkInterfacePermission",
+                    "nimble:GetLaunchProfile",
+                    "nimble:GetLaunchProfileInitialization",
+                    "nimble:ListEulaAcceptances"
+                ],
+                "required": true
+            },
+            "DeleteLaunchProfile": {
+                "privilege": "DeleteLaunchProfile",
+                "description": "Grants permission to delete a launch profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteLaunchProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteLaunchProfileMember": {
+                "privilege": "DeleteLaunchProfileMember",
+                "description": "Grants permission to delete a launch profile member",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteLaunchProfileMember.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutLaunchProfileMembers": {
+                "privilege": "PutLaunchProfileMembers",
+                "description": "Grants permission to add/update launch profile members",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_PutLaunchProfileMembers.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso-directory:DescribeUsers"
+                ],
+                "required": true
+            },
+            "UpdateLaunchProfile": {
+                "privilege": "UpdateLaunchProfile",
+                "description": "Grants permission to update a launch profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateLaunchProfile.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "ec2:DescribeNatGateways",
+                    "ec2:DescribeNetworkAcls",
+                    "ec2:DescribeRouteTables",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeVpcEndpoints"
+                ],
+                "required": true
+            },
+            "UpdateLaunchProfileMember": {
+                "privilege": "UpdateLaunchProfileMember",
+                "description": "Grants permission to update a launch profile member",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateLaunchProfileMember.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or overwrite one or more tags for the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to disassociate one or more tags from the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "streamingSession": {
+        "resourceName": "streaming-session",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "nimble:createdBy": {
+                "condition": "nimble:createdBy",
+                "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                "type": "String"
+            },
+            "nimble:ownedBy": {
+                "condition": "nimble:ownedBy",
+                "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetStreamingSession": {
+                "privilege": "GetStreamingSession",
+                "description": "Grants permission to get a streaming session",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStreamingSession.html",
+                "privConditions": {
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "GetStreamingSessionStream": {
+                "privilege": "GetStreamingSessionStream",
+                "description": "Grants permission to get a streaming session stream",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStreamingSessionStream.html",
+                "privConditions": {
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags on a Nimble Studio resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateStreamingSessionStream": {
+                "privilege": "CreateStreamingSessionStream",
+                "description": "Grants permission to create a StreamingSessionStream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStreamingSessionStream.html",
+                "privConditions": {
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteStreamingSession": {
+                "privilege": "DeleteStreamingSession",
+                "description": "Grants permission to delete a streaming session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStreamingSession.html",
+                "privConditions": {
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ec2:DeleteNetworkInterface"
+                ],
+                "required": true
+            },
+            "StartStreamingSession": {
+                "privilege": "StartStreamingSession",
+                "description": "Grants permission to start a streaming session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_StartStreamingSession.html",
+                "privConditions": {
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "nimble:GetLaunchProfile",
+                    "nimble:GetLaunchProfileMember"
+                ],
+                "required": true
+            },
+            "StopStreamingSession": {
+                "privilege": "StopStreamingSession",
+                "description": "Grants permission to stop a streaming session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_StopStreamingSession.html",
+                "privConditions": {
+                    "nimble:requesterPrincipalId": {
+                        "condition": "nimble:requesterPrincipalId",
+                        "description": "Filters access by the ID of the logged in user",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "nimble:GetLaunchProfile"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or overwrite one or more tags for the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to disassociate one or more tags from the specified Nimble Studio resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "eula": {
+        "resourceName": "eula",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:eula/${EulaId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetEula": {
+                "privilege": "GetEula",
+                "description": "Grants permission to get a EULA",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetEula.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListEulas": {
+                "privilege": "ListEulas",
+                "description": "Grants permission to list EULAs",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListEulas.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AcceptEulas": {
+                "privilege": "AcceptEulas",
+                "description": "Grants permission to accept EULAs",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_AcceptEulas.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "eulaAcceptance": {
+        "resourceName": "eula-acceptance",
+        "service": "nimble",
+        "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:eula-acceptance/${EulaAcceptanceId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "nimble:studioId": {
+                "condition": "nimble:studioId",
+                "description": "Filters access by a specific studio",
+                "type": "ARN"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListEulaAcceptances": {
+                "privilege": "ListEulaAcceptances",
+                "description": "Grants permission to list EULA acceptances",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListEulaAcceptances.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

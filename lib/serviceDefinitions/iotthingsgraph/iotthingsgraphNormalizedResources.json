@@ -1,0 +1,228 @@
+{
+    "workflow": {
+        "resourceName": "Workflow",
+        "service": "iotthingsgraph",
+        "resourceArn": "arn:${Partition}:iotthingsgraph:${Region}:${Account}:Workflow/${NamespacePath}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetFlowTemplate": {
+                "privilege": "GetFlowTemplate",
+                "description": "Gets the latest version of the DefinitionDocument and FlowTemplateSummary for the specified workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_GetFlowTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetFlowTemplateRevisions": {
+                "privilege": "GetFlowTemplateRevisions",
+                "description": "Gets revisions of the specified workflow. Only the last 100 revisions are stored. If the workflow has been deprecated, this action will return revisions that occurred before the deprecation. This action won't work for workflows that have been deleted",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_GetFlowTemplateRevisions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteFlowTemplate": {
+                "privilege": "DeleteFlowTemplate",
+                "description": "Deletes a workflow. Any new system or system instance that contains this workflow will fail to update or deploy. Existing system instances that contain the workflow will continue to run (since they use a snapshot of the workflow taken at the time of deploying the system instance)",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_DeleteFlowTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeprecateFlowTemplate": {
+                "privilege": "DeprecateFlowTemplate",
+                "description": "Deprecates the specified workflow. This action marks the workflow for deletion. Deprecated flows can't be deployed, but existing system instances that use the flow will continue to run",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_DeprecateFlowTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateFlowTemplate": {
+                "privilege": "UpdateFlowTemplate",
+                "description": "Updates the specified workflow. All deployed systems and system instances that use the workflow will see the changes in the flow when it is redeployed. The workflow can contain only entities in the specified namespace",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_UpdateFlowTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "system": {
+        "resourceName": "System",
+        "service": "iotthingsgraph",
+        "resourceArn": "arn:${Partition}:iotthingsgraph:${Region}:${Account}:System/${NamespacePath}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetSystemTemplate": {
+                "privilege": "GetSystemTemplate",
+                "description": "Gets a system",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_GetSystemTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetSystemTemplateRevisions": {
+                "privilege": "GetSystemTemplateRevisions",
+                "description": "Gets revisions made to the specified system template. Only the previous 100 revisions are stored. If the system has been deprecated, this action will return the revisions that occurred before its deprecation. This action won't work with systems that have been deleted",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_GetSystemTemplateRevisions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteSystemTemplate": {
+                "privilege": "DeleteSystemTemplate",
+                "description": "Deletes a system. New system instances can't contain the system after its deletion. Existing system instances that contain the system will continue to work because they use a snapshot of the system that is taken when it is deployed",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_DeleteSystemTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeprecateSystemTemplate": {
+                "privilege": "DeprecateSystemTemplate",
+                "description": "Deprecates the specified system",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_DeprecateSystemTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateSystemTemplate": {
+                "privilege": "UpdateSystemTemplate",
+                "description": "Updates the specified system. You don't need to run this action after updating a workflow. Any system instance that uses the system will see the changes in the system when it is redeployed",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_UpdateSystemTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "systemInstance": {
+        "resourceName": "SystemInstance",
+        "service": "iotthingsgraph",
+        "resourceArn": "arn:${Partition}:iotthingsgraph:${Region}:${Account}:Deployment/${NamespacePath}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Lists all tags for a given resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetSystemInstance": {
+                "privilege": "GetSystemInstance",
+                "description": "Gets a system instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_GetSystemInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SearchFlowExecutions": {
+                "privilege": "SearchFlowExecutions",
+                "description": "Searches for workflow executions of a system instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_SearchFlowExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteSystemInstance": {
+                "privilege": "DeleteSystemInstance",
+                "description": "Deletes a system instance. Only instances that have never been deployed, or that have been undeployed from the target can be deleted. Users can create a new system instance that has the same ID as a deleted system instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_DeleteSystemInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeploySystemInstance": {
+                "privilege": "DeploySystemInstance",
+                "description": "Deploys the system instance to the target specified in CreateSystemInstance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_DeploySystemInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UndeploySystemInstance": {
+                "privilege": "UndeploySystemInstance",
+                "description": "Removes the system instance and associated triggers from the target",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_UndeploySystemInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Tag a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a key that is present in the request the user makes to the thingsgraph service",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the thingsgraph service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Untag a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/thingsgraph/latest/APIReference/{APIReferenceDocPage}API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the list of all the tag key names present in the request the user makes to the thingsgraph service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

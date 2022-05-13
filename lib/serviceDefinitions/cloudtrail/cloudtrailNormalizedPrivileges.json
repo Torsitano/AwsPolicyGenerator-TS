@@ -1,0 +1,484 @@
+{
+    "addTags": {
+        "privilege": "AddTags",
+        "description": "Grants permission to add one or more tags to a trail, up to a limit of 10",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AddTags.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "cancelQuery": {
+        "privilege": "CancelQuery",
+        "description": "Grants permission to cancel a running query",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_CancelQuery.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createEventDataStore": {
+        "privilege": "CreateEventDataStore",
+        "description": "Grants permission to create an event data store",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_CreateEventDataStore.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by value associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createTrail": {
+        "privilege": "CreateTrail",
+        "description": "Grants permission to create a trail that specifies the settings for delivery of log data to an Amazon S3 bucket",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_CreateTrail.html",
+        "service": "cloudtrail",
+        "dependentActions": [
+            "s3:PutObject"
+        ],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteEventDataStore": {
+        "privilege": "DeleteEventDataStore",
+        "description": "Grants permission to delete an event data store",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DeleteEventDataStore.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTrail": {
+        "privilege": "DeleteTrail",
+        "description": "Grants permission to delete a trail",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DeleteTrail.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeQuery": {
+        "privilege": "DescribeQuery",
+        "description": "Grants permission to list details for the query",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DescribeQuery.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTrails": {
+        "privilege": "DescribeTrails",
+        "description": "Grants permission to list settings for the trails associated with the current region for your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DescribeTrails.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getEventDataStore": {
+        "privilege": "GetEventDataStore",
+        "description": "Grants permission to list settings for the event data store",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetEventDataStore.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getEventSelectors": {
+        "privilege": "GetEventSelectors",
+        "description": "Grants permission to list settings for event selectors configured for a trail",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetEventSelectors.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getInsightSelectors": {
+        "privilege": "GetInsightSelectors",
+        "description": "Grants permission to list CloudTrail Insights selectors that are configured for a trail",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetInsightSelectors.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getQueryResults": {
+        "privilege": "GetQueryResults",
+        "description": "Grants permission to fetch results of a complete query",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetQueryResults.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getTrail": {
+        "privilege": "GetTrail",
+        "description": "Grants permission to list settings for the trail",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getTrailStatus": {
+        "privilege": "GetTrailStatus",
+        "description": "Grants permission to retrieve a JSON-formatted list of information about the specified trail",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrailStatus.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listEventDataStores": {
+        "privilege": "ListEventDataStores",
+        "description": "Grants permission to list event data stores associated with the current region for your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_ListEventDataStores.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPublicKeys": {
+        "privilege": "ListPublicKeys",
+        "description": "Grants permission to list the public keys whose private keys were used to sign trail digest files within a specified time range",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_ListPublicKeys.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listQueries": {
+        "privilege": "ListQueries",
+        "description": "Grants permission to list queries associated with an event data store",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_ListQueries.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTags": {
+        "privilege": "ListTags",
+        "description": "Grants permission to list the tags for trails or event data stores in the current region",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_ListTags.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listTrails": {
+        "privilege": "ListTrails",
+        "description": "Grants permission to list trails associated with the current region for your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_ListTrails.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "lookupEvents": {
+        "privilege": "LookupEvents",
+        "description": "Grants permission to look up API activity events captured by CloudTrail that create, update, or delete resources in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "putEventSelectors": {
+        "privilege": "PutEventSelectors",
+        "description": "Grants permission to create and update event selectors for a trail",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_PutEventSelectors.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "putInsightSelectors": {
+        "privilege": "PutInsightSelectors",
+        "description": "Grants permission to create and update CloudTrail Insights selectors for a trail",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_PutInsightSelectors.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "removeTags": {
+        "privilege": "RemoveTags",
+        "description": "Grants permission to remove tags from a trail",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_RemoveTags.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "restoreEventDataStore": {
+        "privilege": "RestoreEventDataStore",
+        "description": "Grants permission to restore an event data store",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_RestoreEventDataStore.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startLogging": {
+        "privilege": "StartLogging",
+        "description": "Grants permission to start the recording of AWS API calls and log file delivery for a trail",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StartLogging.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "startQuery": {
+        "privilege": "StartQuery",
+        "description": "Grants permission to start a new query on a specified event data store",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StartQuery.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "stopLogging": {
+        "privilege": "StopLogging",
+        "description": "Grants permission to stop the recording of AWS API calls and log file delivery for a trail",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StopLogging.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateEventDataStore": {
+        "privilege": "UpdateEventDataStore",
+        "description": "Grants permission to update an event data store",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_UpdateEventDataStore.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventdatastore": {
+                "resourceName": "eventdatastore",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:eventdatastore/${EventDataStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateTrail": {
+        "privilege": "UpdateTrail",
+        "description": "Grants permission to update the settings that specify delivery of log files",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_UpdateTrail.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trail": {
+                "resourceName": "trail",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    }
+}

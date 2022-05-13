@@ -1,0 +1,1067 @@
+{
+    "associateFirewallPolicy": {
+        "privilege": "AssociateFirewallPolicy",
+        "description": "Grants permission to create an association between a firewall policy and a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_AssociateFirewallPolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "associateSubnets": {
+        "privilege": "AssociateSubnets",
+        "description": "Grants permission to associate VPC subnets to a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_AssociateSubnets.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFirewall": {
+        "privilege": "CreateFirewall",
+        "description": "Grants permission to create an AWS Network Firewall firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_CreateFirewall.html",
+        "service": "networkFirewall",
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFirewallPolicy": {
+        "privilege": "CreateFirewallPolicy",
+        "description": "Grants permission to create an AWS Network Firewall firewall policy",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_CreateFirewallPolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createRuleGroup": {
+        "privilege": "CreateRuleGroup",
+        "description": "Grants permission to create an AWS Network Firewall rule group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_CreateRuleGroup.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFirewall": {
+        "privilege": "DeleteFirewall",
+        "description": "Grants permission to delete a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DeleteFirewall.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFirewallPolicy": {
+        "privilege": "DeleteFirewallPolicy",
+        "description": "Grants permission to delete a firewall policy",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DeleteFirewallPolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteResourcePolicy": {
+        "privilege": "DeleteResourcePolicy",
+        "description": "Grants permission to delete a resource policy for a firewall policy or rule group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DeleteResourcePolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRuleGroup": {
+        "privilege": "DeleteRuleGroup",
+        "description": "Grants permission to delete a rule group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DeleteRuleGroup.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFirewall": {
+        "privilege": "DescribeFirewall",
+        "description": "Grants permission to retrieve the data objects that define a firewall",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeFirewall.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFirewallPolicy": {
+        "privilege": "DescribeFirewallPolicy",
+        "description": "Grants permission to retrieve the data objects that define a firewall policy",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeFirewallPolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeLoggingConfiguration": {
+        "privilege": "DescribeLoggingConfiguration",
+        "description": "Grants permission to describe the logging configuration of a firewall",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeLoggingConfiguration.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeResourcePolicy": {
+        "privilege": "DescribeResourcePolicy",
+        "description": "Grants permission to describe a resource policy for a firewall policy or rule group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeResourcePolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeRuleGroup": {
+        "privilege": "DescribeRuleGroup",
+        "description": "Grants permission to retrieve the data objects that define a rule group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeRuleGroupMetadata": {
+        "privilege": "DescribeRuleGroupMetadata",
+        "description": "Grants permission to retrieve the high-level information about a rule group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroupMetadata.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateSubnets": {
+        "privilege": "DisassociateSubnets",
+        "description": "Grants permission to disassociate VPC subnets from a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DisassociateSubnets.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listFirewallPolicies": {
+        "privilege": "ListFirewallPolicies",
+        "description": "Grants permission to retrieve the metadata for firewall policies",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_ListFirewallPolicies.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listFirewalls": {
+        "privilege": "ListFirewalls",
+        "description": "Grants permission to retrieve the metadata for firewalls",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_ListFirewalls.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listRuleGroups": {
+        "privilege": "ListRuleGroups",
+        "description": "Grants permission to retrieve the metadata for rule groups",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_ListRuleGroups.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to retrieve the tags for a resource",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_ListTagsForResource.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putResourcePolicy": {
+        "privilege": "PutResourcePolicy",
+        "description": "Grants permission to put a resource policy for a firewall policy or rule group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_PutResourcePolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to attach tags to a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_TagResource.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tags from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UntagResource.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFirewallDeleteProtection": {
+        "privilege": "UpdateFirewallDeleteProtection",
+        "description": "Grants permission to add or remove delete protection for a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateFirewallDeleteProtection.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFirewallDescription": {
+        "privilege": "UpdateFirewallDescription",
+        "description": "Grants permission to modify the description for a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateFirewallDescription.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFirewallPolicy": {
+        "privilege": "UpdateFirewallPolicy",
+        "description": "Grants permission to modify a firewall policy",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateFirewallPolicy.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewallPolicy": {
+                "resourceName": "FirewallPolicy",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall-policy/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFirewallPolicyChangeProtection": {
+        "privilege": "UpdateFirewallPolicyChangeProtection",
+        "description": "Grants permission to add or remove firewall policy change protection for a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateFirewallPolicyChangeProtection.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateLoggingConfiguration": {
+        "privilege": "UpdateLoggingConfiguration",
+        "description": "Grants permission to modify the logging configuration of a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateLoggingConfiguration.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateRuleGroup": {
+        "privilege": "UpdateRuleGroup",
+        "description": "Grants permission to modify a rule group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateRuleGroup.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "statefulRuleGroup": {
+                "resourceName": "StatefulRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateful-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "statelessRuleGroup": {
+                "resourceName": "StatelessRuleGroup",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:stateless-rulegroup/${Name}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSubnetChangeProtection": {
+        "privilege": "UpdateSubnetChangeProtection",
+        "description": "Grants permission to add or remove subnet change protection for a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateSubnetChangeProtection.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

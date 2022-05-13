@@ -1,0 +1,54 @@
+{
+    "event": {
+        "resourceName": "event",
+        "service": "health",
+        "resourceArn": "arn:${Partition}:health:*::event/${Service}/${EventTypeCode}/*",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeAffectedEntities": {
+                "privilege": "DescribeAffectedEntities",
+                "description": "Grants permission to retrieve a list of entities that have been affected by the specified events",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html",
+                "privConditions": {
+                    "health:eventTypeCode": {
+                        "condition": "health:eventTypeCode",
+                        "description": "Filters access by event type",
+                        "type": "String"
+                    },
+                    "health:service": {
+                        "condition": "health:service",
+                        "description": "Filters access by impacted service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeEventDetails": {
+                "privilege": "DescribeEventDetails",
+                "description": "Grants permission to retrieve detailed information about one or more specified events",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html",
+                "privConditions": {
+                    "health:eventTypeCode": {
+                        "condition": "health:eventTypeCode",
+                        "description": "Filters access by event type",
+                        "type": "String"
+                    },
+                    "health:service": {
+                        "condition": "health:service",
+                        "description": "Filters access by impacted service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

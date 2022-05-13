@@ -1,0 +1,1434 @@
+{
+    "associateFileGateway": {
+        "privilege": "AssociateFileGateway",
+        "description": "Grants permission to associate a File Gateway instance with an Amazon FSx for Windows File Server file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/filegateway/latest/filefsxw/what-is-file-fsxw.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "associateFileSystemAliases": {
+        "privilege": "AssociateFileSystemAliases",
+        "description": "Grants permission to associate DNS aliases with an Amazon FSx for Windows File Server file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "cancelDataRepositoryTask": {
+        "privilege": "CancelDataRepositoryTask",
+        "description": "Grants permission to cancel a data repository task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CancelDataRepositoryTask.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:task/${TaskId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "copyBackup": {
+        "privilege": "CopyBackup",
+        "description": "Grants permission to copy a backup",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopyBackup.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createBackup": {
+        "privilege": "CreateBackup",
+        "description": "Grants permission to create a new backup of an Amazon FSx file system or an Amazon FSx volume",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateBackup.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createDataRepositoryAssociation": {
+        "privilege": "CreateDataRepositoryAssociation",
+        "description": "Grants permission to create a new data respository association for an Amazon FSx for Lustre file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateDataRepositoryAssociation.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createDataRepositoryTask": {
+        "privilege": "CreateDataRepositoryTask",
+        "description": "Grants permission to create a new data respository task for an Amazon FSx for Lustre file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateDataRepositoryTask.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:task/${TaskId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFileSystem": {
+        "privilege": "CreateFileSystem",
+        "description": "Grants permission to create a new, empty, Amazon FSx file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileSystem.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFileSystemFromBackup": {
+        "privilege": "CreateFileSystemFromBackup",
+        "description": "Grants permission to create a new Amazon FSx file system from an existing backup",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileSystemFromBackup.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createSnapshot": {
+        "privilege": "CreateSnapshot",
+        "description": "Grants permission to create a new snapshot on a volume",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateSnapshot.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createStorageVirtualMachine": {
+        "privilege": "CreateStorageVirtualMachine",
+        "description": "Grants permission to create a new storage virtual machine in an Amazon FSx for Ontap file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateStorageVirtualMachine.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createVolume": {
+        "privilege": "CreateVolume",
+        "description": "Grants permission to create a new volume",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateVolume.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "fsx:StorageVirtualMachineId": {
+                "condition": "fsx:StorageVirtualMachineId",
+                "description": "Filters access by the containing storage virtual machine for a volume for mutating volume operations",
+                "type": "String"
+            },
+            "fsx:ParentVolumeId": {
+                "condition": "fsx:ParentVolumeId",
+                "description": "Filters access by the containing parent volume for mutating volume operations",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createVolumeFromBackup": {
+        "privilege": "CreateVolumeFromBackup",
+        "description": "Grants permission to create a new volume from backup",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateVolumeFromBackup.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "fsx:StorageVirtualMachineId": {
+                "condition": "fsx:StorageVirtualMachineId",
+                "description": "Filters access by the containing storage virtual machine for a volume for mutating volume operations",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteBackup": {
+        "privilege": "DeleteBackup",
+        "description": "Grants permission to delete a backup, deleting its contents. After deletion, the backup no longer exists, and its data is no longer available",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteBackup.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteDataRepositoryAssociation": {
+        "privilege": "DeleteDataRepositoryAssociation",
+        "description": "Grants permission to delete a data repository association",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteDataRepositoryAssociation.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFileSystem": {
+        "privilege": "DeleteFileSystem",
+        "description": "Grants permission to delete a file system, deleting its contents and any existing automatic backups of the file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteFileSystem.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:CreateBackup",
+            "fsx:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSnapshot": {
+        "privilege": "DeleteSnapshot",
+        "description": "Grants permission to delete a snapshot on a volume",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteSnapshot.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteStorageVirtualMachine": {
+        "privilege": "DeleteStorageVirtualMachine",
+        "description": "Grants permission to delete a storage virtual machine, deleting its contents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteStorageVirtualMachine.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteVolume": {
+        "privilege": "DeleteVolume",
+        "description": "Grants permission to delete a volume, deleting its contents and any existing automatic backups of the volume",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteVolume.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "fsx:StorageVirtualMachineId": {
+                "condition": "fsx:StorageVirtualMachineId",
+                "description": "Filters access by the containing storage virtual machine for a volume for mutating volume operations",
+                "type": "String"
+            },
+            "fsx:ParentVolumeId": {
+                "condition": "fsx:ParentVolumeId",
+                "description": "Filters access by the containing parent volume for mutating volume operations",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAssociatedFileGateways": {
+        "privilege": "DescribeAssociatedFileGateways",
+        "description": "Grants permission to describe the File Gateway instances associated with an Amazon FSx for Windows File Server file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/filegateway/latest/filefsxw/what-is-file-fsxw.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeBackups": {
+        "privilege": "DescribeBackups",
+        "description": "Grants permission to return the descriptions of all backups owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeBackups.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDataRepositoryAssociations": {
+        "privilege": "DescribeDataRepositoryAssociations",
+        "description": "Grants permission to return the descriptions of all data repository associations owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeDataRepositoryAssociations.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDataRepositoryTasks": {
+        "privilege": "DescribeDataRepositoryTasks",
+        "description": "Grants permission to return the descriptions of all data repository tasks owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeDataRepositoryTasks.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeFileSystemAliases": {
+        "privilege": "DescribeFileSystemAliases",
+        "description": "Grants permission to return the description of all DNS aliases owned by your Amazon FSx for Windows File Server file system",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystemAliases.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeFileSystems": {
+        "privilege": "DescribeFileSystems",
+        "description": "Grants permission to return the descriptions of all file systems owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSnapshots": {
+        "privilege": "DescribeSnapshots",
+        "description": "Grants permission to return the descriptions of all snapshots owned by your AWS account in the AWS Region of the endpoint you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeStorageVirtualMachines": {
+        "privilege": "DescribeStorageVirtualMachines",
+        "description": "Grants permission to return the descriptions of all storage virtual machines owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeStorageVirtualMachines.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeVolumes": {
+        "privilege": "DescribeVolumes",
+        "description": "Grants permission to return the descriptions of all volumes owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeVolumes.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disassociateFileGateway": {
+        "privilege": "DisassociateFileGateway",
+        "description": "Grants permission to disassociate a File Gateway instance from an Amazon FSx for Windows File Server file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/filegateway/latest/filefsxw/what-is-file-fsxw.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateFileSystemAliases": {
+        "privilege": "DisassociateFileSystemAliases",
+        "description": "Grants permission to disassociate file system aliases with an Amazon FSx for Windows File Server file system",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags for an Amazon FSx resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_ListTagsForResource.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:task/${TaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "manageBackupPrincipalAssociations": {
+        "privilege": "ManageBackupPrincipalAssociations",
+        "description": "Grants permission to manage backup principal associations through AWS Backup",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopyBackup.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "releaseFileSystemNfsV3Locks": {
+        "privilege": "ReleaseFileSystemNfsV3Locks",
+        "description": "Grants permission to release file system NFS V3 locks",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_ReleaseFileSystemNfsV3Locks.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "restoreVolumeFromSnapshot": {
+        "privilege": "RestoreVolumeFromSnapshot",
+        "description": "Grants permission to restore volume state from a snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_RestoreVolumeFromSnapshot.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag an Amazon FSx resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_TagResource.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:task/${TaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove a tag from an Amazon FSx resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UntagResource.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "backup": {
+                "resourceName": "backup",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:task/${TaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateDataRepositoryAssociation": {
+        "privilege": "UpdateDataRepositoryAssociation",
+        "description": "Grants permission to update data repository association configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateDataRepositoryAssociation.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFileSystem": {
+        "privilege": "UpdateFileSystem",
+        "description": "Grants permission to update file system configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileSystem": {
+                "resourceName": "file-system",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-system/${FileSystemId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSnapshot": {
+        "privilege": "UpdateSnapshot",
+        "description": "Grants permission to update snapshot configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateSnapshot.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:snapshot/${VolumeId}/${SnapshotId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateStorageVirtualMachine": {
+        "privilege": "UpdateStorageVirtualMachine",
+        "description": "Grants permission to update storage virtual machine configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateStorageVirtualMachine.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "storageVirtualMachine": {
+                "resourceName": "storage-virtual-machine",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:storage-virtual-machine/${FileSystemId}/${StorageVirtualMachineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateVolume": {
+        "privilege": "UpdateVolume",
+        "description": "Grants permission to update volume configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateVolume.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {
+            "fsx:StorageVirtualMachineId": {
+                "condition": "fsx:StorageVirtualMachineId",
+                "description": "Filters access by the containing storage virtual machine for a volume for mutating volume operations",
+                "type": "String"
+            },
+            "fsx:ParentVolumeId": {
+                "condition": "fsx:ParentVolumeId",
+                "description": "Filters access by the containing parent volume for mutating volume operations",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "volume": {
+                "resourceName": "volume",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:volume/${FileSystemId}/${VolumeId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,235 @@
+{
+    "associateProjectAdminUser": {
+        "privilege": "AssociateProjectAdminUser",
+        "description": "Grants permission to associate a user with the project as an administrator",
+        "accessLevel": "Permissions management",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:AssociateProfile",
+                    "sso:GetManagedApplicationInstance",
+                    "sso:GetProfile",
+                    "sso:ListDirectoryAssociations",
+                    "sso:ListProfiles"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/user-management-chapter.html"
+    },
+    "createProject": {
+        "privilege": "CreateProject",
+        "description": "Grants permission to create a project",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "kms:CreateGrant",
+                    "sso:CreateManagedApplicationInstance",
+                    "sso:DeleteManagedApplicationInstance"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-creating-project.html"
+    },
+    "deleteProject": {
+        "privilege": "DeleteProject",
+        "description": "Grants permission to delete a project",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "sso:DeleteManagedApplicationInstance"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-delete-project.html"
+    },
+    "disassociateProjectAdminUser": {
+        "privilege": "DisassociateProjectAdminUser",
+        "description": "Grants permission to disassociate an administrator from the project",
+        "accessLevel": "Permissions management",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:DisassociateProfile",
+                    "sso:GetManagedApplicationInstance",
+                    "sso:GetProfile",
+                    "sso:ListDirectoryAssociations",
+                    "sso:ListProfiles"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mu-remove-project-admin.html"
+    },
+    "getProject": {
+        "privilege": "GetProject",
+        "description": "Grants permission to get information about a project",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-project-tasks.html"
+    },
+    "getProjectAdminUser": {
+        "privilege": "GetProjectAdminUser",
+        "description": "Grants permission to describe an administrator who is associated with the project",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:GetManagedApplicationInstance"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-project-tasks.html"
+    },
+    "listProjectAdminUsers": {
+        "privilege": "ListProjectAdminUsers",
+        "description": "Grants permission to list all administrators associated with the project",
+        "accessLevel": "Permissions management",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:GetManagedApplicationInstance"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/user-management-chapter.html"
+    },
+    "listProjects": {
+        "privilege": "ListProjects",
+        "description": "Grants permission to list all projects",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-project-tasks.html"
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list all tags for a resource",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/tagging.html"
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag a resource",
+        "accessLevel": "Tagging",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/tagging.html"
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag a resource",
+        "accessLevel": "Tagging",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/tagging.html#modify-tag-1"
+    },
+    "updateProject": {
+        "privilege": "UpdateProject",
+        "description": "Grants permission to update a project",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "project": {
+                "resourceType": "project",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-updating-project.html"
+    }
+}

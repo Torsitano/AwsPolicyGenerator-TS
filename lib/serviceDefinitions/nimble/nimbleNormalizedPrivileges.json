@@ -1,0 +1,2370 @@
+{
+    "acceptEulas": {
+        "privilege": "AcceptEulas",
+        "description": "Grants permission to accept EULAs",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_AcceptEulas.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eula": {
+                "resourceName": "eula",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:eula/${EulaId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createLaunchProfile": {
+        "privilege": "CreateLaunchProfile",
+        "description": "Grants permission to create a launch profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateLaunchProfile.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:DescribeNatGateways",
+            "ec2:DescribeNetworkAcls",
+            "ec2:DescribeRouteTables",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcEndpoints",
+            "ec2:RunInstances"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "createStreamingImage": {
+        "privilege": "CreateStreamingImage",
+        "description": "Grants permission to create a streaming image",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStreamingImage.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ec2:DescribeImages",
+            "ec2:DescribeSnapshots",
+            "ec2:ModifyInstanceAttribute",
+            "ec2:ModifySnapshotAttribute",
+            "ec2:RegisterImage"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "createStreamingSession": {
+        "privilege": "CreateStreamingSession",
+        "description": "Grants permission to create a streaming session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStreamingSession.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:CreateNetworkInterfacePermission",
+            "nimble:GetLaunchProfile",
+            "nimble:GetLaunchProfileInitialization",
+            "nimble:ListEulaAcceptances"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "createStreamingSessionStream": {
+        "privilege": "CreateStreamingSessionStream",
+        "description": "Grants permission to create a StreamingSessionStream",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStreamingSessionStream.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createStudio": {
+        "privilege": "CreateStudio",
+        "description": "Grants permission to create a studio",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStudio.html",
+        "service": "nimble",
+        "dependentActions": [
+            "iam:PassRole",
+            "sso:CreateManagedApplicationInstance"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "createStudioComponent": {
+        "privilege": "CreateStudioComponent",
+        "description": "Grants permission to create a studio component. A studio component designates a network resource to which a launch profile will provide access",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_CreateStudioComponent.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ds:AuthorizeApplication",
+            "ds:DescribeDirectories",
+            "ec2:DescribeSecurityGroups",
+            "fsx:DescribeFileSystems"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLaunchProfile": {
+        "privilege": "DeleteLaunchProfile",
+        "description": "Grants permission to delete a launch profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteLaunchProfile.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLaunchProfileMember": {
+        "privilege": "DeleteLaunchProfileMember",
+        "description": "Grants permission to delete a launch profile member",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteLaunchProfileMember.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "deleteStreamingImage": {
+        "privilege": "DeleteStreamingImage",
+        "description": "Grants permission to delete a streaming image",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStreamingImage.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ec2:DeleteSnapshot",
+            "ec2:DeregisterImage",
+            "ec2:ModifyInstanceAttribute",
+            "ec2:ModifySnapshotAttribute"
+        ],
+        "privConditions": {},
+        "resources": {
+            "streamingImage": {
+                "resourceName": "streaming-image",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "deleteStreamingSession": {
+        "privilege": "DeleteStreamingSession",
+        "description": "Grants permission to delete a streaming session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStreamingSession.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ec2:DeleteNetworkInterface"
+        ],
+        "privConditions": {
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteStudio": {
+        "privilege": "DeleteStudio",
+        "description": "Grants permission to delete a studio",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStudio.html",
+        "service": "nimble",
+        "dependentActions": [
+            "sso:DeleteManagedApplicationInstance"
+        ],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "deleteStudioComponent": {
+        "privilege": "DeleteStudioComponent",
+        "description": "Grants permission to delete a studio component",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStudioComponent.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ds:UnauthorizeApplication"
+        ],
+        "privConditions": {},
+        "resources": {
+            "studioComponent": {
+                "resourceName": "studio-component",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "deleteStudioMember": {
+        "privilege": "DeleteStudioMember",
+        "description": "Grants permission to delete a studio member",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_DeleteStudioMember.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getEula": {
+        "privilege": "GetEula",
+        "description": "Grants permission to get a EULA",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetEula.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eula": {
+                "resourceName": "eula",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:eula/${EulaId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getFeatureMap": {
+        "privilege": "GetFeatureMap",
+        "description": "Grants permission to allow Nimble Studio portal to show the appropriate features for this account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/userguide/security-iam-service-with-iam.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getLaunchProfile": {
+        "privilege": "GetLaunchProfile",
+        "description": "Grants permission to get a launch profile",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfile.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getLaunchProfileDetails": {
+        "privilege": "GetLaunchProfileDetails",
+        "description": "Grants permission to get a launch profile's details, which includes the summary of studio components and streaming images used by the launch profile",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfileDetails.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getLaunchProfileInitialization": {
+        "privilege": "GetLaunchProfileInitialization",
+        "description": "Grants permission to get a launch profile initialization. A launch profile initialization is a dereferenced version of a launch profile, including attached studio component connection information",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfileInitialization.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ds:DescribeDirectories",
+            "ec2:DescribeSecurityGroups",
+            "fsx:DescribeFileSystems"
+        ],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getLaunchProfileMember": {
+        "privilege": "GetLaunchProfileMember",
+        "description": "Grants permission to get a launch profile member",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetLaunchProfileMember.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getStreamingImage": {
+        "privilege": "GetStreamingImage",
+        "description": "Grants permission to get a streaming image",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStreamingImage.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "streamingImage": {
+                "resourceName": "streaming-image",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getStreamingSession": {
+        "privilege": "GetStreamingSession",
+        "description": "Grants permission to get a streaming session",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStreamingSession.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getStreamingSessionStream": {
+        "privilege": "GetStreamingSessionStream",
+        "description": "Grants permission to get a streaming session stream",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStreamingSessionStream.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getStudio": {
+        "privilege": "GetStudio",
+        "description": "Grants permission to get a studio",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStudio.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getStudioComponent": {
+        "privilege": "GetStudioComponent",
+        "description": "Grants permission to get a studio component",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStudioComponent.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studioComponent": {
+                "resourceName": "studio-component",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "getStudioMember": {
+        "privilege": "GetStudioMember",
+        "description": "Grants permission to get a studio member",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_GetStudioMember.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listEulaAcceptances": {
+        "privilege": "ListEulaAcceptances",
+        "description": "Grants permission to list EULA acceptances",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListEulaAcceptances.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eulaAcceptance": {
+                "resourceName": "eula-acceptance",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:eula-acceptance/${EulaAcceptanceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listEulas": {
+        "privilege": "ListEulas",
+        "description": "Grants permission to list EULAs",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListEulas.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eula": {
+                "resourceName": "eula",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:eula/${EulaId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listLaunchProfileMembers": {
+        "privilege": "ListLaunchProfileMembers",
+        "description": "Grants permission to list launch profile members",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListLaunchProfileMembers.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listLaunchProfiles": {
+        "privilege": "ListLaunchProfiles",
+        "description": "Grants permission to list launch profiles",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListLaunchProfiles.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "nimble:principalId": {
+                "condition": "nimble:principalId",
+                "description": "Filters access by the principalId request parameter",
+                "type": "String"
+            },
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listStreamingImages": {
+        "privilege": "ListStreamingImages",
+        "description": "Grants permission to list streaming images",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStreamingImages.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listStreamingSessions": {
+        "privilege": "ListStreamingSessions",
+        "description": "Grants permission to list streaming sessions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStreamingSessions.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "nimble:createdBy": {
+                "condition": "nimble:createdBy",
+                "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                "type": "String"
+            },
+            "nimble:ownedBy": {
+                "condition": "nimble:ownedBy",
+                "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                "type": "String"
+            },
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listStudioComponents": {
+        "privilege": "ListStudioComponents",
+        "description": "Grants permission to list studio components",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStudioComponents.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listStudioMembers": {
+        "privilege": "ListStudioMembers",
+        "description": "Grants permission to list studio members",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStudioMembers.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "listStudios": {
+        "privilege": "ListStudios",
+        "description": "Grants permission to list all studios",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListStudios.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list all tags on a Nimble Studio resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_ListTagsForResource.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "streamingImage": {
+                "resourceName": "streaming-image",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "studioComponent": {
+                "resourceName": "studio-component",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "putLaunchProfileMembers": {
+        "privilege": "PutLaunchProfileMembers",
+        "description": "Grants permission to add/update launch profile members",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_PutLaunchProfileMembers.html",
+        "service": "nimble",
+        "dependentActions": [
+            "sso-directory:DescribeUsers"
+        ],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "putStudioLogEvents": {
+        "privilege": "PutStudioLogEvents",
+        "description": "Grants permission to report metrics and logs for the Nimble Studio portal to monitor application health",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/userguide/security-iam-service-with-iam.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "putStudioMembers": {
+        "privilege": "PutStudioMembers",
+        "description": "Grants permission to add/update studio members",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_PutStudioMembers.html",
+        "service": "nimble",
+        "dependentActions": [
+            "sso-directory:DescribeUsers"
+        ],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "startStreamingSession": {
+        "privilege": "StartStreamingSession",
+        "description": "Grants permission to start a streaming session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_StartStreamingSession.html",
+        "service": "nimble",
+        "dependentActions": [
+            "nimble:GetLaunchProfile",
+            "nimble:GetLaunchProfileMember"
+        ],
+        "privConditions": {
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startStudioSSOConfigurationRepair": {
+        "privilege": "StartStudioSSOConfigurationRepair",
+        "description": "Grants permission to repair the studio's AWS SSO configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_StartStudioSSOConfigurationRepair.html",
+        "service": "nimble",
+        "dependentActions": [
+            "sso:CreateManagedApplicationInstance",
+            "sso:GetManagedApplicationInstance"
+        ],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "stopStreamingSession": {
+        "privilege": "StopStreamingSession",
+        "description": "Grants permission to stop a streaming session",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_StopStreamingSession.html",
+        "service": "nimble",
+        "dependentActions": [
+            "nimble:GetLaunchProfile"
+        ],
+        "privConditions": {
+            "nimble:requesterPrincipalId": {
+                "condition": "nimble:requesterPrincipalId",
+                "description": "Filters access by the ID of the logged in user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add or overwrite one or more tags for the specified Nimble Studio resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_TagResource.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "streamingImage": {
+                "resourceName": "streaming-image",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "studioComponent": {
+                "resourceName": "studio-component",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to disassociate one or more tags from the specified Nimble Studio resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UntagResource.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "streamingImage": {
+                "resourceName": "streaming-image",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "streamingSession": {
+                "resourceName": "streaming-session",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-session/${StreamingSessionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:createdBy": {
+                        "condition": "nimble:createdBy",
+                        "description": "Filters access by the createdBy request parameter or the ID of the creator of the resource",
+                        "type": "String"
+                    },
+                    "nimble:ownedBy": {
+                        "condition": "nimble:ownedBy",
+                        "description": "Filters access by the ownedBy request parameter or the ID of the owner of the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            },
+            "studioComponent": {
+                "resourceName": "studio-component",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "updateLaunchProfile": {
+        "privilege": "UpdateLaunchProfile",
+        "description": "Grants permission to update a launch profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateLaunchProfile.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ec2:DescribeNatGateways",
+            "ec2:DescribeNetworkAcls",
+            "ec2:DescribeRouteTables",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcEndpoints"
+        ],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "updateLaunchProfileMember": {
+        "privilege": "UpdateLaunchProfileMember",
+        "description": "Grants permission to update a launch profile member",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateLaunchProfileMember.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchProfile": {
+                "resourceName": "launch-profile",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:launch-profile/${LaunchProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "updateStreamingImage": {
+        "privilege": "UpdateStreamingImage",
+        "description": "Grants permission to update a streaming image",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateStreamingImage.html",
+        "service": "nimble",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "streamingImage": {
+                "resourceName": "streaming-image",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:streaming-image/${StreamingImageId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "updateStudio": {
+        "privilege": "UpdateStudio",
+        "description": "Grants permission to update a studio",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateStudio.html",
+        "service": "nimble",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio/${StudioId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    },
+    "updateStudioComponent": {
+        "privilege": "UpdateStudioComponent",
+        "description": "Grants permission to update a studio component",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/nimble-studio/latest/APIReference/API_UpdateStudioComponent.html",
+        "service": "nimble",
+        "dependentActions": [
+            "ds:AuthorizeApplication",
+            "ds:DescribeDirectories",
+            "ec2:DescribeSecurityGroups",
+            "fsx:DescribeFileSystems"
+        ],
+        "privConditions": {},
+        "resources": {
+            "studioComponent": {
+                "resourceName": "studio-component",
+                "resourceArn": "arn:${Partition}:nimble:${Region}:${Account}:studio-component/${StudioComponentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "nimble:studioId": {
+                        "condition": "nimble:studioId",
+                        "description": "Filters access by a specific studio",
+                        "type": "ARN"
+                    }
+                }
+            }
+        }
+    }
+}

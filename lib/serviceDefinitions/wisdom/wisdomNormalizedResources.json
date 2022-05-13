@@ -1,0 +1,410 @@
+{
+    "assistant": {
+        "resourceName": "Assistant",
+        "service": "wisdom",
+        "resourceArn": "arn:${Partition}:wisdom:${Region}:${Account}:assistant/${AssistantId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAssistantAssociations": {
+                "privilege": "ListAssistantAssociations",
+                "description": "Grants permission to list information about assistant associations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_ListAssistantAssociations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetAssistant": {
+                "privilege": "GetAssistant",
+                "description": "Grants permission to retrieve information about an assistant",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetAssistant.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAssistantAssociation": {
+                "privilege": "GetAssistantAssociation",
+                "description": "Grants permission to retrieve information about an assistant association",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetAssistantAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRecommendations": {
+                "privilege": "GetRecommendations",
+                "description": "Grants permission to retrieve recommendations for the specified session",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetSession": {
+                "privilege": "GetSession",
+                "description": "Grants permission to retrieve information for a specified session",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetSession.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "QueryAssistant": {
+                "privilege": "QueryAssistant",
+                "description": "Grants permission to perform a manual search against the specified assistant",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SearchSessions": {
+                "privilege": "SearchSessions",
+                "description": "Grants permission to search for sessions referencing a specified assistant. Can be used to et a specific session resource by its name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_SearchSessions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateAssistantAssociation": {
+                "privilege": "CreateAssistantAssociation",
+                "description": "Grants permission to create an association between an assistant and another resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateAssistantAssociation.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateSession": {
+                "privilege": "CreateSession",
+                "description": "Grants permission to create a session",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateSession.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteAssistant": {
+                "privilege": "DeleteAssistant",
+                "description": "Grants permission to delete an assistant",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteAssistant.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteAssistantAssociation": {
+                "privilege": "DeleteAssistantAssociation",
+                "description": "Grants permission to delete an assistant association",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteAssistantAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "NotifyRecommendationsReceived": {
+                "privilege": "NotifyRecommendationsReceived",
+                "description": "Grants permission to remove the specified recommendations from the specified assistant's queue of newly available recommendations",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_NotifyRecommendationsReceived.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "assistantAssociation": {
+        "resourceName": "AssistantAssociation",
+        "service": "wisdom",
+        "resourceArn": "arn:${Partition}:wisdom:${Region}:${Account}:association/${AssistantId}/${AssistantAssociationId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetAssistantAssociation": {
+                "privilege": "GetAssistantAssociation",
+                "description": "Grants permission to retrieve information about an assistant association",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetAssistantAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteAssistantAssociation": {
+                "privilege": "DeleteAssistantAssociation",
+                "description": "Grants permission to delete an assistant association",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteAssistantAssociation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "content": {
+        "resourceName": "Content",
+        "service": "wisdom",
+        "resourceArn": "arn:${Partition}:wisdom:${Region}:${Account}:content/${KnowledgeBaseId}/${ContentId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetContent": {
+                "privilege": "GetContent",
+                "description": "Grants permission to retrieve content, including a pre-signed URL to download the content",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetContentSummary": {
+                "privilege": "GetContentSummary",
+                "description": "Grants permission to retrieve summary information about the content",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContentSummary.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteContent": {
+                "privilege": "DeleteContent",
+                "description": "Grants permission to delete content",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateContent": {
+                "privilege": "UpdateContent",
+                "description": "Grants permission to update information about the content",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "knowledgeBase": {
+        "resourceName": "KnowledgeBase",
+        "service": "wisdom",
+        "resourceArn": "arn:${Partition}:wisdom:${Region}:${Account}:knowledge-base/${KnowledgeBaseId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListContents": {
+                "privilege": "ListContents",
+                "description": "Grants permission to list the content with a knowledge base",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_ListContents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetContent": {
+                "privilege": "GetContent",
+                "description": "Grants permission to retrieve content, including a pre-signed URL to download the content",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetContentSummary": {
+                "privilege": "GetContentSummary",
+                "description": "Grants permission to retrieve summary information about the content",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContentSummary.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetKnowledgeBase": {
+                "privilege": "GetKnowledgeBase",
+                "description": "Grants permission to retrieve information about the knowledge base",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetKnowledgeBase.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SearchContent": {
+                "privilege": "SearchContent",
+                "description": "Grants permission to search for content referencing a specified knowledge base. Can be used to get a specific content resource by its name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_SearchContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateContent": {
+                "privilege": "CreateContent",
+                "description": "Grants permission to create content",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateContent.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteContent": {
+                "privilege": "DeleteContent",
+                "description": "Grants permission to delete content",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteKnowledgeBase": {
+                "privilege": "DeleteKnowledgeBase",
+                "description": "Grants permission to delete a knowledge base",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RemoveKnowledgeBaseTemplateUri": {
+                "privilege": "RemoveKnowledgeBaseTemplateUri",
+                "description": "Grants permission to remove a URI template from a knowledge base",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_RemoveKnowledgeBaseTemplateUri.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartContentUpload": {
+                "privilege": "StartContentUpload",
+                "description": "Grants permission to get a URL to upload content to a knowledge base",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateContent": {
+                "privilege": "UpdateContent",
+                "description": "Grants permission to update information about the content",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateContent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateKnowledgeBaseTemplateUri": {
+                "privilege": "UpdateKnowledgeBaseTemplateUri",
+                "description": "Grants permission to update the template URI of a knowledge base",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateKnowledgeBaseTemplateUri.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "session": {
+        "resourceName": "Session",
+        "service": "wisdom",
+        "resourceArn": "arn:${Partition}:wisdom:${Region}:${Account}:session/${AssistantId}/${SessionId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetSession": {
+                "privilege": "GetSession",
+                "description": "Grants permission to retrieve information for a specified session",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetSession.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

@@ -1,0 +1,249 @@
+{
+    "createCliToken": {
+        "privilege": "CreateCliToken",
+        "description": "Grants permission to create a short-lived token that allows a user to invoke Airflow CLI via an endpoint on the Apache Airflow Webserver",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createEnvironment": {
+        "privilege": "CreateEnvironment",
+        "description": "Grants permission to create an Amazon MWAA environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createWebLoginToken": {
+        "privilege": "CreateWebLoginToken",
+        "description": "Grants permission to create a short-lived token that allows a user to log into Apache Airflow web UI",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "rbacRole": {
+                "resourceName": "rbac-role",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:role/${EnvironmentName}/${RoleName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteEnvironment": {
+        "privilege": "DeleteEnvironment",
+        "description": "Grants permission to delete an Amazon MWAA environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getEnvironment": {
+        "privilege": "GetEnvironment",
+        "description": "Grants permission to view details about an Amazon MWAA environment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listEnvironments": {
+        "privilege": "ListEnvironments",
+        "description": "Grants permission to list the Amazon MWAA environments in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to lists tag for an Amazon MWAA environment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "publishMetrics": {
+        "privilege": "PublishMetrics",
+        "description": "Grants permission to publish metrics for an Amazon MWAA environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag an Amazon MWAA environment",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag an Amazon MWAA environment",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateEnvironment": {
+        "privilege": "UpdateEnvironment",
+        "description": "Grants permission to modify an Amazon MWAA environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-actions-resources.html",
+        "service": "airflow",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "environment": {
+                "resourceName": "environment",
+                "resourceArn": "arn:${Partition}:airflow:${Region}:${Account}:environment/${EnvironmentName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,272 @@
+{
+    "createCanary": {
+        "privilege": "CreateCanary",
+        "description": "Grants permission to create a canary",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CreateCanary.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "deleteCanary": {
+        "privilege": "DeleteCanary",
+        "description": "Grants permission to delete a canary. Amazon Synthetics deletes all the resources except for the Lambda function and the CloudWatch Alarms if you created one",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeCanaries": {
+        "privilege": "DescribeCanaries",
+        "description": "Grants permission to list information of all canaries",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "synthetics:Names": {
+                "condition": "synthetics:Names",
+                "description": "Filters access based on the name of the canary",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "describeCanariesLastRun": {
+        "privilege": "DescribeCanariesLastRun",
+        "description": "Grants permission to list information about the last test run associated with all canaries",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanariesLastRun.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "synthetics:Names": {
+                "condition": "synthetics:Names",
+                "description": "Filters access based on the name of the canary",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "describeRuntimeVersions": {
+        "privilege": "DescribeRuntimeVersions",
+        "description": "Grants permission to list information about Synthetics canary runtime versions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeRuntimeVersions.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getCanary": {
+        "privilege": "GetCanary",
+        "description": "Grants permission to get a canary details",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getCanaryRuns": {
+        "privilege": "GetCanaryRuns",
+        "description": "Grants permission to list information about all the test runs associated with a canary",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list all tags and values associated with a canary",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_ListTagsForResource.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startCanary": {
+        "privilege": "StartCanary",
+        "description": "Grants permission to start a canary, so that Amazon CloudWatch Synthetics starts monitoring a website",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_StartCanary.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopCanary": {
+        "privilege": "StopCanary",
+        "description": "Grants permission to stop a canary",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_StopCanary.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add one or more tags to a canary",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove one or more tags from a canary",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UntagResource.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateCanary": {
+        "privilege": "UpdateCanary",
+        "description": "Grants permission to update a canary",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

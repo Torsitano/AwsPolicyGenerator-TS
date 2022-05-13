@@ -1,0 +1,190 @@
+{
+    "createApplication": {
+        "privilege": "CreateApplication",
+        "description": "Grants permission to create an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions by the tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "deleteApplication": {
+        "privilege": "DeleteApplication",
+        "description": "Grants permission to delete an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_DeleteApplication.html",
+        "service": "iotfleethub",
+        "dependentActions": [
+            "sso:DeleteManagedApplicationInstance"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:iotfleethub:${Region}:${Account}:application/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeApplication": {
+        "privilege": "DescribeApplication",
+        "description": "Grants permission to describe an application",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_DescribeApplication.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:iotfleethub:${Region}:${Account}:application/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listApplications": {
+        "privilege": "ListApplications",
+        "description": "Grants permission to list all applications",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_ListApplications.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list all tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_ListTagsForResource.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:iotfleethub:${Region}:${Account}:application/${ApplicationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_TagResource.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions by the tag keys in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tag key-value pairs in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:iotfleethub:${Region}:${Account}:application/${ApplicationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_UntagResource.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions by the tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:iotfleethub:${Region}:${Account}:application/${ApplicationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateApplication": {
+        "privilege": "UpdateApplication",
+        "description": "Grants permission to update an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_UpdateApplication.html",
+        "service": "iotfleethub",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:iotfleethub:${Region}:${Account}:application/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

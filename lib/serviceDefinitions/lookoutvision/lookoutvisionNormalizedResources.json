@@ -1,0 +1,180 @@
+{
+    "model": {
+        "resourceName": "model",
+        "service": "lookoutvision",
+        "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeModel": {
+                "privilege": "DescribeModel",
+                "description": "Grants permission to show detailed information about a model",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grant permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateModel": {
+                "privilege": "CreateModel",
+                "description": "Grants permission to create a new anomaly detection model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateModel.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteModel": {
+                "privilege": "DeleteModel",
+                "description": "Grants permission to delete a model and all associated assets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DeleteModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DetectAnomalies": {
+                "privilege": "DetectAnomalies",
+                "description": "Grants permission to invoke detection of anomalies",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DetectAnomalies.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartModel": {
+                "privilege": "StartModel",
+                "description": "Grants permission to start anomaly detection model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartModelPackagingJob": {
+                "privilege": "StartModelPackagingJob",
+                "description": "Grants permission to start a model packaging job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModelPackagingJob.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopModel": {
+                "privilege": "StopModel",
+                "description": "Grants permission to stop anomaly detection model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StopModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grant permission to tag a resource with given key value pairs",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grant permission to remove the tag with the given key from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "project": {
+        "resourceName": "project",
+        "service": "lookoutvision",
+        "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:project/${ProjectName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeProject": {
+                "privilege": "DescribeProject",
+                "description": "Grants permission to show detailed information about a project",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateProject": {
+                "privilege": "CreateProject",
+                "description": "Grants permission to create a new project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteProject": {
+                "privilege": "DeleteProject",
+                "description": "Grants permission to permanently remove a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DeleteProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

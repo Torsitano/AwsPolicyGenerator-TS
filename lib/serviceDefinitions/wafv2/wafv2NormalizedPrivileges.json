@@ -1,0 +1,1381 @@
+{
+    "associateWebACL": {
+        "privilege": "AssociateWebACL",
+        "description": "Grants permission to associate a WebACL with a resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_AssociateWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "apigateway": {
+                "resourceName": "apigateway",
+                "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${ApiId}/stages/${StageName}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "appsync": {
+                "resourceName": "appsync",
+                "resourceArn": "arn:${Partition}:appsync:${Region}:${Account}:apis/${GraphQLAPIId}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "checkCapacity": {
+        "privilege": "CheckCapacity",
+        "description": "Grants permission to calculate web ACL capacity unit (WCU) requirements for a specified scope and set of rules",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_CheckCapacity.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createIPSet": {
+        "privilege": "CreateIPSet",
+        "description": "Grants permission to create an IPSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateIPSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createRegexPatternSet": {
+        "privilege": "CreateRegexPatternSet",
+        "description": "Grants permission to create a RegexPatternSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateRegexPatternSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createRuleGroup": {
+        "privilege": "CreateRuleGroup",
+        "description": "Grants permission to create a RuleGroup",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateRuleGroup.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createWebACL": {
+        "privilege": "CreateWebACL",
+        "description": "Grants permission to create a WebACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "managedruleset": {
+                "resourceName": "managedruleset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/managedruleset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFirewallManagerRuleGroups": {
+        "privilege": "DeleteFirewallManagerRuleGroups",
+        "description": "Grants permission to delete FirewallManagedRulesGroups from a WebACL if not managed by Firewall Manager anymore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeleteFirewallManagerRuleGroups.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteIPSet": {
+        "privilege": "DeleteIPSet",
+        "description": "Grants permission to delete an IPSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeleteIPSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLoggingConfiguration": {
+        "privilege": "DeleteLoggingConfiguration",
+        "description": "Grants permission to delete the LoggingConfiguration from a WebACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeleteLoggingConfiguration.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePermissionPolicy": {
+        "privilege": "DeletePermissionPolicy",
+        "description": "Grants permission to delete the PermissionPolicy on a RuleGroup",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeletePermissionPolicy.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRegexPatternSet": {
+        "privilege": "DeleteRegexPatternSet",
+        "description": "Grants permission to delete a RegexPatternSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeleteRegexPatternSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRuleGroup": {
+        "privilege": "DeleteRuleGroup",
+        "description": "Grants permission to delete a RuleGroup",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeleteRuleGroup.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteWebACL": {
+        "privilege": "DeleteWebACL",
+        "description": "Grants permission to delete a WebACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DeleteWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeManagedRuleGroup": {
+        "privilege": "DescribeManagedRuleGroup",
+        "description": "Grants permission to retrieve high-level information for a managed rule group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DescribeManagedRuleGroup.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disassociateFirewallManager": {
+        "privilege": "DisassociateFirewallManager",
+        "description": "Grants permission to disassociate Firewall Manager from a WebACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DisassociateFirewallManager.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateWebACL": {
+        "privilege": "DisassociateWebACL",
+        "description": "Grants permission to disassociate a WebACL from an application resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_DisassociateWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "apigateway": {
+                "resourceName": "apigateway",
+                "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${ApiId}/stages/${StageName}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "appsync": {
+                "resourceName": "appsync",
+                "resourceArn": "arn:${Partition}:appsync:${Region}:${Account}:apis/${GraphQLAPIId}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "generateMobileSdkReleaseUrl": {
+        "privilege": "GenerateMobileSdkReleaseUrl",
+        "description": "Grants permission to generate a presigned download URL for the specified release of the mobile SDK",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GenerateMobileSdkReleaseUrl.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getIPSet": {
+        "privilege": "GetIPSet",
+        "description": "Grants permission to retrieve details about an IPSet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetIPSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getLoggingConfiguration": {
+        "privilege": "GetLoggingConfiguration",
+        "description": "Grants permission to retrieve LoggingConfiguration for a WebACL",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetLoggingConfiguration.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getManagedRuleSet": {
+        "privilege": "GetManagedRuleSet",
+        "description": "Grants permission to retrieve details about a ManagedRuleSet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetManagedRuleSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "managedruleset": {
+                "resourceName": "managedruleset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/managedruleset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getMobileSdkRelease": {
+        "privilege": "GetMobileSdkRelease",
+        "description": "Grants permission to retrieve information for the specified mobile SDK release, including release notes and tags",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetMobileSdkRelease.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getPermissionPolicy": {
+        "privilege": "GetPermissionPolicy",
+        "description": "Grants permission to retrieve a PermissionPolicy for a RuleGroup",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetPermissionPolicy.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getRateBasedStatementManagedKeys": {
+        "privilege": "GetRateBasedStatementManagedKeys",
+        "description": "Grants permission to retrieve the keys that are currently blocked by a rate-based rule",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetRateBasedStatementManagedKeys.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getRegexPatternSet": {
+        "privilege": "GetRegexPatternSet",
+        "description": "Grants permission to retrieve details about a RegexPatternSet",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetRegexPatternSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getRuleGroup": {
+        "privilege": "GetRuleGroup",
+        "description": "Grants permission to retrieve details about a RuleGroup",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetRuleGroup.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getSampledRequests": {
+        "privilege": "GetSampledRequests",
+        "description": "Grants permission to retrieve detailed information about a sampling of web requests",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetSampledRequests.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getWebACL": {
+        "privilege": "GetWebACL",
+        "description": "Grants permission to retrieve details about a WebACL",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getWebACLForResource": {
+        "privilege": "GetWebACLForResource",
+        "description": "Grants permission to retrieve the WebACL that's associated with a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_GetWebACLForResource.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "apigateway": {
+                "resourceName": "apigateway",
+                "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${ApiId}/stages/${StageName}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "appsync": {
+                "resourceName": "appsync",
+                "resourceArn": "arn:${Partition}:appsync:${Region}:${Account}:apis/${GraphQLAPIId}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "loadbalancer/app/": {
+                "resourceName": "loadbalancer/app/",
+                "resourceArn": "arn:${Partition}:elasticloadbalancing:${Region}:${Account}:loadbalancer/app/${LoadBalancerName}/${LoadBalancerId}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listAvailableManagedRuleGroupVersions": {
+        "privilege": "ListAvailableManagedRuleGroupVersions",
+        "description": "Grants permission to retrieve an array of managed rule group versions that are available for you to use",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListAvailableManagedRuleGroupVersions.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listAvailableManagedRuleGroups": {
+        "privilege": "ListAvailableManagedRuleGroups",
+        "description": "Grants permission to retrieve an array of managed rule groups that are available for you to use",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListAvailableManagedRuleGroups.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listIPSets": {
+        "privilege": "ListIPSets",
+        "description": "Grants permission to retrieve an array of IPSetSummary objects for the IP sets that you manage",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListIPSets.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listLoggingConfigurations": {
+        "privilege": "ListLoggingConfigurations",
+        "description": "Grants permission to retrieve an array of your LoggingConfiguration objects",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListLoggingConfigurations.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listManagedRuleSets": {
+        "privilege": "ListManagedRuleSets",
+        "description": "Grants permission to retrieve an array of your ManagedRuleSet objects",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListManagedRuleSets.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listMobileSdkReleases": {
+        "privilege": "ListMobileSdkReleases",
+        "description": "Grants permission to retrieve a list of the available releases for the mobile SDK and the specified device platform",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListMobileSdkReleases.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listRegexPatternSets": {
+        "privilege": "ListRegexPatternSets",
+        "description": "Grants permission to retrieve an array of RegexPatternSetSummary objects for the regex pattern sets that you manage",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListRegexPatternSets.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listResourcesForWebACL": {
+        "privilege": "ListResourcesForWebACL",
+        "description": "Grants permission to retrieve an array of the Amazon Resource Names (ARNs) for the resources that are associated with a web ACL",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListResourcesForWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listRuleGroups": {
+        "privilege": "ListRuleGroups",
+        "description": "Grants permission to retrieve an array of RuleGroupSummary objects for the rule groups that you manage",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListRuleGroups.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListTagsForResource.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listWebACLs": {
+        "privilege": "ListWebACLs",
+        "description": "Grants permission to retrieve an array of WebACLSummary objects for the web ACLs that you manage",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_ListWebACLs.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "putFirewallManagerRuleGroups": {
+        "privilege": "PutFirewallManagerRuleGroups",
+        "description": "Grants permission to create FirewallManagedRulesGroups in a WebACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_PutFirewallManagerRuleGroups.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putLoggingConfiguration": {
+        "privilege": "PutLoggingConfiguration",
+        "description": "Grants permission to enable a LoggingConfiguration, to start logging for a web ACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_PutLoggingConfiguration.html",
+        "service": "wafv2",
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putManagedRuleSetVersions": {
+        "privilege": "PutManagedRuleSetVersions",
+        "description": "Grants permission to enable create a new or update an existing version of a ManagedRuleSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_PutManagedRuleSetVersions.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "managedruleset": {
+                "resourceName": "managedruleset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/managedruleset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putPermissionPolicy": {
+        "privilege": "PutPermissionPolicy",
+        "description": "Grants permission to attach an IAM policy to a resource, used to share rule groups between accounts",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_PutPermissionPolicy.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to associate tags with a AWS resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_TagResource.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to disassociate tags from an AWS resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_UntagResource.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateIPSet": {
+        "privilege": "UpdateIPSet",
+        "description": "Grants permission to update an IPSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_UpdateIPSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateManagedRuleSetVersionExpiryDate": {
+        "privilege": "UpdateManagedRuleSetVersionExpiryDate",
+        "description": "Grants permission to update the expiry date of a version in ManagedRuleSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_UpdateManagedRuleSetVersionExpiryDate.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "managedruleset": {
+                "resourceName": "managedruleset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/managedruleset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateRegexPatternSet": {
+        "privilege": "UpdateRegexPatternSet",
+        "description": "Grants permission to update a RegexPatternSet",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_UpdateRegexPatternSet.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateRuleGroup": {
+        "privilege": "UpdateRuleGroup",
+        "description": "Grants permission to update a RuleGroup",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_UpdateRuleGroup.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateWebACL": {
+        "privilege": "UpdateWebACL",
+        "description": "Grants permission to update a WebACL",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/APIReference/API_UpdateWebACL.html",
+        "service": "wafv2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "webacl": {
+                "resourceName": "webacl",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/webacl/${Name}/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "ipset": {
+                "resourceName": "ipset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/ipset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "managedruleset": {
+                "resourceName": "managedruleset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/managedruleset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "regexpatternset": {
+                "resourceName": "regexpatternset",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/regexpatternset/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "rulegroup": {
+                "resourceName": "rulegroup",
+                "resourceArn": "arn:${Partition}:wafv2:${Region}:${Account}:${Scope}/rulegroup/${Name}/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

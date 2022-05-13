@@ -1,0 +1,4103 @@
+{
+    "addClientIDToOpenIDConnectProvider": {
+        "privilege": "AddClientIDToOpenIDConnectProvider",
+        "description": "Grants permission to add a new client ID (audience) to the list of registered IDs for the specified IAM OpenID Connect (OIDC) provider resource",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_AddClientIDToOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "addRoleToInstanceProfile": {
+        "privilege": "AddRoleToInstanceProfile",
+        "description": "Grants permission to add an IAM role to the specified instance profile",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_AddRoleToInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "addUserToGroup": {
+        "privilege": "AddUserToGroup",
+        "description": "Grants permission to add an IAM user to the specified IAM group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_AddUserToGroup.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "attachGroupPolicy": {
+        "privilege": "AttachGroupPolicy",
+        "description": "Grants permission to attach a managed policy to the specified IAM group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachGroupPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PolicyARN": {
+                "condition": "iam:PolicyARN",
+                "description": "Filters access by the ARN of an IAM policy",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "attachRolePolicy": {
+        "privilege": "AttachRolePolicy",
+        "description": "Grants permission to attach a managed policy to the specified IAM role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachRolePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PolicyARN": {
+                "condition": "iam:PolicyARN",
+                "description": "Filters access by the ARN of an IAM policy",
+                "type": "ARN"
+            },
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "attachUserPolicy": {
+        "privilege": "AttachUserPolicy",
+        "description": "Grants permission to attach a managed policy to the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachUserPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PolicyARN": {
+                "condition": "iam:PolicyARN",
+                "description": "Filters access by the ARN of an IAM policy",
+                "type": "ARN"
+            },
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "changePassword": {
+        "privilege": "ChangePassword",
+        "description": "Grants permission for an IAM user to to change their own password",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAccessKey": {
+        "privilege": "CreateAccessKey",
+        "description": "Grants permission to create access key and secret access key for the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAccountAlias": {
+        "privilege": "CreateAccountAlias",
+        "description": "Grants permission to create an alias for your AWS account",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccountAlias.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createGroup": {
+        "privilege": "CreateGroup",
+        "description": "Grants permission to create a new group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateGroup.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createInstanceProfile": {
+        "privilege": "CreateInstanceProfile",
+        "description": "Grants permission to create a new instance profile",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createLoginProfile": {
+        "privilege": "CreateLoginProfile",
+        "description": "Grants permission to create a password for the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateLoginProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createOpenIDConnectProvider": {
+        "privilege": "CreateOpenIDConnectProvider",
+        "description": "Grants permission to create an IAM resource that describes an identity provider (IdP) that supports OpenID Connect (OIDC)",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createPolicy": {
+        "privilege": "CreatePolicy",
+        "description": "Grants permission to create a new managed policy",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createPolicyVersion": {
+        "privilege": "CreatePolicyVersion",
+        "description": "Grants permission to create a new version of the specified managed policy",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicyVersion.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createRole": {
+        "privilege": "CreateRole",
+        "description": "Grants permission to create a new role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createSAMLProvider": {
+        "privilege": "CreateSAMLProvider",
+        "description": "Grants permission to create an IAM resource that describes an identity provider (IdP) that supports SAML 2.0",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateSAMLProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createServiceLinkedRole": {
+        "privilege": "CreateServiceLinkedRole",
+        "description": "Grants permission to create an IAM role that allows an AWS service to perform actions on your behalf",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateServiceLinkedRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:AWSServiceName": {
+                "condition": "iam:AWSServiceName",
+                "description": "Filters access by the AWS service to which this role is attached",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createServiceSpecificCredential": {
+        "privilege": "CreateServiceSpecificCredential",
+        "description": "Grants permission to create a new service-specific credential for an IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateServiceSpecificCredential.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createUser": {
+        "privilege": "CreateUser",
+        "description": "Grants permission to create a new IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createVirtualMFADevice": {
+        "privilege": "CreateVirtualMFADevice",
+        "description": "Grants permission to create a new virtual MFA device",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateVirtualMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "mfa": {
+                "resourceName": "mfa",
+                "resourceArn": "arn:${Partition}:iam::${Account}:mfa/${MfaTokenIdWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deactivateMFADevice": {
+        "privilege": "DeactivateMFADevice",
+        "description": "Grants permission to deactivate the specified MFA device and remove its association with the IAM user for which it was originally enabled",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeactivateMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteAccessKey": {
+        "privilege": "DeleteAccessKey",
+        "description": "Grants permission to delete the access key pair that is associated with the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteAccountAlias": {
+        "privilege": "DeleteAccountAlias",
+        "description": "Grants permission to delete the specified AWS account alias",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccountAlias.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteAccountPasswordPolicy": {
+        "privilege": "DeleteAccountPasswordPolicy",
+        "description": "Grants permission to delete the password policy for the AWS account",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccountPasswordPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteGroup": {
+        "privilege": "DeleteGroup",
+        "description": "Grants permission to delete the specified IAM group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroup.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteGroupPolicy": {
+        "privilege": "DeleteGroupPolicy",
+        "description": "Grants permission to delete the specified inline policy from its group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroupPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteInstanceProfile": {
+        "privilege": "DeleteInstanceProfile",
+        "description": "Grants permission to delete the specified instance profile",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLoginProfile": {
+        "privilege": "DeleteLoginProfile",
+        "description": "Grants permission to delete the password for the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteLoginProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteOpenIDConnectProvider": {
+        "privilege": "DeleteOpenIDConnectProvider",
+        "description": "Grants permission to delete an OpenID Connect identity provider (IdP) resource object in IAM",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePolicy": {
+        "privilege": "DeletePolicy",
+        "description": "Grants permission to delete the specified managed policy and remove it from any IAM entities (users, groups, or roles) to which it is attached",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePolicyVersion": {
+        "privilege": "DeletePolicyVersion",
+        "description": "Grants permission to delete a version from the specified managed policy",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicyVersion.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRole": {
+        "privilege": "DeleteRole",
+        "description": "Grants permission to delete the specified role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRolePermissionsBoundary": {
+        "privilege": "DeleteRolePermissionsBoundary",
+        "description": "Grants permission to remove the permissions boundary from a role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePermissionsBoundary.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteRolePolicy": {
+        "privilege": "DeleteRolePolicy",
+        "description": "Grants permission to delete the specified inline policy from the specified role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSAMLProvider": {
+        "privilege": "DeleteSAMLProvider",
+        "description": "Grants permission to delete a SAML provider resource in IAM",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteSAMLProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSSHPublicKey": {
+        "privilege": "DeleteSSHPublicKey",
+        "description": "Grants permission to delete the specified SSH public key",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteSSHPublicKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteServerCertificate": {
+        "privilege": "DeleteServerCertificate",
+        "description": "Grants permission to delete the specified server certificate",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServerCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteServiceLinkedRole": {
+        "privilege": "DeleteServiceLinkedRole",
+        "description": "Grants permission to delete an IAM role that is linked to a specific AWS service, if the service is no longer using it",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteServiceSpecificCredential": {
+        "privilege": "DeleteServiceSpecificCredential",
+        "description": "Grants permission to delete the specified service-specific credential for an IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceSpecificCredential.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSigningCertificate": {
+        "privilege": "DeleteSigningCertificate",
+        "description": "Grants permission to delete a signing certificate that is associated with the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteSigningCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUser": {
+        "privilege": "DeleteUser",
+        "description": "Grants permission to delete the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUserPermissionsBoundary": {
+        "privilege": "DeleteUserPermissionsBoundary",
+        "description": "Grants permission to remove the permissions boundary from the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUserPermissionsBoundary.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUserPolicy": {
+        "privilege": "DeleteUserPolicy",
+        "description": "Grants permission to delete the specified inline policy from an IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteUserPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteVirtualMFADevice": {
+        "privilege": "DeleteVirtualMFADevice",
+        "description": "Grants permission to delete a virtual MFA device",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteVirtualMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "mfa": {
+                "resourceName": "mfa",
+                "resourceArn": "arn:${Partition}:iam::${Account}:mfa/${MfaTokenIdWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "smsMfa": {
+                "resourceName": "sms-mfa",
+                "resourceArn": "arn:${Partition}:iam::${Account}:sms-mfa/${MfaTokenIdWithPath}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "detachGroupPolicy": {
+        "privilege": "DetachGroupPolicy",
+        "description": "Grants permission to detach a managed policy from the specified IAM group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachGroupPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PolicyARN": {
+                "condition": "iam:PolicyARN",
+                "description": "Filters access by the ARN of an IAM policy",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "detachRolePolicy": {
+        "privilege": "DetachRolePolicy",
+        "description": "Grants permission to detach a managed policy from the specified role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachRolePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PolicyARN": {
+                "condition": "iam:PolicyARN",
+                "description": "Filters access by the ARN of an IAM policy",
+                "type": "ARN"
+            },
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "detachUserPolicy": {
+        "privilege": "DetachUserPolicy",
+        "description": "Grants permission to detach a managed policy from the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachUserPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PolicyARN": {
+                "condition": "iam:PolicyARN",
+                "description": "Filters access by the ARN of an IAM policy",
+                "type": "ARN"
+            },
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "enableMFADevice": {
+        "privilege": "EnableMFADevice",
+        "description": "Grants permission to enable an MFA device and associate it with the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_EnableMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "generateCredentialReport": {
+        "privilege": "GenerateCredentialReport",
+        "description": "Grants permission to generate a credential report for the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "generateOrganizationsAccessReport": {
+        "privilege": "GenerateOrganizationsAccessReport",
+        "description": "Grants permission to generate an access report for an AWS Organizations entity",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html",
+        "service": "iam",
+        "dependentActions": [
+            "organizations:DescribePolicy",
+            "organizations:ListChildren",
+            "organizations:ListParents",
+            "organizations:ListPoliciesForTarget",
+            "organizations:ListRoots",
+            "organizations:ListTargetsForPolicy"
+        ],
+        "privConditions": {
+            "iam:OrganizationsPolicyId": {
+                "condition": "iam:OrganizationsPolicyId",
+                "description": "Filters access by the ID of an AWS Organizations policy",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "accessReport": {
+                "resourceName": "access-report",
+                "resourceArn": "arn:${Partition}:iam::${Account}:access-report/${EntityPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "generateServiceLastAccessedDetails": {
+        "privilege": "GenerateServiceLastAccessedDetails",
+        "description": "Grants permission to generate a service last accessed data report for an IAM resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateServiceLastAccessedDetails.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getAccessKeyLastUsed": {
+        "privilege": "GetAccessKeyLastUsed",
+        "description": "Grants permission to retrieve information about when the specified access key was last used",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccessKeyLastUsed.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getAccountAuthorizationDetails": {
+        "privilege": "GetAccountAuthorizationDetails",
+        "description": "Grants permission to retrieve information about all IAM users, groups, roles, and policies in your AWS account, including their relationships to one another",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getAccountPasswordPolicy": {
+        "privilege": "GetAccountPasswordPolicy",
+        "description": "Grants permission to retrieve the password policy for the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getAccountSummary": {
+        "privilege": "GetAccountSummary",
+        "description": "Grants permission to retrieve information about IAM entity usage and IAM quotas in the AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getContextKeysForCustomPolicy": {
+        "privilege": "GetContextKeysForCustomPolicy",
+        "description": "Grants permission to retrieve a list of all of the context keys that are referenced in the specified policy",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getContextKeysForPrincipalPolicy": {
+        "privilege": "GetContextKeysForPrincipalPolicy",
+        "description": "Grants permission to retrieve a list of all context keys that are referenced in all IAM policies that are attached to the specified IAM identity (user, group, or role)",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getCredentialReport": {
+        "privilege": "GetCredentialReport",
+        "description": "Grants permission to retrieve a credential report for the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getGroup": {
+        "privilege": "GetGroup",
+        "description": "Grants permission to retrieve a list of IAM users in the specified IAM group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroup.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getGroupPolicy": {
+        "privilege": "GetGroupPolicy",
+        "description": "Grants permission to retrieve an inline policy document that is embedded in the specified IAM group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getInstanceProfile": {
+        "privilege": "GetInstanceProfile",
+        "description": "Grants permission to retrieve information about the specified instance profile, including the instance profile's path, GUID, ARN, and role",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getLoginProfile": {
+        "privilege": "GetLoginProfile",
+        "description": "Grants permission to retrieve the user name and password creation date for the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetLoginProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getOpenIDConnectProvider": {
+        "privilege": "GetOpenIDConnectProvider",
+        "description": "Grants permission to retrieve information about the specified OpenID Connect (OIDC) provider resource in IAM",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getOrganizationsAccessReport": {
+        "privilege": "GetOrganizationsAccessReport",
+        "description": "Grants permission to retrieve an AWS Organizations access report",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getPolicy": {
+        "privilege": "GetPolicy",
+        "description": "Grants permission to retrieve information about the specified managed policy, including the policy's default version and the total number of identities to which the policy is attached",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPolicyVersion": {
+        "privilege": "GetPolicyVersion",
+        "description": "Grants permission to retrieve information about a version of the specified managed policy, including the policy document",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getRole": {
+        "privilege": "GetRole",
+        "description": "Grants permission to retrieve information about the specified role, including the role's path, GUID, ARN, and the role's trust policy",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getRolePolicy": {
+        "privilege": "GetRolePolicy",
+        "description": "Grants permission to retrieve an inline policy document that is embedded with the specified IAM role",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRolePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getSAMLProvider": {
+        "privilege": "GetSAMLProvider",
+        "description": "Grants permission to retrieve the SAML provider metadocument that was uploaded when the IAM SAML provider resource was created or updated",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getSSHPublicKey": {
+        "privilege": "GetSSHPublicKey",
+        "description": "Grants permission to retrieve the specified SSH public key, including metadata about the key",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSSHPublicKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getServerCertificate": {
+        "privilege": "GetServerCertificate",
+        "description": "Grants permission to retrieve information about the specified server certificate stored in IAM",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServerCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getServiceLastAccessedDetails": {
+        "privilege": "GetServiceLastAccessedDetails",
+        "description": "Grants permission to retrieve information about the service last accessed data report",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetails.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getServiceLastAccessedDetailsWithEntities": {
+        "privilege": "GetServiceLastAccessedDetailsWithEntities",
+        "description": "Grants permission to retrieve information about the entities from the service last accessed data report",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetailsWithEntities.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getServiceLinkedRoleDeletionStatus": {
+        "privilege": "GetServiceLinkedRoleDeletionStatus",
+        "description": "Grants permission to retrieve an IAM service-linked role deletion status",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLinkedRoleDeletionStatus.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getUser": {
+        "privilege": "GetUser",
+        "description": "Grants permission to retrieve information about the specified IAM user, including the user's creation date, path, unique ID, and ARN",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getUserPolicy": {
+        "privilege": "GetUserPolicy",
+        "description": "Grants permission to retrieve an inline policy document that is embedded in the specified IAM user",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listAccessKeys": {
+        "privilege": "ListAccessKeys",
+        "description": "Grants permission to list information about the access key IDs that are associated with the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listAccountAliases": {
+        "privilege": "ListAccountAliases",
+        "description": "Grants permission to list the account alias that is associated with the AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccountAliases.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listAttachedGroupPolicies": {
+        "privilege": "ListAttachedGroupPolicies",
+        "description": "Grants permission to list all managed policies that are attached to the specified IAM group",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedGroupPolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listAttachedRolePolicies": {
+        "privilege": "ListAttachedRolePolicies",
+        "description": "Grants permission to list all managed policies that are attached to the specified IAM role",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listAttachedUserPolicies": {
+        "privilege": "ListAttachedUserPolicies",
+        "description": "Grants permission to list all managed policies that are attached to the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listEntitiesForPolicy": {
+        "privilege": "ListEntitiesForPolicy",
+        "description": "Grants permission to list all IAM identities to which the specified managed policy is attached",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listGroupPolicies": {
+        "privilege": "ListGroupPolicies",
+        "description": "Grants permission to list the names of the inline policies that are embedded in the specified IAM group",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupPolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listGroups": {
+        "privilege": "ListGroups",
+        "description": "Grants permission to list the IAM groups that have the specified path prefix",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroups.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listGroupsForUser": {
+        "privilege": "ListGroupsForUser",
+        "description": "Grants permission to list the IAM groups that the specified IAM user belongs to",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupsForUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listInstanceProfileTags": {
+        "privilege": "ListInstanceProfileTags",
+        "description": "Grants permission to list the tags that are attached to the specified instance profile",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListInstanceProfileTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listInstanceProfiles": {
+        "privilege": "ListInstanceProfiles",
+        "description": "Grants permission to list the instance profiles that have the specified path prefix",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListInstanceProfiles.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listInstanceProfilesForRole": {
+        "privilege": "ListInstanceProfilesForRole",
+        "description": "Grants permission to list the instance profiles that have the specified associated IAM role",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListInstanceProfilesForRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listMFADeviceTags": {
+        "privilege": "ListMFADeviceTags",
+        "description": "Grants permission to list the tags that are attached to the specified virtual mfa device",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADeviceTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "mfa": {
+                "resourceName": "mfa",
+                "resourceArn": "arn:${Partition}:iam::${Account}:mfa/${MfaTokenIdWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listMFADevices": {
+        "privilege": "ListMFADevices",
+        "description": "Grants permission to list the MFA devices for an IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADevices.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listOpenIDConnectProviderTags": {
+        "privilege": "ListOpenIDConnectProviderTags",
+        "description": "Grants permission to list the tags that are attached to the specified OpenID Connect provider",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviderTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listOpenIDConnectProviders": {
+        "privilege": "ListOpenIDConnectProviders",
+        "description": "Grants permission to list information about the IAM OpenID Connect (OIDC) provider resource objects that are defined in the AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPolicies": {
+        "privilege": "ListPolicies",
+        "description": "Grants permission to list all managed policies",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPoliciesGrantingServiceAccess": {
+        "privilege": "ListPoliciesGrantingServiceAccess",
+        "description": "Grants permission to list information about the policies that grant an entity access to a specific service",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPoliciesGrantingServiceAccess.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listPolicyTags": {
+        "privilege": "ListPolicyTags",
+        "description": "Grants permission to list the tags that are attached to the specified managed policy",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listPolicyVersions": {
+        "privilege": "ListPolicyVersions",
+        "description": "Grants permission to list information about the versions of the specified managed policy, including the version that is currently set as the policy's default version",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listRolePolicies": {
+        "privilege": "ListRolePolicies",
+        "description": "Grants permission to list the names of the inline policies that are embedded in the specified IAM role",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRolePolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listRoleTags": {
+        "privilege": "ListRoleTags",
+        "description": "Grants permission to list the tags that are attached to the specified IAM role",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRoleTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listRoles": {
+        "privilege": "ListRoles",
+        "description": "Grants permission to list the IAM roles that have the specified path prefix",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRoles.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSAMLProviderTags": {
+        "privilege": "ListSAMLProviderTags",
+        "description": "Grants permission to list the tags that are attached to the specified SAML provider",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSAMLProviderTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listSAMLProviders": {
+        "privilege": "ListSAMLProviders",
+        "description": "Grants permission to list the SAML provider resources in IAM",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSAMLProviders.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSSHPublicKeys": {
+        "privilege": "ListSSHPublicKeys",
+        "description": "Grants permission to list information about the SSH public keys that are associated with the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSSHPublicKeys.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listServerCertificateTags": {
+        "privilege": "ListServerCertificateTags",
+        "description": "Grants permission to list the tags that are attached to the specified server certificate",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServerCertificateTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listServerCertificates": {
+        "privilege": "ListServerCertificates",
+        "description": "Grants permission to list the server certificates that have the specified path prefix",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServerCertificates.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listServiceSpecificCredentials": {
+        "privilege": "ListServiceSpecificCredentials",
+        "description": "Grants permission to list the service-specific credentials that are associated with the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServiceSpecificCredentials.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listSigningCertificates": {
+        "privilege": "ListSigningCertificates",
+        "description": "Grants permission to list information about the signing certificates that are associated with the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSigningCertificates.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listUserPolicies": {
+        "privilege": "ListUserPolicies",
+        "description": "Grants permission to list the names of the inline policies that are embedded in the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUserPolicies.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listUserTags": {
+        "privilege": "ListUserTags",
+        "description": "Grants permission to list the tags that are attached to the specified IAM user",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUserTags.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listUsers": {
+        "privilege": "ListUsers",
+        "description": "Grants permission to list the IAM users that have the specified path prefix",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUsers.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listVirtualMFADevices": {
+        "privilege": "ListVirtualMFADevices",
+        "description": "Grants permission to list virtual MFA devices by assignment status",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListVirtualMFADevices.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "passRole": {
+        "privilege": "PassRole",
+        "description": "Grants permission to pass a role to a service",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:AssociatedResourceArn": {
+                "condition": "iam:AssociatedResourceArn",
+                "description": "Filters by the resource that the role will be used on behalf of",
+                "type": "ARN"
+            },
+            "iam:PassedToService": {
+                "condition": "iam:PassedToService",
+                "description": "Filters access by the AWS service to which this role is passed",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putGroupPolicy": {
+        "privilege": "PutGroupPolicy",
+        "description": "Grants permission to create or update an inline policy document that is embedded in the specified IAM group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutGroupPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "putRolePermissionsBoundary": {
+        "privilege": "PutRolePermissionsBoundary",
+        "description": "Grants permission to set a managed policy as a permissions boundary for a role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePermissionsBoundary.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putRolePolicy": {
+        "privilege": "PutRolePolicy",
+        "description": "Grants permission to create or update an inline policy document that is embedded in the specified IAM role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putUserPermissionsBoundary": {
+        "privilege": "PutUserPermissionsBoundary",
+        "description": "Grants permission to set a managed policy as a permissions boundary for an IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutUserPermissionsBoundary.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putUserPolicy": {
+        "privilege": "PutUserPolicy",
+        "description": "Grants permission to create or update an inline policy document that is embedded in the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutUserPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "iam:PermissionsBoundary": {
+                "condition": "iam:PermissionsBoundary",
+                "description": "Filters access if the specified policy is set as the permissions boundary on the IAM entity (user or role)",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "removeClientIDFromOpenIDConnectProvider": {
+        "privilege": "RemoveClientIDFromOpenIDConnectProvider",
+        "description": "Grants permission to remove the client ID (audience) from the list of client IDs in the specified IAM OpenID Connect (OIDC) provider resource",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveClientIDFromOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "removeRoleFromInstanceProfile": {
+        "privilege": "RemoveRoleFromInstanceProfile",
+        "description": "Grants permission to remove an IAM role from the specified EC2 instance profile",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveRoleFromInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "removeUserFromGroup": {
+        "privilege": "RemoveUserFromGroup",
+        "description": "Grants permission to remove an IAM user from the specified group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveUserFromGroup.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "resetServiceSpecificCredential": {
+        "privilege": "ResetServiceSpecificCredential",
+        "description": "Grants permission to reset the password for an existing service-specific credential for an IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResetServiceSpecificCredential.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resyncMFADevice": {
+        "privilege": "ResyncMFADevice",
+        "description": "Grants permission to synchronize the specified MFA device with its IAM entity (user or role)",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResyncMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setDefaultPolicyVersion": {
+        "privilege": "SetDefaultPolicyVersion",
+        "description": "Grants permission to set the version of the specified policy as the policy's default version",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_SetDefaultPolicyVersion.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setSecurityTokenServicePreferences": {
+        "privilege": "SetSecurityTokenServicePreferences",
+        "description": "Grants permission to set the STS global endpoint token version",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_SetSecurityTokenServicePreferences.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "simulateCustomPolicy": {
+        "privilege": "SimulateCustomPolicy",
+        "description": "Grants permission to simulate whether an identity-based policy or resource-based policy provides permissions for specific API operations and resources",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "simulatePrincipalPolicy": {
+        "privilege": "SimulatePrincipalPolicy",
+        "description": "Grants permission to simulate whether an identity-based policy that is attached to a specified IAM entity (user or role) provides permissions for specific API operations and resources",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            },
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagInstanceProfile": {
+        "privilege": "TagInstanceProfile",
+        "description": "Grants permission to add tags to an instance profile",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagMFADevice": {
+        "privilege": "TagMFADevice",
+        "description": "Grants permission to add tags to a virtual mfa device",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "mfa": {
+                "resourceName": "mfa",
+                "resourceArn": "arn:${Partition}:iam::${Account}:mfa/${MfaTokenIdWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagOpenIDConnectProvider": {
+        "privilege": "TagOpenIDConnectProvider",
+        "description": "Grants permission to add tags to an OpenID Connect provider",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagPolicy": {
+        "privilege": "TagPolicy",
+        "description": "Grants permission to add tags to a managed policy",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagRole": {
+        "privilege": "TagRole",
+        "description": "Grants permission to add tags to an IAM role",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagSAMLProvider": {
+        "privilege": "TagSAMLProvider",
+        "description": "Grants permission to add tags to a SAML Provider",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagSAMLProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagServerCertificate": {
+        "privilege": "TagServerCertificate",
+        "description": "Grants permission to add tags to a server certificate",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagServerCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagUser": {
+        "privilege": "TagUser",
+        "description": "Grants permission to add tags to an IAM user",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_TagUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagInstanceProfile": {
+        "privilege": "UntagInstanceProfile",
+        "description": "Grants permission to remove the specified tags from the instance profile",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagInstanceProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "instanceProfile": {
+                "resourceName": "instance-profile",
+                "resourceArn": "arn:${Partition}:iam::${Account}:instance-profile/${InstanceProfileNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagMFADevice": {
+        "privilege": "UntagMFADevice",
+        "description": "Grants permission to remove the specified tags from the virtual mfa device",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagMFADevice.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "mfa": {
+                "resourceName": "mfa",
+                "resourceArn": "arn:${Partition}:iam::${Account}:mfa/${MfaTokenIdWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagOpenIDConnectProvider": {
+        "privilege": "UntagOpenIDConnectProvider",
+        "description": "Grants permission to remove the specified tags from the OpenID Connect provider",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagOpenIDConnectProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagPolicy": {
+        "privilege": "UntagPolicy",
+        "description": "Grants permission to remove the specified tags from the managed policy",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "policy": {
+                "resourceName": "policy",
+                "resourceArn": "arn:${Partition}:iam::${Account}:policy/${PolicyNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagRole": {
+        "privilege": "UntagRole",
+        "description": "Grants permission to remove the specified tags from the role",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagSAMLProvider": {
+        "privilege": "UntagSAMLProvider",
+        "description": "Grants permission to remove the specified tags from the SAML Provider",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagSAMLProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagServerCertificate": {
+        "privilege": "UntagServerCertificate",
+        "description": "Grants permission to remove the specified tags from the server certificate",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagServerCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagUser": {
+        "privilege": "UntagUser",
+        "description": "Grants permission to remove the specified tags from the user",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UntagUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateAccessKey": {
+        "privilege": "UpdateAccessKey",
+        "description": "Grants permission to update the status of the specified access key as Active or Inactive",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccessKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateAccountPasswordPolicy": {
+        "privilege": "UpdateAccountPasswordPolicy",
+        "description": "Grants permission to update the password policy settings for the AWS account",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccountPasswordPolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateAssumeRolePolicy": {
+        "privilege": "UpdateAssumeRolePolicy",
+        "description": "Grants permission to update the policy that grants an IAM entity permission to assume a role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateGroup": {
+        "privilege": "UpdateGroup",
+        "description": "Grants permission to update the name or path of the specified IAM group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateGroup.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:iam::${Account}:group/${GroupNameWithPath}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateLoginProfile": {
+        "privilege": "UpdateLoginProfile",
+        "description": "Grants permission to change the password for the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateLoginProfile.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateOpenIDConnectProviderThumbprint": {
+        "privilege": "UpdateOpenIDConnectProviderThumbprint",
+        "description": "Grants permission to update the entire list of server certificate thumbprints that are associated with an OpenID Connect (OIDC) provider resource",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateOpenIDConnectProviderThumbprint.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "oidcProvider": {
+                "resourceName": "oidc-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:oidc-provider/${OidcProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateRole": {
+        "privilege": "UpdateRole",
+        "description": "Grants permission to update the description or maximum session duration setting of a role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateRole.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateRoleDescription": {
+        "privilege": "UpdateRoleDescription",
+        "description": "Grants permission to update only the description of a role",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateRoleDescription.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "role": {
+                "resourceName": "role",
+                "resourceArn": "arn:${Partition}:iam::${Account}:role/${RoleNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSAMLProvider": {
+        "privilege": "UpdateSAMLProvider",
+        "description": "Grants permission to update the metadata document for an existing SAML provider resource",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSAMLProvider.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "samlProvider": {
+                "resourceName": "saml-provider",
+                "resourceArn": "arn:${Partition}:iam::${Account}:saml-provider/${SamlProviderName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSSHPublicKey": {
+        "privilege": "UpdateSSHPublicKey",
+        "description": "Grants permission to update the status of an IAM user's SSH public key to active or inactive",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSSHPublicKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateServerCertificate": {
+        "privilege": "UpdateServerCertificate",
+        "description": "Grants permission to update the name or the path of the specified server certificate stored in IAM",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateServerCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateServiceSpecificCredential": {
+        "privilege": "UpdateServiceSpecificCredential",
+        "description": "Grants permission to update the status of a service-specific credential to active or inactive for an IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateServiceSpecificCredential.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSigningCertificate": {
+        "privilege": "UpdateSigningCertificate",
+        "description": "Grants permission to update the status of the specified user signing certificate to active or disabled",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSigningCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateUser": {
+        "privilege": "UpdateUser",
+        "description": "Grants permission to update the name or the path of the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateUser.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "uploadSSHPublicKey": {
+        "privilege": "UploadSSHPublicKey",
+        "description": "Grants permission to upload an SSH public key and associate it with the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSSHPublicKey.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "uploadServerCertificate": {
+        "privilege": "UploadServerCertificate",
+        "description": "Grants permission to upload a server certificate entity for the AWS account",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadServerCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "serverCertificate": {
+                "resourceName": "server-certificate",
+                "resourceArn": "arn:${Partition}:iam::${Account}:server-certificate/${CertificateNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "uploadSigningCertificate": {
+        "privilege": "UploadSigningCertificate",
+        "description": "Grants permission to upload an X.509 signing certificate and associate it with the specified IAM user",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSigningCertificate.html",
+        "service": "iam",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "user": {
+                "resourceName": "user",
+                "resourceArn": "arn:${Partition}:iam::${Account}:user/${UserNameWithPath}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "iam:ResourceTag/${TagKey}": {
+                        "condition": "iam:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags attached to an IAM entity (user or role)",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

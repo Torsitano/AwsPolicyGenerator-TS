@@ -1,0 +1,520 @@
+{
+    "acceptInvitation": {
+        "privilege": "AcceptInvitation",
+        "description": "Grants permission to accept an invitation to become a member of a behavior graph",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_AcceptInvitation.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createGraph": {
+        "privilege": "CreateGraph",
+        "description": "Grants permission to create a behavior graph and begin to aggregate security information",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_CreateGraph.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by specifying the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by specifying the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createMembers": {
+        "privilege": "CreateMembers",
+        "description": "Grants permission to request the membership of one or more accounts in a behavior graph managed by this account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_CreateMembers.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteGraph": {
+        "privilege": "DeleteGraph",
+        "description": "Grants permission to delete a behavior graph and stop aggregating security information",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_DeleteGraph.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteMembers": {
+        "privilege": "DeleteMembers",
+        "description": "Grants permission to remove member accounts from a behavior graph managed by this account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_DeleteMembers.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeOrganizationConfiguration": {
+        "privilege": "DescribeOrganizationConfiguration",
+        "description": "Grants permission to view the current configuration related to the Amazon Detective integration with AWS Organizations",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_DescribeOrganizationConfiguration.html",
+        "service": "detective",
+        "dependentActions": [
+            "organizations:DescribeOrganization"
+        ],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disableOrganizationAdminAccount": {
+        "privilege": "DisableOrganizationAdminAccount",
+        "description": "Grants permission to remove the Amazon Detective delegated administrator account for an organization",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_DisableOrganizationAdminAccount.html",
+        "service": "detective",
+        "dependentActions": [
+            "organizations:DescribeOrganization"
+        ],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateMembership": {
+        "privilege": "DisassociateMembership",
+        "description": "Grants permission to remove the association of this account with a behavior graph",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_DisassociateMembership.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "enableOrganizationAdminAccount": {
+        "privilege": "EnableOrganizationAdminAccount",
+        "description": "Grants permission to designate the Amazon Detective delegated administrator account for an organization",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_EnableOrganizationAdminAccount.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getFreeTrialEligibility": {
+        "privilege": "GetFreeTrialEligibility",
+        "description": "Grants permission to retrieve a behavior graph's eligibility for a free trial period",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/adminguide/free-trial-overview.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getGraphIngestState": {
+        "privilege": "GetGraphIngestState",
+        "description": "Grants permission to retrieve the data ingestion state of a behavior graph",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/adminguide/detective-source-data-about.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getMembers": {
+        "privilege": "GetMembers",
+        "description": "Grants permission to retrieve details on specified members of a behavior graph",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_GetMembers.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPricingInformation": {
+        "privilege": "GetPricingInformation",
+        "description": "Grants permission to retrieve information about Amazon Detective's pricing",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/adminguide/usage-projected-cost-calculation.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getUsageInformation": {
+        "privilege": "GetUsageInformation",
+        "description": "Grants permission to list usage information of a behavior graph",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/adminguide/tracking-usage-logging.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listGraphs": {
+        "privilege": "ListGraphs",
+        "description": "Grants permission to list behavior graphs managed by this account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_ListGraphs.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listInvitations": {
+        "privilege": "ListInvitations",
+        "description": "Grants permission to retrieve details on the behavior graphs to which this account has been invited to join",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_ListInvitations.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listMembers": {
+        "privilege": "ListMembers",
+        "description": "Grants permission to retrieve details on all members of a behavior graph",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_ListMembers.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listOrganizationAdminAccounts": {
+        "privilege": "ListOrganizationAdminAccounts",
+        "description": "Grants permission to view the current Amazon Detective delegated administrator account for an organization",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_ListOrganizationAdminAccounts.html",
+        "service": "detective",
+        "dependentActions": [
+            "organizations:DescribeOrganization"
+        ],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list the tag values that are assigned to a behavior graph",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_ListTagsForResource.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by specifying the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "rejectInvitation": {
+        "privilege": "RejectInvitation",
+        "description": "Grants permission to reject an invitation to become a member of a behavior graph",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_RejectInvitation.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "searchGraph": {
+        "privilege": "SearchGraph",
+        "description": "Grants permission to search the data stored in a behavior graph",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/userguide/detective-search.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startMonitoringMember": {
+        "privilege": "StartMonitoringMember",
+        "description": "Grants permission to start data ingest for a member account that has a status of ACCEPTED_BUT_DISABLED",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_StartMonitoringMember.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to assign tag values to a behavior graph",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_TagResource.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by specifying the tag keys that are passed in the request",
+                "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by specifying the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by specifying the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tag values from a behavior graph",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_UntagResource.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by specifying the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateOrganizationConfiguration": {
+        "privilege": "UpdateOrganizationConfiguration",
+        "description": "Grants permission to update the current configuration related to the Amazon Detective integration with AWS Organizations",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_UpdateOrganizationConfiguration.html",
+        "service": "detective",
+        "dependentActions": [
+            "organizations:DescribeOrganization"
+        ],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,631 @@
+{
+    "cancelQuery": {
+        "privilege": "CancelQuery",
+        "description": "Grants permission to cancel queries in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_CancelQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createDatabase": {
+        "privilege": "CreateDatabase",
+        "description": "Grants permission to create a database in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_CreateDatabase.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createScheduledQuery": {
+        "privilege": "CreateScheduledQuery",
+        "description": "Grants permission to create a scheduled query in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_CreateScheduledQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createTable": {
+        "privilege": "CreateTable",
+        "description": "Grants permission to create a table in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_CreateTable.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteDatabase": {
+        "privilege": "DeleteDatabase",
+        "description": "Grants permission to delete a database in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_DeleteDatabase.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteScheduledQuery": {
+        "privilege": "DeleteScheduledQuery",
+        "description": "Grants permission to delete a scheduled query in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_DeleteScheduledQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTable": {
+        "privilege": "DeleteTable",
+        "description": "Grants permission to delete a table in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_DeleteTable.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeDatabase": {
+        "privilege": "DescribeDatabase",
+        "description": "Grants permission to describe a database in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_DescribeDatabase.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeEndpoints": {
+        "privilege": "DescribeEndpoints",
+        "description": "Grants permission to describe timestream endpoints",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_DescribeEndpoints.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeScheduledQuery": {
+        "privilege": "DescribeScheduledQuery",
+        "description": "Grants permission to describe a scheduled query in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_DescribeScheduledQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeTable": {
+        "privilege": "DescribeTable",
+        "description": "Grants permission to describe a table in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_DescribeTable.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "executeScheduledQuery": {
+        "privilege": "ExecuteScheduledQuery",
+        "description": "Grants permission to execute a scheduled query in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_ExecuteScheduledQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDatabases": {
+        "privilege": "ListDatabases",
+        "description": "Grants permission to list databases in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_ListDatabases.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listMeasures": {
+        "privilege": "ListMeasures",
+        "description": "Grants permission to list measures of a table in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_Query.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listScheduledQueries": {
+        "privilege": "ListScheduledQueries",
+        "description": "Grants permission to list scheduled queries in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_ListScheduledQueries.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTables": {
+        "privilege": "ListTables",
+        "description": "Grants permission to list tables in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_ListTables.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags of a resource in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_ListTagsForResource.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "prepareQuery": {
+        "privilege": "PrepareQuery",
+        "description": "Grants permission to issue prepare queries",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_PrepareQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "select": {
+        "privilege": "Select",
+        "description": "Grants permission to issue 'select from table' queries",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_Query.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "selectValues": {
+        "privilege": "SelectValues",
+        "description": "Grants permission to issue 'select 1' queries",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_Query.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add tags to a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_TagResource.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove a tag from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_UntagResource.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateDatabase": {
+        "privilege": "UpdateDatabase",
+        "description": "Grants permission to update a database in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_UpdateDatabase.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateScheduledQuery": {
+        "privilege": "UpdateScheduledQuery",
+        "description": "Grants permission to update a scheduled query in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_query_UpdateScheduledQuery.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "scheduledQuery": {
+                "resourceName": "scheduled-query",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:scheduled-query/${ScheduledQueryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateTable": {
+        "privilege": "UpdateTable",
+        "description": "Grants permission to update a table in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_UpdateTable.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "writeRecords": {
+        "privilege": "WriteRecords",
+        "description": "Grants permission to ingest data to a table in your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/timestream/latest/developerguide/API_WriteRecords.html",
+        "service": "timestream",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "table": {
+                "resourceName": "table",
+                "resourceArn": "arn:${Partition}:timestream:${Region}:${Account}:database/${DatabaseName}/table/${TableName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

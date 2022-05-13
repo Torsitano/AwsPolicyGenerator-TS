@@ -1,0 +1,557 @@
+{
+    "device": {
+        "resourceName": "device",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:device/${DeviceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListDataSources": {
+                "privilege": "ListDataSources",
+                "description": "Grants permission to retrieve a list of datasources in AWS Panorama",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_ListDataSources.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags for a resource in AWS Panorama",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeDevice": {
+                "privilege": "DescribeDevice",
+                "description": "Grants permission to view details about an AWS Panorama Appliance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeDevice.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetInputs": {
+                "privilege": "GetInputs",
+                "description": "Grants permission to retrieve a list of cameras generated with CreateInputs",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_GetInputList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetStreams": {
+                "privilege": "GetStreams",
+                "description": "Grants permission to retrieve a list of streams generated with CreateStreams",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_GetStreamsList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateDataSource": {
+                "privilege": "CreateDataSource",
+                "description": "Grants permission to create an AWS Panorama datasource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_CreateDataSource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateInputs": {
+                "privilege": "CreateInputs",
+                "description": "Grants permission to generate a list of cameras on the same network as an AWS Panorama Appliance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_CreateInputList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateStreams": {
+                "privilege": "CreateStreams",
+                "description": "Grants permission to generate a list of streams available to an AWS Panorama Appliance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_CreateStreamsList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteDevice": {
+                "privilege": "DeleteDevice",
+                "description": "Grants permission to deregister an AWS Panorama Appliance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DeleteDevice.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "package": {
+        "resourceName": "package",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:package/${PackageId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribePackage": {
+                "privilege": "DescribePackage",
+                "description": "Grants permission to view details about an AWS Panorama Package",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribePackage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeletePackage": {
+                "privilege": "DeletePackage",
+                "description": "Grants permission to delete an AWS Panorama Package",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DeletePackage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "applicationInstance": {
+        "resourceName": "applicationInstance",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:applicationInstance/${ApplicationInstanceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeApplicationInstance": {
+                "privilege": "DescribeApplicationInstance",
+                "description": "Grants permission to view details about an AWS Panorama Application Instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeApplicationInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeApplicationInstanceDetails": {
+                "privilege": "DescribeApplicationInstanceDetails",
+                "description": "Grants permission to view details about an AWS Panorama Application Instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeApplicationInstanceDetails.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "RemoveApplicationInstance": {
+                "privilege": "RemoveApplicationInstance",
+                "description": "Grants permission to remove an AWS Panorama Application Instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_RemoveApplicationInstance.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "dataSource": {
+        "resourceName": "dataSource",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:dataSource/${DeviceId}/${DataSourceName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags for a resource in AWS Panorama",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeDataSource": {
+                "privilege": "DescribeDataSource",
+                "description": "Grants permission to view details about a datasource in AWS Panorama",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeDataSource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteDataSource": {
+                "privilege": "DeleteDataSource",
+                "description": "Grants permission to delete an AWS Panorama datasource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DeleteDataSource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDataSource": {
+                "privilege": "UpdateDataSource",
+                "description": "Grants permission to modify an AWS Panorama datasource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UpdateDataSource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "model": {
+        "resourceName": "model",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:model/${ModelName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags for a resource in AWS Panorama",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeModel": {
+                "privilege": "DescribeModel",
+                "description": "Grants permission to view details about a machine learning model in AWS Panorama",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteModel": {
+                "privilege": "DeleteModel",
+                "description": "Grants permission to delete a machine learning model from AWS Panorama",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DeleteModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "app": {
+        "resourceName": "app",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:app/${AppName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAppVersions": {
+                "privilege": "ListAppVersions",
+                "description": "Grants permission to retrieve a list of application versions in AWS Panorama",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_ListAppVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags for a resource in AWS Panorama",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeApp": {
+                "privilege": "DescribeApp",
+                "description": "Grants permission to view details about an AWS Panorama application",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeApp.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeAppVersion": {
+                "privilege": "DescribeAppVersion",
+                "description": "Grants permission to view details about a version of an AWS Panorama application",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DescribeAppVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteApp": {
+                "privilege": "DeleteApp",
+                "description": "Grants permission to delete an AWS Panorama application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DeleteApp.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteAppVersion": {
+                "privilege": "DeleteAppVersion",
+                "description": "Grants permission to delete a version of an AWS Panorama application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_DeleteAppVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateApp": {
+                "privilege": "UpdateApp",
+                "description": "Grants permission to modify an AWS Panorama application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UpdateApp.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAppConfiguration": {
+                "privilege": "UpdateAppConfiguration",
+                "description": "Grants permission to modify the version-specific configuration of an AWS Panorama application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UpdateAppConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource in AWS Panorama",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "appVersion": {
+        "resourceName": "appVersion",
+        "service": "panorama",
+        "resourceArn": "arn:${Partition}:panorama:${Region}:${Account}:app/${AppName}:${AppVersion}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "CreateAppVersion": {
+                "privilege": "CreateAppVersion",
+                "description": "Grants permission to create a version of an AWS Panorama application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/panorama/latest/dev/API_CreateAppVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

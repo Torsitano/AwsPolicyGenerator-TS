@@ -1,0 +1,124 @@
+{
+    "rule": {
+        "resourceName": "rule",
+        "service": "rbin",
+        "resourceArn": "arn:${Partition}:rbin:${Region}:${Account}:rule/${ResourceName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetRule": {
+                "privilege": "GetRule",
+                "description": "Grants permission to get detailed information about a Recycle Bin retention rule",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_GetRule.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags associated with a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateRule": {
+                "privilege": "CreateRule",
+                "description": "Grants permission to create a Recycle Bin retention rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_CreateRule.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag's key and value in a request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys in a request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteRule": {
+                "privilege": "DeleteRule",
+                "description": "Grants permission to delete a Recycle Bin retention rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_DeleteRule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateRule": {
+                "privilege": "UpdateRule",
+                "description": "Grants permission to update an existing Recycle Bin retention rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_UpdateRule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update tags of a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag's key and value in a request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys in a request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags associated with a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/recyclebin/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag's key and value in a request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys in a request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    }
+}

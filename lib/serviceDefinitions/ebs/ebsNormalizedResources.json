@@ -1,0 +1,161 @@
+{
+    "snapshot": {
+        "resourceName": "snapshot",
+        "service": "ebs",
+        "resourceArn": "arn:${Partition}:ec2:${Region}::snapshot/${SnapshotId}",
+        "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "String"
+            },
+            "ebs:Description": {
+                "condition": "ebs:Description",
+                "description": "Filters access by the description of the snapshot being created",
+                "type": "String"
+            },
+            "ebs:ParentSnapshot": {
+                "condition": "ebs:ParentSnapshot",
+                "description": "Filters access by the ID of the parent snapshot",
+                "type": "String"
+            },
+            "ebs:VolumeSize": {
+                "condition": "ebs:VolumeSize",
+                "description": "Filters access by the size of the volume for the snapshot being created, in GiB",
+                "type": "Numeric"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetSnapshotBlock": {
+                "privilege": "GetSnapshotBlock",
+                "description": "Grants permission to return the data of a block in an Amazon Elastic Block Store (EBS) snapshot",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ebs/latest/APIReference/API_GetSnapshotBlock.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListChangedBlocks": {
+                "privilege": "ListChangedBlocks",
+                "description": "Grants permission to list the blocks that are different between two Amazon Elastic Block Store (EBS) snapshots of the same volume/snapshot lineage",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ebs/latest/APIReference/API_ListChangedBlocks.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListSnapshotBlocks": {
+                "privilege": "ListSnapshotBlocks",
+                "description": "Grants permission to list the blocks in an Amazon Elastic Block Store (EBS) snapshot",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ebs/latest/APIReference/API_ListSnapshotBlocks.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CompleteSnapshot": {
+                "privilege": "CompleteSnapshot",
+                "description": "Grants permission to seal and complete the snapshot after all of the required blocks of data have been written to it",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ebs/latest/APIReference/API_CompleteSnapshot.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PutSnapshotBlock": {
+                "privilege": "PutSnapshotBlock",
+                "description": "Grants permission to write a block of data to a snapshot created by the StartSnapshot operation",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartSnapshot": {
+                "privilege": "StartSnapshot",
+                "description": "Grants permission to create a new EBS snapshot",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ebs/latest/APIReference/API_StartSnapshot.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on tag key-value pairs assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "ebs:Description": {
+                        "condition": "ebs:Description",
+                        "description": "Filters access by the description of the snapshot being created",
+                        "type": "String"
+                    },
+                    "ebs:ParentSnapshot": {
+                        "condition": "ebs:ParentSnapshot",
+                        "description": "Filters access by the ID of the parent snapshot",
+                        "type": "String"
+                    },
+                    "ebs:VolumeSize": {
+                        "condition": "ebs:VolumeSize",
+                        "description": "Filters access by the size of the volume for the snapshot being created, in GiB",
+                        "type": "Numeric"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

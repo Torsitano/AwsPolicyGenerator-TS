@@ -1,0 +1,912 @@
+{
+    "associateBrowserSettings": {
+        "privilege": "AssociateBrowserSettings",
+        "description": "Grants permission to associate browser settings to web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_AssociateBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "browserSettings": {
+                "resourceName": "browserSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:browserSettings/${BrowserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "associateNetworkSettings": {
+        "privilege": "AssociateNetworkSettings",
+        "description": "Grants permission to associate network settings to web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_AssociateNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:CreateNetworkInterfacePermission",
+            "ec2:CreateTags",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DeleteNetworkInterfacePermission",
+            "ec2:ModifyNetworkInterfaceAttribute"
+        ],
+        "privConditions": {},
+        "resources": {
+            "networkSettings": {
+                "resourceName": "networkSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:networkSettings/${NetworkSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "associateTrustStore": {
+        "privilege": "AssociateTrustStore",
+        "description": "Grants permission to associate trust stores with web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_AssociateTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "associateUserSettings": {
+        "privilege": "AssociateUserSettings",
+        "description": "Grants permission to associate user settings with web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_AssociateUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "userSettings": {
+                "resourceName": "userSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userSettings/${UserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createBrowserSettings": {
+        "privilege": "CreateBrowserSettings",
+        "description": "Grants permission to create browser settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreateBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createIdentityProvider": {
+        "privilege": "CreateIdentityProvider",
+        "description": "Grants permission to create identity providers",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreateIdentityProvider.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createNetworkSettings": {
+        "privilege": "CreateNetworkSettings",
+        "description": "Grants permission to create network settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreateNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createPortal": {
+        "privilege": "CreatePortal",
+        "description": "Grants permission to create web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreatePortal.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createTrustStore": {
+        "privilege": "CreateTrustStore",
+        "description": "Grants permission to create trust stores",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreateTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createUserSettings": {
+        "privilege": "CreateUserSettings",
+        "description": "Grants permission to create user settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreateUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "deleteBrowserSettings": {
+        "privilege": "DeleteBrowserSettings",
+        "description": "Grants permission to delete browser settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeleteBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "browserSettings": {
+                "resourceName": "browserSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:browserSettings/${BrowserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteIdentityProvider": {
+        "privilege": "DeleteIdentityProvider",
+        "description": "Grants permission to delete identity providers",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeleteIdentityProvider.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteNetworkSettings": {
+        "privilege": "DeleteNetworkSettings",
+        "description": "Grants permission to delete network settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeleteNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "networkSettings": {
+                "resourceName": "networkSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:networkSettings/${NetworkSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePortal": {
+        "privilege": "DeletePortal",
+        "description": "Grants permission to delete web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeletePortal.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTrustStore": {
+        "privilege": "DeleteTrustStore",
+        "description": "Grants permission to delete trust stores",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeleteTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUserSettings": {
+        "privilege": "DeleteUserSettings",
+        "description": "Grants permission to delete user settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeleteUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "userSettings": {
+                "resourceName": "userSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userSettings/${UserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateBrowserSettings": {
+        "privilege": "DisassociateBrowserSettings",
+        "description": "Grants permission to disassociate browser settings from web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DisassociateBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateNetworkSettings": {
+        "privilege": "DisassociateNetworkSettings",
+        "description": "Grants permission to disassociate network settings from web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DisassociateNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateTrustStore": {
+        "privilege": "DisassociateTrustStore",
+        "description": "Grants permission to disassociate trust stores from web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DisassociateTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateUserSettings": {
+        "privilege": "DisassociateUserSettings",
+        "description": "Grants permission to disassociate user settings from web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DisassociateUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getBrowserSettings": {
+        "privilege": "GetBrowserSettings",
+        "description": "Grants permission to get details on browser settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "browserSettings": {
+                "resourceName": "browserSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:browserSettings/${BrowserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getIdentityProvider": {
+        "privilege": "GetIdentityProvider",
+        "description": "Grants permission to get details on identity providers",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetIdentityProvider.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getNetworkSettings": {
+        "privilege": "GetNetworkSettings",
+        "description": "Grants permission to get details on network settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "networkSettings": {
+                "resourceName": "networkSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:networkSettings/${NetworkSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPortal": {
+        "privilege": "GetPortal",
+        "description": "Grants permission to get details on web portals",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetPortal.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPortalServiceProviderMetadata": {
+        "privilege": "GetPortalServiceProviderMetadata",
+        "description": "Grants permission to get service provider metadata information for web portals",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetPortalServiceProviderMetadata.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getTrustStore": {
+        "privilege": "GetTrustStore",
+        "description": "Grants permission to get details on trust stores",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getTrustStoreCertificate": {
+        "privilege": "GetTrustStoreCertificate",
+        "description": "Grants permission to get certificates from trust stores",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetTrustStoreCertificate.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getUserSettings": {
+        "privilege": "GetUserSettings",
+        "description": "Grants permission to get details on user settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "userSettings": {
+                "resourceName": "userSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userSettings/${UserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listBrowserSettings": {
+        "privilege": "ListBrowserSettings",
+        "description": "Grants permission to list browser settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listIdentityProviders": {
+        "privilege": "ListIdentityProviders",
+        "description": "Grants permission to list identity providers",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListIdentityProviders.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listNetworkSettings": {
+        "privilege": "ListNetworkSettings",
+        "description": "Grants permission to list network settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPortals": {
+        "privilege": "ListPortals",
+        "description": "Grants permission to list web portals",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListPortals.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListTagsForResource.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTrustStoreCertificates": {
+        "privilege": "ListTrustStoreCertificates",
+        "description": "Grants permission to list certificates in a trust store",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListTrustStoreCertificates.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTrustStores": {
+        "privilege": "ListTrustStores",
+        "description": "Grants permission to list trust stores",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListTrustStores.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listUserSettings": {
+        "privilege": "ListUserSettings",
+        "description": "Grants permission to list user settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add one or more tags to a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_TagResource.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove one or more tags from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UntagResource.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "updateBrowserSettings": {
+        "privilege": "UpdateBrowserSettings",
+        "description": "Grants permission to update browser settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateBrowserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "browserSettings": {
+                "resourceName": "browserSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:browserSettings/${BrowserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateIdentityProvider": {
+        "privilege": "UpdateIdentityProvider",
+        "description": "Grants permission to update identity provider",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateIdentityProvider.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateNetworkSettings": {
+        "privilege": "UpdateNetworkSettings",
+        "description": "Grants permission to update network settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateNetworkSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "networkSettings": {
+                "resourceName": "networkSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:networkSettings/${NetworkSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updatePortal": {
+        "privilege": "UpdatePortal",
+        "description": "Grants permission to update web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdatePortal.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateTrustStore": {
+        "privilege": "UpdateTrustStore",
+        "description": "Grants permission to update trust stores",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateUserSettings": {
+        "privilege": "UpdateUserSettings",
+        "description": "Grants permission to update user settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateUserSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "userSettings": {
+                "resourceName": "userSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userSettings/${UserSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

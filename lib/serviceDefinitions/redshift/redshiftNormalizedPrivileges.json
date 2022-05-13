@@ -1,0 +1,3078 @@
+{
+    "acceptReservedNodeExchange": {
+        "privilege": "AcceptReservedNodeExchange",
+        "description": "Grants permission to exchange a DC1 reserved node for a DC2 reserved node with no changes to the configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AcceptReservedNodeExchange.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "addPartner": {
+        "privilege": "AddPartner",
+        "description": "Grants permission to add a partner integration to a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AddPartner.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "associateDataShareConsumer": {
+        "privilege": "AssociateDataShareConsumer",
+        "description": "Grants permission to associate a consumer to a datashare",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AssociateDataShareConsumer.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "datashare": {
+                "resourceName": "datashare",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:datashare:${ProducerClusterNamespace}/${DataShareName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "authorizeClusterSecurityGroupIngress": {
+        "privilege": "AuthorizeClusterSecurityGroupIngress",
+        "description": "Grants permission to add an inbound (ingress) rule to an Amazon Redshift security group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AuthorizeClusterSecurityGroupIngress.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressEc2securitygroup": {
+                "resourceName": "securitygroupingress-ec2securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ece2SecuritygroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "authorizeDataShare": {
+        "privilege": "AuthorizeDataShare",
+        "description": "Grants permission to authorize the specified datashare consumer to consume a datashare",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AuthorizeDataShare.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "redshift:ConsumerIdentifier": {
+                "condition": "redshift:ConsumerIdentifier",
+                "description": "Filters access by the datashare consumer",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "datashare": {
+                "resourceName": "datashare",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:datashare:${ProducerClusterNamespace}/${DataShareName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "authorizeEndpointAccess": {
+        "privilege": "AuthorizeEndpointAccess",
+        "description": "Grants permission to authorize endpoint related activities for redshift-managed vpc endpoint",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AuthorizeEndpointAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "authorizeSnapshotAccess": {
+        "privilege": "AuthorizeSnapshotAccess",
+        "description": "Grants permission to the specified AWS account to restore a snapshot",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_AuthorizeSnapshotAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "batchDeleteClusterSnapshots": {
+        "privilege": "BatchDeleteClusterSnapshots",
+        "description": "Grants permission to delete snapshots in a batch of size upto 100",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_BatchDeleteClusterSnapshots.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "batchModifyClusterSnapshots": {
+        "privilege": "BatchModifyClusterSnapshots",
+        "description": "Grants permission to modify settings for a list of snapshots",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_BatchModifyClusterSnapshots.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "cancelQuery": {
+        "privilege": "CancelQuery",
+        "description": "Grants permission to cancel a query through the Amazon Redshift console",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "cancelQuerySession": {
+        "privilege": "CancelQuerySession",
+        "description": "Grants permission to see queries in the Amazon Redshift console",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "cancelResize": {
+        "privilege": "CancelResize",
+        "description": "Grants permission to cancel a resize operation",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CancelResize.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "copyClusterSnapshot": {
+        "privilege": "CopyClusterSnapshot",
+        "description": "Grants permission to copy a cluster snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CopyClusterSnapshot.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createAuthenticationProfile": {
+        "privilege": "CreateAuthenticationProfile",
+        "description": "Grants permission to create an Amazon Redshift authentication profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateAuthenticationProfile.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createCluster": {
+        "privilege": "CreateCluster",
+        "description": "Grants permission to create a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createClusterParameterGroup": {
+        "privilege": "CreateClusterParameterGroup",
+        "description": "Grants permission to create an Amazon Redshift parameter group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateClusterParameterGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createClusterSecurityGroup": {
+        "privilege": "CreateClusterSecurityGroup",
+        "description": "Grants permission to create an Amazon Redshift security group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateClusterSecurityGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createClusterSnapshot": {
+        "privilege": "CreateClusterSnapshot",
+        "description": "Grants permission to create a manual snapshot of the specified cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateClusterSnapshot.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createClusterSubnetGroup": {
+        "privilege": "CreateClusterSubnetGroup",
+        "description": "Grants permission to create an Amazon Redshift subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateClusterSubnetGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:subnetgroup:${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createClusterUser": {
+        "privilege": "CreateClusterUser",
+        "description": "Grants permission to automatically create the specified Amazon Redshift user if it does not exist",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/generating-iam-credentials-role-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "redshift:DbUser": {
+                "condition": "redshift:DbUser",
+                "description": "Filters access by the database user name",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "dbuser": {
+                "resourceName": "dbuser",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbuser:${ClusterName}/${DbUser}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createEndpointAccess": {
+        "privilege": "CreateEndpointAccess",
+        "description": "Grants permission to create a redshift-managed vpc endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateEndpointAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createEventSubscription": {
+        "privilege": "CreateEventSubscription",
+        "description": "Grants permission to create an Amazon Redshift event notification subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateEventSubscription.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "eventsubscription": {
+                "resourceName": "eventsubscription",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:eventsubscription:${EventSubscriptionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createHsmClientCertificate": {
+        "privilege": "CreateHsmClientCertificate",
+        "description": "Grants permission to create an HSM client certificate that a cluster uses to connect to an HSM",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateHsmClientCertificate.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "hsmclientcertificate": {
+                "resourceName": "hsmclientcertificate",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmclientcertificate:${HSMClientCertificateId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createHsmConfiguration": {
+        "privilege": "CreateHsmConfiguration",
+        "description": "Grants permission to create an HSM configuration that contains information required by a cluster to store and use database encryption keys in a hardware security module (HSM)",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateHsmConfiguration.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "hsmconfiguration": {
+                "resourceName": "hsmconfiguration",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmconfiguration:${HSMConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createSavedQuery": {
+        "privilege": "CreateSavedQuery",
+        "description": "Grants permission to create saved SQL queries through the Amazon Redshift console",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createScheduledAction": {
+        "privilege": "CreateScheduledAction",
+        "description": "Grants permission to create an Amazon Redshift scheduled action",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateScheduledAction.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createSnapshotCopyGrant": {
+        "privilege": "CreateSnapshotCopyGrant",
+        "description": "Grants permission to create a snapshot copy grant and encrypt copied snapshots in a destination AWS Region",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateSnapshotCopyGrant.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshotcopygrant": {
+                "resourceName": "snapshotcopygrant",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotcopygrant:${SnapshotCopyGrantName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createSnapshotSchedule": {
+        "privilege": "CreateSnapshotSchedule",
+        "description": "Grants permission to create a snapshot schedule",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateSnapshotSchedule.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createTags": {
+        "privilege": "CreateTags",
+        "description": "Grants permission to add one or more tags to a specified resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateTags.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbgroup": {
+                "resourceName": "dbgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbgroup:${ClusterName}/${DbGroup}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbname": {
+                "resourceName": "dbname",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbname:${ClusterName}/${DbName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbuser": {
+                "resourceName": "dbuser",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbuser:${ClusterName}/${DbUser}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventsubscription": {
+                "resourceName": "eventsubscription",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:eventsubscription:${EventSubscriptionName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hsmclientcertificate": {
+                "resourceName": "hsmclientcertificate",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmclientcertificate:${HSMClientCertificateId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hsmconfiguration": {
+                "resourceName": "hsmconfiguration",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmconfiguration:${HSMConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressCidr": {
+                "resourceName": "securitygroupingress-cidr",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/cidrip/${IpRange}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressEc2securitygroup": {
+                "resourceName": "securitygroupingress-ec2securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ece2SecuritygroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshotcopygrant": {
+                "resourceName": "snapshotcopygrant",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotcopygrant:${SnapshotCopyGrantName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:subnetgroup:${SubnetGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createUsageLimit": {
+        "privilege": "CreateUsageLimit",
+        "description": "Grants permission to create a usage limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateUsageLimit.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deauthorizeDataShare": {
+        "privilege": "DeauthorizeDataShare",
+        "description": "Grants permission to remove permission from the specified datashare consumer to consume a datashare",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeauthorizeDataShare.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "redshift:ConsumerIdentifier": {
+                "condition": "redshift:ConsumerIdentifier",
+                "description": "Filters access by the datashare consumer",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "datashare": {
+                "resourceName": "datashare",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:datashare:${ProducerClusterNamespace}/${DataShareName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteAuthenticationProfile": {
+        "privilege": "DeleteAuthenticationProfile",
+        "description": "Grants permission to delete an Amazon Redshift authentication profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "API_DeleteAuthenticationProfile.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteCluster": {
+        "privilege": "DeleteCluster",
+        "description": "Grants permission to delete a previously provisioned cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteClusterParameterGroup": {
+        "privilege": "DeleteClusterParameterGroup",
+        "description": "Grants permission to delete an Amazon Redshift parameter group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteClusterParameterGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteClusterSecurityGroup": {
+        "privilege": "DeleteClusterSecurityGroup",
+        "description": "Grants permission to delete an Amazon Redshift security group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteClusterSecurityGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteClusterSnapshot": {
+        "privilege": "DeleteClusterSnapshot",
+        "description": "Grants permission to delete a manual snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteClusterSnapshot.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteClusterSubnetGroup": {
+        "privilege": "DeleteClusterSubnetGroup",
+        "description": "Grants permission to delete a cluster subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteClusterSubnetGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:subnetgroup:${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEndpointAccess": {
+        "privilege": "DeleteEndpointAccess",
+        "description": "Grants permission to delete a redshift-managed vpc endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteEndpointAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteEventSubscription": {
+        "privilege": "DeleteEventSubscription",
+        "description": "Grants permission to delete an Amazon Redshift event notification subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteEventSubscription.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventsubscription": {
+                "resourceName": "eventsubscription",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:eventsubscription:${EventSubscriptionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteHsmClientCertificate": {
+        "privilege": "DeleteHsmClientCertificate",
+        "description": "Grants permission to delete an HSM client certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteHsmClientCertificate.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "hsmclientcertificate": {
+                "resourceName": "hsmclientcertificate",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmclientcertificate:${HSMClientCertificateId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteHsmConfiguration": {
+        "privilege": "DeleteHsmConfiguration",
+        "description": "Grants permission to delete an Amazon Redshift HSM configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteHsmConfiguration.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "hsmconfiguration": {
+                "resourceName": "hsmconfiguration",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmconfiguration:${HSMConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePartner": {
+        "privilege": "DeletePartner",
+        "description": "Grants permission to delete a partner integration from a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeletePartner.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteSavedQueries": {
+        "privilege": "DeleteSavedQueries",
+        "description": "Grants permission to delete saved SQL queries through the Amazon Redshift console",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteScheduledAction": {
+        "privilege": "DeleteScheduledAction",
+        "description": "Grants permission to delete an Amazon Redshift scheduled action",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "API_DeleteScheduledAction.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteSnapshotCopyGrant": {
+        "privilege": "DeleteSnapshotCopyGrant",
+        "description": "Grants permission to delete a snapshot copy grant",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteSnapshotCopyGrant.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshotcopygrant": {
+                "resourceName": "snapshotcopygrant",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotcopygrant:${SnapshotCopyGrantName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSnapshotSchedule": {
+        "privilege": "DeleteSnapshotSchedule",
+        "description": "Grants permission to delete a snapshot schedule",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteSnapshotSchedule.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTags": {
+        "privilege": "DeleteTags",
+        "description": "Grants permission to delete a tag or tags from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteTags.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbgroup": {
+                "resourceName": "dbgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbgroup:${ClusterName}/${DbGroup}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbname": {
+                "resourceName": "dbname",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbname:${ClusterName}/${DbName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbuser": {
+                "resourceName": "dbuser",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbuser:${ClusterName}/${DbUser}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventsubscription": {
+                "resourceName": "eventsubscription",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:eventsubscription:${EventSubscriptionName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hsmclientcertificate": {
+                "resourceName": "hsmclientcertificate",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmclientcertificate:${HSMClientCertificateId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hsmconfiguration": {
+                "resourceName": "hsmconfiguration",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmconfiguration:${HSMConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressCidr": {
+                "resourceName": "securitygroupingress-cidr",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/cidrip/${IpRange}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressEc2securitygroup": {
+                "resourceName": "securitygroupingress-ec2securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ece2SecuritygroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshotcopygrant": {
+                "resourceName": "snapshotcopygrant",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotcopygrant:${SnapshotCopyGrantName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:subnetgroup:${SubnetGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUsageLimit": {
+        "privilege": "DeleteUsageLimit",
+        "description": "Grants permission to delete a usage limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DeleteUsageLimit.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAccountAttributes": {
+        "privilege": "DescribeAccountAttributes",
+        "description": "Grants permission to describe attributes attached to the specified AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeAccountAttributes.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeAuthenticationProfiles": {
+        "privilege": "DescribeAuthenticationProfiles",
+        "description": "Grants permission to describe created Amazon Redshift authentication profiles",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "API_DescribeAuthenticationProfiles.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterDbRevisions": {
+        "privilege": "DescribeClusterDbRevisions",
+        "description": "Grants permission to describe database revisions for a cluster",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterDbRevisions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterParameterGroups": {
+        "privilege": "DescribeClusterParameterGroups",
+        "description": "Grants permission to describe Amazon Redshift parameter groups, including parameter groups you created and the default parameter group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterParameterGroups.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterParameters": {
+        "privilege": "DescribeClusterParameters",
+        "description": "Grants permission to describe parameters contained within an Amazon Redshift parameter group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterParameters.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeClusterSecurityGroups": {
+        "privilege": "DescribeClusterSecurityGroups",
+        "description": "Grants permission to describe Amazon Redshift security groups",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterSecurityGroups.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterSnapshots": {
+        "privilege": "DescribeClusterSnapshots",
+        "description": "Grants permission to describe one or more snapshot objects, which contain metadata about your cluster snapshots",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterSnapshots.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterSubnetGroups": {
+        "privilege": "DescribeClusterSubnetGroups",
+        "description": "Grants permission to describe one or more cluster subnet group objects, which contain metadata about your cluster subnet groups",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterSubnetGroups.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterTracks": {
+        "privilege": "DescribeClusterTracks",
+        "description": "Grants permission to describe available maintenance tracks",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterTracks.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusterVersions": {
+        "privilege": "DescribeClusterVersions",
+        "description": "Grants permission to describe available Amazon Redshift cluster versions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusterVersions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusters": {
+        "privilege": "DescribeClusters",
+        "description": "Grants permission to describe properties of provisioned clusters",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusters.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDataShares": {
+        "privilege": "DescribeDataShares",
+        "description": "Grants permission to describe datashares created and consumed by your clusters",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeDataShares.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDataSharesForConsumer": {
+        "privilege": "DescribeDataSharesForConsumer",
+        "description": "Grants permission to describe only datashares consumed by your clusters",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeDataSharesForConsumer.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDataSharesForProducer": {
+        "privilege": "DescribeDataSharesForProducer",
+        "description": "Grants permission to describe only datashares created by your clusters",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeDataSharesForProducer.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDefaultClusterParameters": {
+        "privilege": "DescribeDefaultClusterParameters",
+        "description": "Grants permission to describe parameter settings for a parameter group family",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeDefaultClusterParameters.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEndpointAccess": {
+        "privilege": "DescribeEndpointAccess",
+        "description": "Grants permission to describe redshift-managed vpc endpoints",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeEndpointAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEndpointAuthorization": {
+        "privilege": "DescribeEndpointAuthorization",
+        "description": "Grants permission to authorize describe activity for redshift-managed vpc endpoint",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeEndpointAuthorization.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEventCategories": {
+        "privilege": "DescribeEventCategories",
+        "description": "Grants permission to describe event categories for all event source types, or for a specified source type",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeEventCategories.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEventSubscriptions": {
+        "privilege": "DescribeEventSubscriptions",
+        "description": "Grants permission to describe Amazon Redshift event notification subscriptions for the specified AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeEventSubscriptions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEvents": {
+        "privilege": "DescribeEvents",
+        "description": "Grants permission to describe events related to clusters, security groups, snapshots, and parameter groups for the past 14 days",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeEvents.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeHsmClientCertificates": {
+        "privilege": "DescribeHsmClientCertificates",
+        "description": "Grants permission to describe HSM client certificates",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeHsmClientCertificates.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeHsmConfigurations": {
+        "privilege": "DescribeHsmConfigurations",
+        "description": "Grants permission to describe Amazon Redshift HSM configurations",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeHsmConfigurations.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeLoggingStatus": {
+        "privilege": "DescribeLoggingStatus",
+        "description": "Grants permission to describe whether information, such as queries and connection attempts, is being logged for a cluster",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeLoggingStatus.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeNodeConfigurationOptions": {
+        "privilege": "DescribeNodeConfigurationOptions",
+        "description": "Grants permission to describe properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeNodeConfigurationOptions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeOrderableClusterOptions": {
+        "privilege": "DescribeOrderableClusterOptions",
+        "description": "Grants permission to describe orderable cluster options",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeOrderableClusterOptions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describePartners": {
+        "privilege": "DescribePartners",
+        "description": "Grants permission to retrieve information about the partner integrations defined for a cluster",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribePartners.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeQuery": {
+        "privilege": "DescribeQuery",
+        "description": "Grants permission to describe a query through the Amazon Redshift console",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeReservedNodeExchangeStatus": {
+        "privilege": "DescribeReservedNodeExchangeStatus",
+        "description": "Grants permission to describe exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeReservedNodeExchangeStatus.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeReservedNodeOfferings": {
+        "privilege": "DescribeReservedNodeOfferings",
+        "description": "Grants permission to describe available reserved node offerings by Amazon Redshift",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeReservedNodeOfferings.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeReservedNodes": {
+        "privilege": "DescribeReservedNodes",
+        "description": "Grants permission to describe the reserved nodes",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeReservedNodes.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeResize": {
+        "privilege": "DescribeResize",
+        "description": "Grants permission to describe the last resize operation for a cluster",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeResize.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSavedQueries": {
+        "privilege": "DescribeSavedQueries",
+        "description": "Grants permission to describe saved queries through the Amazon Redshift console",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeScheduledActions": {
+        "privilege": "DescribeScheduledActions",
+        "description": "Grants permission to describe created Amazon Redshift scheduled actions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "API_DescribeScheduledActions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSnapshotCopyGrants": {
+        "privilege": "DescribeSnapshotCopyGrants",
+        "description": "Grants permission to describe snapshot copy grants owned by the specified AWS account in the destination AWS Region",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeSnapshotCopyGrants.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSnapshotSchedules": {
+        "privilege": "DescribeSnapshotSchedules",
+        "description": "Grants permission to describe snapshot schedules",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeSnapshotSchedules.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeStorage": {
+        "privilege": "DescribeStorage",
+        "description": "Grants permission to describe account level backups storage size and provisional storage",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeStorage.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTable": {
+        "privilege": "DescribeTable",
+        "description": "Grants permission to describe a table through the Amazon Redshift console",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTableRestoreStatus": {
+        "privilege": "DescribeTableRestoreStatus",
+        "description": "Grants permission to describe status of one or more table restore requests made using the RestoreTableFromClusterSnapshot API action",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeTableRestoreStatus.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeTags": {
+        "privilege": "DescribeTags",
+        "description": "Grants permission to describe tags",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeTags.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbgroup": {
+                "resourceName": "dbgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbgroup:${ClusterName}/${DbGroup}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbname": {
+                "resourceName": "dbname",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbname:${ClusterName}/${DbName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbuser": {
+                "resourceName": "dbuser",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbuser:${ClusterName}/${DbUser}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventsubscription": {
+                "resourceName": "eventsubscription",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:eventsubscription:${EventSubscriptionName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hsmclientcertificate": {
+                "resourceName": "hsmclientcertificate",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmclientcertificate:${HSMClientCertificateId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hsmconfiguration": {
+                "resourceName": "hsmconfiguration",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:hsmconfiguration:${HSMConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressCidr": {
+                "resourceName": "securitygroupingress-cidr",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/cidrip/${IpRange}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressEc2securitygroup": {
+                "resourceName": "securitygroupingress-ec2securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ece2SecuritygroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshotcopygrant": {
+                "resourceName": "snapshotcopygrant",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotcopygrant:${SnapshotCopyGrantName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:subnetgroup:${SubnetGroupName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeUsageLimits": {
+        "privilege": "DescribeUsageLimits",
+        "description": "Grants permission to describe usage limits",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeUsageLimits.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disableLogging": {
+        "privilege": "DisableLogging",
+        "description": "Grants permission to disable logging information, such as queries and connection attempts, for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DisableLogging.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disableSnapshotCopy": {
+        "privilege": "DisableSnapshotCopy",
+        "description": "Grants permission to disable the automatic copy of snapshots for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DisableSnapshotCopy.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateDataShareConsumer": {
+        "privilege": "DisassociateDataShareConsumer",
+        "description": "Grants permission to disassociate a consumer from a datashare",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DisassociateDataShareConsumer.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "datashare": {
+                "resourceName": "datashare",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:datashare:${ProducerClusterNamespace}/${DataShareName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "enableLogging": {
+        "privilege": "EnableLogging",
+        "description": "Grants permission to enable logging information, such as queries and connection attempts, for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_EnableLogging.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "enableSnapshotCopy": {
+        "privilege": "EnableSnapshotCopy",
+        "description": "Grants permission to enable the automatic copy of snapshots for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_EnableSnapshotCopy.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "executeQuery": {
+        "privilege": "ExecuteQuery",
+        "description": "Grants permission to execute a query through the Amazon Redshift console",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "fetchResults": {
+        "privilege": "FetchResults",
+        "description": "Grants permission to fetch query results through the Amazon Redshift console",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getClusterCredentials": {
+        "privilege": "GetClusterCredentials",
+        "description": "Grants permission to get temporary credentials to access an Amazon Redshift database by the specified AWS account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "redshift:DbName": {
+                "condition": "redshift:DbName",
+                "description": "Filters access by the database name",
+                "type": "String"
+            },
+            "redshift:DbUser": {
+                "condition": "redshift:DbUser",
+                "description": "Filters access by the database user name",
+                "type": "String"
+            },
+            "redshift:DurationSeconds": {
+                "condition": "redshift:DurationSeconds",
+                "description": "Filters access by the number of seconds until a temporary credential set expires",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "dbuser": {
+                "resourceName": "dbuser",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbuser:${ClusterName}/${DbUser}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbgroup": {
+                "resourceName": "dbgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbgroup:${ClusterName}/${DbGroup}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "dbname": {
+                "resourceName": "dbname",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbname:${ClusterName}/${DbName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getReservedNodeExchangeConfigurationOptions": {
+        "privilege": "GetReservedNodeExchangeConfigurationOptions",
+        "description": "Grants permission to get the configuration options for the reserved-node exchange",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetReservedNodeExchangeConfigurationOptions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getReservedNodeExchangeOfferings": {
+        "privilege": "GetReservedNodeExchangeOfferings",
+        "description": "Grants permission to get an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetReservedNodeExchangeOfferings.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "joinGroup": {
+        "privilege": "JoinGroup",
+        "description": "Grants permission to join the specified Amazon Redshift group",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "dbgroup": {
+                "resourceName": "dbgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:dbgroup:${ClusterName}/${DbGroup}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDatabases": {
+        "privilege": "ListDatabases",
+        "description": "Grants permission to list databases through the Amazon Redshift console",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSavedQueries": {
+        "privilege": "ListSavedQueries",
+        "description": "Grants permission to list saved queries through the Amazon Redshift console",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSchemas": {
+        "privilege": "ListSchemas",
+        "description": "Grants permission to list schemas through the Amazon Redshift console",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTables": {
+        "privilege": "ListTables",
+        "description": "Grants permission to list tables through the Amazon Redshift console",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyAquaConfiguration": {
+        "privilege": "ModifyAquaConfiguration",
+        "description": "Grants permission to modify the AQUA configuration of a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyAquaConfiguration.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyAuthenticationProfile": {
+        "privilege": "ModifyAuthenticationProfile",
+        "description": "Grants permission to modify an existing Amazon Redshift authentication profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyAuthenticationProfile.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyCluster": {
+        "privilege": "ModifyCluster",
+        "description": "Grants permission to modify the settings of a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyClusterDbRevision": {
+        "privilege": "ModifyClusterDbRevision",
+        "description": "Grants permission to modify the database revision of a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterDbRevision.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyClusterIamRoles": {
+        "privilege": "ModifyClusterIamRoles",
+        "description": "Grants permission to modify the list of AWS Identity and Access Management (IAM) roles that can be used by a cluster to access other AWS services",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterIamRoles.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyClusterMaintenance": {
+        "privilege": "ModifyClusterMaintenance",
+        "description": "Grants permission to modify the maintenance settings of a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterMaintenance.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyClusterParameterGroup": {
+        "privilege": "ModifyClusterParameterGroup",
+        "description": "Grants permission to modify the parameters of a parameter group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterParameterGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyClusterSnapshot": {
+        "privilege": "ModifyClusterSnapshot",
+        "description": "Grants permission to modify the settings of a snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterSnapshot.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyClusterSnapshotSchedule": {
+        "privilege": "ModifyClusterSnapshotSchedule",
+        "description": "Grants permission to modify a snapshot schedule for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterSnapshotSchedule.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyClusterSubnetGroup": {
+        "privilege": "ModifyClusterSubnetGroup",
+        "description": "Grants permission to modify a cluster subnet group to include the specified list of VPC subnets",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyClusterSubnetGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "subnetgroup": {
+                "resourceName": "subnetgroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:subnetgroup:${SubnetGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyEndpointAccess": {
+        "privilege": "ModifyEndpointAccess",
+        "description": "Grants permission to modify a redshift-managed vpc endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyEndpointAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyEventSubscription": {
+        "privilege": "ModifyEventSubscription",
+        "description": "Grants permission to modify an existing Amazon Redshift event notification subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyEventSubscription.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventsubscription": {
+                "resourceName": "eventsubscription",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:eventsubscription:${EventSubscriptionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifySavedQuery": {
+        "privilege": "ModifySavedQuery",
+        "description": "Grants permission to modify an existing saved query through the Amazon Redshift console",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyScheduledAction": {
+        "privilege": "ModifyScheduledAction",
+        "description": "Grants permission to modify an existing Amazon Redshift scheduled action",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyScheduledAction.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifySnapshotCopyRetentionPeriod": {
+        "privilege": "ModifySnapshotCopyRetentionPeriod",
+        "description": "Grants permission to modify the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifySnapshotCopyRetentionPeriod.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifySnapshotSchedule": {
+        "privilege": "ModifySnapshotSchedule",
+        "description": "Grants permission to modify a snapshot schedule",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifySnapshotSchedule.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshotschedule": {
+                "resourceName": "snapshotschedule",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshotschedule:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyUsageLimit": {
+        "privilege": "ModifyUsageLimit",
+        "description": "Grants permission to modify a usage limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyUsageLimit.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "usagelimit": {
+                "resourceName": "usagelimit",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:usagelimit:${UsageLimitId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "pauseCluster": {
+        "privilege": "PauseCluster",
+        "description": "Grants permission to pause a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_PauseCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "purchaseReservedNodeOffering": {
+        "privilege": "PurchaseReservedNodeOffering",
+        "description": "Grants permission to purchase a reserved node",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_PurchaseReservedNodeOffering.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "rebootCluster": {
+        "privilege": "RebootCluster",
+        "description": "Grants permission to reboot a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RebootCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "rejectDataShare": {
+        "privilege": "RejectDataShare",
+        "description": "Grants permission to decline a datashare shared from another account",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RejectDataShare.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "datashare": {
+                "resourceName": "datashare",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:datashare:${ProducerClusterNamespace}/${DataShareName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resetClusterParameterGroup": {
+        "privilege": "ResetClusterParameterGroup",
+        "description": "Grants permission to set one or more parameters of a parameter group to their default values and set the source values of the parameters to \"engine-default\"",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ResetClusterParameterGroup.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "parametergroup": {
+                "resourceName": "parametergroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:parametergroup:${ParameterGroupName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resizeCluster": {
+        "privilege": "ResizeCluster",
+        "description": "Grants permission to change the size of a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ResizeCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "restoreFromClusterSnapshot": {
+        "privilege": "RestoreFromClusterSnapshot",
+        "description": "Grants permission to create a cluster from a snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RestoreFromClusterSnapshot.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of mandatory tags in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "restoreTableFromClusterSnapshot": {
+        "privilege": "RestoreTableFromClusterSnapshot",
+        "description": "Grants permission to create a table from a table in an Amazon Redshift cluster snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RestoreTableFromClusterSnapshot.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resumeCluster": {
+        "privilege": "ResumeCluster",
+        "description": "Grants permission to resume a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ResumeCluster.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "revokeClusterSecurityGroupIngress": {
+        "privilege": "RevokeClusterSecurityGroupIngress",
+        "description": "Grants permission to revoke an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RevokeClusterSecurityGroupIngress.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "securitygroup": {
+                "resourceName": "securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroup:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ec2SecurityGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "securitygroupingressEc2securitygroup": {
+                "resourceName": "securitygroupingress-ec2securitygroup",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:securitygroupingress:${SecurityGroupName}/ec2securitygroup/${Owner}/${Ece2SecuritygroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "revokeEndpointAccess": {
+        "privilege": "RevokeEndpointAccess",
+        "description": "Grants permission to revoke access for endpoint related activities for redshift-managed vpc endpoint",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RevokeEndpointAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "revokeSnapshotAccess": {
+        "privilege": "RevokeSnapshotAccess",
+        "description": "Grants permission to revoke access from the specified AWS account to restore a snapshot",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RevokeSnapshotAccess.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "snapshot": {
+                "resourceName": "snapshot",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:snapshot:${ClusterName}/${SnapshotName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "rotateEncryptionKey": {
+        "privilege": "RotateEncryptionKey",
+        "description": "Grants permission to rotate an encryption key for a cluster",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_RotateEncryptionKey.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:redshift:${Region}:${Account}:cluster:${ClusterName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updatePartnerStatus": {
+        "privilege": "UpdatePartnerStatus",
+        "description": "Grants permission to update the status of a partner integration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_UpdatePartnerStatus.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "viewQueriesFromConsole": {
+        "privilege": "ViewQueriesFromConsole",
+        "description": "Grants permission to view query results through the Amazon Redshift console",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "viewQueriesInConsole": {
+        "privilege": "ViewQueriesInConsole",
+        "description": "Grants permission to terminate running queries and loads through the Amazon Redshift console",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "redshift",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    }
+}

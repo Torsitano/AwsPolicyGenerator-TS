@@ -1,0 +1,470 @@
+{
+    "batchGetItem": {
+        "privilege": "BatchGetItem",
+        "description": "The BatchGetItem action returns the attributes of one or more items from one or more tables.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "batchWriteItem": {
+        "privilege": "BatchWriteItem",
+        "description": "The BatchWriteItem action operation puts or deletes multiple items in one or more tables.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchWriteItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "conditionCheckItem": {
+        "privilege": "ConditionCheckItem",
+        "description": "The ConditionCheckItem operation checks the existence of a set of attributes for the item with the given primary key",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ConditionCheckItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createCluster": {
+        "privilege": "CreateCluster",
+        "description": "The CreateCluster action creates a DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_CreateCluster.html",
+        "service": "dax",
+        "dependentActions": [
+            "dax:CreateParameterGroup",
+            "dax:CreateSubnetGroup",
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs",
+            "iam:GetRole",
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createParameterGroup": {
+        "privilege": "CreateParameterGroup",
+        "description": "The CreateParameterGroup action creates collection of parameters that you apply to all of the nodes in a DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_CreateParameterGroup.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createSubnetGroup": {
+        "privilege": "CreateSubnetGroup",
+        "description": "The CreateSubnetGroup action creates a new subnet group.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_CreateSubnetGroup.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "decreaseReplicationFactor": {
+        "privilege": "DecreaseReplicationFactor",
+        "description": "The DecreaseReplicationFactor action removes one or more nodes from a DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DecreaseReplicationFactor.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteCluster": {
+        "privilege": "DeleteCluster",
+        "description": "The DeleteCluster action deletes a previously provisioned DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DeleteCluster.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteItem": {
+        "privilege": "DeleteItem",
+        "description": "The DeleteItem action deletes a single item in a table by primary key.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {
+            "dax:EnclosingOperation": {
+                "condition": "dax:EnclosingOperation",
+                "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteParameterGroup": {
+        "privilege": "DeleteParameterGroup",
+        "description": "The DeleteParameterGroup action deletes the specified parameter group.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DeleteParameterGroup.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteSubnetGroup": {
+        "privilege": "DeleteSubnetGroup",
+        "description": "The DeleteSubnetGroup action deletes a subnet group.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DeleteSubnetGroup.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeClusters": {
+        "privilege": "DescribeClusters",
+        "description": "The DescribeClusters action returns information about all provisioned DAX clusters.",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeClusters.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeDefaultParameters": {
+        "privilege": "DescribeDefaultParameters",
+        "description": "The DescribeDefaultParameters action returns the default system parameter information for DAX.",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeDefaultParameters.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEvents": {
+        "privilege": "DescribeEvents",
+        "description": "The DescribeEvents action returns events related to DAX clusters and parameter groups.",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeEvents.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeParameterGroups": {
+        "privilege": "DescribeParameterGroups",
+        "description": "The DescribeParameterGroups action returns a list of parameter group descriptions.",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeParameterGroups.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeParameters": {
+        "privilege": "DescribeParameters",
+        "description": "The DescribeParameters action returns the detailed parameter list for a particular parameter group.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeParameters.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSubnetGroups": {
+        "privilege": "DescribeSubnetGroups",
+        "description": "The DescribeSubnetGroups action returns a list of subnet group descriptions.",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeSubnetGroups.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getItem": {
+        "privilege": "GetItem",
+        "description": "The GetItem action returns a set of attributes for the item with the given primary key.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {
+            "dax:EnclosingOperation": {
+                "condition": "dax:EnclosingOperation",
+                "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "increaseReplicationFactor": {
+        "privilege": "IncreaseReplicationFactor",
+        "description": "The IncreaseReplicationFactor action adds one or more nodes to a DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_IncreaseReplicationFactor.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listTags": {
+        "privilege": "ListTags",
+        "description": "The ListTags action returns a list all of the tags for a DAX cluster.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_ListTags.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "putItem": {
+        "privilege": "PutItem",
+        "description": "The PutItem action creates a new item, or replaces an old item with a new item.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {
+            "dax:EnclosingOperation": {
+                "condition": "dax:EnclosingOperation",
+                "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "query": {
+        "privilege": "Query",
+        "description": "The Query action finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "rebootNode": {
+        "privilege": "RebootNode",
+        "description": "The RebootNode action reboots a single node of a DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_RebootNode.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "scan": {
+        "privilege": "Scan",
+        "description": "The Scan action returns one or more items and item attributes by accessing every item in a table or a secondary index.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "The TagResource action associates a set of tags with a DAX resource.",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_TagResource.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "The UntagResource action removes the association of tags from a DAX resource.",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_UntagResource.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateCluster": {
+        "privilege": "UpdateCluster",
+        "description": "The UpdateCluster action modifies the settings for a DAX cluster.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_UpdateCluster.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateItem": {
+        "privilege": "UpdateItem",
+        "description": "The UpdateItem action edits an existing item's attributes, or adds a new item to the table if it does not already exist.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {
+            "dax:EnclosingOperation": {
+                "condition": "dax:EnclosingOperation",
+                "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "application",
+                "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateParameterGroup": {
+        "privilege": "UpdateParameterGroup",
+        "description": "The UpdateParameterGroup action modifies the parameters of a parameter group.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_UpdateParameterGroup.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateSubnetGroup": {
+        "privilege": "UpdateSubnetGroup",
+        "description": "The UpdateSubnetGroup action modifies an existing subnet group.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_UpdateSubnetGroup.html",
+        "service": "dax",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    }
+}

@@ -1,0 +1,976 @@
+{
+    "index": {
+        "resourceName": "index",
+        "service": "dynamodb",
+        "resourceArn": "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/index/${IndexName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeContributorInsights": {
+                "privilege": "DescribeContributorInsights",
+                "description": "Grants permission to describe the contributor insights status and related details for a given table or global secondary index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeContributorInsights.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "PartiQLSelect": {
+                "privilege": "PartiQLSelect",
+                "description": "Grants permission to read a set of attributes for items from a table or index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExecuteStatement.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:FullTableScan": {
+                        "condition": "dynamodb:FullTableScan",
+                        "description": "Used to block full table scan",
+                        "type": "Bool"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "Query": {
+                "privilege": "Query",
+                "description": "Grants permission to use the primary key of a table or a secondary index to directly access items from that table or index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "Scan": {
+                "privilege": "Scan",
+                "description": "Grants permission to return one or more items and item attributes by accessing every item in a table or a secondary index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "UpdateContributorInsights": {
+                "privilege": "UpdateContributorInsights",
+                "description": "Grants permission to update the status for contributor insights for a specific table or global secondary index",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateContributorInsights.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "stream": {
+        "resourceName": "stream",
+        "service": "dynamodb",
+        "resourceArn": "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/stream/${StreamLabel}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeStream": {
+                "privilege": "DescribeStream",
+                "description": "Grants permission to return information about a stream, including the current status of the stream, its Amazon Resource Name (ARN), the composition of its shards, and its corresponding DynamoDB table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRecords": {
+                "privilege": "GetRecords",
+                "description": "Grants permission to retrieve the stream records from a given shard",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetRecords.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetShardIterator": {
+                "privilege": "GetShardIterator",
+                "description": "Grants permission to return a shard iterator",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetShardIterator.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "table": {
+        "resourceName": "table",
+        "service": "dynamodb",
+        "resourceArn": "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "BatchGetItem": {
+                "privilege": "BatchGetItem",
+                "description": "Grants permission to return the attributes of one or more items from one or more tables",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ConditionCheckItem": {
+                "privilege": "ConditionCheckItem",
+                "description": "Grants permission to the ConditionCheckItem operation checks the existence of a set of attributes for the item with the given primary key",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ConditionCheckItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeContinuousBackups": {
+                "privilege": "DescribeContinuousBackups",
+                "description": "Grants permission to check the status of the backup restore settings on the specified table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeContinuousBackups.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeContributorInsights": {
+                "privilege": "DescribeContributorInsights",
+                "description": "Grants permission to describe the contributor insights status and related details for a given table or global secondary index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeContributorInsights.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "DescribeKinesisStreamingDestination": {
+                "privilege": "DescribeKinesisStreamingDestination",
+                "description": "Grants permission to grant permission to describe the status of Kinesis streaming and related details for a given table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeKinesisStreamingDestination.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeTable": {
+                "privilege": "DescribeTable",
+                "description": "Grants permission to return information about the table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeTableReplicaAutoScaling": {
+                "privilege": "DescribeTableReplicaAutoScaling",
+                "description": "Grants permission to describe the auto scaling settings across all replicas of the global table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTableReplicaAutoScaling.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeTimeToLive": {
+                "privilege": "DescribeTimeToLive",
+                "description": "Grants permission to give a description of the Time to Live (TTL) status on the specified table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTimeToLive.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetItem": {
+                "privilege": "GetItem",
+                "description": "Grants permission to the GetItem operation that returns a set of attributes for the item with the given primary key",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsOfResource": {
+                "privilege": "ListTagsOfResource",
+                "description": "Grants permission to list all tags on an Amazon DynamoDB resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ListTagsOfResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PartiQLSelect": {
+                "privilege": "PartiQLSelect",
+                "description": "Grants permission to read a set of attributes for items from a table or index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExecuteStatement.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:FullTableScan": {
+                        "condition": "dynamodb:FullTableScan",
+                        "description": "Used to block full table scan",
+                        "type": "Bool"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "Query": {
+                "privilege": "Query",
+                "description": "Grants permission to use the primary key of a table or a secondary index to directly access items from that table or index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "Scan": {
+                "privilege": "Scan",
+                "description": "Grants permission to return one or more items and item attributes by accessing every item in a table or a secondary index",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:Select": {
+                        "condition": "dynamodb:Select",
+                        "description": "Filter based on the Select parameter of a Query or Scan request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "BatchWriteItem": {
+                "privilege": "BatchWriteItem",
+                "description": "Grants permission to put or delete multiple items in one or more tables",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchWriteItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateBackup": {
+                "privilege": "CreateBackup",
+                "description": "Grants permission to create a backup for an existing table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateGlobalTable": {
+                "privilege": "CreateGlobalTable",
+                "description": "Grants permission to create a global table from an existing table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateGlobalTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateTable": {
+                "privilege": "CreateTable",
+                "description": "Grants permission to the CreateTable operation adds a new table to your account",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateTableReplica": {
+                "privilege": "CreateTableReplica",
+                "description": "Grants permission to add a new replica table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/V2gt_IAM.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteItem": {
+                "privilege": "DeleteItem",
+                "description": "Grants permission to deletes a single item in a table by primary key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteTable": {
+                "privilege": "DeleteTable",
+                "description": "Grants permission to the DeleteTable operation which deletes a table and all of its items",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteTableReplica": {
+                "privilege": "DeleteTableReplica",
+                "description": "Grants permission to delete a replica table and all of its items",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/V2gt_IAM.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisableKinesisStreamingDestination": {
+                "privilege": "DisableKinesisStreamingDestination",
+                "description": "Grants permission to grant permission to stop replication from the DynamoDB table to the Kinesis data stream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DisableKinesisStreamingDestination.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "EnableKinesisStreamingDestination": {
+                "privilege": "EnableKinesisStreamingDestination",
+                "description": "Grants permission to grant permission to start table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_EnableKinesisStreamingDestination.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ExportTableToPointInTime": {
+                "privilege": "ExportTableToPointInTime",
+                "description": "Grants permission to initiate an Export of a DynamoDB table to S3",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExportTableToPointInTime.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PartiQLDelete": {
+                "privilege": "PartiQLDelete",
+                "description": "Grants permission to delete a single item in a table by primary key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExecuteStatement.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PartiQLInsert": {
+                "privilege": "PartiQLInsert",
+                "description": "Grants permission to create a new item, if an item with same primary key does not exist in the table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExecuteStatement.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PartiQLUpdate": {
+                "privilege": "PartiQLUpdate",
+                "description": "Grants permission to edit an existing item's attributes",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ExecuteStatement.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PutItem": {
+                "privilege": "PutItem",
+                "description": "Grants permission to create a new item, or replace an old item with a new item",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "RestoreTableFromAwsBackup": {
+                "privilege": "RestoreTableFromAwsBackup",
+                "description": "Grants permission to create a new table from recovery point on AWS Backup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_RestoreTableFromAwsBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RestoreTableFromBackup": {
+                "privilege": "RestoreTableFromBackup",
+                "description": "Grants permission to create a new table from an existing backup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_RestoreTableFromBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RestoreTableToPointInTime": {
+                "privilege": "RestoreTableToPointInTime",
+                "description": "Grants permission to restore a table to a point in time",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_RestoreTableToPointInTime.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartAwsBackupJob": {
+                "privilege": "StartAwsBackupJob",
+                "description": "Grants permission to create a backup on AWS Backup with advanced features enabled",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_StartAwsBackupJob.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateContinuousBackups": {
+                "privilege": "UpdateContinuousBackups",
+                "description": "Grants permission to enable or disable continuous backups",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateContinuousBackups.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateContributorInsights": {
+                "privilege": "UpdateContributorInsights",
+                "description": "Grants permission to update the status for contributor insights for a specific table or global secondary index",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateContributorInsights.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateGlobalTable": {
+                "privilege": "UpdateGlobalTable",
+                "description": "Grants permission to add or remove replicas in the specified global table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateGlobalTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateGlobalTableSettings": {
+                "privilege": "UpdateGlobalTableSettings",
+                "description": "Grants permission to update settings of the specified global table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateGlobalTableSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateItem": {
+                "privilege": "UpdateItem",
+                "description": "Grants permission to edit an existing item's attributes, or adds a new item to the table if it does not already exist",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html",
+                "privConditions": {
+                    "dynamodb:Attributes": {
+                        "condition": "dynamodb:Attributes",
+                        "description": "Filter based on the attribute (field or column) names of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:EnclosingOperation": {
+                        "condition": "dynamodb:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa",
+                        "type": "String"
+                    },
+                    "dynamodb:LeadingKeys": {
+                        "condition": "dynamodb:LeadingKeys",
+                        "description": "Filters based on the partition key of the table",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnConsumedCapacity": {
+                        "condition": "dynamodb:ReturnConsumedCapacity",
+                        "description": "Filter based on the ReturnConsumedCapacity parameter of a request. Contains either \"TOTAL\" or \"NONE\"",
+                        "type": "String"
+                    },
+                    "dynamodb:ReturnValues": {
+                        "condition": "dynamodb:ReturnValues",
+                        "description": "Filter based on the ReturnValues parameter of request. Contains one of the following: \"ALL_OLD\", \"UPDATED_OLD\",\"ALL_NEW\",\"UPDATED_NEW\", or \"NONE\"",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateTable": {
+                "privilege": "UpdateTable",
+                "description": "Grants permission to modify the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateTableReplicaAutoScaling": {
+                "privilege": "UpdateTableReplicaAutoScaling",
+                "description": "Grants permission to update auto scaling settings on your replica table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTableReplicaAutoScaling.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateTimeToLive": {
+                "privilege": "UpdateTimeToLive",
+                "description": "Grants permission to enable or disable TTL for the specified table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTimeToLive.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to associate a set of tags with an Amazon DynamoDB resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TagResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove the association of tags from an Amazon DynamoDB resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UntagResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    },
+    "backup": {
+        "resourceName": "backup",
+        "service": "dynamodb",
+        "resourceArn": "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/backup/${BackupName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeBackup": {
+                "privilege": "DescribeBackup",
+                "description": "Grants permission to describe an existing backup of a table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteBackup": {
+                "privilege": "DeleteBackup",
+                "description": "Grants permission to delete an existing backup of a table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RestoreTableFromBackup": {
+                "privilege": "RestoreTableFromBackup",
+                "description": "Grants permission to create a new table from an existing backup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_RestoreTableFromBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "export": {
+        "resourceName": "export",
+        "service": "dynamodb",
+        "resourceArn": "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}/export/${ExportName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeExport": {
+                "privilege": "DescribeExport",
+                "description": "Grants permission to describe an existing Export of a table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeExport.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "globalTable": {
+        "resourceName": "global-table",
+        "service": "dynamodb",
+        "resourceArn": "arn:${Partition}:dynamodb::${Account}:global-table/${GlobalTableName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeGlobalTable": {
+                "privilege": "DescribeGlobalTable",
+                "description": "Grants permission to return information about the specified global table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeGlobalTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeGlobalTableSettings": {
+                "privilege": "DescribeGlobalTableSettings",
+                "description": "Grants permission to return settings information about the specified global table",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeGlobalTableSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateGlobalTable": {
+                "privilege": "CreateGlobalTable",
+                "description": "Grants permission to create a global table from an existing table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateGlobalTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateGlobalTable": {
+                "privilege": "UpdateGlobalTable",
+                "description": "Grants permission to add or remove replicas in the specified global table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateGlobalTable.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateGlobalTableSettings": {
+                "privilege": "UpdateGlobalTableSettings",
+                "description": "Grants permission to update settings of the specified global table",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateGlobalTableSettings.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

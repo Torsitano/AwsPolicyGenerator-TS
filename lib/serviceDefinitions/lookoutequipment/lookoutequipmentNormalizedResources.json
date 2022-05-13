@@ -1,0 +1,403 @@
+{
+    "dataset": {
+        "resourceName": "dataset",
+        "service": "lookoutequipment",
+        "resourceArn": "arn:${Partition}:lookoutequipment:${Region}:${AccountId}:dataset/${DatasetName}/${DatasetId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListDataIngestionJobs": {
+                "privilege": "ListDataIngestionJobs",
+                "description": "Grants permission to list the data ingestion jobs in your account or for a particular dataset",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_ListDataIngestionJobs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeDataset": {
+                "privilege": "DescribeDataset",
+                "description": "Grants permission to describe a dataset",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_DescribeDataset.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateDataset": {
+                "privilege": "CreateDataset",
+                "description": "Grants permission to create a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_CreateDataset.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateModel": {
+                "privilege": "CreateModel",
+                "description": "Grants permission to create a model that is trained on a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_CreateModel.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteDataset": {
+                "privilege": "DeleteDataset",
+                "description": "Grants permission to delete a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_DeleteDataset.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartDataIngestionJob": {
+                "privilege": "StartDataIngestionJob",
+                "description": "Grants permission to start a data ingestion job for a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_StartDataIngestionJob.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "model": {
+        "resourceName": "model",
+        "service": "lookoutequipment",
+        "resourceArn": "arn:${Partition}:lookoutequipment:${Region}:${Account}:model/${ModelName}/${ModelId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeModel": {
+                "privilege": "DescribeModel",
+                "description": "Grants permission to describe a model",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_DescribeModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateInferenceScheduler": {
+                "privilege": "CreateInferenceScheduler",
+                "description": "Grants permission to create an inference scheduler for a trained model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_CreateInferenceScheduler.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateModel": {
+                "privilege": "CreateModel",
+                "description": "Grants permission to create a model that is trained on a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_CreateModel.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteModel": {
+                "privilege": "DeleteModel",
+                "description": "Grants permission to delete a model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_DeleteModel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "inferenceScheduler": {
+        "resourceName": "inference-scheduler",
+        "service": "lookoutequipment",
+        "resourceArn": "arn:${Partition}:lookoutequipment:${Region}:${Account}:inference-scheduler/${InferenceSchedulerName}/${InferenceSchedulerId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeInferenceScheduler": {
+                "privilege": "DescribeInferenceScheduler",
+                "description": "Grants permission to describe an inference scheduler",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_DescribeInferenceScheduler.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListInferenceExecutions": {
+                "privilege": "ListInferenceExecutions",
+                "description": "Grants permission to list the inference executions for an inference scheduler",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_ListInferenceExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateInferenceScheduler": {
+                "privilege": "CreateInferenceScheduler",
+                "description": "Grants permission to create an inference scheduler for a trained model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_CreateInferenceScheduler.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteInferenceScheduler": {
+                "privilege": "DeleteInferenceScheduler",
+                "description": "Grants permission to delete an inference scheduler",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_DeleteInferenceScheduler.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartInferenceScheduler": {
+                "privilege": "StartInferenceScheduler",
+                "description": "Grants permission to start an inference scheduler",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_StartInferenceScheduler.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopInferenceScheduler": {
+                "privilege": "StopInferenceScheduler",
+                "description": "Grants permission to stop an inference scheduler",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_StopInferenceScheduler.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateInferenceScheduler": {
+                "privilege": "UpdateInferenceScheduler",
+                "description": "Grants permission to update an inference scheduler",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_UpdateInferenceScheduler.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

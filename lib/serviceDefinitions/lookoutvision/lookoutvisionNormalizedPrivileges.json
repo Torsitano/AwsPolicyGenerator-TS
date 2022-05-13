@@ -1,0 +1,431 @@
+{
+    "createDataset": {
+        "privilege": "CreateDataset",
+        "description": "Grants permission to create a dataset manifest",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateDataset.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createModel": {
+        "privilege": "CreateModel",
+        "description": "Grants permission to create a new anomaly detection model",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateModel.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createProject": {
+        "privilege": "CreateProject",
+        "description": "Grants permission to create a new project",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_CreateProject.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "project": {
+                "resourceName": "project",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:project/${ProjectName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteDataset": {
+        "privilege": "DeleteDataset",
+        "description": "Grants permission to delete a dataset",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DeleteDataset.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteModel": {
+        "privilege": "DeleteModel",
+        "description": "Grants permission to delete a model and all associated assets",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DeleteModel.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteProject": {
+        "privilege": "DeleteProject",
+        "description": "Grants permission to permanently remove a project",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DeleteProject.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "project": {
+                "resourceName": "project",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:project/${ProjectName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeDataset": {
+        "privilege": "DescribeDataset",
+        "description": "Grants permission to show detailed information about dataset manifest",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeDataset.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeModel": {
+        "privilege": "DescribeModel",
+        "description": "Grants permission to show detailed information about a model",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModel.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeModelPackagingJob": {
+        "privilege": "DescribeModelPackagingJob",
+        "description": "Grants permission to show detailed information about a model packaging job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeModelPackagingJob.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeProject": {
+        "privilege": "DescribeProject",
+        "description": "Grants permission to show detailed information about a project",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DescribeProject.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "project": {
+                "resourceName": "project",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:project/${ProjectName}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeTrialDetection": {
+        "privilege": "DescribeTrialDetection",
+        "description": "Grants permission to provides state information about a running anomaly detection job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/trial-detection.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "detectAnomalies": {
+        "privilege": "DetectAnomalies",
+        "description": "Grants permission to invoke detection of anomalies",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_DetectAnomalies.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDatasetEntries": {
+        "privilege": "ListDatasetEntries",
+        "description": "Grants permission to list the contents of dataset manifest",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListDatasetEntries.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listModelPackagingJobs": {
+        "privilege": "ListModelPackagingJobs",
+        "description": "Grants permission to list all model packaging jobs associated with a project",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListModelPackagingJobs.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listModels": {
+        "privilege": "ListModels",
+        "description": "Grants permission to list all models associated with a project",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListModels.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listProjects": {
+        "privilege": "ListProjects",
+        "description": "Grants permission to list all projects",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListProjects.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grant permission to list tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_ListTagsForResource.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTrialDetections": {
+        "privilege": "ListTrialDetections",
+        "description": "Grants permission to list all anomaly detection jobs",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/trial-detection.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "startModel": {
+        "privilege": "StartModel",
+        "description": "Grants permission to start anomaly detection model",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModel.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startModelPackagingJob": {
+        "privilege": "StartModelPackagingJob",
+        "description": "Grants permission to start a model packaging job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StartModelPackagingJob.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startTrialDetection": {
+        "privilege": "StartTrialDetection",
+        "description": "Grants permission to start bulk detection of anomalies for a set of images stored in an S3 bucket",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/developer-guide/trial-detection.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "stopModel": {
+        "privilege": "StopModel",
+        "description": "Grants permission to stop anomaly detection model",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_StopModel.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grant permission to tag a resource with given key value pairs",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_TagResource.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grant permission to remove the tag with the given key from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_UntagResource.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "model": {
+                "resourceName": "model",
+                "resourceArn": "arn:${Partition}:lookoutvision:${Region}:${Account}:model/${ProjectName}/${ModelVersion}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateDatasetEntries": {
+        "privilege": "UpdateDatasetEntries",
+        "description": "Grants permission to update a training or test dataset manifest",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lookout-for-vision/latest/APIReference/API_UpdateDatasetEntries.html",
+        "service": "lookoutvision",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    }
+}

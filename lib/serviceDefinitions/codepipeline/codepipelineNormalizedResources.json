@@ -1,0 +1,501 @@
+{
+    "action": {
+        "resourceName": "action",
+        "service": "codepipeline",
+        "resourceArn": "arn:${Partition}:codepipeline:${Region}:${Account}:${PipelineName}/${StageName}/${ActionName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "PutActionRevision": {
+                "privilege": "PutActionRevision",
+                "description": "Grants permission to edit actions in a pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutActionRevision.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutApprovalResult": {
+                "privilege": "PutApprovalResult",
+                "description": "Grants permission to provide a response (Approved or Rejected) to a manual approval request in CodePipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutApprovalResult.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "actiontype": {
+        "resourceName": "actiontype",
+        "service": "codepipeline",
+        "resourceArn": "arn:${Partition}:codepipeline:${Region}:${Account}:actiontype:${Owner}/${Category}/${Provider}/${Version}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a CodePipeline resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateCustomActionType": {
+                "privilege": "CreateCustomActionType",
+                "description": "Grants permission to create a custom action that you can use in the pipelines associated with your AWS account",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_CreateCustomActionType.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCustomActionType": {
+                "privilege": "DeleteCustomActionType",
+                "description": "Grants permission to delete a custom action",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_DeleteCustomActionType.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PollForJobs": {
+                "privilege": "PollForJobs",
+                "description": "Grants permission to view information about any jobs for CodePipeline to act on",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PollForJobs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateActionType": {
+                "privilege": "UpdateActionType",
+                "description": "Grants permission to update an action type",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_UpdateActionType.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a CodePipeline resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a CodePipeline resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "pipeline": {
+        "resourceName": "pipeline",
+        "service": "codepipeline",
+        "resourceArn": "arn:${Partition}:codepipeline:${Region}:${Account}:${PipelineName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListPipelineExecutions": {
+                "privilege": "ListPipelineExecutions",
+                "description": "Grants permission to list a summary of the most recent executions for a pipeline",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListPipelineExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetPipeline": {
+                "privilege": "GetPipeline",
+                "description": "Grants permission to retrieve information about a pipeline structure",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetPipeline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPipelineExecution": {
+                "privilege": "GetPipelineExecution",
+                "description": "Grants permission to view information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetPipelineExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPipelineState": {
+                "privilege": "GetPipelineState",
+                "description": "Grants permission to view information about the current state of the stages and actions of a pipeline",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetPipelineState.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListActionExecutions": {
+                "privilege": "ListActionExecutions",
+                "description": "Grants permission to list the action executions that have occurred in a pipeline",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListActionExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a CodePipeline resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreatePipeline": {
+                "privilege": "CreatePipeline",
+                "description": "Grants permission to create a uniquely named pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_CreatePipeline.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePipeline": {
+                "privilege": "DeletePipeline",
+                "description": "Grants permission to delete a specified pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_DeletePipeline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutWebhook": {
+                "privilege": "PutWebhook",
+                "description": "Grants permission to create or update a webhook",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutWebhook.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartPipelineExecution": {
+                "privilege": "StartPipelineExecution",
+                "description": "Grants permission to run the most recent revision through the pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_StartPipelineExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopPipelineExecution": {
+                "privilege": "StopPipelineExecution",
+                "description": "Grants permission to stop an in-progress pipeline execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_StopPipelineExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePipeline": {
+                "privilege": "UpdatePipeline",
+                "description": "Grants permission to update a pipeline with changes to the structure of the pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_UpdatePipeline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a CodePipeline resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a CodePipeline resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "stage": {
+        "resourceName": "stage",
+        "service": "codepipeline",
+        "resourceArn": "arn:${Partition}:codepipeline:${Region}:${Account}:${PipelineName}/${StageName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "DisableStageTransition": {
+                "privilege": "DisableStageTransition",
+                "description": "Grants permission to prevent revisions from transitioning to the next stage in a pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_DisableStageTransition.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "EnableStageTransition": {
+                "privilege": "EnableStageTransition",
+                "description": "Grants permission to allow revisions to transition to the next stage in a pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EnableStageTransition.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RetryStageExecution": {
+                "privilege": "RetryStageExecution",
+                "description": "Grants permission to resume the pipeline execution by retrying the last failed actions in a stage",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_RetryStageExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "webhook": {
+        "resourceName": "webhook",
+        "service": "codepipeline",
+        "resourceArn": "arn:${Partition}:codepipeline:${Region}:${Account}:webhook:${WebhookName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListWebhooks": {
+                "privilege": "ListWebhooks",
+                "description": "Grants permission to list all of the webhooks associated with your AWS account",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListWebhooks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a CodePipeline resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteWebhook": {
+                "privilege": "DeleteWebhook",
+                "description": "Grants permission to delete a specified webhook",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_DeleteWebhook.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeregisterWebhookWithThirdParty": {
+                "privilege": "DeregisterWebhookWithThirdParty",
+                "description": "Grants permission to remove the registration of a webhook with the third party specified in its configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_DeregisterWebhookWithThirdParty.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutWebhook": {
+                "privilege": "PutWebhook",
+                "description": "Grants permission to create or update a webhook",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutWebhook.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "RegisterWebhookWithThirdParty": {
+                "privilege": "RegisterWebhookWithThirdParty",
+                "description": "Grants permission to register a webhook with the third party specified in its configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_RegisterWebhookWithThirdParty.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a CodePipeline resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a CodePipeline resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

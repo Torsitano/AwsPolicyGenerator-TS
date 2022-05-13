@@ -1,0 +1,223 @@
+{
+    "application": {
+        "resourceName": "application",
+        "service": "dax",
+        "resourceArn": "arn:${Partition}:dax:${Region}:${Account}:cache/${ClusterName}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "DescribeClusters": {
+                "privilege": "DescribeClusters",
+                "description": "The DescribeClusters action returns information about all provisioned DAX clusters.",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DescribeClusters.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "BatchGetItem": {
+                "privilege": "BatchGetItem",
+                "description": "The BatchGetItem action returns the attributes of one or more items from one or more tables.",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ConditionCheckItem": {
+                "privilege": "ConditionCheckItem",
+                "description": "The ConditionCheckItem operation checks the existence of a set of attributes for the item with the given primary key",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ConditionCheckItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetItem": {
+                "privilege": "GetItem",
+                "description": "The GetItem action returns a set of attributes for the item with the given primary key.",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html",
+                "privConditions": {
+                    "dax:EnclosingOperation": {
+                        "condition": "dax:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "The ListTags action returns a list all of the tags for a DAX cluster.",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "Query": {
+                "privilege": "Query",
+                "description": "The Query action finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "Scan": {
+                "privilege": "Scan",
+                "description": "The Scan action returns one or more items and item attributes by accessing every item in a table or a secondary index.",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "BatchWriteItem": {
+                "privilege": "BatchWriteItem",
+                "description": "The BatchWriteItem action operation puts or deletes multiple items in one or more tables.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchWriteItem.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateCluster": {
+                "privilege": "CreateCluster",
+                "description": "The CreateCluster action creates a DAX cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_CreateCluster.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "dax:CreateParameterGroup",
+                    "dax:CreateSubnetGroup",
+                    "ec2:CreateNetworkInterface",
+                    "ec2:DeleteNetworkInterface",
+                    "ec2:DescribeNetworkInterfaces",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeVpcs",
+                    "iam:GetRole",
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "DecreaseReplicationFactor": {
+                "privilege": "DecreaseReplicationFactor",
+                "description": "The DecreaseReplicationFactor action removes one or more nodes from a DAX cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DecreaseReplicationFactor.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCluster": {
+                "privilege": "DeleteCluster",
+                "description": "The DeleteCluster action deletes a previously provisioned DAX cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_DeleteCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteItem": {
+                "privilege": "DeleteItem",
+                "description": "The DeleteItem action deletes a single item in a table by primary key.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html",
+                "privConditions": {
+                    "dax:EnclosingOperation": {
+                        "condition": "dax:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "IncreaseReplicationFactor": {
+                "privilege": "IncreaseReplicationFactor",
+                "description": "The IncreaseReplicationFactor action adds one or more nodes to a DAX cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_IncreaseReplicationFactor.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutItem": {
+                "privilege": "PutItem",
+                "description": "The PutItem action creates a new item, or replaces an old item with a new item.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html",
+                "privConditions": {
+                    "dax:EnclosingOperation": {
+                        "condition": "dax:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "RebootNode": {
+                "privilege": "RebootNode",
+                "description": "The RebootNode action reboots a single node of a DAX cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_RebootNode.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateCluster": {
+                "privilege": "UpdateCluster",
+                "description": "The UpdateCluster action modifies the settings for a DAX cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_UpdateCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateItem": {
+                "privilege": "UpdateItem",
+                "description": "The UpdateItem action edits an existing item's attributes, or adds a new item to the table if it does not already exist.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html",
+                "privConditions": {
+                    "dax:EnclosingOperation": {
+                        "condition": "dax:EnclosingOperation",
+                        "description": "Used to block Transactions APIs calls and allow the non-Transaction APIs calls and vice-versa.",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "The TagResource action associates a set of tags with a DAX resource.",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_TagResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "The UntagResource action removes the association of tags from a DAX resource.",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_UntagResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    }
+}

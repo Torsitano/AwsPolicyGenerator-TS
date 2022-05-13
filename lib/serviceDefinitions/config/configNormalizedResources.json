@@ -1,0 +1,626 @@
+{
+    "aggregationAuthorization": {
+        "resourceName": "AggregationAuthorization",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:aggregation-authorization/${AggregatorAccount}/${AggregatorRegion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for AWS Config resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteAggregationAuthorization": {
+                "privilege": "DeleteAggregationAuthorization",
+                "description": "Grants permission to delete the authorization granted to the specified configuration aggregator account in a specified region",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteAggregationAuthorization.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutAggregationAuthorization": {
+                "privilege": "PutAggregationAuthorization",
+                "description": "Grants permission to authorize the aggregator account and region to collect data from the source account and region",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_PutAggregationAuthorization.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to associate the specified tags to a resource with the specified resourceArn",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to delete specified tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "configurationAggregator": {
+        "resourceName": "ConfigurationAggregator",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:config-aggregator/${AggregatorId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAggregateDiscoveredResources": {
+                "privilege": "ListAggregateDiscoveredResources",
+                "description": "Grants permission to accept a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_ListAggregateDiscoveredResources.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "BatchGetAggregateResourceConfig": {
+                "privilege": "BatchGetAggregateResourceConfig",
+                "description": "Grants permission to return the current configuration items for resources that are present in your AWS Config aggregator",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_BatchGetAggregateResourceConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeAggregateComplianceByConfigRules": {
+                "privilege": "DescribeAggregateComplianceByConfigRules",
+                "description": "Grants permission to return a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeAggregateComplianceByConfigRules.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeAggregateComplianceByConformancePacks": {
+                "privilege": "DescribeAggregateComplianceByConformancePacks",
+                "description": "Grants permission to return a list of compliant and noncompliant conformance packs along with count of compliant, non-compliant and total rules within each conformance pack",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeAggregateComplianceByConformancePacks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeConfigurationAggregatorSourcesStatus": {
+                "privilege": "DescribeConfigurationAggregatorSourcesStatus",
+                "description": "Grants permission to return status information for sources within an aggregator",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationAggregatorSourcesStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAggregateComplianceDetailsByConfigRule": {
+                "privilege": "GetAggregateComplianceDetailsByConfigRule",
+                "description": "Grants permission to return the evaluation results for the specified AWS Config rule for a specific resource in a rule",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetAggregateComplianceDetailsByConfigRule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAggregateConfigRuleComplianceSummary": {
+                "privilege": "GetAggregateConfigRuleComplianceSummary",
+                "description": "Grants permission to return the number of compliant and noncompliant rules for one or more accounts and regions in an aggregator",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetAggregateConfigRuleComplianceSummary.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAggregateConformancePackComplianceSummary": {
+                "privilege": "GetAggregateConformancePackComplianceSummary",
+                "description": "Grants permission to return the number of compliant and noncompliant conformance packs for one or more accounts and regions in an aggregator",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetAggregateConformancePackComplianceSummary.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAggregateDiscoveredResourceCounts": {
+                "privilege": "GetAggregateDiscoveredResourceCounts",
+                "description": "Grants permission to return the resource counts across accounts and regions that are present in your AWS Config aggregator",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetAggregateDiscoveredResourceCounts.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAggregateResourceConfig": {
+                "privilege": "GetAggregateResourceConfig",
+                "description": "Grants permission to return configuration item that is aggregated for your specific resource in a specific source account and region",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetAggregateResourceConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for AWS Config resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteConfigurationAggregator": {
+                "privilege": "DeleteConfigurationAggregator",
+                "description": "Grants permission to delete the specified configuration aggregator and the aggregated data associated with the aggregator",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConfigurationAggregator.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutConfigurationAggregator": {
+                "privilege": "PutConfigurationAggregator",
+                "description": "Grants permission to create and update the configuration aggregator with the selected source accounts and regions",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationAggregator.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to associate the specified tags to a resource with the specified resourceArn",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to delete specified tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "configRule": {
+        "resourceName": "ConfigRule",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:config-rule/${ConfigRuleId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribeConfigRules": {
+                "privilege": "DescribeConfigRules",
+                "description": "Grants permission to return details about your AWS Config rules",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigRules.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeComplianceByConfigRule": {
+                "privilege": "DescribeComplianceByConfigRule",
+                "description": "Grants permission to indicate whether the specified AWS Config rules are compliant",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeComplianceByConfigRule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeConfigRuleEvaluationStatus": {
+                "privilege": "DescribeConfigRuleEvaluationStatus",
+                "description": "Grants permission to return status information for each of your AWS managed Config rules",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigRuleEvaluationStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetComplianceDetailsByConfigRule": {
+                "privilege": "GetComplianceDetailsByConfigRule",
+                "description": "Grants permission to return the evaluation results for the specified AWS Config rule",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByConfigRule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for AWS Config resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteConfigRule": {
+                "privilege": "DeleteConfigRule",
+                "description": "Grants permission to delete the specified AWS Config rule and all of its evaluation results",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConfigRule.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteEvaluationResults": {
+                "privilege": "DeleteEvaluationResults",
+                "description": "Grants permission to delete the evaluation results for the specified Config rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteEvaluationResults.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutConfigRule": {
+                "privilege": "PutConfigRule",
+                "description": "Grants permission to add or update an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartConfigRulesEvaluation": {
+                "privilege": "StartConfigRulesEvaluation",
+                "description": "Grants permission to evaluate your resources against the specified Config rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_StartConfigRulesEvaluation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to associate the specified tags to a resource with the specified resourceArn",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to delete specified tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "conformancePack": {
+        "resourceName": "ConformancePack",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:conformance-pack/${ConformancePackName}/${ConformancePackId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to associate the specified tags to a resource with the specified resourceArn",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to delete specified tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "organizationConfigRule": {
+        "resourceName": "OrganizationConfigRule",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:organization-config-rule/${OrganizationConfigRuleId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "organizationConformancePack": {
+        "resourceName": "OrganizationConformancePack",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:organization-conformance-pack/${OrganizationConformancePackId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "remediationConfiguration": {
+        "resourceName": "RemediationConfiguration",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:remediation-configuration/${RemediationConfigurationId}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "DescribeRemediationConfigurations": {
+                "privilege": "DescribeRemediationConfigurations",
+                "description": "Grants permission to return the details of one or more remediation configurations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeRemediationConfigurations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeRemediationExecutionStatus": {
+                "privilege": "DescribeRemediationExecutionStatus",
+                "description": "Grants permission to provide a detailed view of a Remediation Execution for a set of resources including state, timestamps and any error messages for steps that have failed",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeRemediationExecutionStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteRemediationConfiguration": {
+                "privilege": "DeleteRemediationConfiguration",
+                "description": "Grants permission to delete the remediation configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteRemediationConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutRemediationConfigurations": {
+                "privilege": "PutRemediationConfigurations",
+                "description": "Grants permission to add or update the remediation configuration with a specific AWS Config rule with the selected target or action",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_PutRemediationConfigurations.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "StartRemediationExecution": {
+                "privilege": "StartRemediationExecution",
+                "description": "Grants permission to run an on-demand remediation for the specified AWS Config rules against the last known remediation configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_StartRemediationExecution.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "storedQuery": {
+        "resourceName": "StoredQuery",
+        "service": "config",
+        "resourceArn": "arn:${Partition}:config:${Region}:${Account}:stored-query/${StoredQueryName}/${StoredQueryId}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListStoredQueries": {
+                "privilege": "ListStoredQueries",
+                "description": "Grants permission to list the stored queries for an AWS account in an AWS Region",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_ListStoredQueries.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetStoredQuery": {
+                "privilege": "GetStoredQuery",
+                "description": "Grants permission to return the details of a specific stored query",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_GetStoredQuery.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteStoredQuery": {
+                "privilege": "DeleteStoredQuery",
+                "description": "Grants permission to delete the stored query for an AWS account in an AWS Region",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteStoredQuery.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutStoredQuery": {
+                "privilege": "PutStoredQuery",
+                "description": "Grants permission to save a new query or updates an existing saved query",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

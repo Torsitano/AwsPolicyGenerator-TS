@@ -1,0 +1,1205 @@
+{
+    "component": {
+        "resourceName": "component",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:component/${ComponentName}/${ComponentVersion}/${ComponentBuildVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetComponent": {
+                "privilege": "GetComponent",
+                "description": "Grants permission to view details about a component",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetComponent.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "kms:Decrypt"
+                ],
+                "required": true
+            },
+            "GetComponentPolicy": {
+                "privilege": "GetComponentPolicy",
+                "description": "Grants permission to view the resource policy associated with a component",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetComponentPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tag for an Image Builder resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateComponent": {
+                "privilege": "CreateComponent",
+                "description": "Grants permission to create a new component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteComponent": {
+                "privilege": "DeleteComponent",
+                "description": "Grants permission to delete a component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteComponent.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ImportComponent": {
+                "privilege": "ImportComponent",
+                "description": "Grants permission to import a new component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ImportComponent.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {
+            "PutComponentPolicy": {
+                "privilege": "PutComponentPolicy",
+                "description": "Grants permission to set the resource policy associated with a component",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_PutComponentPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "componentVersion": {
+        "resourceName": "componentVersion",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:component/${ComponentName}/${ComponentVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListComponentBuildVersions": {
+                "privilege": "ListComponentBuildVersions",
+                "description": "Grants permission to list the component build versions in your account",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListComponentBuildVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "distributionConfiguration": {
+        "resourceName": "distributionConfiguration",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:distribution-configuration/${DistributionConfigurationName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetDistributionConfiguration": {
+                "privilege": "GetDistributionConfiguration",
+                "description": "Grants permission to view details about a distribution configuration",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetDistributionConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tag for an Image Builder resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateDistributionConfiguration": {
+                "privilege": "CreateDistributionConfiguration",
+                "description": "Grants permission to create a new distribution configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateDistributionConfiguration.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "imagebuilder:TagResource"
+                ],
+                "required": true
+            },
+            "DeleteDistributionConfiguration": {
+                "privilege": "DeleteDistributionConfiguration",
+                "description": "Grants permission to delete a distribution configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteDistributionConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDistributionConfiguration": {
+                "privilege": "UpdateDistributionConfiguration",
+                "description": "Grants permission to update an existing distribution configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UpdateDistributionConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "image": {
+        "resourceName": "image",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:image/${ImageName}/${ImageVersion}/${ImageBuildVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListImagePackages": {
+                "privilege": "ListImagePackages",
+                "description": "Grants permission to returns a list of packages installed on the specified image",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListImagePackages.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetImage": {
+                "privilege": "GetImage",
+                "description": "Grants permission to view details about an image",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImage.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "GetImagePolicy": {
+                "privilege": "GetImagePolicy",
+                "description": "Grants permission to view the resource policy associated with an image",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImagePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tag for an Image Builder resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CancelImageCreation": {
+                "privilege": "CancelImageCreation",
+                "description": "Grants permission to cancel an image creation",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CancelImageCreation.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateImage": {
+                "privilege": "CreateImage",
+                "description": "Grants permission to create a new image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateImage.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "imagebuilder:GetContainerRecipe",
+                    "imagebuilder:GetDistributionConfiguration",
+                    "imagebuilder:GetImageRecipe",
+                    "imagebuilder:GetInfrastructureConfiguration",
+                    "imagebuilder:TagResource"
+                ],
+                "required": true
+            },
+            "DeleteImage": {
+                "privilege": "DeleteImage",
+                "description": "Grants permission to delete an image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteImage.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ImportVmImage": {
+                "privilege": "ImportVmImage",
+                "description": "Grants permission to import an image",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ImportVmImage.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ec2:DescribeImportImageTasks",
+                    "iam:CreateServiceLinkedRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "PutImagePolicy": {
+                "privilege": "PutImagePolicy",
+                "description": "Grants permission to set the resource policy associated with an image",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_PutImagePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "imageVersion": {
+        "resourceName": "imageVersion",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:image/${ImageName}/${ImageVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListImageBuildVersions": {
+                "privilege": "ListImageBuildVersions",
+                "description": "Grants permission to list the image build versions in your account",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListImageBuildVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "imageRecipe": {
+        "resourceName": "imageRecipe",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:image-recipe/${ImageRecipeName}/${ImageRecipeVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetImageRecipe": {
+                "privilege": "GetImageRecipe",
+                "description": "Grants permission to view details about an image recipe",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImageRecipe.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetImageRecipePolicy": {
+                "privilege": "GetImageRecipePolicy",
+                "description": "Grants permission to view the resource policy associated with an image recipe",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImageRecipePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tag for an Image Builder resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateImageRecipe": {
+                "privilege": "CreateImageRecipe",
+                "description": "Grants permission to create a new Image Recipe",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateImageRecipe.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ec2:DescribeImages",
+                    "iam:CreateServiceLinkedRole",
+                    "imagebuilder:GetComponent",
+                    "imagebuilder:GetImage",
+                    "imagebuilder:TagResource"
+                ],
+                "required": true
+            },
+            "DeleteImageRecipe": {
+                "privilege": "DeleteImageRecipe",
+                "description": "Grants permission to delete an image recipe",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteImageRecipe.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "PutImageRecipePolicy": {
+                "privilege": "PutImageRecipePolicy",
+                "description": "Grants permission to set the resource policy associated with an image recipe",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_PutImageRecipePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "containerRecipe": {
+        "resourceName": "containerRecipe",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:container-recipe/${ContainerRecipeName}/${ContainerRecipeVersion}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetContainerRecipe": {
+                "privilege": "GetContainerRecipe",
+                "description": "Grants permission to view details about a container recipe",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetContainerRecipe.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetContainerRecipePolicy": {
+                "privilege": "GetContainerRecipePolicy",
+                "description": "Grants permission to view the resource policy associated with a container recipe",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetContainerRecipePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateContainerRecipe": {
+                "privilege": "CreateContainerRecipe",
+                "description": "Grants permission to create a new Container Recipe",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateContainerRecipe.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "ecr:DescribeImages",
+                    "ecr:DescribeRepositories",
+                    "iam:CreateServiceLinkedRole",
+                    "imagebuilder:GetComponent",
+                    "imagebuilder:GetImage",
+                    "imagebuilder:TagResource",
+                    "kms:Encrypt",
+                    "kms:GenerateDataKey",
+                    "kms:GenerateDataKeyWithoutPlaintext"
+                ],
+                "required": true
+            },
+            "DeleteContainerRecipe": {
+                "privilege": "DeleteContainerRecipe",
+                "description": "Grants permission to delete a container recipe",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteContainerRecipe.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "PutContainerRecipePolicy": {
+                "privilege": "PutContainerRecipePolicy",
+                "description": "Grants permission to set the resource policy associated with a container recipe",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_PutContainerRecipePolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "imagePipeline": {
+        "resourceName": "imagePipeline",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:image-pipeline/${ImagePipelineName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListImagePipelineImages": {
+                "privilege": "ListImagePipelineImages",
+                "description": "Grants permission to returns a list of images created by the specified pipeline",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListImagePipelineImages.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetImagePipeline": {
+                "privilege": "GetImagePipeline",
+                "description": "Grants permission to view details about an image pipeline",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImagePipeline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tag for an Image Builder resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateImagePipeline": {
+                "privilege": "CreateImagePipeline",
+                "description": "Grants permission to create a new image pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateImagePipeline.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "imagebuilder:GetContainerRecipe",
+                    "imagebuilder:GetImageRecipe",
+                    "imagebuilder:TagResource"
+                ],
+                "required": true
+            },
+            "DeleteImagePipeline": {
+                "privilege": "DeleteImagePipeline",
+                "description": "Grants permission to delete an image pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteImagePipeline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartImagePipelineExecution": {
+                "privilege": "StartImagePipelineExecution",
+                "description": "Grants permission to create a new image from a pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_StartImagePipelineExecution.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "imagebuilder:GetImagePipeline"
+                ],
+                "required": true
+            },
+            "UpdateImagePipeline": {
+                "privilege": "UpdateImagePipeline",
+                "description": "Grants permission to update an existing image pipeline",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UpdateImagePipeline.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "infrastructureConfiguration": {
+        "resourceName": "infrastructureConfiguration",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:imagebuilder:${Region}:${Account}:infrastructure-configuration/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetInfrastructureConfiguration": {
+                "privilege": "GetInfrastructureConfiguration",
+                "description": "Grants permission to view details about an infrastructure configuration",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetInfrastructureConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tag for an Image Builder resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateInfrastructureConfiguration": {
+                "privilege": "CreateInfrastructureConfiguration",
+                "description": "Grants permission to create a new infrastructure configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateInfrastructureConfiguration.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "imagebuilder:CreatedResourceTagKeys": {
+                        "condition": "imagebuilder:CreatedResourceTagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "imagebuilder:CreatedResourceTag/<key>": {
+                        "condition": "imagebuilder:CreatedResourceTag/<key>",
+                        "description": "Filters access by the tag key-value pairs attached to the resource created by Image Builder",
+                        "type": "String"
+                    },
+                    "imagebuilder:Ec2MetadataHttpTokens": {
+                        "condition": "imagebuilder:Ec2MetadataHttpTokens",
+                        "description": "Filters access by the EC2 Instance Metadata HTTP Token Requirement specified in the request",
+                        "type": "String"
+                    },
+                    "imagebuilder:StatusTopicArn": {
+                        "condition": "imagebuilder:StatusTopicArn",
+                        "description": "Filters access by the SNS Topic Arn in the request to which terminal state notifications will be published",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "iam:PassRole",
+                    "imagebuilder:TagResource",
+                    "sns:Publish"
+                ],
+                "required": true
+            },
+            "DeleteInfrastructureConfiguration": {
+                "privilege": "DeleteInfrastructureConfiguration",
+                "description": "Grants permission to delete an infrastructure configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_DeleteInfrastructureConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateInfrastructureConfiguration": {
+                "privilege": "UpdateInfrastructureConfiguration",
+                "description": "Grants permission to update an existing infrastructure configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UpdateInfrastructureConfiguration.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "imagebuilder:CreatedResourceTagKeys": {
+                        "condition": "imagebuilder:CreatedResourceTagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "imagebuilder:CreatedResourceTag/<key>": {
+                        "condition": "imagebuilder:CreatedResourceTag/<key>",
+                        "description": "Filters access by the tag key-value pairs attached to the resource created by Image Builder",
+                        "type": "String"
+                    },
+                    "imagebuilder:Ec2MetadataHttpTokens": {
+                        "condition": "imagebuilder:Ec2MetadataHttpTokens",
+                        "description": "Filters access by the EC2 Instance Metadata HTTP Token Requirement specified in the request",
+                        "type": "String"
+                    },
+                    "imagebuilder:StatusTopicArn": {
+                        "condition": "imagebuilder:StatusTopicArn",
+                        "description": "Filters access by the SNS Topic Arn in the request to which terminal state notifications will be published",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole",
+                    "sns:Publish"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Image Builder resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "kmsKey": {
+        "resourceName": "kmsKey",
+        "service": "imagebuilder",
+        "resourceArn": "arn:${Partition}:kms:${Region}:${Account}:key/${KeyId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {
+            "CreateComponent": {
+                "privilege": "CreateComponent",
+                "description": "Grants permission to create a new component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "ImportComponent": {
+                "privilege": "ImportComponent",
+                "description": "Grants permission to import a new component",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_ImportComponent.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

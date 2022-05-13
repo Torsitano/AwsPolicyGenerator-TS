@@ -1,0 +1,174 @@
+{
+    "project": {
+        "resourceName": "project",
+        "service": "monitron",
+        "resourceArn": "arn:${Partition}:monitron:${Region}:${Account}:project/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetProject": {
+                "privilege": "GetProject",
+                "description": "Grants permission to get information about a project",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-project-tasks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetProjectAdminUser": {
+                "privilege": "GetProjectAdminUser",
+                "description": "Grants permission to describe an administrator who is associated with the project",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-project-tasks.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:GetManagedApplicationInstance"
+                ],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list all tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions by the tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteProject": {
+                "privilege": "DeleteProject",
+                "description": "Grants permission to delete a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-delete-project.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso:DeleteManagedApplicationInstance"
+                ],
+                "required": true
+            },
+            "UpdateProject": {
+                "privilege": "UpdateProject",
+                "description": "Grants permission to update a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mp-updating-project.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions by the tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "AssociateProjectAdminUser": {
+                "privilege": "AssociateProjectAdminUser",
+                "description": "Grants permission to associate a user with the project as an administrator",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/user-management-chapter.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:AssociateProfile",
+                    "sso:GetManagedApplicationInstance",
+                    "sso:GetProfile",
+                    "sso:ListDirectoryAssociations",
+                    "sso:ListProfiles"
+                ],
+                "required": true
+            },
+            "DisassociateProjectAdminUser": {
+                "privilege": "DisassociateProjectAdminUser",
+                "description": "Grants permission to disassociate an administrator from the project",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/mu-remove-project-admin.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:DisassociateProfile",
+                    "sso:GetManagedApplicationInstance",
+                    "sso:GetProfile",
+                    "sso:ListDirectoryAssociations",
+                    "sso:ListProfiles"
+                ],
+                "required": true
+            },
+            "ListProjectAdminUsers": {
+                "privilege": "ListProjectAdminUsers",
+                "description": "Grants permission to list all administrators associated with the project",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/user-management-chapter.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "sso-directory:DescribeUsers",
+                    "sso:GetManagedApplicationInstance"
+                ],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/tagging.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions by the tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Monitron/latest/admin-guide/tagging.html#modify-tag-1",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions by the tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

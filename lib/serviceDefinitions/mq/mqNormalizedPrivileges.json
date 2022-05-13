@@ -1,0 +1,510 @@
+{
+    "createBroker": {
+        "privilege": "CreateBroker",
+        "description": "Grants permission to create a broker",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-brokers.html#rest-api-brokers-methods-post",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createConfiguration": {
+        "privilege": "CreateConfiguration",
+        "description": "Grants permission to create a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and engine version)",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configurations.html#rest-api-configurations-methods-post",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createTags": {
+        "privilege": "CreateTags",
+        "description": "Grants permission to create tags",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-post",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createUser": {
+        "privilege": "CreateUser",
+        "description": "Grants permission to create an ActiveMQ user",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-post",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteBroker": {
+        "privilege": "DeleteBroker",
+        "description": "Grants permission to delete a broker",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-broker.html#rest-api-broker-methods-delete",
+        "service": "mq",
+        "dependentActions": [
+            "ec2:DeleteNetworkInterface",
+            "ec2:DeleteNetworkInterfacePermission",
+            "ec2:DeleteVpcEndpoints",
+            "ec2:DetachNetworkInterface"
+        ],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTags": {
+        "privilege": "DeleteTags",
+        "description": "Grants permission to delete tags",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-delete",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteUser": {
+        "privilege": "DeleteUser",
+        "description": "Grants permission to delete an ActiveMQ user",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-delete",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeBroker": {
+        "privilege": "DescribeBroker",
+        "description": "Grants permission to return information about the specified broker",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-broker.html#rest-api-broker-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeBrokerEngineTypes": {
+        "privilege": "DescribeBrokerEngineTypes",
+        "description": "Grants permission to return information about broker engines",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/broker-engine-types.html#broker-engine-types-http-methods",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeBrokerInstanceOptions": {
+        "privilege": "DescribeBrokerInstanceOptions",
+        "description": "Grants permission to return information about the broker instance options",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/broker-instance-options.html#broker-engine-types-http-methods",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeConfiguration": {
+        "privilege": "DescribeConfiguration",
+        "description": "Grants permission to return information about the specified configuration",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configuration.html#rest-api-configuration-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeConfigurationRevision": {
+        "privilege": "DescribeConfigurationRevision",
+        "description": "Grants permission to return the specified configuration revision for the specified configuration",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configuration-revision.html#rest-api-configuration-revision-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeUser": {
+        "privilege": "DescribeUser",
+        "description": "Grants permission to return information about an ActiveMQ user",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listBrokers": {
+        "privilege": "ListBrokers",
+        "description": "Grants permission to return a list of all brokers",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-brokers.html#rest-api-brokers-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listConfigurationRevisions": {
+        "privilege": "ListConfigurationRevisions",
+        "description": "Grants permission to return a list of all existing revisions for the specified configuration",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-revisions.html#rest-api-revisions-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listConfigurations": {
+        "privilege": "ListConfigurations",
+        "description": "Grants permission to return a list of all configurations",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configurations.html#rest-api-configurations-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTags": {
+        "privilege": "ListTags",
+        "description": "Grants permission to return a list of tags",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-tags.html#rest-api-tags-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listUsers": {
+        "privilege": "ListUsers",
+        "description": "Grants permission to return a list of all ActiveMQ users",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-users.html#rest-api-users-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "rebootBroker": {
+        "privilege": "RebootBroker",
+        "description": "Grants permission to reboot a broker",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-restart.html#rest-api-reboot-methods-post",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateBroker": {
+        "privilege": "UpdateBroker",
+        "description": "Grants permission to add a pending configuration change to a broker",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-broker.html#rest-api-broker-methods-get",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateConfiguration": {
+        "privilege": "UpdateConfiguration",
+        "description": "Grants permission to update the specified configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-configuration.html#rest-api-configuration-methods-put",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurations": {
+                "resourceName": "configurations",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:configuration:${ConfigurationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateUser": {
+        "privilege": "UpdateUser",
+        "description": "Grants permission to update the information for an ActiveMQ user",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/amazon-mq/latest/api-reference/rest-api-username.html#rest-api-username-methods-put",
+        "service": "mq",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "brokers": {
+                "resourceName": "brokers",
+                "resourceArn": "arn:${Partition}:mq:${Region}:${Account}:broker:${BrokerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

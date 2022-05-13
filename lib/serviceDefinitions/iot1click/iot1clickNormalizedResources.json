@@ -1,0 +1,332 @@
+{
+    "device": {
+        "resourceName": "device",
+        "service": "iot1click",
+        "resourceArn": "arn:${Partition}:iot1click:${Region}:${Account}:devices/${DeviceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeDevice": {
+                "privilege": "DescribeDevice",
+                "description": "Grants permission to describe a device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "FinalizeDeviceClaim": {
+                "privilege": "FinalizeDeviceClaim",
+                "description": "Grants permission to finalize a device claim",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-finalize-claim.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDeviceMethods": {
+                "privilege": "GetDeviceMethods",
+                "description": "Grants permission to get available methods of a device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-methods.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "InitiateDeviceClaim": {
+                "privilege": "InitiateDeviceClaim",
+                "description": "Grants permission to initialize a device claim",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-initiate-claim.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListDeviceEvents": {
+                "privilege": "ListDeviceEvents",
+                "description": "Grants permission to list past events published by a device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-events.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to lists the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "UnclaimDevice": {
+                "privilege": "UnclaimDevice",
+                "description": "Grants permission to unclaim a device",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-unclaim.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "InvokeDeviceMethod": {
+                "privilege": "InvokeDeviceMethod",
+                "description": "Grants permission to invoke a device method",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-methods.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDeviceState": {
+                "privilege": "UpdateDeviceState",
+                "description": "Grants permission to update device state",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/1.0/devices-apireference/devices-deviceid-state.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or modify the tags of a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove the given tags (metadata) from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "project": {
+        "resourceName": "project",
+        "service": "iot1click",
+        "resourceArn": "arn:${Partition}:iot1click:${Region}:${Account}:projects/${ProjectName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribePlacement": {
+                "privilege": "DescribePlacement",
+                "description": "Grants permission to describe a placement",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_DescribePlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeProject": {
+                "privilege": "DescribeProject",
+                "description": "Grants permission to describe a project",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_DescribeProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDevicesInPlacement": {
+                "privilege": "GetDevicesInPlacement",
+                "description": "Grants permission to get devices associated to a placement",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_GetDevicesInPlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListPlacements": {
+                "privilege": "ListPlacements",
+                "description": "Grants permission to list placements in a project",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_ListPlacements.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to lists the tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "AssociateDeviceWithPlacement": {
+                "privilege": "AssociateDeviceWithPlacement",
+                "description": "Grants permission to associate a device to a placement",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_AssociateDeviceWithPlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreatePlacement": {
+                "privilege": "CreatePlacement",
+                "description": "Grants permission to create a new placement in a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_CreatePlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateProject": {
+                "privilege": "CreateProject",
+                "description": "Grants permission to create a new project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_CreateProject.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePlacement": {
+                "privilege": "DeletePlacement",
+                "description": "Grants permission to delete a placement from a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_DeletePlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteProject": {
+                "privilege": "DeleteProject",
+                "description": "Grants permission to delete a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_DeleteProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateDeviceFromPlacement": {
+                "privilege": "DisassociateDeviceFromPlacement",
+                "description": "Grants permission to disassociate a device from a placement",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_DissacociateDeviceFromPlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePlacement": {
+                "privilege": "UpdatePlacement",
+                "description": "Grants permission to update a placement",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_UpdatePlacement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateProject": {
+                "privilege": "UpdateProject",
+                "description": "Update a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_UpdateProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or modify the tags of a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove the given tags (metadata) from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-1-click/latest/projects-apireference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

@@ -1,0 +1,754 @@
+{
+    "application": {
+        "resourceName": "Application",
+        "service": "servicecatalog",
+        "resourceArn": "arn:${Partition}:servicecatalog:${Region}:${Account}:/applications/${ApplicationId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAssociatedAttributeGroups": {
+                "privilege": "ListAssociatedAttributeGroups",
+                "description": "Grants permission to list the attribute groups associated with an application",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListAssociatedAttributeGroups.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListAssociatedResources": {
+                "privilege": "ListAssociatedResources",
+                "description": "Grants permission to list the resources associated with an application",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListAssociatedResources.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetApplication": {
+                "privilege": "GetApplication",
+                "description": "Grants permission to get an application",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_GetApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAssociatedResource": {
+                "privilege": "GetAssociatedResource",
+                "description": "Grants permission to get information about a resource associated to an application",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_GetAssociatedResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a service catalog appregistry resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "AssociateAttributeGroup": {
+                "privilege": "AssociateAttributeGroup",
+                "description": "Grants permission to associate an attribute group with an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociateResource": {
+                "privilege": "AssociateResource",
+                "description": "Grants permission to associate a resource with an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateApplication": {
+                "privilege": "CreateApplication",
+                "description": "Grants permission to create an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_CreateApplication.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole"
+                ],
+                "required": true
+            },
+            "DeleteApplication": {
+                "privilege": "DeleteApplication",
+                "description": "Grants permission to delete an application if all associations have been removed from the application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_DeleteApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateAttributeGroup": {
+                "privilege": "DisassociateAttributeGroup",
+                "description": "Grants permission to disassociate an attribute group from an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_DisassociateAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateResource": {
+                "privilege": "DisassociateResource",
+                "description": "Grants permission to disassociate a resource from an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_DisassociateResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateApplication": {
+                "privilege": "UpdateApplication",
+                "description": "Grants permission to update the attributes of an existing application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_UpdateApplication.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a service catalog appregistry resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a service catalog appregistry resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "attributeGroup": {
+        "resourceName": "AttributeGroup",
+        "service": "servicecatalog",
+        "resourceArn": "arn:${Partition}:servicecatalog:${Region}:${Account}:/attribute-groups/${AttributeGroupId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetAttributeGroup": {
+                "privilege": "GetAttributeGroup",
+                "description": "Grants permission to get an attribute group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_GetAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags for a service catalog appregistry resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "AssociateAttributeGroup": {
+                "privilege": "AssociateAttributeGroup",
+                "description": "Grants permission to associate an attribute group with an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateAttributeGroup": {
+                "privilege": "CreateAttributeGroup",
+                "description": "Grants permission to create an attribute group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_CreateAttributeGroup.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteAttributeGroup": {
+                "privilege": "DeleteAttributeGroup",
+                "description": "Grants permission to delete an attribute group if all associations have been removed from the attribute group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_DeleteAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateAttributeGroup": {
+                "privilege": "DisassociateAttributeGroup",
+                "description": "Grants permission to disassociate an attribute group from an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_DisassociateAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAttributeGroup": {
+                "privilege": "UpdateAttributeGroup",
+                "description": "Grants permission to update the attributes of an existing attribute group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_UpdateAttributeGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a service catalog appregistry resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a service catalog appregistry resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "portfolio": {
+        "resourceName": "Portfolio",
+        "service": "servicecatalog",
+        "resourceArn": "arn:${Partition}:catalog:${Region}:${Account}:portfolio/${PortfolioId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribePortfolioShares": {
+                "privilege": "DescribePortfolioShares",
+                "description": "Grants permission to view a summary of each of the portfolio shares that were created for the specified portfolio",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DescribePortfolioShares.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListPortfolioAccess": {
+                "privilege": "ListPortfolioAccess",
+                "description": "Grants permission to list the AWS accounts you have shared a given portfolio with",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ListPortfolioAccess.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListPrincipalsForPortfolio": {
+                "privilege": "ListPrincipalsForPortfolio",
+                "description": "Grants permission to list the IAM principals associated with a given portfolio",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ListPrincipalsForPortfolio.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribePortfolio": {
+                "privilege": "DescribePortfolio",
+                "description": "Grants permission to describe a portfolio",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DescribePortfolio.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AcceptPortfolioShare": {
+                "privilege": "AcceptPortfolioShare",
+                "description": "Grants permission to accept a portfolio that has been shared with you",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_AcceptPortfolioShare.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociatePrincipalWithPortfolio": {
+                "privilege": "AssociatePrincipalWithPortfolio",
+                "description": "Grants permission to associate an IAM principal with a portfolio, giving the specified principal access to any products associated with the specified portfolio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_AssociatePrincipalWithPortfolio.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociateTagOptionWithResource": {
+                "privilege": "AssociateTagOptionWithResource",
+                "description": "Grants permission to associate the specified TagOption with the specified portfolio or product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_AssociateTagOptionWithResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "CreatePortfolio": {
+                "privilege": "CreatePortfolio",
+                "description": "Grants permission to create a portfolio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_CreatePortfolio.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePortfolio": {
+                "privilege": "DeletePortfolio",
+                "description": "Grants permission to delete a portfolio if all associations and shares have been removed from the portfolio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DeletePortfolio.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociatePrincipalFromPortfolio": {
+                "privilege": "DisassociatePrincipalFromPortfolio",
+                "description": "Grants permission to disassociate an IAM principal from a portfolio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DisassociatePrincipalFromPortfolio.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateTagOptionFromResource": {
+                "privilege": "DisassociateTagOptionFromResource",
+                "description": "Grants permission to disassociate the specified TagOption from the specified resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DisassociateTagOptionFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RejectPortfolioShare": {
+                "privilege": "RejectPortfolioShare",
+                "description": "Grants permission to reject a portfolio that has been shared with you that you previously accepted",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_RejectPortfolioShare.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePortfolio": {
+                "privilege": "UpdatePortfolio",
+                "description": "Grants permission to update the metadata fields and/or tags of an existing portfolio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_UpdatePortfolio.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "CreatePortfolioShare": {
+                "privilege": "CreatePortfolioShare",
+                "description": "Grants permission to share a portfolio you own with another AWS account",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_CreatePortfolioShare.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePortfolioShare": {
+                "privilege": "DeletePortfolioShare",
+                "description": "Grants permission to unshare a portfolio you own from an AWS account you previously shared the portfolio with",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DeletePortfolioShare.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePortfolioShare": {
+                "privilege": "UpdatePortfolioShare",
+                "description": "Grants permission to enable or disable resource sharing for an existing portfolio share",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_UpdatePortfolioShare.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "product": {
+        "resourceName": "Product",
+        "service": "servicecatalog",
+        "resourceArn": "arn:${Partition}:catalog:${Region}:${Account}:product/${ProductId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListLaunchPaths": {
+                "privilege": "ListLaunchPaths",
+                "description": "Grants permission to list the different ways to launch a given product as an end-user",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ListLaunchPaths.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListPortfoliosForProduct": {
+                "privilege": "ListPortfoliosForProduct",
+                "description": "Grants permission to list the portfolios associated with a given product",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ListPortfoliosForProduct.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListProvisioningArtifacts": {
+                "privilege": "ListProvisioningArtifacts",
+                "description": "Grants permission to list the provisioning artifacts associated with a given product",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ListProvisioningArtifacts.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListServiceActionsForProvisioningArtifact": {
+                "privilege": "ListServiceActionsForProvisioningArtifact",
+                "description": "Grants permission to list all the service actions associated with the specified provisioning artifact in your account",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ListServiceActionsForProvisioningArtifact.html",
+                "privConditions": {
+                    "servicecatalog:accountLevel": {
+                        "condition": "servicecatalog:accountLevel",
+                        "description": "Filters access by user to see and perform actions on resources created by anyone in the account",
+                        "type": "String"
+                    },
+                    "servicecatalog:roleLevel": {
+                        "condition": "servicecatalog:roleLevel",
+                        "description": "Filters access by user to see and perform actions on resources created either by them or by anyone federating into the same role as them",
+                        "type": "String"
+                    },
+                    "servicecatalog:userLevel": {
+                        "condition": "servicecatalog:userLevel",
+                        "description": "Filters access by user to see and perform actions on only resources that they created",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeProduct": {
+                "privilege": "DescribeProduct",
+                "description": "Grants permission to describe a product as an end-user",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DescribeProduct.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeProductAsAdmin": {
+                "privilege": "DescribeProductAsAdmin",
+                "description": "Grants permission to describe a product as an admin",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DescribeProductAsAdmin.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeProvisioningArtifact": {
+                "privilege": "DescribeProvisioningArtifact",
+                "description": "Grants permission to describe a provisioning artifact",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DescribeProvisioningArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeProvisioningParameters": {
+                "privilege": "DescribeProvisioningParameters",
+                "description": "Grants permission to describe the parameters that you need to specify to successfully provision a specified provisioning artifact",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DescribeProvisioningParameters.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AssociateServiceActionWithProvisioningArtifact": {
+                "privilege": "AssociateServiceActionWithProvisioningArtifact",
+                "description": "Grants permission to associate an action with a provisioning artifact",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_AssociateServiceActionWithProvisioningArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociateTagOptionWithResource": {
+                "privilege": "AssociateTagOptionWithResource",
+                "description": "Grants permission to associate the specified TagOption with the specified portfolio or product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_AssociateTagOptionWithResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "CreateConstraint": {
+                "privilege": "CreateConstraint",
+                "description": "Grants permission to create a constraint on an associated product and portfolio",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_CreateConstraint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateProduct": {
+                "privilege": "CreateProduct",
+                "description": "Grants permission to create a product and that product's first provisioning artifact",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_CreateProduct.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateProvisioningArtifact": {
+                "privilege": "CreateProvisioningArtifact",
+                "description": "Grants permission to add a new provisioning artifact to an existing product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_CreateProvisioningArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteProduct": {
+                "privilege": "DeleteProduct",
+                "description": "Grants permission to delete a product if all associations have been removed from the product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DeleteProduct.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteProvisioningArtifact": {
+                "privilege": "DeleteProvisioningArtifact",
+                "description": "Grants permission to delete a provisioning artifact from a product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DeleteProvisioningArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateServiceActionFromProvisioningArtifact": {
+                "privilege": "DisassociateServiceActionFromProvisioningArtifact",
+                "description": "Grants permission to disassociate the specified self-service action association from the specified provisioning artifact",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DisassociateServiceActionFromProvisioningArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateTagOptionFromResource": {
+                "privilege": "DisassociateTagOptionFromResource",
+                "description": "Grants permission to disassociate the specified TagOption from the specified resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_DisassociateTagOptionFromResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ImportAsProvisionedProduct": {
+                "privilege": "ImportAsProvisionedProduct",
+                "description": "Grants permission to import a resource into a provisioned product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ImportAsProvisionedProduct.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ProvisionProduct": {
+                "privilege": "ProvisionProduct",
+                "description": "Grants permission to provision a product with a specified provisioning artifact and launch parameters",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_ProvisionProduct.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateProduct": {
+                "privilege": "UpdateProduct",
+                "description": "Grants permission to update the metadata fields and/or tags of an existing product",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_UpdateProduct.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateProvisioningArtifact": {
+                "privilege": "UpdateProvisioningArtifact",
+                "description": "Grants permission to update the metadata fields of an existing provisioning artifact",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_UpdateProvisioningArtifact.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

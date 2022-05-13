@@ -1,0 +1,436 @@
+{
+    "domain": {
+        "resourceName": "domain",
+        "service": "codeartifact",
+        "resourceArn": "arn:${Partition}:codeartifact:${Region}:${Account}:domain/${DomainName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListRepositoriesInDomain": {
+                "privilege": "ListRepositoriesInDomain",
+                "description": "Grants permission to list the repositories in a domain",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositoriesInDomain.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a CodeArtifact resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeDomain": {
+                "privilege": "DescribeDomain",
+                "description": "Grants permission to return information about a domain",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribeDomain.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAuthorizationToken": {
+                "privilege": "GetAuthorizationToken",
+                "description": "Grants permission to generate a temporary authentication token for accessing repositories in a domain",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_GetAuthorizationToken.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDomainPermissionsPolicy": {
+                "privilege": "GetDomainPermissionsPolicy",
+                "description": "Grants permission to return a domain's resource policy",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_GetDomainPermissionsPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteDomain": {
+                "privilege": "DeleteDomain",
+                "description": "Grants permission to delete a domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeleteDomain.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutDomainPermissionsPolicy": {
+                "privilege": "PutDomainPermissionsPolicy",
+                "description": "Grants permission to attach a resource policy to a domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PutDomainPermissionsPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "DeleteDomainPermissionsPolicy": {
+                "privilege": "DeleteDomainPermissionsPolicy",
+                "description": "Grants permission to delete the resource policy set on a domain",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeleteDomainPermissionsPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a CodeArtifact resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a CodeArtifact resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "repository": {
+        "resourceName": "repository",
+        "service": "codeartifact",
+        "resourceArn": "arn:${Partition}:codeartifact:${Region}:${Account}:repository/${DomainName}/${RepositoryName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListPackages": {
+                "privilege": "ListPackages",
+                "description": "Grants permission to list the packages in a repository",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a CodeArtifact resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeRepository": {
+                "privilege": "DescribeRepository",
+                "description": "Grants permission to return detailed information about a repository",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribeRepository.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRepositoryEndpoint": {
+                "privilege": "GetRepositoryEndpoint",
+                "description": "Grants permission to return an endpoint for a repository",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_GetRepositoryEndpoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRepositoryPermissionsPolicy": {
+                "privilege": "GetRepositoryPermissionsPolicy",
+                "description": "Grants permission to return a repository's resource policy",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_GetRepositoryPermissionsPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ReadFromRepository": {
+                "privilege": "ReadFromRepository",
+                "description": "Grants permission to return package assets and metadata from a repository endpoint",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/ug/repo-policies.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "AssociateExternalConnection": {
+                "privilege": "AssociateExternalConnection",
+                "description": "Grants permission to add an external connection to a repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssociateExternalConnection.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "AssociateWithDownstreamRepository": {
+                "privilege": "AssociateWithDownstreamRepository",
+                "description": "Grants permission to associate an existing repository as an upstream repository to another repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CopyPackageVersions": {
+                "privilege": "CopyPackageVersions",
+                "description": "Grants permission to copy package versions from one repository to another repository in the same domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CopyPackageVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteRepository": {
+                "privilege": "DeleteRepository",
+                "description": "Grants permission to delete a repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeleteRepository.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateExternalConnection": {
+                "privilege": "DisassociateExternalConnection",
+                "description": "Grants permission to disassociate an external connection from a repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisassociateExternalConnection.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutRepositoryPermissionsPolicy": {
+                "privilege": "PutRepositoryPermissionsPolicy",
+                "description": "Grants permission to attach a resource policy to a repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PutRepositoryPermissionsPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateRepository": {
+                "privilege": "UpdateRepository",
+                "description": "Grants permission to modify the properties of a repository",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "DeleteRepositoryPermissionsPolicy": {
+                "privilege": "DeleteRepositoryPermissionsPolicy",
+                "description": "Grants permission to delete the resource policy set on a repository",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeleteRepositoryPermissionsPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a CodeArtifact resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from a CodeArtifact resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "package": {
+        "resourceName": "package",
+        "service": "codeartifact",
+        "resourceArn": "arn:${Partition}:codeartifact:${Region}:${Account}:package/${DomainName}/${RepositoryName}/${PackageFormat}/${PackageNamespace}/${PackageName}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListPackageVersionAssets": {
+                "privilege": "ListPackageVersionAssets",
+                "description": "Grants permission to list a package version's assets",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersionAssets.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListPackageVersionDependencies": {
+                "privilege": "ListPackageVersionDependencies",
+                "description": "Grants permission to list the direct dependencies of a package version",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersionDependencies.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListPackageVersions": {
+                "privilege": "ListPackageVersions",
+                "description": "Grants permission to list a package's versions",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribePackageVersion": {
+                "privilege": "DescribePackageVersion",
+                "description": "Grants permission to return information about a package version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPackageVersionAsset": {
+                "privilege": "GetPackageVersionAsset",
+                "description": "Grants permission to return an asset (or file) that is part of a package version",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_GetPackageVersionAsset.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPackageVersionReadme": {
+                "privilege": "GetPackageVersionReadme",
+                "description": "Grants permission to return a package version's readme file",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_GetPackageVersionReadme.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CopyPackageVersions": {
+                "privilege": "CopyPackageVersions",
+                "description": "Grants permission to copy package versions from one repository to another repository in the same domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CopyPackageVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePackageVersions": {
+                "privilege": "DeletePackageVersions",
+                "description": "Grants permission to delete package versions",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisposePackageVersions": {
+                "privilege": "DisposePackageVersions",
+                "description": "Grants permission to set the status of package versions to Disposed and delete their assets",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisposePackageVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PublishPackageVersion": {
+                "privilege": "PublishPackageVersion",
+                "description": "Grants permission to publish assets and metadata to a repository endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/ug/repo-policies.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutPackageMetadata": {
+                "privilege": "PutPackageMetadata",
+                "description": "Grants permission to add, modify or remove package metadata using a repository endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/ug/repo-policies.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePackageVersionsStatus": {
+                "privilege": "UpdatePackageVersionsStatus",
+                "description": "Grants permission to modify the status of one or more versions of a package",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

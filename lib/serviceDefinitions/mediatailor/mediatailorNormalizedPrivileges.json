@@ -1,0 +1,863 @@
+{
+    "configureLogsForPlaybackConfiguration": {
+        "privilege": "ConfigureLogsForPlaybackConfiguration",
+        "description": "Grants permission to configure logs for a playback configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/configurelogs-playbackconfiguration.html",
+        "service": "mediatailor",
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createChannel": {
+        "privilege": "CreateChannel",
+        "description": "Grants permission to create a new channel",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createPrefetchSchedule": {
+        "privilege": "CreatePrefetchSchedule",
+        "description": "Grants permission to create a prefetch schedule for the playback configuration with the specified playback configuration name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/prefetchschedule-playbackconfigurationname-name.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createProgram": {
+        "privilege": "CreateProgram",
+        "description": "Grants permission to create a new program on the channel with the specified channel name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-program-programname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createSourceLocation": {
+        "privilege": "CreateSourceLocation",
+        "description": "Grants permission to create a new source location",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createVodSource": {
+        "privilege": "CreateVodSource",
+        "description": "Grants permission to create a new VOD source on the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-vodsource-vodsourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteChannel": {
+        "privilege": "DeleteChannel",
+        "description": "Grants permission to delete the channel with the specified channel name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteChannelPolicy": {
+        "privilege": "DeleteChannelPolicy",
+        "description": "Grants permission to delete the IAM policy on the channel with the specified channel name",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-policy.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePlaybackConfiguration": {
+        "privilege": "DeletePlaybackConfiguration",
+        "description": "Grants permission to delete the specified playback configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/playbackconfiguration-name.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePrefetchSchedule": {
+        "privilege": "DeletePrefetchSchedule",
+        "description": "Grants permission to delete a prefetch schedule for a playback configuration with the specified prefetch schedule name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/prefetchschedule-playbackconfigurationname-name.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "prefetchSchedule": {
+                "resourceName": "prefetchSchedule",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:prefetchSchedule/${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteProgram": {
+        "privilege": "DeleteProgram",
+        "description": "Grants permission to delete the program with the specified program name on the channel with the specified channel name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-program-programname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "program": {
+                "resourceName": "program",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:program/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSourceLocation": {
+        "privilege": "DeleteSourceLocation",
+        "description": "Grants permission to delete the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteVodSource": {
+        "privilege": "DeleteVodSource",
+        "description": "Grants permission to delete the VOD source with the specified VOD source name on the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-vodsource-vodsourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vodSource": {
+                "resourceName": "vodSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:vodSource/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeChannel": {
+        "privilege": "DescribeChannel",
+        "description": "Grants permission to retrieve the channel with the specified channel name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeProgram": {
+        "privilege": "DescribeProgram",
+        "description": "Grants permission to retrieve the program with the specified program name on the channel with the specified channel name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-program-programname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "program": {
+                "resourceName": "program",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:program/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSourceLocation": {
+        "privilege": "DescribeSourceLocation",
+        "description": "Grants permission to retrieve the source location with the specified source location name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeVodSource": {
+        "privilege": "DescribeVodSource",
+        "description": "Grants permission to retrieve the VOD source with the specified VOD source name on the source location with the specified source location name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-vodsource-vodsourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vodSource": {
+                "resourceName": "vodSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:vodSource/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getChannelPolicy": {
+        "privilege": "GetChannelPolicy",
+        "description": "Grants permission to read the IAM policy on the channel with the specified channel name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-policy.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getChannelSchedule": {
+        "privilege": "GetChannelSchedule",
+        "description": "Grants permission to retrieve the schedule of programs on the channel with the specified channel name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-schedule.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPlaybackConfiguration": {
+        "privilege": "GetPlaybackConfiguration",
+        "description": "Grants permission to retrieve the configuration for the specified name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/playbackconfiguration-name.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPrefetchSchedule": {
+        "privilege": "GetPrefetchSchedule",
+        "description": "Grants permission to retrieve prefetch schedule for a playback configuration with the specified prefetch schedule name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/prefetchschedule-playbackconfigurationname-name.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "prefetchSchedule": {
+                "resourceName": "prefetchSchedule",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:prefetchSchedule/${ResourceId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listAlerts": {
+        "privilege": "ListAlerts",
+        "description": "Grants permission to retrieve the list of alerts on a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/alerts.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listChannels": {
+        "privilege": "ListChannels",
+        "description": "Grants permission to retrieve the list of existing channels",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channels.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPlaybackConfigurations": {
+        "privilege": "ListPlaybackConfigurations",
+        "description": "Grants permission to retrieve the list of available configurations",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/playbackconfigurations.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPrefetchSchedules": {
+        "privilege": "ListPrefetchSchedules",
+        "description": "Grants permission to retrieve the list of prefetch schedules for a playback configuration",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/prefetchschedule-playbackconfigurationname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listSourceLocations": {
+        "privilege": "ListSourceLocations",
+        "description": "Grants permission to retrieve the list of existing source locations",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocations.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list the tags assigned to the specified playback configuration resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listVodSources": {
+        "privilege": "ListVodSources",
+        "description": "Grants permission to retrieve the list of existing VOD sources on the source location with the specified source location name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-vodsources.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putChannelPolicy": {
+        "privilege": "PutChannelPolicy",
+        "description": "Grants permission to set the IAM policy on the channel with the specified channel name",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-policy.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putPlaybackConfiguration": {
+        "privilege": "PutPlaybackConfiguration",
+        "description": "Grants permission to add a new configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/playbackconfiguration.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "startChannel": {
+        "privilege": "StartChannel",
+        "description": "Grants permission to start the channel with the specified channel name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-start.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopChannel": {
+        "privilege": "StopChannel",
+        "description": "Grants permission to stop the channel with the specified channel name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname-stop.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add tags to the specified playback configuration resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tags from the specified playback configuration resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "updateChannel": {
+        "privilege": "UpdateChannel",
+        "description": "Grants permission to update the channel with the specified channel name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/channel-channelname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSourceLocation": {
+        "privilege": "UpdateSourceLocation",
+        "description": "Grants permission to update the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateVodSource": {
+        "privilege": "UpdateVodSource",
+        "description": "Grants permission to update the VOD source with the specified VOD source name on the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-vodsource-vodsourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vodSource": {
+                "resourceName": "vodSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:vodSource/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

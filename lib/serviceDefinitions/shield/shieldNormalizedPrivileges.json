@@ -1,0 +1,636 @@
+{
+    "associateDRTLogBucket": {
+        "privilege": "AssociateDRTLogBucket",
+        "description": "Grants permission to authorize the DDoS Response team to access the specified Amazon S3 bucket containing your flow logs",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_AssociateDRTLogBucket.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "associateDRTRole": {
+        "privilege": "AssociateDRTRole",
+        "description": "Grants permission to authorize the DDoS Response team using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_AssociateDRTRole.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "associateHealthCheck": {
+        "privilege": "AssociateHealthCheck",
+        "description": "Grants permission to add health-based detection to the Shield Advanced protection for a resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_AssociateHealthCheck.html",
+        "service": "shield",
+        "dependentActions": [
+            "route53:GetHealthCheck"
+        ],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "associateProactiveEngagementDetails": {
+        "privilege": "AssociateProactiveEngagementDetails",
+        "description": "Grants permission to initialize proactive engagement and set the list of contacts for the DDoS Response Team (DRT) to use",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_AssociateProactiveEngagementDetails.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createProtection": {
+        "privilege": "CreateProtection",
+        "description": "Grants permission to activate DDoS protection service for a given resource ARN",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateProtection.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createProtectionGroup": {
+        "privilege": "CreateProtectionGroup",
+        "description": "Grants permission to create a grouping of protected resources so they can be handled as a collective",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateProtectionGroup.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createSubscription": {
+        "privilege": "CreateSubscription",
+        "description": "Grants permission to activate subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteProtection": {
+        "privilege": "DeleteProtection",
+        "description": "Grants permission to delete an existing protection",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DeleteProtection.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteProtectionGroup": {
+        "privilege": "DeleteProtectionGroup",
+        "description": "Grants permission to remove the specified protection group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DeleteProtectionGroup.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSubscription": {
+        "privilege": "DeleteSubscription",
+        "description": "Grants permission to deactivate subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DeleteSubscription.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeAttack": {
+        "privilege": "DescribeAttack",
+        "description": "Grants permission to get attack details",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeAttack.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "attack": {
+                "resourceName": "attack",
+                "resourceArn": "arn:${Partition}:shield::${Account}:attack/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeAttackStatistics": {
+        "privilege": "DescribeAttackStatistics",
+        "description": "Grants permission to describe information about the number and type of attacks AWS Shield has detected in the last year",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeAttackStatistics.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeDRTAccess": {
+        "privilege": "DescribeDRTAccess",
+        "description": "Grants permission to describe the current role and list of Amazon S3 log buckets used by the DDoS Response team to access your AWS account while assisting with attack mitigation",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeDRTAccess.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEmergencyContactSettings": {
+        "privilege": "DescribeEmergencyContactSettings",
+        "description": "Grants permission to list the email addresses that the DRT can use to contact you during a suspected attack",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeEmergencyContactSettings.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeProtection": {
+        "privilege": "DescribeProtection",
+        "description": "Grants permission to get protection details",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeProtection.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeProtectionGroup": {
+        "privilege": "DescribeProtectionGroup",
+        "description": "Grants permission to describe the specification for the specified protection group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeProtectionGroup.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSubscription": {
+        "privilege": "DescribeSubscription",
+        "description": "Grants permission to get subscription details, such as start time",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DescribeSubscription.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disableApplicationLayerAutomaticResponse": {
+        "privilege": "DisableApplicationLayerAutomaticResponse",
+        "description": "Grants permission to disable application layer automatic response for Shield Advanced protection for a resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DisableApplicationLayerAutomaticResponse.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disableProactiveEngagement": {
+        "privilege": "DisableProactiveEngagement",
+        "description": "Grants permission to remove authorization from the DDoS Response Team (DRT) to notify contacts about escalations",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DisableProactiveEngagement.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disassociateDRTLogBucket": {
+        "privilege": "DisassociateDRTLogBucket",
+        "description": "Grants permission to remove the DDoS Response team's access to the specified Amazon S3 bucket containing your flow logs",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DisassociateDRTLogBucket.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disassociateDRTRole": {
+        "privilege": "DisassociateDRTRole",
+        "description": "Grants permission to remove the DDoS Response team's access to your AWS account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DisassociateDRTRole.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disassociateHealthCheck": {
+        "privilege": "DisassociateHealthCheck",
+        "description": "Grants permission to remove health-based detection from the Shield Advanced protection for a resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_DisassociateHealthCheck.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "enableApplicationLayerAutomaticResponse": {
+        "privilege": "EnableApplicationLayerAutomaticResponse",
+        "description": "Grants permission to enable application layer automatic response for Shield Advanced protection for a resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_EnableApplicationLayerAutomaticResponse.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "enableProactiveEngagement": {
+        "privilege": "EnableProactiveEngagement",
+        "description": "Grants permission to authorize the DDoS Response Team (DRT) to use email and phone to notify contacts about escalations",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_EnableProactiveEngagement.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getSubscriptionState": {
+        "privilege": "GetSubscriptionState",
+        "description": "Grants permission to get subscription state",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_GetSubscriptionState.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listAttacks": {
+        "privilege": "ListAttacks",
+        "description": "Grants permission to list all existing attacks",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_ListAttacks.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listProtectionGroups": {
+        "privilege": "ListProtectionGroups",
+        "description": "Grants permission to retrieve the protection groups for the account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_ListProtectionGroups.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listProtections": {
+        "privilege": "ListProtections",
+        "description": "Grants permission to list all existing protections",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_ListProtections.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listResourcesInProtectionGroup": {
+        "privilege": "ListResourcesInProtectionGroup",
+        "description": "Grants permission to retrieve the resources that are included in the protection group",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_ListResourcesInProtectionGroup.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to get information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_ListTagsForResource.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add or updates tags for a resource in AWS Shield",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_TagResource.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tags from a resource in AWS Shield",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_UntagResource.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protection": {
+                "resourceName": "protection",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateApplicationLayerAutomaticResponse": {
+        "privilege": "UpdateApplicationLayerAutomaticResponse",
+        "description": "Grants permission to update application layer automatic response for Shield Advanced protection for a resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_UpdateApplicationLayerAutomaticResponse.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateEmergencyContactSettings": {
+        "privilege": "UpdateEmergencyContactSettings",
+        "description": "Grants permission to update the details of the list of email addresses that the DRT can use to contact you during a suspected attack",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_UpdateEmergencyContactSettings.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateProtectionGroup": {
+        "privilege": "UpdateProtectionGroup",
+        "description": "Grants permission to update an existing protection group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_UpdateProtectionGroup.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "protectionGroup": {
+                "resourceName": "protection-group",
+                "resourceArn": "arn:${Partition}:shield::${Account}:protection-group/${Id}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSubscription": {
+        "privilege": "UpdateSubscription",
+        "description": "Grants permission to update the details of an existing subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_UpdateSubscription.html",
+        "service": "shield",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    }
+}

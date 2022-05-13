@@ -1,0 +1,1354 @@
+{
+    "addTagsToResource": {
+        "privilege": "AddTagsToResource",
+        "description": "Grants permission to add metadata tags to DMS resources, including replication instances, endpoints, security groups, and migration tasks",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_AddTagsToResource.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "certificate": {
+                "resourceName": "Certificate",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:cert:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventSubscription": {
+                "resourceName": "EventSubscription",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:es:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationSubnetGroup": {
+                "resourceName": "ReplicationSubnetGroup",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:subgrp:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "applyPendingMaintenanceAction": {
+        "privilege": "ApplyPendingMaintenanceAction",
+        "description": "Grants permission to apply a pending maintenance action to a resource (for example, to a replication instance)",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ApplyPendingMaintenanceAction.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "cancelReplicationTaskAssessmentRun": {
+        "privilege": "CancelReplicationTaskAssessmentRun",
+        "description": "Grants permission to cancel a single premigration assessment run",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelReplicationTaskAssessmentRun.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTaskAssessmentRun": {
+                "resourceName": "ReplicationTaskAssessmentRun",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:assessment-run:*",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createEndpoint": {
+        "privilege": "CreateEndpoint",
+        "description": "Grants permission to create an endpoint using the provided settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateEndpoint.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createEventSubscription": {
+        "privilege": "CreateEventSubscription",
+        "description": "Grants permission to create an AWS DMS event notification subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateEventSubscription.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createReplicationInstance": {
+        "privilege": "CreateReplicationInstance",
+        "description": "Grants permission to create a replication instance using the specified parameters",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createReplicationSubnetGroup": {
+        "privilege": "CreateReplicationSubnetGroup",
+        "description": "Grants permission to create a replication subnet group given a list of the subnet IDs in a VPC",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationSubnetGroup.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createReplicationTask": {
+        "privilege": "CreateReplicationTask",
+        "description": "Grants permission to create a replication task using the specified parameters",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteCertificate": {
+        "privilege": "DeleteCertificate",
+        "description": "Grants permission to delete the specified certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteCertificate.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "certificate": {
+                "resourceName": "Certificate",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:cert:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteConnection": {
+        "privilege": "DeleteConnection",
+        "description": "Grants permission to delete the specified connection between a replication instance and an endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteConnection.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEndpoint": {
+        "privilege": "DeleteEndpoint",
+        "description": "Grants permission to delete the specified endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteEndpoint.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEventSubscription": {
+        "privilege": "DeleteEventSubscription",
+        "description": "Grants permission to delete an AWS DMS event subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteEventSubscription.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "eventSubscription": {
+                "resourceName": "EventSubscription",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:es:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteReplicationInstance": {
+        "privilege": "DeleteReplicationInstance",
+        "description": "Grants permission to delete the specified replication instance",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationInstance.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteReplicationSubnetGroup": {
+        "privilege": "DeleteReplicationSubnetGroup",
+        "description": "Grants permission to deletes a subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationSubnetGroup": {
+                "resourceName": "ReplicationSubnetGroup",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:subgrp:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteReplicationTask": {
+        "privilege": "DeleteReplicationTask",
+        "description": "Grants permission to delete the specified replication task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteReplicationTaskAssessmentRun": {
+        "privilege": "DeleteReplicationTaskAssessmentRun",
+        "description": "Grants permission to delete the record of a single premigration assessment run",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTaskAssessmentRun.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTaskAssessmentRun": {
+                "resourceName": "ReplicationTaskAssessmentRun",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:assessment-run:*",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeAccountAttributes": {
+        "privilege": "DescribeAccountAttributes",
+        "description": "Grants permission to list all of the AWS DMS attributes for a customer account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeAccountAttributes.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeApplicableIndividualAssessments": {
+        "privilege": "DescribeApplicableIndividualAssessments",
+        "description": "Grants permission to list individual assessments that you can specify for a new premigration assessment run",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeApplicableIndividualAssessments.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeCertificates": {
+        "privilege": "DescribeCertificates",
+        "description": "Grants permission to provide a description of the certificate",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeCertificates.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeConnections": {
+        "privilege": "DescribeConnections",
+        "description": "Grants permission to describe the status of the connections that have been made between the replication instance and an endpoint",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeConnections.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEndpointSettings": {
+        "privilege": "DescribeEndpointSettings",
+        "description": "Grants permission to return the possible endpoint settings available when you create an endpoint for a specific database engine",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeEndpointSettings.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEndpointTypes": {
+        "privilege": "DescribeEndpointTypes",
+        "description": "Grants permission to return information about the type of endpoints available",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeEndpointTypes.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEndpoints": {
+        "privilege": "DescribeEndpoints",
+        "description": "Grants permission to return information about the endpoints for your account in the current region",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeEndpoints.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEventCategories": {
+        "privilege": "DescribeEventCategories",
+        "description": "Grants permission to list categories for all event source types, or, if specified, for a specified source type",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeEventCategories.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEventSubscriptions": {
+        "privilege": "DescribeEventSubscriptions",
+        "description": "Grants permission to list all the event subscriptions for a customer account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeEventSubscriptions.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeEvents": {
+        "privilege": "DescribeEvents",
+        "description": "Grants permission to list events for a given source identifier and source type",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeEvents.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeOrderableReplicationInstances": {
+        "privilege": "DescribeOrderableReplicationInstances",
+        "description": "Grants permission to return information about the replication instance types that can be created in the specified region",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeOrderableReplicationInstances.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeRefreshSchemasStatus": {
+        "privilege": "DescribeRefreshSchemasStatus",
+        "description": "Grants permission to returns the status of the RefreshSchemas operation",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeRefreshSchemasStatus.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeReplicationInstanceTaskLogs": {
+        "privilege": "DescribeReplicationInstanceTaskLogs",
+        "description": "Grants permission to return information about the task logs for the specified task",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationInstanceTaskLogs.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeReplicationInstances": {
+        "privilege": "DescribeReplicationInstances",
+        "description": "Grants permission to return information about replication instances for your account in the current region",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationInstances.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeReplicationSubnetGroups": {
+        "privilege": "DescribeReplicationSubnetGroups",
+        "description": "Grants permission to return information about the replication subnet groups",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationSubnetGroups.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeReplicationTaskAssessmentResults": {
+        "privilege": "DescribeReplicationTaskAssessmentResults",
+        "description": "Grants permission to return the latest task assessment results from Amazon S3",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationTaskAssessmentResults.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeReplicationTaskAssessmentRuns": {
+        "privilege": "DescribeReplicationTaskAssessmentRuns",
+        "description": "Grants permission to return a paginated list of premigration assessment runs based on filter settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationTaskAssessmentRuns.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTaskAssessmentRun": {
+                "resourceName": "ReplicationTaskAssessmentRun",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:assessment-run:*",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeReplicationTaskIndividualAssessments": {
+        "privilege": "DescribeReplicationTaskIndividualAssessments",
+        "description": "Grants permission to return a paginated list of individual assessments based on filter settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationTaskIndividualAssessments.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTaskAssessmentRun": {
+                "resourceName": "ReplicationTaskAssessmentRun",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:assessment-run:*",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeReplicationTasks": {
+        "privilege": "DescribeReplicationTasks",
+        "description": "Grants permission to return information about replication tasks for your account in the current region",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeReplicationTasks.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeSchemas": {
+        "privilege": "DescribeSchemas",
+        "description": "Grants permission to return information about the schema for the specified endpoint",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeSchemas.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeTableStatistics": {
+        "privilege": "DescribeTableStatistics",
+        "description": "Grants permission to return table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeTableStatistics.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "importCertificate": {
+        "privilege": "ImportCertificate",
+        "description": "Grants permission to upload the specified certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ImportCertificate.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list all tags for an AWS DMS resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ListTagsForResource.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "certificate": {
+                "resourceName": "Certificate",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:cert:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventSubscription": {
+                "resourceName": "EventSubscription",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:es:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationSubnetGroup": {
+                "resourceName": "ReplicationSubnetGroup",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:subgrp:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyEndpoint": {
+        "privilege": "ModifyEndpoint",
+        "description": "Grants permission to modify the specified endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyEndpoint.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "certificate": {
+                "resourceName": "Certificate",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:cert:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyEventSubscription": {
+        "privilege": "ModifyEventSubscription",
+        "description": "Grants permission to modify an existing AWS DMS event notification subscription",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyEventSubscription.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyReplicationInstance": {
+        "privilege": "ModifyReplicationInstance",
+        "description": "Grants permission to modify the replication instance to apply new settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationInstance.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifyReplicationSubnetGroup": {
+        "privilege": "ModifyReplicationSubnetGroup",
+        "description": "Grants permission to modify the settings for the specified replication subnet group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationSubnetGroup.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "modifyReplicationTask": {
+        "privilege": "ModifyReplicationTask",
+        "description": "Grants permission to modify the specified replication task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "moveReplicationTask": {
+        "privilege": "MoveReplicationTask",
+        "description": "Grants permission to move the specified replication task to a different replication instance",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "rebootReplicationInstance": {
+        "privilege": "RebootReplicationInstance",
+        "description": "Grants permission to reboot a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_RebootReplicationInstance.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "refreshSchemas": {
+        "privilege": "RefreshSchemas",
+        "description": "Grants permission to populate the schema for the specified endpoint",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_RefreshSchemas.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "reloadTables": {
+        "privilege": "ReloadTables",
+        "description": "Grants permission to reload the target database table with the source data",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_ReloadTables.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "removeTagsFromResource": {
+        "privilege": "RemoveTagsFromResource",
+        "description": "Grants permission to remove metadata tags from a DMS resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_RemoveTagsFromResource.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the presence of tag keys in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "certificate": {
+                "resourceName": "Certificate",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:cert:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "eventSubscription": {
+                "resourceName": "EventSubscription",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:es:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationSubnetGroup": {
+                "resourceName": "ReplicationSubnetGroup",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:subgrp:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startReplicationTask": {
+        "privilege": "StartReplicationTask",
+        "description": "Grants permission to start the replication task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startReplicationTaskAssessment": {
+        "privilege": "StartReplicationTaskAssessment",
+        "description": "Grants permission to start the replication task assessment for unsupported data types in the source database",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startReplicationTaskAssessmentRun": {
+        "privilege": "StartReplicationTaskAssessmentRun",
+        "description": "Grants permission to start a new premigration assessment run for one or more individual assessments of a migration task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopReplicationTask": {
+        "privilege": "StopReplicationTask",
+        "description": "Grants permission to stop the replication task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "replicationTask": {
+                "resourceName": "ReplicationTask",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:task:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "testConnection": {
+        "privilege": "TestConnection",
+        "description": "Grants permission to test the connection between the replication instance and the endpoint",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/dms/latest/APIReference/API_TestConnection.html",
+        "service": "dms",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "Endpoint",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:endpoint:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationInstance": {
+                "resourceName": "ReplicationInstance",
+                "resourceArn": "arn:${Partition}:dms:${Region}:${Account}:rep:*",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

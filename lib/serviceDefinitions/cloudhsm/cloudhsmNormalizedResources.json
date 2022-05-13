@@ -1,0 +1,233 @@
+{
+    "backup": {
+        "resourceName": "backup",
+        "service": "cloudhsm",
+        "resourceArn": "arn:${Partition}:cloudhsm:${Region}:${Account}:backup/${CloudHsmBackupInstanceName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Gets a list of tags for the specified AWS CloudHSM cluster",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CopyBackupToRegion": {
+                "privilege": "CopyBackupToRegion",
+                "description": "Creates a copy of a backup in the specified region",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CopyBackupToRegion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateCluster": {
+                "privilege": "CreateCluster",
+                "description": "Creates a new AWS CloudHSM cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateCluster.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteBackup": {
+                "privilege": "DeleteBackup",
+                "description": "Deletes the specified CloudHSM backup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DeleteBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ModifyBackupAttributes": {
+                "privilege": "ModifyBackupAttributes",
+                "description": "Modifies attributes for AWS CloudHSM backup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_ModifyBackupAttributes.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "RestoreBackup": {
+                "privilege": "RestoreBackup",
+                "description": "Restores the specified CloudHSM backup",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_RestoreBackup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Adds or overwrites one or more tags for the specified AWS CloudHSM cluster",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Removes the specified tag or tags from the specified AWS CloudHSM cluster",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "cluster": {
+        "resourceName": "cluster",
+        "service": "cloudhsm",
+        "resourceArn": "arn:${Partition}:cloudhsm:${Region}:${Account}:cluster/${CloudHsmClusterInstanceName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Gets a list of tags for the specified AWS CloudHSM cluster",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateHsm": {
+                "privilege": "CreateHsm",
+                "description": "Creates a new hardware security module (HSM) in the specified AWS CloudHSM cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCluster": {
+                "privilege": "DeleteCluster",
+                "description": "Deletes the specified AWS CloudHSM cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DeleteCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "InitializeCluster": {
+                "privilege": "InitializeCluster",
+                "description": "Claims an AWS CloudHSM cluster",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_InitializeCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ModifyCluster": {
+                "privilege": "ModifyCluster",
+                "description": "Modifies AWS CloudHSM cluster.",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_ModifyCluster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Adds or overwrites one or more tags for the specified AWS CloudHSM cluster",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Removes the specified tag or tags from the specified AWS CloudHSM cluster",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

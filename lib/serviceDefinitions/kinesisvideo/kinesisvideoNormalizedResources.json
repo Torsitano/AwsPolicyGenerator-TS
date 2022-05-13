@@ -1,0 +1,396 @@
+{
+    "stream": {
+        "resourceName": "stream",
+        "service": "kinesisvideo",
+        "resourceArn": "arn:${Partition}:kinesisvideo:${Region}:${Account}:stream/${StreamName}/${CreationTime}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value assoicated with the stream",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribeStream": {
+                "privilege": "DescribeStream",
+                "description": "Grants permission to describe the specified Kinesis video stream",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListFragments": {
+                "privilege": "ListFragments",
+                "description": "Grants permission to list the fragments from archival storage based on the pagination token or selector type with range specified",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_ListFragments.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetClip": {
+                "privilege": "GetClip",
+                "description": "Grants permission to get a media clip from a video stream",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetClip.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDASHStreamingSessionURL": {
+                "privilege": "GetDASHStreamingSessionURL",
+                "description": "Grants permission to create a URL for MPEG-DASH video streaming",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetDASHStreamingSessionURL.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDataEndpoint": {
+                "privilege": "GetDataEndpoint",
+                "description": "Grants permission to get an endpoint for a specified stream for either reading or writing media data to Kinesis Video Streams",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetDataEndpoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetHLSStreamingSessionURL": {
+                "privilege": "GetHLSStreamingSessionURL",
+                "description": "Grants permission to create a URL for HLS video streaming",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetHLSStreamingSessionURL.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetMedia": {
+                "privilege": "GetMedia",
+                "description": "Grants permission to return media content of a Kinesis video stream",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetMedia.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetMediaForFragmentList": {
+                "privilege": "GetMediaForFragmentList",
+                "description": "Grants permission to read and return media data only from persisted storage",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetMediaForFragmentList.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to fetch the tags associated with your resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTagsForStream": {
+                "privilege": "ListTagsForStream",
+                "description": "Grants permission to fetch the tags associated with Kinesis video stream",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_ListTagsForStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateStream": {
+                "privilege": "CreateStream",
+                "description": "Grants permission to create a Kinesis video stream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_CreateStream.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteStream": {
+                "privilege": "DeleteStream",
+                "description": "Grants permission to delete an existing Kinesis video stream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DeleteStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutMedia": {
+                "privilege": "PutMedia",
+                "description": "Grants permission to send media data to a Kinesis video stream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_PutMedia.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateDataRetention": {
+                "privilege": "UpdateDataRetention",
+                "description": "Grants permission to update the data retention period of your Kinesis video stream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_UpdateDataRetention.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateStream": {
+                "privilege": "UpdateStream",
+                "description": "Grants permission to update an existing Kinesis video stream",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_UpdateStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to attach set of tags to your resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "TagStream": {
+                "privilege": "TagStream",
+                "description": "Grants permission to attach set of tags to your Kinesis video streams",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_TagStream.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove one or more tags from your resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagStream": {
+                "privilege": "UntagStream",
+                "description": "Grants permission to remove one or more tags from your Kinesis video streams",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_UntagStream.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        }
+    },
+    "channel": {
+        "resourceName": "channel",
+        "service": "kinesisvideo",
+        "resourceArn": "arn:${Partition}:kinesisvideo:${Region}:${Account}:channel/${ChannelName}/${CreationTime}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value assoicated with the stream",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "DescribeSignalingChannel": {
+                "privilege": "DescribeSignalingChannel",
+                "description": "Grants permission to describe the specified signaling channel",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeSignalingChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetIceServerConfig": {
+                "privilege": "GetIceServerConfig",
+                "description": "Grants permission to get the ICE server configuration",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetIceServerConfig.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetSignalingChannelEndpoint": {
+                "privilege": "GetSignalingChannelEndpoint",
+                "description": "Grants permission to get endpoints for a specified combination of protocol and role for a signaling channel",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetSignalingChannelEndpoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to fetch the tags associated with your resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ConnectAsMaster": {
+                "privilege": "ConnectAsMaster",
+                "description": "Grants permission to connect as a master to the signaling channel specified by the endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_ConnectAsMaster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ConnectAsViewer": {
+                "privilege": "ConnectAsViewer",
+                "description": "Grants permission to connect as a viewer to the signaling channel specified by the endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_ConnectAsViewer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateSignalingChannel": {
+                "privilege": "CreateSignalingChannel",
+                "description": "Grants permission to create a signaling channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_CreateSignalingChannel.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteSignalingChannel": {
+                "privilege": "DeleteSignalingChannel",
+                "description": "Grants permission to delete an existing signaling channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DeleteSignalingChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SendAlexaOfferToMaster": {
+                "privilege": "SendAlexaOfferToMaster",
+                "description": "Grants permission to send the Alexa SDP offer to the master",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_SendAlexaOfferToMaster.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateSignalingChannel": {
+                "privilege": "UpdateSignalingChannel",
+                "description": "Grants permission to update an existing signaling channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_UpdateSignalingChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to attach set of tags to your resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters requests based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove one or more tags from your resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters requests based on the presence of mandatory tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

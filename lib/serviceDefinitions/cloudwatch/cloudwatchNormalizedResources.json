@@ -1,0 +1,412 @@
+{
+    "alarm": {
+        "resourceName": "alarm",
+        "service": "cloudwatch",
+        "resourceArn": "arn:${Partition}:cloudwatch:${Region}:${Account}:alarm:${AlarmName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an Amazon CloudWatch resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAlarmHistory": {
+                "privilege": "DescribeAlarmHistory",
+                "description": "Grants permission to retrieve the history for the specified alarm",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeAlarms": {
+                "privilege": "DescribeAlarms",
+                "description": "Grants permission to describe all alarms, currently owned by the user's account",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteAlarms": {
+                "privilege": "DeleteAlarms",
+                "description": "Grants permission to delete a collection of alarms",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DeleteAlarms.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisableAlarmActions": {
+                "privilege": "DisableAlarmActions",
+                "description": "Grants permission to disable actions for a collection of alarms",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DisableAlarmActions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "EnableAlarmActions": {
+                "privilege": "EnableAlarmActions",
+                "description": "Grants permission to enable actions for a collection of alarms",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_EnableAlarmActions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutCompositeAlarm": {
+                "privilege": "PutCompositeAlarm",
+                "description": "Grants permission to create or update a composite alarm",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutCompositeAlarm.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "cloudwatch:AlarmActions": {
+                        "condition": "cloudwatch:AlarmActions",
+                        "description": "Filters actions based on defined alarm actions",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "PutMetricAlarm": {
+                "privilege": "PutMetricAlarm",
+                "description": "Grants permission to create or update an alarm and associates it with the specified Amazon CloudWatch metric",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "cloudwatch:AlarmActions": {
+                        "condition": "cloudwatch:AlarmActions",
+                        "description": "Filters actions based on defined alarm actions",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "SetAlarmState": {
+                "privilege": "SetAlarmState",
+                "description": "Grants permission to temporarily set the state of an alarm for testing purposes",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_SetAlarmState.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to an Amazon CloudWatch resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from an Amazon CloudWatch resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "dashboard": {
+        "resourceName": "dashboard",
+        "service": "cloudwatch",
+        "resourceArn": "arn:${Partition}:cloudwatch::${Account}:dashboard/${DashboardName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetDashboard": {
+                "privilege": "GetDashboard",
+                "description": "Grants permission to display the details of the CloudWatch dashboard you specify",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetDashboard.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteDashboards": {
+                "privilege": "DeleteDashboards",
+                "description": "Grants permission to delete all CloudWatch dashboards that you specify",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DeleteDashboards.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutDashboard": {
+                "privilege": "PutDashboard",
+                "description": "Grants permission to create a CloudWatch dashboard, or update an existing dashboard if it already exists",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutDashboard.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "insightRule": {
+        "resourceName": "insight-rule",
+        "service": "cloudwatch",
+        "resourceArn": "arn:${Partition}:cloudwatch:${Region}:${Account}:insight-rule/${InsightRuleName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an Amazon CloudWatch resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "GetInsightRuleReport": {
+                "privilege": "GetInsightRuleReport",
+                "description": "Grants permission to return the top-N report of unique contributors over a time range for a given insight rule",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteInsightRules": {
+                "privilege": "DeleteInsightRules",
+                "description": "Grants permission to delete a collection of insight rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DeleteInsightRules.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisableInsightRules": {
+                "privilege": "DisableInsightRules",
+                "description": "Grants permission to disable a collection of insight rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DisableInsightRules.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "EnableInsightRules": {
+                "privilege": "EnableInsightRules",
+                "description": "Grants permission to enable a collection of insight rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_EnableInsightRules.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutInsightRule": {
+                "privilege": "PutInsightRule",
+                "description": "Grants permission to create a new insight rule or replace an existing insight rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutInsightRule.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "cloudwatch:requestInsightRuleLogGroups": {
+                        "condition": "cloudwatch:requestInsightRuleLogGroups",
+                        "description": "Filters actions based on the Log Groups specified in an Insight Rule",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to an Amazon CloudWatch resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from an Amazon CloudWatch resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "metricStream": {
+        "resourceName": "metric-stream",
+        "service": "cloudwatch",
+        "resourceArn": "arn:${Partition}:cloudwatch:${Region}:${Account}:metric-stream/${MetricStreamName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag-value associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetMetricStream": {
+                "privilege": "GetMetricStream",
+                "description": "Grants permission to return the details of a CloudWatch metric stream",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "DeleteMetricStream": {
+                "privilege": "DeleteMetricStream",
+                "description": "Grants permission to delete the CloudWatch metric stream that you specify",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DeleteMetricStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutMetricStream": {
+                "privilege": "PutMetricStream",
+                "description": "Grants permission to create a CloudWatch metric stream, or update an existing metric stream if it already exists",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricStream.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "StartMetricStreams": {
+                "privilege": "StartMetricStreams",
+                "description": "Grants permission to start all CloudWatch metric streams that you specify",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartMetricStreams.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopMetricStreams": {
+                "privilege": "StopMetricStreams",
+                "description": "Grants permission to stop all CloudWatch metric streams that you specify",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StopMetricStreams.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

@@ -1,0 +1,613 @@
+{
+    "channel": {
+        "resourceName": "Channel",
+        "service": "ivs",
+        "resourceArn": "arn:${Partition}:ivs:${Region}:${Account}:channel/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListChannels": {
+                "privilege": "ListChannels",
+                "description": "Grants permission to get summary information about channels",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListChannels.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStreamKeys": {
+                "privilege": "ListStreamKeys",
+                "description": "Grants permission to get summary information about stream keys",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListStreamKeys.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStreamSessions": {
+                "privilege": "ListStreamSessions",
+                "description": "Grants permission to get summary information about streams sessions on a specified channel",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListStreamSessions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListStreams": {
+                "privilege": "ListStreams",
+                "description": "Grants permission to get summary information about live streams",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListStreams.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "BatchGetChannel": {
+                "privilege": "BatchGetChannel",
+                "description": "Grants permission to get multiple channels simultaneously by channel ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_BatchGetChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetChannel": {
+                "privilege": "GetChannel",
+                "description": "Grants permission to get the channel configuration for a specified channel ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_GetChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetStream": {
+                "privilege": "GetStream",
+                "description": "Grants permission to get information about the active (live) stream on a specified channel",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_GetStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetStreamSession": {
+                "privilege": "GetStreamSession",
+                "description": "Grants permission to get information about the stream session on a specified channel",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_GetStreamSession.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get information about the tags for a specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateChannel": {
+                "privilege": "CreateChannel",
+                "description": "Grants permission to create a new channel and an associated stream key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_CreateChannel.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteChannel": {
+                "privilege": "DeleteChannel",
+                "description": "Grants permission to delete a channel and channel's stream keys",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_DeleteChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutMetadata": {
+                "privilege": "PutMetadata",
+                "description": "Grants permission to insert metadata into an RTMP stream for a specified channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_PutMetadata.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopStream": {
+                "privilege": "StopStream",
+                "description": "Grants permission to disconnect a streamer on a specified channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_StopStream.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateChannel": {
+                "privilege": "UpdateChannel",
+                "description": "Grants permission to update a channel's configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_UpdateChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "streamKey": {
+        "resourceName": "Stream-Key",
+        "service": "ivs",
+        "resourceArn": "arn:${Partition}:ivs:${Region}:${Account}:stream-key/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListStreamKeys": {
+                "privilege": "ListStreamKeys",
+                "description": "Grants permission to get summary information about stream keys",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListStreamKeys.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "BatchGetStreamKey": {
+                "privilege": "BatchGetStreamKey",
+                "description": "Grants permission to get multiple stream keys simultaneously by stream key ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_BatchGetStreamKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetStreamKey": {
+                "privilege": "GetStreamKey",
+                "description": "Grants permission to get stream-key information for a specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_GetStreamKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get information about the tags for a specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateChannel": {
+                "privilege": "CreateChannel",
+                "description": "Grants permission to create a new channel and an associated stream key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_CreateChannel.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateStreamKey": {
+                "privilege": "CreateStreamKey",
+                "description": "Grants permission to create a stream key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_CreateStreamKey.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteChannel": {
+                "privilege": "DeleteChannel",
+                "description": "Grants permission to delete a channel and channel's stream keys",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_DeleteChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteStreamKey": {
+                "privilege": "DeleteStreamKey",
+                "description": "Grants permission to delete the stream key for a specified ARN",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_DeleteStreamKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "playbackKeyPair": {
+        "resourceName": "Playback-Key-Pair",
+        "service": "ivs",
+        "resourceArn": "arn:${Partition}:ivs:${Region}:${Account}:playback-key/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListPlaybackKeyPairs": {
+                "privilege": "ListPlaybackKeyPairs",
+                "description": "Grants permission to get summary information about playback key pairs",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListPlaybackKeyPairs.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetPlaybackKeyPair": {
+                "privilege": "GetPlaybackKeyPair",
+                "description": "Grants permission to get the playback keypair information for a specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_GetPlaybackKeyPair.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get information about the tags for a specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeletePlaybackKeyPair": {
+                "privilege": "DeletePlaybackKeyPair",
+                "description": "Grants permission to delete the playback key pair for a specified ARN",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_DeletePlaybackKeyPair.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ImportPlaybackKeyPair": {
+                "privilege": "ImportPlaybackKeyPair",
+                "description": "Grants permission to import the public key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ImportPlaybackKeyPair.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "recordingConfiguration": {
+        "resourceName": "Recording-Configuration",
+        "service": "ivs",
+        "resourceArn": "arn:${Partition}:ivs:${Region}:${Account}:recording-configuration/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListRecordingConfigurations": {
+                "privilege": "ListRecordingConfigurations",
+                "description": "Grants permission to get summary information about recording configurations",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListRecordingConfigurations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetRecordingConfiguration": {
+                "privilege": "GetRecordingConfiguration",
+                "description": "Grants permission to get the recording configuration for the specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_GetRecordingConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get information about the tags for a specified ARN",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateRecordingConfiguration": {
+                "privilege": "CreateRecordingConfiguration",
+                "description": "Grants permission to create a a new recording configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_CreateRecordingConfiguration.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteRecordingConfiguration": {
+                "privilege": "DeleteRecordingConfiguration",
+                "description": "Grants permission to delete a recording configuration for the specified ARN",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_DeleteRecordingConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags for a resource with a specified ARN",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/ivs/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "sendSSHPublicKey": {
+        "privilege": "SendSSHPublicKey",
+        "description": "Grants access to push an SSH public key to the specified EC2 instance to be used for standard SSH",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/ec2-instance-connect/latest/APIReference/API_SendSSHPublicKey.html",
+        "service": "ec2InstanceConnect",
+        "dependentActions": [],
+        "privConditions": {
+            "ec2:osuser": {
+                "condition": "ec2:osuser",
+                "description": "Filters access by specifying the default user name for the AMI that you used to launch your instance",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "instance": {
+                "resourceName": "instance",
+                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "ec2:ResourceTag/${TagKey}": {
+                        "condition": "ec2:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "sendSerialConsoleSSHPublicKey": {
+        "privilege": "SendSerialConsoleSSHPublicKey",
+        "description": "Grants access to push an SSH public key to the specified EC2 instance to be used for serial console SSH",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/ec2-instance-connect/latest/APIReference/API_SendSerialConsoleSSHPublicKey.html",
+        "service": "ec2InstanceConnect",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "instance": {
+                "resourceName": "instance",
+                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    },
+                    "ec2:ResourceTag/${TagKey}": {
+                        "condition": "ec2:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

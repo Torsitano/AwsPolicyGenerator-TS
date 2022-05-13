@@ -1,0 +1,2360 @@
+{
+    "account": {
+        "resourceName": "Account",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/account",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "apiKey": {
+        "resourceName": "ApiKey",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apikeys/${ApiKeyId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "apiKeys": {
+        "resourceName": "ApiKeys",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apikeys",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "authorizer": {
+        "resourceName": "Authorizer",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/authorizers/${AuthorizerId}",
+        "resourceConditions": {
+            "apigateway:Request/AuthorizerType": {
+                "condition": "apigateway:Request/AuthorizerType",
+                "description": "Filters access by type of authorizer in the request, for example REQUEST or JWT. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/AuthorizerUri": {
+                "condition": "apigateway:Request/AuthorizerUri",
+                "description": "Filters access by URI of a Lambda authorizer function. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/AuthorizerType": {
+                "condition": "apigateway:Resource/AuthorizerType",
+                "description": "Filters access by the current type of authorizer, for example REQUEST or JWT. Available during UpdateAuthorizer and DeleteAuthorizer operations. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/AuthorizerUri": {
+                "condition": "apigateway:Resource/AuthorizerUri",
+                "description": "Filters access by the URI of the current Lambda authorizer associated with the current API. Available during UpdateAuthorizer and DeleteAuthorizer. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "authorizers": {
+        "resourceName": "Authorizers",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/authorizers",
+        "resourceConditions": {
+            "apigateway:Request/AuthorizerType": {
+                "condition": "apigateway:Request/AuthorizerType",
+                "description": "Filters access by type of authorizer in the request, for example REQUEST or JWT. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/AuthorizerUri": {
+                "condition": "apigateway:Request/AuthorizerUri",
+                "description": "Filters access by URI of a Lambda authorizer function. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "basePathMapping": {
+        "resourceName": "BasePathMapping",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/domainnames/${DomainName}/basepathmappings/${BasePath}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "basePathMappings": {
+        "resourceName": "BasePathMappings",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/domainnames/${DomainName}/basepathmappings",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "clientCertificate": {
+        "resourceName": "ClientCertificate",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/clientcertificates/${ClientCertificateId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "clientCertificates": {
+        "resourceName": "ClientCertificates",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/clientcertificates",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "deployment": {
+        "resourceName": "Deployment",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/deployments/${DeploymentId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "deployments": {
+        "resourceName": "Deployments",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/deployments",
+        "resourceConditions": {
+            "apigateway:Request/StageName": {
+                "condition": "apigateway:Request/StageName",
+                "description": "Filters access by stage name of the deployment that you attempt to create. Available during the CreateDeployment operation",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "documentationPart": {
+        "resourceName": "DocumentationPart",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/documentation/parts/${DocumentationPartId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "documentationParts": {
+        "resourceName": "DocumentationParts",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/documentation/parts",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "documentationVersion": {
+        "resourceName": "DocumentationVersion",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/documentation/versions/${DocumentationVersionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "documentationVersions": {
+        "resourceName": "DocumentationVersions",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/documentation/versions",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "domainName": {
+        "resourceName": "DomainName",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/domainnames/${DomainName}",
+        "resourceConditions": {
+            "apigateway:Request/EndpointType": {
+                "condition": "apigateway:Request/EndpointType",
+                "description": "Filters access by endpoint type. Available during the CreateDomainName, UpdateDomainName, CreateApi, and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/MtlsTrustStoreUri": {
+                "condition": "apigateway:Request/MtlsTrustStoreUri",
+                "description": "Filters access by URI of the truststore used for mutual TLS authentication. Available during the CreateDomainName and UpdateDomainName operations",
+                "type": "String"
+            },
+            "apigateway:Request/MtlsTrustStoreVersion": {
+                "condition": "apigateway:Request/MtlsTrustStoreVersion",
+                "description": "Filters access by version of the truststore used for mutual TLS authentication. Available during the CreateDomainName and UpdateDomainName operations",
+                "type": "String"
+            },
+            "apigateway:Request/SecurityPolicy": {
+                "condition": "apigateway:Request/SecurityPolicy",
+                "description": "Filters access by TLS version. Available during the CreateDomain and UpdateDomain operations",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/EndpointType": {
+                "condition": "apigateway:Resource/EndpointType",
+                "description": "Filters access by endpoint type. Available during the UpdateDomainName, DeleteDomainName, UpdateApi, and DeleteApi operations",
+                "type": "String"
+            },
+            "apigateway:Resource/MtlsTrustStoreUri": {
+                "condition": "apigateway:Resource/MtlsTrustStoreUri",
+                "description": "Filters access by URI of the truststore used for mutual TLS authentication. Available during the UpdateDomainName and DeleteDomainName operations",
+                "type": "String"
+            },
+            "apigateway:Resource/MtlsTrustStoreVersion": {
+                "condition": "apigateway:Resource/MtlsTrustStoreVersion",
+                "description": "Filters access by version of the truststore used for mutual TLS authentication. Available during the UpdateDomainName and DeleteDomainName operations",
+                "type": "String"
+            },
+            "apigateway:Resource/SecurityPolicy": {
+                "condition": "apigateway:Resource/SecurityPolicy",
+                "description": "Filters access by TLS version. Available during the UpdateDomainName and DeleteDomainName operations",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {
+            "AddCertificateToDomain": {
+                "privilege": "AddCertificateToDomain",
+                "description": "Grants permission to add certificates for mutual TLS authentication to a domain name. This is an additional authorization control for managing the DomainName resource due to the sensitive nature of mTLS",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/ADD_CERTIFICATE_TO_DOMAIN.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveCertificateFromDomain": {
+                "privilege": "RemoveCertificateFromDomain",
+                "description": "Grants permission to remove certificates for mutual TLS authentication from a domain name. This is an additional authorization control for managing the DomainName resource due to the sensitive nature of mTLS",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/REMOVE_CERTIFICATE_FROM_DOMAIN.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "domainNames": {
+        "resourceName": "DomainNames",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/domainnames",
+        "resourceConditions": {
+            "apigateway:Request/EndpointType": {
+                "condition": "apigateway:Request/EndpointType",
+                "description": "Filters access by endpoint type. Available during the CreateDomainName, UpdateDomainName, CreateApi, and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/MtlsTrustStoreUri": {
+                "condition": "apigateway:Request/MtlsTrustStoreUri",
+                "description": "Filters access by URI of the truststore used for mutual TLS authentication. Available during the CreateDomainName and UpdateDomainName operations",
+                "type": "String"
+            },
+            "apigateway:Request/MtlsTrustStoreVersion": {
+                "condition": "apigateway:Request/MtlsTrustStoreVersion",
+                "description": "Filters access by version of the truststore used for mutual TLS authentication. Available during the CreateDomainName and UpdateDomainName operations",
+                "type": "String"
+            },
+            "apigateway:Request/SecurityPolicy": {
+                "condition": "apigateway:Request/SecurityPolicy",
+                "description": "Filters access by TLS version. Available during the CreateDomain and UpdateDomain operations",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {
+            "AddCertificateToDomain": {
+                "privilege": "AddCertificateToDomain",
+                "description": "Grants permission to add certificates for mutual TLS authentication to a domain name. This is an additional authorization control for managing the DomainName resource due to the sensitive nature of mTLS",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/ADD_CERTIFICATE_TO_DOMAIN.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveCertificateFromDomain": {
+                "privilege": "RemoveCertificateFromDomain",
+                "description": "Grants permission to remove certificates for mutual TLS authentication from a domain name. This is an additional authorization control for managing the DomainName resource due to the sensitive nature of mTLS",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/REMOVE_CERTIFICATE_FROM_DOMAIN.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "gatewayResponse": {
+        "resourceName": "GatewayResponse",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/gatewayresponses/${ResponseType}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "gatewayResponses": {
+        "resourceName": "GatewayResponses",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/gatewayresponses",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "integration": {
+        "resourceName": "Integration",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/integrations/${IntegrationId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "integrationResponse": {
+        "resourceName": "IntegrationResponse",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/integrations/${IntegrationId}/integrationresponses/${IntegrationResponseId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "method": {
+        "resourceName": "Method",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/resources/${ResourceId}/methods/${HttpMethodType}",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/ApiKeyRequired": {
+                "condition": "apigateway:Resource/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not for the existing Route resource. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Resource/RouteAuthorizationType": {
+                "condition": "apigateway:Resource/RouteAuthorizationType",
+                "description": "ilters access by authorization type of the existing Route resource, for example NONE, AWS_IAM, CUSTOM. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "methodResponse": {
+        "resourceName": "MethodResponse",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/resources/${ResourceId}/methods/${HttpMethodType}/responses/${StatusCode}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "model": {
+        "resourceName": "Model",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/models/${ModelId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "models": {
+        "resourceName": "Models",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/models",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "requestValidator": {
+        "resourceName": "RequestValidator",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/requestvalidators/${RequestValidatorId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "requestValidators": {
+        "resourceName": "RequestValidators",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/requestvalidators",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "resource": {
+        "resourceName": "Resource",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/resources/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "resources": {
+        "resourceName": "Resources",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/resources",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "restApi": {
+        "resourceName": "RestApi",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/ApiName": {
+                "condition": "apigateway:Request/ApiName",
+                "description": "Filters access by API name. Available during the CreateApi and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/AuthorizerType": {
+                "condition": "apigateway:Request/AuthorizerType",
+                "description": "Filters access by type of authorizer in the request, for example REQUEST or JWT. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/AuthorizerUri": {
+                "condition": "apigateway:Request/AuthorizerUri",
+                "description": "Filters access by URI of a Lambda authorizer function. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/DisableExecuteApiEndpoint": {
+                "condition": "apigateway:Request/DisableExecuteApiEndpoint",
+                "description": "Filters access by status of the default execute-api endpoint. Available during the CreateApi and UpdateApi operations",
+                "type": "Bool"
+            },
+            "apigateway:Request/EndpointType": {
+                "condition": "apigateway:Request/EndpointType",
+                "description": "Filters access by endpoint type. Available during the CreateDomainName, UpdateDomainName, CreateApi, and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/ApiKeyRequired": {
+                "condition": "apigateway:Resource/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not for the existing Route resource. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Resource/ApiName": {
+                "condition": "apigateway:Resource/ApiName",
+                "description": "Filters access by API name. Available during the UpdateApi and DeleteApi operations",
+                "type": "String"
+            },
+            "apigateway:Resource/AuthorizerType": {
+                "condition": "apigateway:Resource/AuthorizerType",
+                "description": "Filters access by the current type of authorizer, for example REQUEST or JWT. Available during UpdateAuthorizer and DeleteAuthorizer operations. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/AuthorizerUri": {
+                "condition": "apigateway:Resource/AuthorizerUri",
+                "description": "Filters access by the URI of the current Lambda authorizer associated with the current API. Available during UpdateAuthorizer and DeleteAuthorizer. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/DisableExecuteApiEndpoint": {
+                "condition": "apigateway:Resource/DisableExecuteApiEndpoint",
+                "description": "Filters access by status of the default execute-api endpoint. Available during the UpdateApi and DeleteApi operations",
+                "type": "Bool"
+            },
+            "apigateway:Resource/EndpointType": {
+                "condition": "apigateway:Resource/EndpointType",
+                "description": "Filters access by endpoint type. Available during the UpdateDomainName, DeleteDomainName, UpdateApi, and DeleteApi operations",
+                "type": "String"
+            },
+            "apigateway:Resource/RouteAuthorizationType": {
+                "condition": "apigateway:Resource/RouteAuthorizationType",
+                "description": "ilters access by authorization type of the existing Route resource, for example NONE, AWS_IAM, CUSTOM. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {
+            "UpdateRestApiPolicy": {
+                "privilege": "UpdateRestApiPolicy",
+                "description": "Grants permission to manage the IAM resource policy for an API. This is an additional authorization control for managing an API due to the sensitive nature of the resource policy",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/UPDATE_REST_API_POLICY.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "restApis": {
+        "resourceName": "RestApis",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/ApiName": {
+                "condition": "apigateway:Request/ApiName",
+                "description": "Filters access by API name. Available during the CreateApi and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/AuthorizerType": {
+                "condition": "apigateway:Request/AuthorizerType",
+                "description": "Filters access by type of authorizer in the request, for example REQUEST or JWT. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/AuthorizerUri": {
+                "condition": "apigateway:Request/AuthorizerUri",
+                "description": "Filters access by URI of a Lambda authorizer function. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/DisableExecuteApiEndpoint": {
+                "condition": "apigateway:Request/DisableExecuteApiEndpoint",
+                "description": "Filters access by status of the default execute-api endpoint. Available during the CreateApi and UpdateApi operations",
+                "type": "Bool"
+            },
+            "apigateway:Request/EndpointType": {
+                "condition": "apigateway:Request/EndpointType",
+                "description": "Filters access by endpoint type. Available during the CreateDomainName, UpdateDomainName, CreateApi, and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {
+            "UpdateRestApiPolicy": {
+                "privilege": "UpdateRestApiPolicy",
+                "description": "Grants permission to manage the IAM resource policy for an API. This is an additional authorization control for managing an API due to the sensitive nature of the resource policy",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/UPDATE_REST_API_POLICY.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "sdk": {
+        "resourceName": "Sdk",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/${RestApiId}/stages/${StageName}/sdks/${SdkType}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "stage": {
+        "resourceName": "Stage",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/stages/${StageName}",
+        "resourceConditions": {
+            "apigateway:Request/AccessLoggingDestination": {
+                "condition": "apigateway:Request/AccessLoggingDestination",
+                "description": "Filters access by access log destination. Available during the CreateStage and UpdateStage operations",
+                "type": "String"
+            },
+            "apigateway:Request/AccessLoggingFormat": {
+                "condition": "apigateway:Request/AccessLoggingFormat",
+                "description": "Filters access by access log format. Available during the CreateStage and UpdateStage operations",
+                "type": "String"
+            },
+            "apigateway:Resource/AccessLoggingDestination": {
+                "condition": "apigateway:Resource/AccessLoggingDestination",
+                "description": "Filters access by access log destination of the current Stage resource. Available during the UpdateStage and DeleteStage operations",
+                "type": "String"
+            },
+            "apigateway:Resource/AccessLoggingFormat": {
+                "condition": "apigateway:Resource/AccessLoggingFormat",
+                "description": "Filters access by access log format of the current Stage resource. Available during the UpdateStage and DeleteStage operations",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {
+            "SetWebACL": {
+                "privilege": "SetWebACL",
+                "description": "Grants permission set a WAF access control list (ACL). This is an additional authorization control for managing the Stage resource due to the sensitive nature of WebAcl's",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/WEBACL_SET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "stages": {
+        "resourceName": "Stages",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/stages",
+        "resourceConditions": {
+            "apigateway:Request/AccessLoggingDestination": {
+                "condition": "apigateway:Request/AccessLoggingDestination",
+                "description": "Filters access by access log destination. Available during the CreateStage and UpdateStage operations",
+                "type": "String"
+            },
+            "apigateway:Request/AccessLoggingFormat": {
+                "condition": "apigateway:Request/AccessLoggingFormat",
+                "description": "Filters access by access log format. Available during the CreateStage and UpdateStage operations",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {
+            "SetWebACL": {
+                "privilege": "SetWebACL",
+                "description": "Grants permission set a WAF access control list (ACL). This is an additional authorization control for managing the Stage resource due to the sensitive nature of WebAcl's",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigateway/api-reference/WEBACL_SET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "tagPrivileges": {}
+    },
+    "template": {
+        "resourceName": "Template",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/restapis/models/${ModelName}/template",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "usagePlan": {
+        "resourceName": "UsagePlan",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/usageplans/${UsagePlanId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "usagePlans": {
+        "resourceName": "UsagePlans",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/usageplans",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "usagePlanKey": {
+        "resourceName": "UsagePlanKey",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/usageplans/${UsagePlanId}/keys/${Id}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "usagePlanKeys": {
+        "resourceName": "UsagePlanKeys",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/usageplans/${UsagePlanId}/keys",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "vpcLink": {
+        "resourceName": "VpcLink",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/vpclinks/${VpcLinkId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "vpcLinks": {
+        "resourceName": "VpcLinks",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/vpclinks",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "accessLogSettings": {
+        "resourceName": "AccessLogSettings",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/stages/${StageName}/accesslogsettings",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "api": {
+        "resourceName": "Api",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/ApiName": {
+                "condition": "apigateway:Request/ApiName",
+                "description": "Filters access by API name. Available during the CreateApi and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/AuthorizerType": {
+                "condition": "apigateway:Request/AuthorizerType",
+                "description": "Filters access by type of authorizer in the request, for example REQUEST or JWT. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/AuthorizerUri": {
+                "condition": "apigateway:Request/AuthorizerUri",
+                "description": "Filters access by URI of a Lambda authorizer function. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/DisableExecuteApiEndpoint": {
+                "condition": "apigateway:Request/DisableExecuteApiEndpoint",
+                "description": "Filters access by status of the default execute-api endpoint. Available during the CreateApi and UpdateApi operations",
+                "type": "Bool"
+            },
+            "apigateway:Request/EndpointType": {
+                "condition": "apigateway:Request/EndpointType",
+                "description": "Filters access by endpoint type. Available during the CreateDomainName, UpdateDomainName, CreateApi, and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/ApiKeyRequired": {
+                "condition": "apigateway:Resource/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not for the existing Route resource. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Resource/ApiName": {
+                "condition": "apigateway:Resource/ApiName",
+                "description": "Filters access by API name. Available during the UpdateApi and DeleteApi operations",
+                "type": "String"
+            },
+            "apigateway:Resource/AuthorizerType": {
+                "condition": "apigateway:Resource/AuthorizerType",
+                "description": "Filters access by the current type of authorizer, for example REQUEST or JWT. Available during UpdateAuthorizer and DeleteAuthorizer operations. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/AuthorizerUri": {
+                "condition": "apigateway:Resource/AuthorizerUri",
+                "description": "Filters access by the URI of the current Lambda authorizer associated with the current API. Available during UpdateAuthorizer and DeleteAuthorizer. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/DisableExecuteApiEndpoint": {
+                "condition": "apigateway:Resource/DisableExecuteApiEndpoint",
+                "description": "Filters access by status of the default execute-api endpoint. Available during the UpdateApi and DeleteApi operations",
+                "type": "Bool"
+            },
+            "apigateway:Resource/EndpointType": {
+                "condition": "apigateway:Resource/EndpointType",
+                "description": "Filters access by endpoint type. Available during the UpdateDomainName, DeleteDomainName, UpdateApi, and DeleteApi operations",
+                "type": "String"
+            },
+            "apigateway:Resource/RouteAuthorizationType": {
+                "condition": "apigateway:Resource/RouteAuthorizationType",
+                "description": "ilters access by authorization type of the existing Route resource, for example NONE, AWS_IAM, CUSTOM. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "apis": {
+        "resourceName": "Apis",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/ApiName": {
+                "condition": "apigateway:Request/ApiName",
+                "description": "Filters access by API name. Available during the CreateApi and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/AuthorizerType": {
+                "condition": "apigateway:Request/AuthorizerType",
+                "description": "Filters access by type of authorizer in the request, for example REQUEST or JWT. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/AuthorizerUri": {
+                "condition": "apigateway:Request/AuthorizerUri",
+                "description": "Filters access by URI of a Lambda authorizer function. Available during CreateAuthorizer and UpdateAuthorizer. Also available during import and reimport as an ArrayOfString",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Request/DisableExecuteApiEndpoint": {
+                "condition": "apigateway:Request/DisableExecuteApiEndpoint",
+                "description": "Filters access by status of the default execute-api endpoint. Available during the CreateApi and UpdateApi operations",
+                "type": "Bool"
+            },
+            "apigateway:Request/EndpointType": {
+                "condition": "apigateway:Request/EndpointType",
+                "description": "Filters access by endpoint type. Available during the CreateDomainName, UpdateDomainName, CreateApi, and UpdateApi operations",
+                "type": "String"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PUT": {
+                "privilege": "PUT",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PUT.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "apiMapping": {
+        "resourceName": "ApiMapping",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/domainnames/${DomainName}/apimappings/${ApiMappingId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "apiMappings": {
+        "resourceName": "ApiMappings",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/domainnames/${DomainName}/apimappings",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "authorizersCache": {
+        "resourceName": "AuthorizersCache",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/stages/${StageName}/cache/authorizers",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "cors": {
+        "resourceName": "Cors",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/cors",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "exportedAPI": {
+        "resourceName": "ExportedAPI",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/exports/${Specification}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "integrations": {
+        "resourceName": "Integrations",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/integrations",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "integrationResponses": {
+        "resourceName": "IntegrationResponses",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/integrations/${IntegrationId}/integrationresponses",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "modelTemplate": {
+        "resourceName": "ModelTemplate",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/models/${ModelId}/template",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "route": {
+        "resourceName": "Route",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/routes/${RouteId}",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "apigateway:Resource/ApiKeyRequired": {
+                "condition": "apigateway:Resource/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not for the existing Route resource. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Resource/RouteAuthorizationType": {
+                "condition": "apigateway:Resource/RouteAuthorizationType",
+                "description": "ilters access by authorization type of the existing Route resource, for example NONE, AWS_IAM, CUSTOM. Available during the UpdateRoute and DeleteRoute operations. Also available as a collection during reimport",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "routes": {
+        "resourceName": "Routes",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/routes",
+        "resourceConditions": {
+            "apigateway:Request/ApiKeyRequired": {
+                "condition": "apigateway:Request/ApiKeyRequired",
+                "description": "Filters access based on whether an API key is required or not. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import and reimport",
+                "type": "ArrayOfBool"
+            },
+            "apigateway:Request/RouteAuthorizationType": {
+                "condition": "apigateway:Request/RouteAuthorizationType",
+                "description": "Filters access by authorization type, for example NONE, AWS_IAM, CUSTOM, JWT. Available during the CreateRoute and UpdateRoute operations. Also available as a collection during import",
+                "type": "ArrayOfString"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "routeResponse": {
+        "resourceName": "RouteResponse",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/routes/${RouteId}/routeresponses/${RouteResponseId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "routeResponses": {
+        "resourceName": "RouteResponses",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/routes/${RouteId}/routeresponses",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "POST": {
+                "privilege": "POST",
+                "description": "Grants permission to create a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_POST.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "routeRequestParameter": {
+        "resourceName": "RouteRequestParameter",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/routes/${RouteId}/requestparameters/${RequestParameterKey}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PATCH": {
+                "privilege": "PATCH",
+                "description": "Grants permission to update a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_PATCH.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "routeSettings": {
+        "resourceName": "RouteSettings",
+        "service": "apigateway",
+        "resourceArn": "arn:${Partition}:apigateway:${Region}::/apis/${ApiId}/stages/${StageName}/routesettings/${RouteKey}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GET": {
+                "privilege": "GET",
+                "description": "Grants permission to read a particular resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_GET.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DELETE": {
+                "privilege": "DELETE",
+                "description": "Grants permission to delete a particular resource",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/API_DELETE.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the presence of tag keys in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

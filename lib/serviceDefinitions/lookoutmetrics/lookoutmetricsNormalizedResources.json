@@ -1,0 +1,490 @@
+{
+    "anomalyDetector": {
+        "resourceName": "AnomalyDetector",
+        "service": "lookoutmetrics",
+        "resourceArn": "arn:${Partition}:lookoutmetrics:${Region}:${Account}:AnomalyDetector:${AnomalyDetectorName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAlerts": {
+                "privilege": "ListAlerts",
+                "description": "Grants permission to get a list of alerts for a detector",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListAlerts.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
+            "ListAnomalyGroupRelatedMetrics": {
+                "privilege": "ListAnomalyGroupRelatedMetrics",
+                "description": "Grants permission to get a list of related measures in an anomaly group",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListAnomalyGroupRelatedMetrics.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListAnomalyGroupSummaries": {
+                "privilege": "ListAnomalyGroupSummaries",
+                "description": "Grants permission to get a list of anomaly groups",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListAnomalyGroupSummaries.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListAnomalyGroupTimeSeries": {
+                "privilege": "ListAnomalyGroupTimeSeries",
+                "description": "Grants permission to get a list of affected metrics for a measure in an anomaly group",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListAnomalyGroupTimeSeries.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListMetricSets": {
+                "privilege": "ListMetricSets",
+                "description": "Grants permission to get a list of datasets",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListMetricSets.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAnomalyDetectionExecutions": {
+                "privilege": "DescribeAnomalyDetectionExecutions",
+                "description": "Grants permission to get information about an anomaly detection job",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DescribeAnomalyDetectionExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeAnomalyDetector": {
+                "privilege": "DescribeAnomalyDetector",
+                "description": "Grants permission to get details about an anomaly detector",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DescribeAnomalyDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAnomalyGroup": {
+                "privilege": "GetAnomalyGroup",
+                "description": "Grants permission to get details about a group of affected metrics",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_GetAnomalyGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetDataQualityMetrics": {
+                "privilege": "GetDataQualityMetrics",
+                "description": "Grants permission to get data quality metrics for an anomaly detector",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_GetDataQualityMetrics.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetFeedback": {
+                "privilege": "GetFeedback",
+                "description": "Grants permission to get feedback on affected metrics for an anomaly group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_GetFeedback.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for a detector, dataset, or alert",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ActivateAnomalyDetector": {
+                "privilege": "ActivateAnomalyDetector",
+                "description": "Grants permission to activate an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ActivateAnomalyDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BackTestAnomalyDetector": {
+                "privilege": "BackTestAnomalyDetector",
+                "description": "Grants permission to run a backtest with an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_BackTestAnomalyDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateAlert": {
+                "privilege": "CreateAlert",
+                "description": "Grants permission to create an alert for an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_CreateAlert.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateAnomalyDetector": {
+                "privilege": "CreateAnomalyDetector",
+                "description": "Grants permission to create an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_CreateAnomalyDetector.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateMetricSet": {
+                "privilege": "CreateMetricSet",
+                "description": "Grants permission to create a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_CreateMetricSet.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeactivateAnomalyDetector": {
+                "privilege": "DeactivateAnomalyDetector",
+                "description": "Grants permission to deactivate an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DeactivateAnomalyDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteAnomalyDetector": {
+                "privilege": "DeleteAnomalyDetector",
+                "description": "Grants permission to delete an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DeleteAnomalyDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutFeedback": {
+                "privilege": "PutFeedback",
+                "description": "Grants permission to add feedback for an affected metric in an anomaly group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_PutFeedback.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAnomalyDetector": {
+                "privilege": "UpdateAnomalyDetector",
+                "description": "Grants permission to update an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_UpdateAnomalyDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a detector, dataset, or alert",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a detector, dataset, or alert",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "metricSet": {
+        "resourceName": "MetricSet",
+        "service": "lookoutmetrics",
+        "resourceArn": "arn:${Partition}:lookoutmetrics:${Region}:${Account}:MetricSet/${AnomalyDetectorName}/${MetricSetName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeMetricSet": {
+                "privilege": "DescribeMetricSet",
+                "description": "Grants permission to get details about a dataset",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DescribeMetricSet.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for a detector, dataset, or alert",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateMetricSet": {
+                "privilege": "CreateMetricSet",
+                "description": "Grants permission to create a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_CreateMetricSet.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateMetricSet": {
+                "privilege": "UpdateMetricSet",
+                "description": "Grants permission to update a dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_UpdateMetricSet.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a detector, dataset, or alert",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a detector, dataset, or alert",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "alert": {
+        "resourceName": "Alert",
+        "service": "lookoutmetrics",
+        "resourceArn": "arn:${Partition}:lookoutmetrics:${Region}:${Account}:Alert:${AlertName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeAlert": {
+                "privilege": "DescribeAlert",
+                "description": "Grants permission to get details about an alert",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DescribeAlert.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to get a list of tags for a detector, dataset, or alert",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateAlert": {
+                "privilege": "CreateAlert",
+                "description": "Grants permission to create an alert for an anomaly detector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_CreateAlert.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteAlert": {
+                "privilege": "DeleteAlert",
+                "description": "Grants permission to delete an alert",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_DeleteAlert.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a detector, dataset, or alert",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters actions based on the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a detector, dataset, or alert",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lookoutmetrics/latest/api/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

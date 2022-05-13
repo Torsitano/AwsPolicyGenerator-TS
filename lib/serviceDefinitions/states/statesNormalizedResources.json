@@ -1,0 +1,311 @@
+{
+    "activity": {
+        "resourceName": "activity",
+        "service": "states",
+        "resourceArn": "arn:${Partition}:states:${Region}:${Account}:activity:${ActivityName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeActivity": {
+                "privilege": "DescribeActivity",
+                "description": "Grants permission to describe an activity",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeActivity.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Step Functions resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateActivity": {
+                "privilege": "CreateActivity",
+                "description": "Grants permission to create an activity",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_CreateActivity.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteActivity": {
+                "privilege": "DeleteActivity",
+                "description": "Grants permission to delete an activity",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_DeleteActivity.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetActivityTask": {
+                "privilege": "GetActivityTask",
+                "description": "Grants permission to be used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_GetActivityTask.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Step Functions resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from an AWS Step Functions resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "execution": {
+        "resourceName": "execution",
+        "service": "states",
+        "resourceArn": "arn:${Partition}:states:${Region}:${Account}:execution:${StateMachineName}:${ExecutionId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeExecution": {
+                "privilege": "DescribeExecution",
+                "description": "Grants permission to describe an execution",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeStateMachineForExecution": {
+                "privilege": "DescribeStateMachineForExecution",
+                "description": "Grants permission to describe the state machine for an execution",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeStateMachineForExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetExecutionHistory": {
+                "privilege": "GetExecutionHistory",
+                "description": "Grants permission to return the history of the specified execution as a list of events",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_GetExecutionHistory.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "StopExecution": {
+                "privilege": "StopExecution",
+                "description": "Grants permission to stop an execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_StopExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "statemachine": {
+        "resourceName": "statemachine",
+        "service": "states",
+        "resourceArn": "arn:${Partition}:states:${Region}:${Account}:stateMachine:${StateMachineName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeStateMachine": {
+                "privilege": "DescribeStateMachine",
+                "description": "Grants permission to describe a state machine",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeStateMachine.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListExecutions": {
+                "privilege": "ListExecutions",
+                "description": "Grants permission to list the executions of a state machine",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_ListExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Step Functions resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateStateMachine": {
+                "privilege": "CreateStateMachine",
+                "description": "Grants permission to create a state machine",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_CreateStateMachine.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteStateMachine": {
+                "privilege": "DeleteStateMachine",
+                "description": "Grants permission to delete a state machine",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_DeleteStateMachine.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartExecution": {
+                "privilege": "StartExecution",
+                "description": "Grants permission to start a state machine execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartSyncExecution": {
+                "privilege": "StartSyncExecution",
+                "description": "Grants permission to start a Synchronous Express state machine execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateStateMachine": {
+                "privilege": "UpdateStateMachine",
+                "description": "Grants permission to update a state machine",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_UpdateStateMachine.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Step Functions resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from an AWS Step Functions resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/step-functions/latest/apireference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by a list of tag keys that are allowed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

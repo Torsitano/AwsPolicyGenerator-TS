@@ -1,0 +1,763 @@
+{
+    "backupVault": {
+        "resourceName": "backupVault",
+        "service": "backup",
+        "resourceArn": "arn:${Partition}:backup:${Region}:${Account}:backup-vault:${BackupVaultName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListRecoveryPointsByBackupVault": {
+                "privilege": "ListRecoveryPointsByBackupVault",
+                "description": "Grants permission to list recovery points inside a backup vault",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListRecoveryPointsByBackupVault.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeBackupVault": {
+                "privilege": "DescribeBackupVault",
+                "description": "Grants permission to describe a new backup vault with the specified name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeBackupVault.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetBackupVaultAccessPolicy": {
+                "privilege": "GetBackupVaultAccessPolicy",
+                "description": "Grants permission to get backup vault access policy",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_GetBackupVaultAccessPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetBackupVaultNotifications": {
+                "privilege": "GetBackupVaultNotifications",
+                "description": "Grants permission to get backup vault notifications",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_GetBackupVaultNotifications.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateBackupVault": {
+                "privilege": "CreateBackupVault",
+                "description": "Grants permission to create a new backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_CreateBackupVault.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteBackupVault": {
+                "privilege": "DeleteBackupVault",
+                "description": "Grants permission to delete a backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteBackupVault.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteBackupVaultLockConfiguration": {
+                "privilege": "DeleteBackupVaultLockConfiguration",
+                "description": "Grants permission to remove the lock configuration from a backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteBackupVaultLockConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteBackupVaultNotifications": {
+                "privilege": "DeleteBackupVaultNotifications",
+                "description": "Grants permission to remove the notifications from a backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteBackupVaultNotifications.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutBackupVaultLockConfiguration": {
+                "privilege": "PutBackupVaultLockConfiguration",
+                "description": "Grants permission to add a lock configuration to the backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_PutBackupVaultLockConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutBackupVaultNotifications": {
+                "privilege": "PutBackupVaultNotifications",
+                "description": "Grants permission to add an SNS topic to the backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_PutBackupVaultNotifications.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartBackupJob": {
+                "privilege": "StartBackupJob",
+                "description": "Grants permission to start a new backup job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_StartBackupJob.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {
+            "DeleteBackupVaultAccessPolicy": {
+                "privilege": "DeleteBackupVaultAccessPolicy",
+                "description": "Grants permission to delete backup vault access policy",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteBackupVaultAccessPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutBackupVaultAccessPolicy": {
+                "privilege": "PutBackupVaultAccessPolicy",
+                "description": "Grants permission to add an access policy to the backup vault",
+                "accessLevel": "Permissions management",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_PutBackupVaultAccessPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "backupPlan": {
+        "resourceName": "backupPlan",
+        "service": "backup",
+        "resourceArn": "arn:${Partition}:backup:${Region}:${Account}:backup-plan:${BackupPlanId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListBackupPlanVersions": {
+                "privilege": "ListBackupPlanVersions",
+                "description": "Grants permission to list backup plan versions",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupPlanVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListBackupSelections": {
+                "privilege": "ListBackupSelections",
+                "description": "Grants permission to list resource assignments for a specific backup plan",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupSelections.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetBackupPlan": {
+                "privilege": "GetBackupPlan",
+                "description": "Grants permission to get a backup plan",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_GetBackupPlan.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetBackupSelection": {
+                "privilege": "GetBackupSelection",
+                "description": "Grants permission to get a backup plan resource assignment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_GetBackupSelection.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateBackupPlan": {
+                "privilege": "CreateBackupPlan",
+                "description": "Grants permission to create a new backup plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_CreateBackupPlan.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateBackupSelection": {
+                "privilege": "CreateBackupSelection",
+                "description": "Grants permission to create a new resource assignment in a backup plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_CreateBackupSelection.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "DeleteBackupPlan": {
+                "privilege": "DeleteBackupPlan",
+                "description": "Grants permission to delete a backup plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteBackupPlan.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteBackupSelection": {
+                "privilege": "DeleteBackupSelection",
+                "description": "Grants permission to delete a resource assignment from a backup plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteBackupSelection.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateBackupPlan": {
+                "privilege": "UpdateBackupPlan",
+                "description": "Grants permission to update a backup plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "recoveryPoint": {
+        "resourceName": "recoveryPoint",
+        "service": "backup",
+        "resourceArn": "arn:${Partition}:${Vendor}:${Region}:*:${ResourceType}:${RecoveryPointId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeRecoveryPoint": {
+                "privilege": "DescribeRecoveryPoint",
+                "description": "Grants permission to describe a recovery point",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetRecoveryPointRestoreMetadata": {
+                "privilege": "GetRecoveryPointRestoreMetadata",
+                "description": "Grants permission to get recovery point restore metadata",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_GetRecoveryPointRestoreMetadata.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteRecoveryPoint": {
+                "privilege": "DeleteRecoveryPoint",
+                "description": "Grants permission to delete a recovery point from a backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteRecoveryPoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DisassociateRecoveryPoint": {
+                "privilege": "DisassociateRecoveryPoint",
+                "description": "Grants permission to disassociate a recovery point from a backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DisassociateRecoveryPoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartCopyJob": {
+                "privilege": "StartCopyJob",
+                "description": "Grants permission to copy a backup from a source backup vault to a destination backup vault",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_StartCopyJob.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "StartRestoreJob": {
+                "privilege": "StartRestoreJob",
+                "description": "Grants permission to start a new restore job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_StartRestoreJob.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "UpdateRecoveryPointLifecycle": {
+                "privilege": "UpdateRecoveryPointLifecycle",
+                "description": "Grants permission to update the lifecycle of the recovery point",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateRecoveryPointLifecycle.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "framework": {
+        "resourceName": "framework",
+        "service": "backup",
+        "resourceArn": "arn:${Partition}:backup:${Region}:${Account}:framework:${FrameworkName}-${FrameworkId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeFramework": {
+                "privilege": "DescribeFramework",
+                "description": "Grants permission to describe a framework with the specified name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeFramework.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateFramework": {
+                "privilege": "CreateFramework",
+                "description": "Grants permission to create a new framework",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_CreateFramework.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteFramework": {
+                "privilege": "DeleteFramework",
+                "description": "Grants permission to delete a framework",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteFramework.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateFramework": {
+                "privilege": "UpdateFramework",
+                "description": "Grants permission to update a framework",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateFramework.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "reportPlan": {
+        "resourceName": "reportPlan",
+        "service": "backup",
+        "resourceArn": "arn:${Partition}:backup:${Region}:${Account}:report-plan:${ReportPlanName}-${ReportPlanId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeReportPlan": {
+                "privilege": "DescribeReportPlan",
+                "description": "Grants permission to describe a report plan with the specified name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeReportPlan.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTags": {
+                "privilege": "ListTags",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListTags.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateReportPlan": {
+                "privilege": "CreateReportPlan",
+                "description": "Grants permission to create a new report plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_CreateReportPlan.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "backup:FrameworkArns": {
+                        "condition": "backup:FrameworkArns",
+                        "description": "Filters access by the Framework ARNs",
+                        "type": "ArrayOfARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteReportPlan": {
+                "privilege": "DeleteReportPlan",
+                "description": "Grants permission to delete a report plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteReportPlan.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartReportJob": {
+                "privilege": "StartReportJob",
+                "description": "Grants permission to start a new report job",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_StartReportJob.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateReportPlan": {
+                "privilege": "UpdateReportPlan",
+                "description": "Grants permission to update a report plan",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateReportPlan.html",
+                "privConditions": {
+                    "backup:FrameworkArns": {
+                        "condition": "backup:FrameworkArns",
+                        "description": "Filters access by the Framework ARNs",
+                        "type": "ArrayOfARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

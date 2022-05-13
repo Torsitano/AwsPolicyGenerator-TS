@@ -1,0 +1,76 @@
+{
+    "acceptAgreement": {
+        "privilege": "AcceptAgreement",
+        "description": "Grants permission to accept an AWS agreement that has not yet been accepted by the customer account.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/artifact/latest/ug/managingagreements.html",
+        "service": "artifact",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:artifact:::agreement/*",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "downloadAgreement": {
+        "privilege": "DownloadAgreement",
+        "description": "Grants permission to download an AWS agreement that has not yet been accepted or a customer agreement that has been accepted by the customer account.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/artifact/latest/ug/managingagreements.html",
+        "service": "artifact",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:artifact:::agreement/*",
+                "required": false,
+                "resourceConditions": {}
+            },
+            "customerAgreement": {
+                "resourceName": "customer-agreement",
+                "resourceArn": "arn:${Partition}:artifact::${Account}:customer-agreement/*",
+                "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "get": {
+        "privilege": "Get",
+        "description": "Grants permission to download an AWS compliance report package.",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/artifact/latest/ug/getting-started.html ",
+        "service": "artifact",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "reportPackage": {
+                "resourceName": "report-package",
+                "resourceArn": "arn:${Partition}:artifact:::report-package/*",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "terminateAgreement": {
+        "privilege": "TerminateAgreement",
+        "description": "Grants permission to terminate a customer agreement that was previously accepted by the customer account.",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/artifact/latest/ug/managingagreements.html",
+        "service": "artifact",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "customerAgreement": {
+                "resourceName": "customer-agreement",
+                "resourceArn": "arn:${Partition}:artifact::${Account}:customer-agreement/*",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    }
+}
