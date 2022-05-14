@@ -1,25 +1,17 @@
-import { PrivilegeProperties, AccessLevel, NormalizedResource, PrivMap, ConditionProperties,
-    NormalizedPrivilege, ResourceBase, ResourceProperties, NormalizedPrivileges, NormalizedResources } from '../src/awsPolicyGenerator/interfaces/interfaces';
+import { AccessLevel, NormalizedResource, PrivMap, ImportConditions,
+    NormalizedPrivilege, ResourceBase, NormalizedPrivileges, NormalizedResources,
+    ImportPrivs, ImportResources } from '../src/awsPolicyGenerator/interfaces/interfaces';
 import * as fs from 'fs'
 
 
 const serviceDefDir = './lib/serviceDefinitions'
 
-interface ImportPrivs {
-    [key: string]: PrivilegeProperties
-}
 
-interface ImportResources {
-    [key: string]: ResourceProperties
-}
-
-
-
-function mapPrivsToResources(privileges: ImportPrivs, serviceConditions: ConditionProperties) {
+function mapPrivsToResources(privileges: ImportPrivs, serviceConditions: ImportConditions) {
 
     let resourceActionMap: Map<string, PrivMap[]> = new Map
     for( let privKey in privileges ) {
-        let priv = privileges[privKey]
+        const priv = privileges[privKey]
 
         let conKeys: string[] = []
 
@@ -28,7 +20,7 @@ function mapPrivsToResources(privileges: ImportPrivs, serviceConditions: Conditi
             conKeys = priv.resourceTypes[''].conditionKeys
         }
 
-        let conditions: ConditionProperties = {}
+        let conditions: ImportConditions = {}
 
         for (let key of conKeys) {
             conditions[key] = serviceConditions[key]
@@ -69,7 +61,7 @@ function mapPrivsToResources(privileges: ImportPrivs, serviceConditions: Conditi
 }
 
 
-function normalizeResources(service: string, privileges: ImportPrivs, resources: ImportResources, serviceConditions: ConditionProperties) {
+function normalizeResources(service: string, privileges: ImportPrivs, resources: ImportResources, serviceConditions: ImportConditions) {
 
     let normalizedResources: NormalizedResources = {}
 
@@ -79,7 +71,7 @@ function normalizeResources(service: string, privileges: ImportPrivs, resources:
 
         let resource = resources[resourceKey]
         let resourceActions = resourceActionMap.get(resourceKey)
-        let conditions: ConditionProperties = {}
+        let conditions: ImportConditions = {}
 
     for (let key of resource.conditionKeys) {
         conditions[key] = serviceConditions[key]
@@ -130,7 +122,7 @@ function normalizeResources(service: string, privileges: ImportPrivs, resources:
 
 }
 
-export function normalizePrivs(service: string, privileges: ImportPrivs, resources: ImportResources, serviceConditions: ConditionProperties) {
+export function normalizePrivs(service: string, privileges: ImportPrivs, resources: ImportResources, serviceConditions: ImportConditions) {
     
     let normalizedPrivileges: NormalizedPrivileges = {}
 
@@ -145,7 +137,7 @@ export function normalizePrivs(service: string, privileges: ImportPrivs, resourc
             conKeys = priv.resourceTypes[''].conditionKeys
         }
 
-        let conditions: ConditionProperties = {}
+        let conditions: ImportConditions = {}
 
         for (let key of conKeys) {
             conditions[key] = serviceConditions[key]
@@ -166,7 +158,7 @@ export function normalizePrivs(service: string, privileges: ImportPrivs, resourc
             if(resourceKey != '') {
                 let resource = resources[resourceKey]
 
-                let conditions: ConditionProperties = {}
+                let conditions: ImportConditions = {}
     
                 for (let key of resource.conditionKeys) {
                     conditions[key] = serviceConditions[key]
@@ -204,7 +196,7 @@ export function main() {
         const resources: ImportResources = JSON.parse(fs.readFileSync(
             `${serviceDefDir}/${service}/${service}Resources.json`, 'utf-8'
         ))
-        const serviceConditions: ConditionProperties = JSON.parse(fs.readFileSync(
+        const serviceConditions: ImportConditions = JSON.parse(fs.readFileSync(
             `${serviceDefDir}/${service}/${service}Conditions.json`, 'utf-8'
         ))
 

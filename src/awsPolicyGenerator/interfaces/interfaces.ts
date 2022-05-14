@@ -4,17 +4,20 @@ export interface IamDefinition {
         serviceName: string,
         prefix: string,
         serviceAuthorizationUrl: string,
-        privileges: {
-            [key: string]: PrivilegeProperties
-        },
-        resources: {
-            [key: string]: ResourceProperties
-        },
-        conditions: {
-            [key: string]: ConditionTypeProperties
-        }
+        privileges: ImportPrivs,
+        resources: ImportResources,
+        conditions: ImportConditions
     }
 }
+
+export interface ImportPrivs {
+    [key: string]: PrivilegeProperties
+}
+
+export interface ImportResources {
+    [key: string]: ResourceProperties
+}
+
 
 export interface ServiceDefinition {
     serviceName: string,
@@ -46,7 +49,7 @@ export interface ResourceTypeProperties {
     dependentActions: string[]
 }
 
-export interface ConditionTypeDefinition {
+export interface ImportConditions {
     [key: string]: ConditionTypeProperties
 }
 
@@ -72,14 +75,6 @@ export interface ResourceProperties {
     conditionKeys: string[]
 }
 
-export interface ConditionProperties {
-    [key: string]: {
-        condition: string,
-        description: string,
-        type: ConditionType
-    }
-}
-
 export enum ConditionType {
     STRING = 'String',
     ARN = 'ARN',
@@ -97,10 +92,12 @@ export enum ConditionType {
 // RESOURCE NORMALIZATION
 // ######################
 
+
+
 export interface ResourceBase {
     resourceName: string,
     resourceArn: string,
-    resourceConditions: ConditionProperties,
+    resourceConditions: ImportConditions,
 }
 
 
@@ -130,7 +127,7 @@ export interface NormalizedResources {
 export interface PrivilegeBase {
     privilege: string,
     description: string,
-    privConditions: ConditionProperties,
+    privConditions: ImportConditions,
     dependentActions: string[],
     accessLevel: AccessLevel,
     apiDocumentationLink: string
@@ -158,166 +155,3 @@ export interface NormalizedService {
     resources: string[],
     privileges: string[]
 }
-
-
-// let test: NormalizedPrivilege = {
-//     privilege: '',
-//     description: '',
-//     service: '',
-//     conditionKeys: [],
-//     dependentActions: [],
-//     accessLevel: AccessLevel.LIST,
-//     resources: [{
-//         required: true,
-//         resourceArn: '',
-//         resourceName: ''
-//     },
-//     {
-//         required: false,
-//         resourceArn: '',
-//         resourceName: ''
-//     }]
-// }
-
-// let test2: NormalizedResource = {
-//     resourceName: '',
-//     resourceArn: '',
-//     service: '',
-//     conditionKeys: [],
-//     privileges: [{
-//         accessLevel: AccessLevel.LIST,
-//         conditionKeys: [],
-//         dependentActions: [],
-//         description: '',
-//         privilege: ''
-//     }]
-// }
-
-
-
-
-// ############################
-// ############################
-
-export interface IAccessLevel {
-    /**
-     * Access level of the privilege
-     * @experimental
-     */
-    readonly accessLevel: 'LIST' | 'READ' | 'WRITE' | 'PERMISSION_MANAGEMENT' | 'TAGGING'
-}
-
-
-export interface IAction {
-    /**
-     * Name of the Action
-     * @experimental
-     */
-    readonly actionName: string
-
-    /**
-     * Description of the action
-     * @experimental
-     */
-    readonly description: string
-
-    /**
-     * Other actions that this requires for successful execution
-     * @experimental
-     */
-    readonly dependentActions?: string[]
-
-    /**
-     * Access level of the IAM Action
-     * @experimental
-     */
-    readonly accessLevel: IAccessLevel
-
-}
-
-export interface IResource {
-    /**
-     * Type of a resource effected by an IAM Privilege
-     * @experimental
-     */
-    readonly resourceName: string
-
-    /**
-     * Available condition keys for the resource
-     * @experimental
-     */
-    readonly conditionKeys?: string[]
-
-    /**
-     * Format of the ARN for a resource
-     * @experimental
-     */
-    readonly resourceArnFormat: string
-
-    /**
-     * Actions taken against the resource type
-     * @param {string} actionName
-     * @param {string} description
-     * @param {string[]} dependentActions
-     * @param {IAccessLevel} accessLevel
-     * @experimental
-     */
-    readonly actions: IAction[]
-
-}
-
-export interface IResourceType{
-    /**
-     * Type of a resource effected by an IAM Privilege
-     * @experimental
-     */
-     readonly resourceName: string
-
-     /**
-      * Available condition keys for the resource
-      * @experimental
-      */
-     readonly conditionKeys?: string[]
- 
-     /**
-      * Format of the ARN for a resource
-      * @experimental
-      */
-     readonly resourceArnFormat: string
-
-    /**
-     * Is the resource required for the IAM Action
-     * @experimental
-     */
-    readonly required: boolean
-
-    /**
-     * Any other actions that are required to complete this action
-     * @experimental
-     */
-    readonly dependentActions: string[]
-
-}
-
-
-export interface IPrivilege extends IAction {
-
-    /**
-     * Name of the prefix for a command. ie: 'ec2' in 'ec2:RunInstances'
-     * @experimental
-     */
-    readonly prefix: string
-
-    /**
-     * Documentation link for the API action
-     * @experimental
-     */
-    readonly apiDocumentationLink: string
-
-    /**
-     * Resource types included in the action
-     * @experimental
-     */
-    readonly resourceTypes?: IResourceType[]
-}
-
