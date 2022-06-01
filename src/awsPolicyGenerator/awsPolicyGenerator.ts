@@ -34,6 +34,13 @@ export class AwsPolicyGenerator {
     }
 
 
+    /**
+     * 
+     * @param service 
+     * @param resource 
+     * @param privilegeLevels 
+     * @returns 
+     */
     addActionsForResource(service: string, resource: string, privilegeLevels: privilegeLevel[]): AwsPolicyGenerator {
         
         const resourceDefinition = this.iamDefinition.resources[service][resource]
@@ -60,17 +67,66 @@ export class AwsPolicyGenerator {
         return this
     }
 
-    addActions(actions: string[]) {
+    /**
+     * 
+     * @param actions 
+     * @returns 
+     */
+    addSpecificActions(actions: string[]): AwsPolicyGenerator {
         this.policyStatement.action.push(...actions)
+
+        return this
     }
 
-    checkConditions() {
+    /**
+     * 
+     * @returns 
+     */
+    addDependentActions(): AwsPolicyGenerator {
+        const policyActions: string[] = this.policyStatement.action
 
+        for (let action of policyActions) {
+
+            // Since an action is in the form of service.Privilege, we need to split it to check the privileges
+            // Assuming an action is in the right format like s3:CreateBucket, the 0th index will be the service
+            // and the 1st index will be the privilege
+            let splitAction = action.split(':')
+            let privilege = this.iamDefinition.privileges[splitAction[0]][splitAction[1]]
+
+            if (privilege.dependentActions.length > 0) {
+                this.policyStatement.action.push(...privilege.dependentActions)
+            }
+        }
+
+        return this
     }
 
-    build() {
+
+    /**
+     * 
+     * @returns 
+     */
+    checkConditions(): void {
+        if (!this.policyStatement.condition) {
+            return
+        }
+
+        for (let condition of this.policyStatement.condition) {
+            if (!this.allowedConditions.includes(condition)) {
+                throw new Error('Condition added that is not allowed')
+            }
+        }
+
+        return
+    }
+
+    /**
+     * 
+     */
+    build(): PolicyStatement {
 
         this.checkConditions()
+        this.addDependentActions()
 
         this.policyStatement.action = this.policyStatement.action.sort()
         console.log(this.allowedConditions)
