@@ -1,6 +1,6 @@
 import { AccessLevel, NormalizedResource, PrivMap, ImportConditions,
     NormalizedPrivilege, ResourceBase, NormalizedPrivileges, NormalizedResources,
-    ImportPrivs, ImportResources } from '../src/awsPolicyGenerator/interfaces/interfaces';
+    ImportPrivs, ImportResources, NormalizedDefinition } from '../src/awsPolicyGenerator/interfaces/interfaces';
 import * as fs from 'fs'
 
 
@@ -119,7 +119,7 @@ function normalizeResources(service: string, privileges: ImportPrivs, resources:
 
     let folderPath = `${serviceDefDir}/${service}/`  
     fs.writeFileSync(`${folderPath}${service}NormalizedResources.json`, JSON.stringify(normalizedResources, null, 4), 'utf-8')
-
+    return normalizedResources
 }
 
 export function normalizePrivs(service: string, privileges: ImportPrivs, resources: ImportResources, serviceConditions: ImportConditions) {
@@ -182,12 +182,17 @@ export function normalizePrivs(service: string, privileges: ImportPrivs, resourc
 
     let folderPath = `${serviceDefDir}/${service}/`
     fs.writeFileSync(`${folderPath}${service}NormalizedPrivileges.json`, JSON.stringify(normalizedPrivileges, null, 4), 'utf-8')
-
+    return normalizedPrivileges
 }
 
 
 export function main() {
     const directories = fs.readdirSync(serviceDefDir)
+
+    const normalizedDefinition: NormalizedDefinition = {
+        privileges: {},
+        resources: {}
+    }
     
     for (let service of directories) {
         const privileges: ImportPrivs = JSON.parse(fs.readFileSync(
@@ -200,9 +205,14 @@ export function main() {
             `${serviceDefDir}/${service}/${service}Conditions.json`, 'utf-8'
         ))
 
-        normalizeResources(service, privileges, resources, serviceConditions)
-        normalizePrivs(service, privileges, resources, serviceConditions)
+        const normalizedResources = normalizeResources(service, privileges, resources, serviceConditions)
+        const normalizedPrivs = normalizePrivs(service, privileges, resources, serviceConditions)
+        
+        normalizedDefinition.privileges[service] = normalizedPrivs
+        normalizedDefinition.resources[service] = normalizedResources
     }
+    fs.writeFileSync(`./lib/normalizedDefinition.json`, JSON.stringify(normalizedDefinition, null, 4), 'utf-8')
+
 }
 
 main()

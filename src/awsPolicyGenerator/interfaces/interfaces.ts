@@ -102,21 +102,11 @@ export interface ResourceBase {
 
 
 export interface NormalizedResource extends ResourceBase {
-    listPrivileges: {
-        [key: string]: PrivilegeBase
-    },
-    readPrivileges: {
-        [key: string]: PrivilegeBase
-    },
-    writePrivileges: {
-        [key: string]: PrivilegeBase
-    },
-    tagPrivileges: {
-        [key: string]: PrivilegeBase
-    },
-    permManPrivileges: {
-        [key: string]: PrivilegeBase
-    },
+    listPrivileges: Privileges,
+    readPrivileges: Privileges,
+    writePrivileges: Privileges,
+    tagPrivileges: Privileges,
+    permManPrivileges: Privileges,
     service: string
 }
 
@@ -131,6 +121,10 @@ export interface PrivilegeBase {
     dependentActions: string[],
     accessLevel: AccessLevel,
     apiDocumentationLink: string
+}
+
+export interface Privileges {
+    [key: string]: PrivilegeBase
 }
 
 export interface PrivMap extends PrivilegeBase {
@@ -154,4 +148,28 @@ export interface NormalizedService {
     service: string,
     resources: string[],
     privileges: string[]
+}
+
+export interface NormalizedDefinition {
+    privileges: {
+        [key: string]: NormalizedPrivileges
+    },
+    resources: {
+        [key: string]: NormalizedResources
+    }
+}
+
+
+
+/////////////////////////////////////////////
+//////////////////////////////////////////////
+
+
+export interface PolicyStatement {
+    version: string,
+    effect: 'Allow' | 'Deny',
+    action: string[],
+    principal?: string[],
+    condition?: string[],
+    resource?: string[]
 }
