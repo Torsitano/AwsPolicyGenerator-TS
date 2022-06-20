@@ -171,5 +171,5 @@ export interface PolicyStatement {
     action: string[],
     principal?: string[],
     condition?: string[],
-    resource?: string[]
+    resource: string[]
 }

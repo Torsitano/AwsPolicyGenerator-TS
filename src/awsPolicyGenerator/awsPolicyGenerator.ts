@@ -18,7 +18,8 @@ export class AwsPolicyGenerator {
         this.policyStatement = {
             version: '2012-10-17',
             effect: 'Allow',
-            action: []
+            action: [],
+            resource: []
         }
 
         this.iamDefinition = JSON.parse(fs.readFileSync(`./lib/normalizedDefinition.json`, 'utf-8'))
@@ -45,22 +46,11 @@ export class AwsPolicyGenerator {
         
         const resourceDefinition = this.iamDefinition.resources[service][resource]
 
-        for (let condition in resourceDefinition.resourceConditions) {
-            this.allowedConditions.push(condition)
-        }
-
         for (let privilegeLevel of privilegeLevels) {
             for (let action in resourceDefinition[privilegeLevel]) {
 
                 let privilege = resourceDefinition[privilegeLevel][action]
-                this.policyStatement.action.push(`${service}:${privilege.privilege}`)
-
-                if (privilege.dependentActions.length > 0) {
-                    this.policyStatement.action.push(...privilege.dependentActions)
-                }
-                for (let condition in privilege.privConditions) {
-                    this.allowedConditions.push(condition)
-                }
+                this.policyStatement.action.push(`${service}:${privilege.privilege}`)                
             }
         }
 
@@ -78,12 +68,19 @@ export class AwsPolicyGenerator {
         return this
     }
 
+
+    pascalPrivName(privilege: string): string {
+        const pascalName = privilege.charAt(0).toLowerCase() + privilege.substring(1)
+        return pascalName
+    }
+
     /**
      * 
      * @returns 
      */
     addDependentActions(): AwsPolicyGenerator {
         const policyActions: string[] = this.policyStatement.action
+        console.log(policyActions)
 
         for (let action of policyActions) {
 
@@ -91,7 +88,7 @@ export class AwsPolicyGenerator {
             // Assuming an action is in the right format like s3:CreateBucket, the 0th index will be the service
             // and the 1st index will be the privilege
             let splitAction = action.split(':')
-            let privilege = this.iamDefinition.privileges[splitAction[0]][splitAction[1]]
+            let privilege = this.iamDefinition.privileges[splitAction[0]][this.pascalPrivName(splitAction[1])]
 
             if (privilege.dependentActions.length > 0) {
                 this.policyStatement.action.push(...privilege.dependentActions)
@@ -99,6 +96,34 @@ export class AwsPolicyGenerator {
         }
 
         return this
+    }
+
+    getAllowedConditions(): void {
+
+        const policyActions: string[] = this.policyStatement.action
+        
+        for (let action of policyActions) {
+            let splitAction = action.split(':')
+            let privilege = this.iamDefinition.privileges[splitAction[0]][this.pascalPrivName(splitAction[1])]
+
+            for (let condition in privilege.privConditions) {
+                if(!this.allowedConditions.includes(condition)) {
+                    this.allowedConditions.push(condition)
+                }
+            }
+            
+            for (let resourceKey in privilege.resources) {
+                let resource = privilege.resources[resourceKey]
+                for (let conditionKey in resource.resourceConditions) {
+                    let condition = resource.resourceConditions[conditionKey]
+                    if(!this.allowedConditions.includes(condition.condition)) {
+                        this.allowedConditions.push(condition.condition)
+                    }
+                    
+                }
+            }
+        }
+        
     }
 
 
@@ -125,8 +150,13 @@ export class AwsPolicyGenerator {
      */
     build(): PolicyStatement {
 
+        this.getAllowedConditions()
         this.checkConditions()
         this.addDependentActions()
+
+        if (this.policyStatement.resource.length == 0) {
+            this.policyStatement.resource.push('*')
+        }
 
         this.policyStatement.action = this.policyStatement.action.sort()
         console.log(this.allowedConditions)
