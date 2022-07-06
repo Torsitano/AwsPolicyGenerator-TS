@@ -1,8 +1,8 @@
-import { AwsPolicyGenerator } from './../src/awsPolicyGenerator/awsPolicyGenerator'
-import { PolicyStatement } from '../src/awsPolicyGenerator/interfaces'
+import { PolicyStatement } from '../src/awsPolicyGenerator/interfaces/interfaces'
+import { PolicyStatementGenerator } from '../src/awsPolicyGenerator/PolicyStatementGenerator'
 
 
-const genTest: PolicyStatement = new AwsPolicyGenerator()
+const genTest: PolicyStatement = new PolicyStatementGenerator()
     .addActionsForResource( { service: 'iam', resource: 'role', privilegeLevels: [ 'readPrivileges', 'listPrivileges' ] } )
     .build()
 

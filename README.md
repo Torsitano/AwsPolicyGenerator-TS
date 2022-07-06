@@ -5,10 +5,10 @@ Still very, very WIP. Stay tuned
 Example(`./test/generatorTest.ts`):
 
 ```typescript
-import { AwsPolicyGenerator } from './../src/awsPolicyGenerator/awsPolicyGenerator'
-import { PolicyStatement } from '../src/awsPolicyGenerator/interfaces'
+import { PolicyStatement } from '../src/awsPolicyGenerator/interfaces/interfaces'
+import { PolicyStatementGenerator } from '../src/awsPolicyGenerator/PolicyStatementGenerator'
 
-const genTest: PolicyStatement = new AwsPolicyGenerator()
+const genTest: PolicyStatement = new PolicyStatementGenerator()
     .addActionsForResource({ service: 'iam', resource: 'role', privilegeLevels: ['readPrivileges', 'listPrivileges'] })
     .build()
 
@@ -19,7 +19,6 @@ Output:
 
 ```json
 {
-    "version": "2012-10-17",
     "effect": "Allow",
     "action": [
         "iam:GenerateServiceLastAccessedDetails",

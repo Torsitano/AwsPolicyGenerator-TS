@@ -166,12 +166,22 @@ export interface NormalizedDefinition {
 
 
 export interface PolicyStatement {
-    version: string,
     effect: 'Allow' | 'Deny',
     action: string[],
     principal?: string[],
     condition?: string[],
     resource: string[]
+}
+
+export interface Policy {
+    version: string,
+    statement: PolicyStatement[]
+}
+
+export interface PolicyObject {
+    policyStatement: PolicyStatement,
+    toYaml(): string,
+    toJson(): string
 }
 
 
@@ -190,3 +200,4 @@ export interface AddActionsForResourceParams {
     /** The privilege levels to include. Options: 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'  */
     privilegeLevels: PrivilegeLevel[]
 }
+

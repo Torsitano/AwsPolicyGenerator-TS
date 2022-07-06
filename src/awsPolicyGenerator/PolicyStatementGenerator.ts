@@ -1,46 +1,29 @@
-import { AddActionsForResourceParams } from './interfaces/interfaces'
-import { NormalizedDefinition, PolicyStatement } from "./interfaces"
+import { AddActionsForResourceParams, PolicyStatement, NormalizedDefinition } from './interfaces/interfaces'
 import * as fs from 'fs'
-
-export enum Service {
-    IAM = 'iam',
-    EC2 = 'ec2'
-}
+import { pascalPrivName } from './utils'
 
 
 
 
-
-
-export class AwsPolicyGenerator {
-    private readonly policyStatement: PolicyStatement
+export class PolicyStatementGenerator {
     private readonly iamDefinition: NormalizedDefinition
-    private readonly allowedConditions: string[]
+    private readonly allowedConditions: string[] = []
+    private readonly statement: PolicyStatement
 
     constructor () {
-        this.policyStatement = {
-            version: '2012-10-17',
+        this.statement = {
             effect: 'Allow',
             action: [],
             resource: []
         }
 
         this.iamDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
-
-        this.allowedConditions = []
     }
 
-    // public AwsPolicyChecker = new class {
-    //     private superThis: AwsPolicyGenerator
 
-    //     constructor(superThis: AwsPolicyGenerator) {
-    //         this.superThis = superThis
-    //     }
-
-    // }(this)
 
     //@ts-ignore
-    addActionsForService( services: string ): AwsPolicyGenerator {
+    addActionsForService( services: string ): PolicyStatementGenerator {
 
 
         return this
@@ -54,7 +37,7 @@ export class AwsPolicyGenerator {
      * @param privilegeLevels 
      * @returns 
      */
-    addActionsForResource( params: AddActionsForResourceParams ): AwsPolicyGenerator {
+    addActionsForResource( params: AddActionsForResourceParams ): PolicyStatementGenerator {
 
         const resourceDefinition = this.iamDefinition.resources[ params.service ][ params.resource ]
 
@@ -62,7 +45,7 @@ export class AwsPolicyGenerator {
             for ( let action in resourceDefinition[ privilegeLevel ] ) {
 
                 let privilege = resourceDefinition[ privilegeLevel ][ action ]
-                this.policyStatement.action.push( `${params.service}:${privilege.privilege}` )
+                this.statement.action.push( `${params.service}:${privilege.privilege}` )
             }
         }
 
@@ -74,24 +57,20 @@ export class AwsPolicyGenerator {
      * @param actions 
      * @returns 
      */
-    addSpecificActions( actions: string[] ): AwsPolicyGenerator {
-        this.policyStatement.action.push( ...actions )
+    addSpecificActions( actions: string[] ): PolicyStatementGenerator {
+        this.statement.action.push( ...actions )
 
         return this
     }
 
 
-    pascalPrivName( privilege: string ): string {
-        const pascalName = privilege.charAt( 0 ).toLowerCase() + privilege.substring( 1 )
-        return pascalName
-    }
 
     /**
      * 
      * @returns 
      */
-    addDependentActions(): AwsPolicyGenerator {
-        const policyActions: string[] = this.policyStatement.action
+    addDependentActions(): PolicyStatementGenerator {
+        const policyActions: string[] = this.statement.action
 
 
         for ( let action of policyActions ) {
@@ -100,10 +79,10 @@ export class AwsPolicyGenerator {
             // Assuming an action is in the right format like s3:CreateBucket, the 0th index will be the service
             // and the 1st index will be the privilege
             let splitAction = action.split( ':' )
-            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ this.pascalPrivName( splitAction[ 1 ] ) ]
+            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ pascalPrivName( splitAction[ 1 ] ) ]
 
             if ( privilege.dependentActions.length > 0 ) {
-                this.policyStatement.action.push( ...privilege.dependentActions )
+                this.statement.action.push( ...privilege.dependentActions )
             }
         }
 
@@ -112,11 +91,11 @@ export class AwsPolicyGenerator {
 
     getAllowedConditions(): void {
 
-        const policyActions: string[] = this.policyStatement.action
+        const policyActions: string[] = this.statement.action
 
         for ( let action of policyActions ) {
             let splitAction = action.split( ':' )
-            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ this.pascalPrivName( splitAction[ 1 ] ) ]
+            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ pascalPrivName( splitAction[ 1 ] ) ]
 
             for ( let condition in privilege.privConditions ) {
                 if ( !this.allowedConditions.includes( condition ) ) {
@@ -144,11 +123,11 @@ export class AwsPolicyGenerator {
      * @returns 
      */
     checkConditions(): void {
-        if ( !this.policyStatement.condition ) {
+        if ( !this.statement.condition ) {
             return
         }
 
-        for ( let condition of this.policyStatement.condition ) {
+        for ( let condition of this.statement.condition ) {
             if ( !this.allowedConditions.includes( condition ) ) {
                 throw new Error( 'Condition added that is not allowed' )
             }
@@ -174,13 +153,13 @@ export class AwsPolicyGenerator {
         this.checkConditions()
         this.addDependentActions()
 
-        if ( this.policyStatement.resource.length == 0 ) {
-            this.policyStatement.resource.push( '*' )
+        if ( this.statement.resource.length == 0 ) {
+            this.statement.resource.push( '*' )
         }
 
-        this.policyStatement.action = this.policyStatement.action.sort()
+        this.statement.action = this.statement.action.sort()
         //console.log(this.allowedConditions)
-        return this.policyStatement
+        return this.statement
     }
 
 
