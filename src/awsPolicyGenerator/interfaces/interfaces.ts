@@ -1,6 +1,6 @@
 
 export interface IamDefinition {
-    [key: string]: {
+    [ key: string ]: {
         serviceName: string,
         prefix: string,
         serviceAuthorizationUrl: string,
@@ -11,11 +11,11 @@ export interface IamDefinition {
 }
 
 export interface ImportPrivs {
-    [key: string]: PrivilegeProperties
+    [ key: string ]: PrivilegeProperties
 }
 
 export interface ImportResources {
-    [key: string]: ResourceProperties
+    [ key: string ]: ResourceProperties
 }
 
 
@@ -27,7 +27,7 @@ export interface ServiceDefinition {
 }
 
 export interface ServicePrivilege {
-    [key: string]: PrivilegeProperties
+    [ key: string ]: PrivilegeProperties
 }
 
 export interface PrivilegeProperties {
@@ -39,7 +39,7 @@ export interface PrivilegeProperties {
 }
 
 export interface ResourceType {
-    [key: string]: ResourceTypeProperties
+    [ key: string ]: ResourceTypeProperties
 }
 
 export interface ResourceTypeProperties {
@@ -50,7 +50,7 @@ export interface ResourceTypeProperties {
 }
 
 export interface ImportConditions {
-    [key: string]: ConditionTypeProperties
+    [ key: string ]: ConditionTypeProperties
 }
 
 export interface ConditionTypeProperties {
@@ -111,7 +111,7 @@ export interface NormalizedResource extends ResourceBase {
 }
 
 export interface NormalizedResources {
-    [key: string]: NormalizedResource
+    [ key: string ]: NormalizedResource
 }
 
 export interface PrivilegeBase {
@@ -124,7 +124,7 @@ export interface PrivilegeBase {
 }
 
 export interface Privileges {
-    [key: string]: PrivilegeBase
+    [ key: string ]: PrivilegeBase
 }
 
 export interface PrivMap extends PrivilegeBase {
@@ -133,15 +133,15 @@ export interface PrivMap extends PrivilegeBase {
 
 export interface NormalizedPrivilege extends PrivilegeBase {
     resources: {
-        [key: string]: (ResourceBase & {
+        [ key: string ]: ( ResourceBase & {
             required: boolean
-        })
+        } )
     },
     service: string
 }
 
 export interface NormalizedPrivileges {
-    [key: string]: NormalizedPrivilege
+    [ key: string ]: NormalizedPrivilege
 }
 
 export interface NormalizedService {
@@ -152,10 +152,10 @@ export interface NormalizedService {
 
 export interface NormalizedDefinition {
     privileges: {
-        [key: string]: NormalizedPrivileges
+        [ key: string ]: NormalizedPrivileges
     },
     resources: {
-        [key: string]: NormalizedResources
+        [ key: string ]: NormalizedResources
     }
 }
 
