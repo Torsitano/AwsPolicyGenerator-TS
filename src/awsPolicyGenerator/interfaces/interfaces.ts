@@ -173,3 +173,20 @@ export interface PolicyStatement {
     condition?: string[],
     resource: string[]
 }
+
+
+
+// ########################################
+// Argument Interfaces
+// ########################################
+export type PrivilegeLevel = 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'
+
+
+export interface AddActionsForResourceParams {
+    /** The AWS Service you want to add actions for */
+    service: string,
+    /** The resource you want to add permissions for */
+    resource: string,
+    /** The privilege levels to include. Options: 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'  */
+    privilegeLevels: PrivilegeLevel[]
+}

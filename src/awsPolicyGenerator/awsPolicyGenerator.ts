@@ -1,3 +1,4 @@
+import { AddActionsForResourceParams } from './interfaces/interfaces';
 import { NormalizedDefinition, PolicyStatement } from "./interfaces"
 import * as fs from 'fs'
 
@@ -6,7 +7,9 @@ export enum Service {
     EC2 = 'ec2'
 }
 
-type privilegeLevel = 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'
+
+
+
 
 
 export class AwsPolicyGenerator {
@@ -27,6 +30,15 @@ export class AwsPolicyGenerator {
         this.allowedConditions = []
     }
 
+    // public AwsPolicyChecker = new class {
+    //     private superThis: AwsPolicyGenerator
+
+    //     constructor(superThis: AwsPolicyGenerator) {
+    //         this.superThis = superThis
+    //     }
+
+    // }(this)
+
     //@ts-ignore
     addActionsForService(services: string): AwsPolicyGenerator {
 
@@ -42,15 +54,15 @@ export class AwsPolicyGenerator {
      * @param privilegeLevels 
      * @returns 
      */
-    addActionsForResource(service: string, resource: string, privilegeLevels: privilegeLevel[]): AwsPolicyGenerator {
+    addActionsForResource(params: AddActionsForResourceParams): AwsPolicyGenerator {
         
-        const resourceDefinition = this.iamDefinition.resources[service][resource]
+        const resourceDefinition = this.iamDefinition.resources[params.service][params.resource]
 
-        for (let privilegeLevel of privilegeLevels) {
+        for (let privilegeLevel of params.privilegeLevels) {
             for (let action in resourceDefinition[privilegeLevel]) {
 
                 let privilege = resourceDefinition[privilegeLevel][action]
-                this.policyStatement.action.push(`${service}:${privilege.privilege}`)                
+                this.policyStatement.action.push(`${params.service}:${privilege.privilege}`)                
             }
         }
 
@@ -80,11 +92,11 @@ export class AwsPolicyGenerator {
      */
     addDependentActions(): AwsPolicyGenerator {
         const policyActions: string[] = this.policyStatement.action
-        console.log(policyActions)
+        
 
         for (let action of policyActions) {
 
-            // Since an action is in the form of service.Privilege, we need to split it to check the privileges
+            // Since an action is in the form of service:Privilege, we need to split it to check the privileges
             // Assuming an action is in the right format like s3:CreateBucket, the 0th index will be the service
             // and the 1st index will be the privilege
             let splitAction = action.split(':')
@@ -145,6 +157,14 @@ export class AwsPolicyGenerator {
         return
     }
 
+
+    /**
+     * Check if depedent actions are higher privilege
+     */
+    checkDependentActionPrivLevel(): void {
+
+    }
+
     /**
      * 
      */
@@ -159,7 +179,7 @@ export class AwsPolicyGenerator {
         }
 
         this.policyStatement.action = this.policyStatement.action.sort()
-        console.log(this.allowedConditions)
+        //console.log(this.allowedConditions)
         return this.policyStatement
     }
 
