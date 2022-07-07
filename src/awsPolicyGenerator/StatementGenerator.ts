@@ -1,11 +1,11 @@
-import { AddActionsForResourceParams, PolicyStatement, NormalizedDefinition } from './interfaces/interfaces'
+import { AddActionsForResourceParams, PolicyStatement, NormalizedDefinition, AddActionsForServiceParams } from './interfaces/interfaces'
 import * as fs from 'fs'
-import { pascalPrivName } from './utils'
+import { camelPrivName } from './utils'
 
 
 
 
-export class PolicyStatementGenerator {
+export class StatementGenerator {
     private readonly iamDefinition: NormalizedDefinition
     private readonly allowedConditions: string[] = []
     private readonly statement: PolicyStatement
@@ -21,12 +21,31 @@ export class PolicyStatementGenerator {
     }
 
 
-
-    //@ts-ignore
-    addActionsForService( services: string ): PolicyStatementGenerator {
-
-
+    /**
+     * 
+     * @param props 
+     * @returns 
+     */
+    addActionsForService( props: AddActionsForServiceParams ): StatementGenerator {
+        this.statement.action.push( ...this.getActionsForService( props ) )
         return this
+    }
+
+    /**
+     * FIXME: This will miss actions not for a specific resource, need to refactor
+     * 
+     * @returns 
+     */
+    getActionsForService( { service, privilegeLevels }: AddActionsForServiceParams ): string[] {
+        const actions: string[] = []
+
+        const serviceDefinition = this.iamDefinition.resources[ service ]
+
+        for ( let resource in serviceDefinition ) {
+            actions.push( ...this.getActionsForResource( { service, resource, privilegeLevels } ) )
+        }
+
+        return actions
     }
 
 
@@ -37,30 +56,37 @@ export class PolicyStatementGenerator {
      * @param privilegeLevels 
      * @returns 
      */
-    addActionsForResource( params: AddActionsForResourceParams ): PolicyStatementGenerator {
+    addActionsForResource( props: AddActionsForResourceParams ): StatementGenerator {
 
-        const resourceDefinition = this.iamDefinition.resources[ params.service ][ params.resource ]
+        this.statement.action.push( ...this.getActionsForResource( props ) )
 
-        for ( let privilegeLevel of params.privilegeLevels ) {
+        return this
+    }
+
+    getActionsForResource( { service, resource, privilegeLevels }: AddActionsForResourceParams ): string[] {
+        const actions: string[] = []
+        const resourceDefinition = this.iamDefinition.resources[ service ][ resource ]
+
+        for ( let privilegeLevel of privilegeLevels ) {
             for ( let action in resourceDefinition[ privilegeLevel ] ) {
 
                 let privilege = resourceDefinition[ privilegeLevel ][ action ]
-                this.statement.action.push( `${params.service}:${privilege.privilege}` )
+                actions.push( `${service}:${privilege.privilege}` )
             }
         }
 
-        return this
+        return actions
     }
 
     /**
-     * 
+     * Used if you want to add individual actions that don't fit in with the other permission levels that
+     * are assigned more broadly
      * @param actions 
      * @returns 
      */
-    addSpecificActions( actions: string[] ): PolicyStatementGenerator {
+    addSpecificActions( actions: string[] ): void {
         this.statement.action.push( ...actions )
 
-        return this
     }
 
 
@@ -69,7 +95,7 @@ export class PolicyStatementGenerator {
      * 
      * @returns 
      */
-    addDependentActions(): PolicyStatementGenerator {
+    addDependentActions(): StatementGenerator {
         const policyActions: string[] = this.statement.action
 
 
@@ -79,23 +105,30 @@ export class PolicyStatementGenerator {
             // Assuming an action is in the right format like s3:CreateBucket, the 0th index will be the service
             // and the 1st index will be the privilege
             let splitAction = action.split( ':' )
-            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ pascalPrivName( splitAction[ 1 ] ) ]
+            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ camelPrivName( splitAction[ 1 ] ) ]
 
             if ( privilege.dependentActions.length > 0 ) {
                 this.statement.action.push( ...privilege.dependentActions )
             }
         }
 
+
         return this
     }
 
+    /**
+     * Generates a list of of all conditions that are allowed for the various resources/actions that are 
+     * in the policy
+     */
     getAllowedConditions(): void {
 
         const policyActions: string[] = this.statement.action
 
         for ( let action of policyActions ) {
             let splitAction = action.split( ':' )
-            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ pascalPrivName( splitAction[ 1 ] ) ]
+            // The name format used in the IAM definition object is Camel Case, but AWS actions are Pascal Case
+            // This converts the action to Camel Case(ie: CreateBucket -> createBucket) for use as a key
+            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ camelPrivName( splitAction[ 1 ] ) ]
 
             for ( let condition in privilege.privConditions ) {
                 if ( !this.allowedConditions.includes( condition ) ) {
@@ -119,7 +152,7 @@ export class PolicyStatementGenerator {
 
 
     /**
-     * 
+     * Checks for conditions that are in the policy but not actually allowed for any service/action/resource
      * @returns 
      */
     checkConditions(): void {
@@ -138,7 +171,7 @@ export class PolicyStatementGenerator {
 
 
     /**
-     * Check if depedent actions are higher privilege
+     * Check if depedent actions are higher privilege level than the privileges allowed
      */
     checkDependentActionPrivLevel(): void {
 
@@ -158,7 +191,6 @@ export class PolicyStatementGenerator {
         }
 
         this.statement.action = this.statement.action.sort()
-        //console.log(this.allowedConditions)
         return this.statement
     }
 

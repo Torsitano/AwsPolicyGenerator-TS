@@ -179,9 +179,11 @@ export interface Policy {
 }
 
 export interface PolicyObject {
-    policyStatement: PolicyStatement,
+    policy: Policy,
     toYaml(): string,
-    toJson(): string
+    toJson(): string,
+    permissionLevels(): string[],
+    services(): string[]
 }
 
 
@@ -197,6 +199,13 @@ export interface AddActionsForResourceParams {
     service: string,
     /** The resource you want to add permissions for */
     resource: string,
+    /** The privilege levels to include. Options: 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'  */
+    privilegeLevels: PrivilegeLevel[]
+}
+
+export interface AddActionsForServiceParams {
+    /** The AWS Service you want to add actions for */
+    service: string,
     /** The privilege levels to include. Options: 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'  */
     privilegeLevels: PrivilegeLevel[]
 }

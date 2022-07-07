@@ -1,9 +1,10 @@
 import { PolicyStatement } from '../src/awsPolicyGenerator/interfaces/interfaces'
-import { PolicyStatementGenerator } from '../src/awsPolicyGenerator/PolicyStatementGenerator'
+import { StatementGenerator } from '../src/awsPolicyGenerator/StatementGenerator'
 
 
-const genTest: PolicyStatement = new PolicyStatementGenerator()
-    .addActionsForResource( { service: 'iam', resource: 'role', privilegeLevels: [ 'readPrivileges', 'listPrivileges' ] } )
+const genTest: PolicyStatement = new StatementGenerator()
+    .addActionsForResource( { service: 'iam', resource: 'role', privilegeLevels: [ 'listPrivileges' ] } )
+    .addActionsForService( { service: 's3', privilegeLevels: [ 'listPrivileges', 'writePrivileges', 'tagPrivileges' ] } )
     .build()
 
 console.log( JSON.stringify( genTest, null, 4 ) )
