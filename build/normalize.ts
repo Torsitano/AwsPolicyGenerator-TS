@@ -224,9 +224,14 @@ function normalizeService( service: string, privileges: ImportPrivs, resources: 
             }
         }
 
-        // If there is only 1 resource, it will be the empty string containing condition keys for the
-        // action. This means that this action is not tied to a resource specifically.
-        if ( Object.keys( priv.resourceTypes ).length === 1 ) {
+        /**
+         * If there is only one resource listed and it's an empty string, that means it holds conditions for
+         * the action and that the action isn't tied to specific resources. In that situation, or where there 
+         * are no resource keys, the action will be added to the list
+         */
+        let numKeys = Object.keys( priv.resourceTypes ).length
+
+        if ( numKeys === 0 || ( numKeys === 1 && priv.resourceTypes[ '' ] ) ) {
             normalizedService.privsWithoutResource.push( priv.privilege )
         }
 

@@ -46,9 +46,13 @@ const privJson = `{
 }`
 
 const privTest = JSON.parse( privJson )
-const resources = privTest[ 'deleteAlternateContact' ][ 'resourceTypes' ]
+const resources = privTest[ 'disableRegion' ][ 'resourceTypes' ]
 const keys = Object.keys( resources )
 
 console.log( keys.length )
+
+if ( resources[ '' ] ) {
+    console.log( 'true' )
+}
 
 
