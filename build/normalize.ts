@@ -1,7 +1,7 @@
 import {
     AccessLevel, NormalizedResource, PrivMap, ImportConditions,
     NormalizedPrivilege, ResourceBase, NormalizedPrivileges, NormalizedResources,
-    ImportPrivs, ImportResources, NormalizedDefinition
+    ImportPrivs, ImportResources, NormalizedDefinition, NormalizedService
 } from '../src/awsPolicyGenerator/interfaces/interfaces'
 import * as fs from 'fs'
 
@@ -187,13 +187,67 @@ export function normalizePrivs( service: string, privileges: ImportPrivs, resour
     return normalizedPrivileges
 }
 
+function normalizeService( service: string, privileges: ImportPrivs, resources: ImportResources ): NormalizedService {
+    let normalizedService: NormalizedService = {
+        listPrivileges: [],
+        readPrivileges: [],
+        permManPrivileges: [],
+        tagPrivileges: [],
+        privsWithoutResource: [],
+        resources: [],
+        service: service,
+        writePrivileges: []
+    }
+
+    for ( let privKey in privileges ) {
+        let priv = privileges[ privKey ]
+        switch ( priv.accessLevel ) {
+            case AccessLevel.LIST: {
+                normalizedService.listPrivileges.push( priv.privilege )
+                break
+            }
+            case AccessLevel.READ: {
+                normalizedService.readPrivileges.push( priv.privilege )
+                break
+            }
+            case AccessLevel.WRITE: {
+                normalizedService.writePrivileges.push( priv.privilege )
+                break
+            }
+            case AccessLevel.PERMISSIONS_MANAGEMENT: {
+                normalizedService.permManPrivileges.push( priv.privilege )
+                break
+            }
+            case AccessLevel.TAGGING: {
+                normalizedService.tagPrivileges.push( priv.privilege )
+                break
+            }
+        }
+
+        // If there is only 1 resource, it will be the empty string containing condition keys for the
+        // action. This means that this action is not tied to a resource specifically.
+        if ( Object.keys( priv.resourceTypes ).length === 1 ) {
+            normalizedService.privsWithoutResource.push( priv.privilege )
+        }
+
+    }
+
+    for ( let resourceKey in resources ) {
+        normalizedService.resources.push( resourceKey )
+    }
+
+    return normalizedService
+
+}
+
 
 export function main() {
     const directories = fs.readdirSync( serviceDefDir )
 
     const normalizedDefinition: NormalizedDefinition = {
         privileges: {},
-        resources: {}
+        resources: {},
+        services: {}
     }
 
     for ( let service of directories ) {
@@ -209,9 +263,11 @@ export function main() {
 
         const normalizedResources = normalizeResources( service, privileges, resources, serviceConditions )
         const normalizedPrivs = normalizePrivs( service, privileges, resources, serviceConditions )
+        const normalizedService = normalizeService( service, privileges, resources )
 
         normalizedDefinition.privileges[ service ] = normalizedPrivs
         normalizedDefinition.resources[ service ] = normalizedResources
+        normalizedDefinition.services[ service ] = normalizedService
     }
     fs.writeFileSync( `./lib/normalizedDefinition.json`, JSON.stringify( normalizedDefinition, null, 4 ), 'utf-8' )
 

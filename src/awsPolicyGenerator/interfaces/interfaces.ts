@@ -145,9 +145,16 @@ export interface NormalizedPrivileges {
 }
 
 export interface NormalizedService {
+
     service: string,
-    resources: string[],
-    privileges: string[]
+    listPrivileges: string[],
+    readPrivileges: string[],
+    writePrivileges: string[],
+    tagPrivileges: string[],
+    permManPrivileges: string[],
+    privsWithoutResource: string[],
+    resources: string[]
+
 }
 
 export interface NormalizedDefinition {
@@ -156,6 +163,9 @@ export interface NormalizedDefinition {
     },
     resources: {
         [ key: string ]: NormalizedResources
+    },
+    services: {
+        [ key: string ]: NormalizedService
     }
 }
 
