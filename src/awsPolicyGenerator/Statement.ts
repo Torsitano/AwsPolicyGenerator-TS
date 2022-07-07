@@ -1,6 +1,6 @@
 import { PolicyStatement } from './interfaces/interfaces'
 import { PolicyBase } from './PolicyBase'
-import { stringify } from 'yaml'
+import { stringify, parse } from 'yaml'
 
 
 
@@ -20,7 +20,15 @@ export class Statement extends PolicyBase {
         return stringify( this.statement )
     }
 
+    fromYaml( input: string ): void {
+        this.statement = parse( input )
+    }
+
     toJson(): string {
         return JSON.stringify( this.statement, null, 4 )
+    }
+
+    fromJson( input: string ): void {
+        this.statement = JSON.parse( input )
     }
 }

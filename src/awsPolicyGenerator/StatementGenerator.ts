@@ -13,9 +13,6 @@ export class StatementGenerator {
 
     constructor () {
         this.statement = new Statement()
-
-
-
         this.iamDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
     }
 
