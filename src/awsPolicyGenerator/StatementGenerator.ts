@@ -1,6 +1,7 @@
-import { AddActionsForResourceParams, PolicyStatement, NormalizedDefinition, AddActionsForServiceParams } from './interfaces/interfaces'
+import { AddActionsForResourceParams, NormalizedDefinition, AddActionsForServiceParams } from './interfaces/interfaces'
 import * as fs from 'fs'
-import { camelPrivName } from './utils'
+import { camelize } from 'humps'
+import { Statement } from './Statement'
 
 
 
@@ -8,14 +9,12 @@ import { camelPrivName } from './utils'
 export class StatementGenerator {
     private readonly iamDefinition: NormalizedDefinition
     private readonly allowedConditions: string[] = []
-    private readonly statement: PolicyStatement
+    private readonly statement: Statement
 
     constructor () {
-        this.statement = {
-            effect: 'Allow',
-            action: [],
-            resource: []
-        }
+        this.statement = new Statement()
+
+
 
         this.iamDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
     }
@@ -27,24 +26,25 @@ export class StatementGenerator {
      * @returns 
      */
     addActionsForService( props: AddActionsForServiceParams ): StatementGenerator {
-        this.statement.action.push( ...this.getActionsForService( props ) )
+        this.statement.statement.action.push( ...this.getActionsForService( props ) )
         return this
     }
 
     /**
-     * FIXME: This will miss actions not for a specific resource, need to refactor
+     *
      * 
      * @returns 
      */
     getActionsForService( { service, privilegeLevels }: AddActionsForServiceParams ): string[] {
         const actions: string[] = []
 
-        const serviceDefinition = this.iamDefinition.resources[ service ]
+        const serviceDefinition = this.iamDefinition.services[ service ]
 
-        for ( let resource in serviceDefinition ) {
-            actions.push( ...this.getActionsForResource( { service, resource, privilegeLevels } ) )
+        for ( let privilegeLevel of privilegeLevels ) {
+            for ( let privilege of serviceDefinition[ privilegeLevel ] ) {
+                actions.push( `${service}:${privilege}` )
+            }
         }
-
         return actions
     }
 
@@ -57,12 +57,15 @@ export class StatementGenerator {
      * @returns 
      */
     addActionsForResource( props: AddActionsForResourceParams ): StatementGenerator {
-
-        this.statement.action.push( ...this.getActionsForResource( props ) )
-
+        this.statement.statement.action.push( ...this.getActionsForResource( props ) )
         return this
     }
 
+    /**
+     * 
+     * @param 
+     * @returns 
+     */
     getActionsForResource( { service, resource, privilegeLevels }: AddActionsForResourceParams ): string[] {
         const actions: string[] = []
         const resourceDefinition = this.iamDefinition.resources[ service ][ resource ]
@@ -85,7 +88,7 @@ export class StatementGenerator {
      * @returns 
      */
     addSpecificActions( actions: string[] ): void {
-        this.statement.action.push( ...actions )
+        this.statement.statement.action.push( ...actions )
 
     }
 
@@ -96,7 +99,7 @@ export class StatementGenerator {
      * @returns 
      */
     addDependentActions(): StatementGenerator {
-        const policyActions: string[] = this.statement.action
+        const policyActions: string[] = this.statement.statement.action
 
 
         for ( let action of policyActions ) {
@@ -105,10 +108,10 @@ export class StatementGenerator {
             // Assuming an action is in the right format like s3:CreateBucket, the 0th index will be the service
             // and the 1st index will be the privilege
             let splitAction = action.split( ':' )
-            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ camelPrivName( splitAction[ 1 ] ) ]
+            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ camelize( splitAction[ 1 ] ) ]
 
             if ( privilege.dependentActions.length > 0 ) {
-                this.statement.action.push( ...privilege.dependentActions )
+                this.statement.statement.action.push( ...privilege.dependentActions )
             }
         }
 
@@ -122,13 +125,13 @@ export class StatementGenerator {
      */
     getAllowedConditions(): void {
 
-        const policyActions: string[] = this.statement.action
+        const policyActions: string[] = this.statement.statement.action
 
         for ( let action of policyActions ) {
             let splitAction = action.split( ':' )
             // The name format used in the IAM definition object is Camel Case, but AWS actions are Pascal Case
             // This converts the action to Camel Case(ie: CreateBucket -> createBucket) for use as a key
-            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ camelPrivName( splitAction[ 1 ] ) ]
+            let privilege = this.iamDefinition.privileges[ splitAction[ 0 ] ][ camelize( splitAction[ 1 ] ) ]
 
             for ( let condition in privilege.privConditions ) {
                 if ( !this.allowedConditions.includes( condition ) ) {
@@ -156,11 +159,11 @@ export class StatementGenerator {
      * @returns 
      */
     checkConditions(): void {
-        if ( !this.statement.condition ) {
+        if ( !this.statement.statement.condition ) {
             return
         }
 
-        for ( let condition of this.statement.condition ) {
+        for ( let condition of this.statement.statement.condition ) {
             if ( !this.allowedConditions.includes( condition ) ) {
                 throw new Error( 'Condition added that is not allowed' )
             }
@@ -180,17 +183,17 @@ export class StatementGenerator {
     /**
      * 
      */
-    build(): PolicyStatement {
+    build(): Statement {
 
         this.getAllowedConditions()
         this.checkConditions()
         this.addDependentActions()
 
-        if ( this.statement.resource.length == 0 ) {
-            this.statement.resource.push( '*' )
+        if ( this.statement.statement.resource.length == 0 ) {
+            this.statement.statement.resource.push( '*' )
         }
 
-        this.statement.action = this.statement.action.sort()
+        this.statement.statement.action = this.statement.statement.action.sort()
         return this.statement
     }
 

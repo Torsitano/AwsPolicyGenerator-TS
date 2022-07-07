@@ -174,6 +174,13 @@ export interface NormalizedDefinition {
 /////////////////////////////////////////////
 //////////////////////////////////////////////
 
+// export interface Base {
+//     toYaml(): string,
+//     toJson(): string,
+//     permissionLevels(): string[],
+//     services(): string[]
+// }
+
 
 export interface PolicyStatement {
     effect: 'Allow' | 'Deny',
@@ -181,6 +188,11 @@ export interface PolicyStatement {
     principal?: string[],
     condition?: string[],
     resource: string[]
+}
+
+export interface GeneratedStatement {
+    statement: PolicyStatement,
+
 }
 
 export interface Policy {
