@@ -191,6 +191,9 @@ const statementFromYaml = Statement.fromYaml(yaml)
 console.log(statementFromJson.accessLevels)
 // Set(1) { 'List' }
 
+console.log(statementFromYaml.accessLevels)
+// Set(2) { 'Read', 'List' }
+
 console.log(statementFromYaml.allowedConditions)
 /**
  * Set(10) {

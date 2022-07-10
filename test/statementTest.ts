@@ -109,4 +109,6 @@ const statementFromYaml = Statement.fromYaml( yaml )
 
 console.log( statementFromJson.accessLevels )
 
+
+console.log( statementFromYaml.accessLevels )
 console.log( statementFromYaml.allowedConditions )
