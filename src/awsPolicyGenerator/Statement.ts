@@ -1,14 +1,13 @@
 import { PolicyStatement } from './interfaces/interfaces'
-import { PolicyBase } from './PolicyBase'
+import { Base } from './StatementBase'
 import { stringify, parse } from 'yaml'
 
 
 
-export class Statement extends PolicyBase {
+export class Statement implements Base {
     statement: PolicyStatement
 
     constructor () {
-        super()
         this.statement = {
             effect: 'Allow',
             action: [],
@@ -30,5 +29,13 @@ export class Statement extends PolicyBase {
 
     fromJson( input: string ): void {
         this.statement = JSON.parse( input )
+    }
+
+    permissionLevels(): string[] {
+        return [ '' ]
+    }
+
+    services(): string[] {
+        return [ '' ]
     }
 }

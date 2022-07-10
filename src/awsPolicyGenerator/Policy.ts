@@ -1,5 +1,5 @@
 import { PolicyStatement } from './interfaces/interfaces'
-import { PolicyBase } from './PolicyBase'
+
 import { Statement } from './Statement'
 
 
