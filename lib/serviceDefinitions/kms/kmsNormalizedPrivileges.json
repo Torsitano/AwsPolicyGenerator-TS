@@ -155,7 +155,10 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateCustomKeyStore.html",
         "service": "kms",
-        "dependentActions": [],
+        "dependentActions": [
+            "cloudhsm:DescribeClusters",
+            "iam:CreateServiceLinkedRole"
+        ],
         "privConditions": {
             "kms:CallerAccount": {
                 "condition": "kms:CallerAccount",
@@ -270,7 +273,11 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html",
         "service": "kms",
-        "dependentActions": [],
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole",
+            "kms:PutKeyPolicy",
+            "kms:TagResource"
+        ],
         "privConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",

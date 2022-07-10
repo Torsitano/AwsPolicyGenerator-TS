@@ -5,7 +5,10 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-scram-secrets.html#BatchAssociateScramSecret",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "kms:CreateGrant",
+            "kms:RetireGrant"
+        ],
         "privConditions": {},
         "resources": {}
     },
@@ -15,7 +18,9 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-scram-secrets.html#BatchDisassociateScramSecret",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "kms:RetireGrant"
+        ],
         "privConditions": {},
         "resources": {}
     },
@@ -25,7 +30,16 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/msk/1.0/apireference/clusters.html#CreateCluster",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs",
+            "iam:AttachRolePolicy",
+            "iam:CreateServiceLinkedRole",
+            "iam:PutRolePolicy",
+            "kms:CreateGrant",
+            "kms:DescribeKey"
+        ],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -46,7 +60,21 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/MSK/2.0/APIReference/v2-clusters.html#CreateClusterV2",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:CreateTags",
+            "ec2:CreateVpcEndpoint",
+            "ec2:DeleteVpcEndpoints",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcAttribute",
+            "ec2:DescribeVpcEndpoints",
+            "ec2:DescribeVpcs",
+            "iam:AttachRolePolicy",
+            "iam:CreateServiceLinkedRole",
+            "iam:PutRolePolicy",
+            "kms:CreateGrant",
+            "kms:DescribeKey"
+        ],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -77,7 +105,11 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn.html#DeleteCluster",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DeleteVpcEndpoints",
+            "ec2:DescribeVpcAttribute",
+            "ec2:DescribeVpcEndpoints"
+        ],
         "privConditions": {},
         "resources": {}
     },
@@ -417,7 +449,10 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-connectivity.html#UpdateConnectivity",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DescribeRouteTables",
+            "ec2:DescribeSubnets"
+        ],
         "privConditions": {},
         "resources": {}
     },
@@ -437,7 +472,9 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-security.html#UpdateSecurity",
         "service": "kafka",
-        "dependentActions": [],
+        "dependentActions": [
+            "kms:RetireGrant"
+        ],
         "privConditions": {},
         "resources": {}
     }
