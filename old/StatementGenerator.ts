@@ -63,11 +63,11 @@ export class StatementGenerator {
      * @param 
      * @returns 
      */
-    getActionsForResource( { service, resource, privilegeLevels }: AddActionsForResourceParams ): string[] {
+    getActionsForResource( { service, resource, privLevels }: AddActionsForResourceParams ): string[] {
         const actions: string[] = []
         const resourceDefinition = this.iamDefinition.resources[ service ][ resource ]
 
-        for ( let privilegeLevel of privilegeLevels ) {
+        for ( let privilegeLevel of privLevels ) {
             for ( let action in resourceDefinition[ privilegeLevel ] ) {
 
                 let privilege = resourceDefinition[ privilegeLevel ][ action ]

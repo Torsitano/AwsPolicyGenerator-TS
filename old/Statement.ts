@@ -4,7 +4,7 @@ import { stringify, parse } from 'yaml'
 
 
 
-export class Statement implements Base {
+class Statement implements Base {
     statement: PolicyStatement
 
     constructor () {

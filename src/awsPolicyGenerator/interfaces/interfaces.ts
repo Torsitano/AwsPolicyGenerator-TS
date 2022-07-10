@@ -222,7 +222,7 @@ export interface AddActionsForResourceParams {
     /** The resource you want to add permissions for */
     resource: string,
     /** The privilege levels to include. Options: 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'  */
-    privilegeLevels: PrivilegeLevel[]
+    privLevels: PrivilegeLevel[]
 }
 
 export interface AddActionsForServiceParams {
