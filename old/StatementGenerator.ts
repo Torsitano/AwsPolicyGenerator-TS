@@ -1,4 +1,4 @@
-import { AddActionsForResourceParams, NormalizedDefinition, AddActionsForServiceParams } from './interfaces/interfaces'
+import { AddActionsForResourceParams, NormalizedDefinition, AddActionsForServiceParams } from '../src/awsPolicyGenerator/interfaces/interfaces'
 import * as fs from 'fs'
 import { camelize } from 'humps'
 import { Statement } from './Statement'

@@ -1,4 +1,4 @@
-import { NormalizedDefinition, AddActionsForResourceParams, PolicyStatement, PrivilegeLevel } from '../interfaces/interfaces'
+import { NormalizedDefinition, AddActionsForResourceParams, PolicyStatement, AccessLevel } from '../interfaces/interfaces'
 import { Action } from './Action'
 import { Condition } from './Condition'
 import { Resource } from './Resource'
@@ -17,7 +17,7 @@ export class Statement {
     public actions: Action[] = []
     public resources: Resource[] = []
     public allowedConditions: Set<string> = new Set<string>()
-    public privilegeLevels: Set<PrivilegeLevel> = new Set<PrivilegeLevel>()
+    public accessLevels: Set<AccessLevel> = new Set<AccessLevel>()
     public affectedResources: Set<string> = new Set<string>()
 
 
@@ -25,21 +25,38 @@ export class Statement {
         this.effect = effect
     }
 
+    /**
+     * Creates a new Statement object from a JSON IAM policy statement
+     * @param jsonStatement 
+     * @returns 
+     */
     public static fromJson( jsonStatement: string ): Statement {
         const parsedStatement: PolicyStatement = JSON.parse( jsonStatement )
+        return Statement.buildFrom( parsedStatement )
+    }
+
+    /**
+     * Creates a new Statement object from a YAML IAM policy statement
+     * @param yamlStatement 
+     * @returns 
+     */
+    public static fromYaml( yamlStatement: string ): Statement {
+        const parsedStatement: PolicyStatement = parse( yamlStatement )
+        return Statement.buildFrom( parsedStatement )
+    }
+
+    /**
+     * Creates a new Statement object from a parsed PolicyStatement
+     * Used to generate new Statement objects for the Policy class
+     * @param parsedStatement 
+     * @returns 
+     */
+    public static buildFrom( parsedStatement: PolicyStatement ): Statement {
 
         const returnStatement = new Statement( parsedStatement.effect )
         returnStatement.addSpecificActions( parsedStatement.action )
 
         return returnStatement
-    }
-
-    public static fromYaml( yamlStatement: string ): Statement {
-        //@ts-ignore
-        const parsedStatement: PolicyStatement = parse( yamlStatement )
-
-
-        return new Statement( 'Allow' )
     }
 
     /**
@@ -51,9 +68,6 @@ export class Statement {
         let resource = new Resource( iamDefinition.resources[ props.service ][ props.resource ] )
 
         for ( let privLevel of props.privLevels ) {
-
-            this.privilegeLevels.add( privLevel )
-
             for ( let privilege of resource[ privLevel ] ) {
                 this.createAction( props.service, privilege )
             }
@@ -99,6 +113,8 @@ export class Statement {
         for ( let condition of action.allowedConditions ) {
             this.allowedConditions.add( condition )
         }
+
+        this.accessLevels.add( action.accessLevel )
         this.actions.push( action )
 
         return action

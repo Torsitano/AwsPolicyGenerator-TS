@@ -28,6 +28,7 @@ import { Statement } from './../src/awsPolicyGenerator/statementComponents/State
 
 // console.log( statement.statement )
 
+//@ts-ignore
 const json = `
 {
     "effect": "Allow",
@@ -43,17 +44,28 @@ const json = `
 }
 `
 
-// const statement = new Statement( 'Allow' )
-//     .addActionsForResource( { service: 'kms', resource: 'key', privLevels: [ 'listPrivileges' ] } )
+const statement = new Statement( 'Allow' )
+    .addActionsForResource( { service: 'iam', resource: 'role', privLevels: [ 'readPrivileges', 'listPrivileges' ] } )
+    .addSpecificActions( [ 'iam:CreateRole', 'kms:CreateKey' ] )
 
-// console.dir( statement.build(), { depth: null, } )
 
-// console.log( statement.toJson() )
+// console.log( statement.accessLevels )
 
-console.log( '\n\n' )
+// console.log( statement.allowedConditions )
 
-const jsonStatement = Statement.fromJson( json )
+// console.log( statement.getDependentActions() )
 
-console.dir( jsonStatement, { depth: null } )
+console.dir( statement.build(), { depth: null, } )
 
-console.log( jsonStatement.allowedConditions )
+console.log( statement.toJson() )
+console.log( statement.toYaml() )
+
+// console.log( '\n\n' )
+
+// const jsonStatement = Statement.fromJson( json )
+
+// console.dir( jsonStatement, { depth: null } )
+
+// console.log( jsonStatement.accessLevels )
+
+// console.log( jsonStatement.allowedConditions )

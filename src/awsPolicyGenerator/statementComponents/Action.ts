@@ -35,7 +35,7 @@ export class Action {
         this.accessLevel = privilegeDefintion.accessLevel
         this.fetchAllowedConditions( privilegeDefintion )
         this.resources = Object.keys( privilegeDefintion.resources ).sort()
-        this.dependentActions = Object.keys( privilegeDefintion.dependentActions ).sort()
+        this.dependentActions = Object.values( privilegeDefintion.dependentActions ).sort()
     }
 
 
