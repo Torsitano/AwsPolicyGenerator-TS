@@ -157,6 +157,7 @@ export function normalizePrivs( service: string, privileges: ImportPrivs, resour
         }
 
         for ( let resourceKey in priv.resourceTypes ) {
+            normalPriv.dependentActions = normalPriv.dependentActions.concat( priv.resourceTypes[ resourceKey ].dependentActions )
             if ( resourceKey != '' ) {
                 let resource = resources[ resourceKey ]
 
@@ -172,7 +173,7 @@ export function normalizePrivs( service: string, privileges: ImportPrivs, resour
                     required: priv.resourceTypes[ resourceKey ].required,
                     resourceConditions: conditions
                 }
-                normalPriv.dependentActions = normalPriv.dependentActions.concat( priv.resourceTypes[ resourceKey ].dependentActions )
+
 
                 normalPriv.resources[ resourceKey ] = privResource
             }
