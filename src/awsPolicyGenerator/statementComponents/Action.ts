@@ -1,19 +1,18 @@
-import { AccessLevel, NormalizedPrivilege, ConditionType } from '../interfaces/interfaces'
+import { AccessLevel, NormalizedPrivilege, ImportConditions } from '../interfaces/interfaces'
 
-//@ts-ignore
-interface Resource {
+export interface ResourceOnAction {
     resourceName: string,
     resourceArn: string,
     required: boolean,
-    resourceConditions: string[]
+    resourceConditions: ImportConditions
 }
 
-//@ts-ignore
-interface Condition {
-    condition: string,
-    description: string,
-    type: ConditionType
-}
+
+// interface Condition {
+//     condition: string,
+//     description: string,
+//     type: ConditionType
+// }
 
 export interface NewAction {
 
@@ -24,7 +23,7 @@ export class Action {
     public readonly service: string
     public readonly action: string
     public readonly accessLevel: AccessLevel
-    public readonly resources: string[] = []
+    public readonly resources: ResourceOnAction[] = []
     public readonly dependentActions: string[]
     public allowedConditions: string[] = []
 
@@ -33,9 +32,10 @@ export class Action {
         this.service = privilegeDefintion.service
         this.action = `${this.service}:${this.privilege}`
         this.accessLevel = privilegeDefintion.accessLevel
-        this.fetchAllowedConditions( privilegeDefintion )
-        this.resources = Object.keys( privilegeDefintion.resources ).sort()
         this.dependentActions = Object.values( privilegeDefintion.dependentActions ).sort()
+        this.fetchAllowedConditions( privilegeDefintion )
+        this.fetchResources( privilegeDefintion )
+
     }
 
 
@@ -57,6 +57,12 @@ export class Action {
             }
         }
         this.allowedConditions = this.allowedConditions.sort()
+    }
+
+    fetchResources( privilegeDefintion: NormalizedPrivilege ): void {
+        for ( let resource in privilegeDefintion.resources ) {
+            this.resources.push( privilegeDefintion.resources[ resource ] )
+        }
     }
 
 

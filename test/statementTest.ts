@@ -31,9 +31,11 @@ import { Statement } from './../src/awsPolicyGenerator/statementComponents/State
 //@ts-ignore
 
 
-// const statement = new Statement( 'Allow' )
-//     .addActionsForResource( { service: 'iam', resource: 'role', privLevels: [ 'readPrivileges', 'listPrivileges' ] } )
-//     .addSpecificActions( [ 'iam:CreateRole', 'kms:CreateKey' ] )
+const statement = new Statement( 'Allow' )
+    .addActionsForResource( { service: 'iam', resource: 'role', privLevels: [ 'readPrivileges', 'listPrivileges' ] } )
+    .addSpecificActions( [ 'iam:CreateRole', 'kms:CreateKey' ] )
+
+console.log( statement.getAllResourcesForActions() )
 
 
 // console.log( statement.accessLevels )
@@ -57,58 +59,58 @@ import { Statement } from './../src/awsPolicyGenerator/statementComponents/State
 // console.log( statement )
 
 
-const json = `
-{
-    "effect": "Allow",
-    "action": [
-        "kms:ListGrants",
-        "kms:ListKeyPolicies",
-        "kms:ListResourceTags",
-        "kms:ListRetirableGrants"
-    ],
-    "resource": [
-        "*"
-    ]
-}
-`
+// const json = `
+// {
+//     "effect": "Allow",
+//     "action": [
+//         "kms:ListGrants",
+//         "kms:ListKeyPolicies",
+//         "kms:ListResourceTags",
+//         "kms:ListRetirableGrants"
+//     ],
+//     "resource": [
+//         "*"
+//     ]
+// }
+// `
 
-const yaml = `
-effect: Allow
-action:
-  - s3:GetAccelerateConfiguration
-  - s3:GetAnalyticsConfiguration
-  - s3:GetBucketAcl
-  - s3:GetBucketCORS
-  - s3:GetBucketLocation
-  - s3:GetBucketLogging
-  - s3:GetBucketNotification
-  - s3:GetBucketObjectLockConfiguration
-  - s3:GetBucketOwnershipControls
-  - s3:GetBucketPolicy
-  - s3:GetBucketPolicyStatus
-  - s3:GetBucketPublicAccessBlock
-  - s3:GetBucketRequestPayment
-  - s3:GetBucketTagging
-  - s3:GetBucketVersioning
-  - s3:GetBucketWebsite
-  - s3:GetEncryptionConfiguration
-  - s3:GetIntelligentTieringConfiguration
-  - s3:GetInventoryConfiguration
-  - s3:GetLifecycleConfiguration
-  - s3:GetMetricsConfiguration
-  - s3:GetReplicationConfiguration
-  - s3:ListBucket
-  - s3:ListBucketMultipartUploads
-  - s3:ListBucketVersions
-resource:
-  - "*"
-`
+// const yaml = `
+// effect: Allow
+// action:
+//   - s3:GetAccelerateConfiguration
+//   - s3:GetAnalyticsConfiguration
+//   - s3:GetBucketAcl
+//   - s3:GetBucketCORS
+//   - s3:GetBucketLocation
+//   - s3:GetBucketLogging
+//   - s3:GetBucketNotification
+//   - s3:GetBucketObjectLockConfiguration
+//   - s3:GetBucketOwnershipControls
+//   - s3:GetBucketPolicy
+//   - s3:GetBucketPolicyStatus
+//   - s3:GetBucketPublicAccessBlock
+//   - s3:GetBucketRequestPayment
+//   - s3:GetBucketTagging
+//   - s3:GetBucketVersioning
+//   - s3:GetBucketWebsite
+//   - s3:GetEncryptionConfiguration
+//   - s3:GetIntelligentTieringConfiguration
+//   - s3:GetInventoryConfiguration
+//   - s3:GetLifecycleConfiguration
+//   - s3:GetMetricsConfiguration
+//   - s3:GetReplicationConfiguration
+//   - s3:ListBucket
+//   - s3:ListBucketMultipartUploads
+//   - s3:ListBucketVersions
+// resource:
+//   - "*"
+// `
 
-const statementFromJson = Statement.fromJson( json )
-const statementFromYaml = Statement.fromYaml( yaml )
+// const statementFromJson = Statement.fromJson( json )
+// const statementFromYaml = Statement.fromYaml( yaml )
 
-console.log( statementFromJson.accessLevels )
+// console.log( statementFromJson.accessLevels )
 
 
-console.log( statementFromYaml.accessLevels )
-console.log( statementFromYaml.allowedConditions )
+// console.log( statementFromYaml.accessLevels )
+// console.log( statementFromYaml.allowedConditions )

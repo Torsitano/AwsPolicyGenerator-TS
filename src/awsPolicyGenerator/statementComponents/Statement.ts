@@ -1,5 +1,5 @@
 import { NormalizedDefinition, AddActionsForResourceParams, PolicyStatement, AccessLevel } from '../interfaces/interfaces'
-import { Action } from './Action'
+import { Action, ResourceOnAction } from './Action'
 import { Condition } from './Condition'
 import { Resource } from './Resource'
 import * as fs from 'fs'
@@ -12,13 +12,14 @@ export type Effect = 'Allow' | 'Deny'
 const iamDefinition: NormalizedDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
 
 export class Statement {
-    public effect: Effect
-    public conditions: Condition[] = []
-    public actions: Action[] = []
-    public resources: Resource[] = []
-    public allowedConditions: Set<string> = new Set<string>()
-    public accessLevels: Set<AccessLevel> = new Set<AccessLevel>()
-    public affectedResources: Set<string> = new Set<string>()
+    public readonly effect: Effect
+    //@ts-ignore
+    private readonly conditions: Condition[] = []
+    private readonly actions: Action[] = []
+    private readonly resources: Resource[] = []
+    public readonly allowedConditions: Set<string> = new Set<string>()
+    public readonly accessLevels: Set<AccessLevel> = new Set<AccessLevel>()
+    public readonly affectedResources: Set<string> = new Set<string>()
 
 
     constructor ( effect: Effect ) {
@@ -65,7 +66,7 @@ export class Statement {
      * @returns 
      */
     public addActionsForResource( props: AddActionsForResourceParams ): Statement {
-        let resource = new Resource( iamDefinition.resources[ props.service ][ props.resource ] )
+        let resource = this.createResource( props.service, props.resource )
 
         for ( let privLevel of props.privLevels ) {
             for ( let privilege of resource[ privLevel ] ) {
@@ -75,6 +76,11 @@ export class Statement {
         this.resources.push( resource )
 
         return this
+    }
+
+    private createResource( service: string, resource: string ): Resource {
+        const createdResource = new Resource( iamDefinition.resources[ service ][ resource ] )
+        return createdResource
     }
 
     private static actionSplit( action: string ): [ string, string ] {
@@ -165,6 +171,32 @@ export class Statement {
     public getResources(): string[] {
 
         return [ '*' ]
+    }
+
+    public getAllResourcesForActions(): ResourceOnAction[] {
+        const resourceList: ResourceOnAction[] = []
+
+        for ( let action of this.actions ) {
+            for ( let resource of action.resources ) {
+                const check = resourceList.some( item => item.resourceArn === resource.resourceArn )
+                if ( !check ) {
+                    resourceList.push( resource )
+                }
+            }
+
+        }
+
+        return resourceList
+    }
+
+    public getResourceArns(): string[] {
+        const arns: string[] = []
+
+        for ( let resource of this.resources ) {
+            arns.push( resource.arn )
+        }
+
+        return arns
     }
 
 
