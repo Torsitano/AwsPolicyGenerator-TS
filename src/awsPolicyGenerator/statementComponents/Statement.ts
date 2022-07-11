@@ -62,6 +62,18 @@ export class Statement {
 
     /**
      * 
+     * @param action 
+     * @returns 
+     */
+    private static actionSplit( action: string ): [ string, string ] {
+        let service = action.split( ':' )[ 0 ]
+        let privilege = action.split( ':' )[ 1 ]
+
+        return [ service, privilege ]
+    }
+
+    /**
+     * 
      * @param props 
      * @returns 
      */
@@ -78,16 +90,29 @@ export class Statement {
         return this
     }
 
+    /**
+     * 
+     * @param service 
+     * @param resource 
+     * @returns 
+     */
     private createResource( service: string, resource: string ): Resource {
         const createdResource = new Resource( iamDefinition.resources[ service ][ resource ] )
+        this.addConditions( createdResource )
+        this.resources.push( createdResource )
+
         return createdResource
     }
 
-    private static actionSplit( action: string ): [ string, string ] {
-        let service = action.split( ':' )[ 0 ]
-        let privilege = action.split( ':' )[ 1 ]
 
-        return [ service, privilege ]
+    /**
+     * 
+     * @param item 
+     */
+    private addConditions( item: Resource | Action ): void {
+        for ( let condition of item.allowedConditions ) {
+            this.allowedConditions.add( condition )
+        }
     }
 
     /**
@@ -115,13 +140,17 @@ export class Statement {
     private createAction( service: string, privilege: string ): Action {
 
         const action = new Action( iamDefinition.privileges[ service ][ camelize( privilege ) ] )
-
-        for ( let condition of action.allowedConditions ) {
-            this.allowedConditions.add( condition )
-        }
+        this.addConditions( action )
 
         this.accessLevels.add( action.accessLevel )
-        this.actions.push( action )
+
+        // Checks to see if there is already an action of this type in the statement
+        const check = this.actions.some( item => item.action === action.action )
+
+        // If there is, it won't be added to the array
+        if ( !check ) {
+            this.actions.push( action )
+        }
 
         return action
     }
@@ -149,6 +178,56 @@ export class Statement {
      * 
      * @returns 
      */
+    public getDependentActions(): string[] {
+        const dependentActions: string[] = []
+
+        for ( let action of this.actions ) {
+            dependentActions.push( ...action.dependentActions )
+        }
+        return dependentActions.sort()
+    }
+
+    /**
+     * 
+     */
+    private addRequiredResources(): void {
+        const requiredResources = this.getRequiredResources()
+
+        for ( let requiredResource of requiredResources ) {
+            // Get the service from the Resource ARN
+            let service = requiredResource.resourceArn.split( ':' )[ 2 ]
+            this.createResource( service, requiredResource.resourceName )
+        }
+    }
+
+    /**
+     * 
+     * @returns 
+     */
+    public getRequiredResources(): ResourceOnAction[] {
+        const requiredResources: ResourceOnAction[] = []
+
+        for ( let action of this.actions ) {
+            for ( let resource of action.resources ) {
+                if ( resource.required ) {
+                    const check = requiredResources.some(
+                        item => item.resourceArn === resource.resourceArn
+                    )
+
+                    if ( !check ) {
+                        requiredResources.push( resource )
+                    }
+                }
+            }
+        }
+
+        return requiredResources.sort()
+    }
+
+    /**
+     * 
+     * @returns 
+     */
     public getActions(): string[] {
         const actionList: string[] = []
 
@@ -156,23 +235,28 @@ export class Statement {
             actionList.push( action.action )
         }
 
-        return actionList
+        return actionList.sort()
     }
 
-    public getDependentActions(): string[] {
-        const dependentActions: string[] = []
 
-        for ( let action of this.actions ) {
-            dependentActions.push( ...action.dependentActions )
-        }
-        return dependentActions
-    }
-
+    /**
+     * 
+     * @returns 
+     */
     public getResources(): string[] {
+        const resourceList: string[] = []
 
-        return [ '*' ]
+        for ( let resource of this.resources ) {
+            resourceList.push( resource.resource )
+        }
+
+        return resourceList
     }
 
+    /**
+     * Returns a list of all possible resources that can be affected by the actions on the statement
+     * @returns 
+     */
     public getAllResourcesForActions(): ResourceOnAction[] {
         const resourceList: ResourceOnAction[] = []
 
@@ -189,35 +273,57 @@ export class Statement {
         return resourceList
     }
 
+    /**
+     * 
+     * @returns 
+     */
     public getResourceArns(): string[] {
         const arns: string[] = []
 
         for ( let resource of this.resources ) {
-            arns.push( resource.arn )
+            if ( !arns.includes( resource.arn ) ) {
+                arns.push( resource.arn )
+            }
         }
 
-        return arns
+        if ( arns.length === 0 ) {
+            return [ '*' ]
+        }
+
+        return arns.sort()
     }
 
-
+    /**
+     * 
+     * @returns 
+     */
     public build(): PolicyStatement {
 
         this.addDependentActions()
+        this.addRequiredResources()
 
 
         const policyStatement: PolicyStatement = {
             effect: this.effect,
             action: this.getActions(),
-            resource: this.getResources()
+            resource: this.getResourceArns()
         }
 
         return policyStatement
     }
 
+    /**
+     * 
+     * @returns 
+     */
     public toJson(): string {
         return JSON.stringify( this.build(), null, 4 )
     }
 
+    /**
+     * 
+     * @returns 
+     */
     public toYaml(): string {
         return stringify( this.build() )
     }

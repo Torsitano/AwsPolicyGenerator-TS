@@ -33,8 +33,8 @@ export class Action {
         this.action = `${this.service}:${this.privilege}`
         this.accessLevel = privilegeDefintion.accessLevel
         this.dependentActions = Object.values( privilegeDefintion.dependentActions ).sort()
-        this.fetchAllowedConditions( privilegeDefintion )
-        this.fetchResources( privilegeDefintion )
+        this.getAllowedConditions( privilegeDefintion )
+        this.getResources( privilegeDefintion )
 
     }
 
@@ -43,7 +43,7 @@ export class Action {
      * 
      * @param privilegeDefintion 
      */
-    fetchAllowedConditions( privilegeDefintion: NormalizedPrivilege ): void {
+    getAllowedConditions( privilegeDefintion: NormalizedPrivilege ): void {
         for ( let condition in privilegeDefintion.privConditions ) {
             this.allowedConditions.push( condition )
             //this.allowedConditions.push( privilegeDefintion.privConditions[ condition ] )
@@ -59,7 +59,7 @@ export class Action {
         this.allowedConditions = this.allowedConditions.sort()
     }
 
-    fetchResources( privilegeDefintion: NormalizedPrivilege ): void {
+    getResources( privilegeDefintion: NormalizedPrivilege ): void {
         for ( let resource in privilegeDefintion.resources ) {
             this.resources.push( privilegeDefintion.resources[ resource ] )
         }
