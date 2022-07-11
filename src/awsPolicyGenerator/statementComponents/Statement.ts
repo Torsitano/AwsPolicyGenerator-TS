@@ -11,6 +11,9 @@ export type Effect = 'Allow' | 'Deny'
 
 const iamDefinition: NormalizedDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
 
+
+const globalServices: string[] = [ 'account', 'cloudfront', 'iam', 's3' ]
+
 export class Statement {
     public readonly effect: Effect
     //@ts-ignore
@@ -226,6 +229,28 @@ export class Statement {
 
     /**
      * 
+     */
+    private addServicesForActions(): string[] {
+        const serviceArns: string[] = []
+
+        const actions = this.getActionsWithoutResource()
+        for ( let action of actions ) {
+            if ( globalServices.includes( action.service ) ) {
+                serviceArns.push( `arn:\${Partition}:${action.service}::\${Account}:*` )
+            } else {
+                serviceArns.push( `arn:\${Partition}:${action.service}:\${Region}:\${Account}:*` )
+            }
+
+
+
+
+        }
+
+        return serviceArns
+    }
+
+    /**
+     * 
      * @returns 
      */
     public getActions(): string[] {
@@ -236,6 +261,21 @@ export class Statement {
         }
 
         return actionList.sort()
+    }
+
+    /**
+     * 
+     */
+    public getActionsWithoutResource(): Action[] {
+        const actions: Action[] = []
+
+        for ( let action of this.actions ) {
+            if ( Object.keys( action.resources ).length === 0 ) {
+                actions.push( action )
+            }
+        }
+
+        return actions
     }
 
 
@@ -262,7 +302,9 @@ export class Statement {
 
         for ( let action of this.actions ) {
             for ( let resource of action.resources ) {
-                const check = resourceList.some( item => item.resourceArn === resource.resourceArn )
+                const check = resourceList.some(
+                    item => item.resourceArn === resource.resourceArn
+                )
                 if ( !check ) {
                     resourceList.push( resource )
                 }
@@ -290,6 +332,8 @@ export class Statement {
             return [ '*' ]
         }
 
+        arns.push( ...this.addServicesForActions() )
+
         return arns.sort()
     }
 
@@ -301,7 +345,6 @@ export class Statement {
 
         this.addDependentActions()
         this.addRequiredResources()
-
 
         const policyStatement: PolicyStatement = {
             effect: this.effect,

@@ -33,9 +33,9 @@ import { Statement } from './../src/awsPolicyGenerator/statementComponents/State
 
 const statement = new Statement( 'Allow' )
     .addActionsForResource( { service: 'iam', resource: 'role', privLevels: [ 'readPrivileges', 'listPrivileges' ] } )
-    .addSpecificActions( [ 's3:CreateBucket' ] )
+    .addSpecificActions( [ 's3:CreateBucket', 'kms:CreateKey' ] )
 
-console.log( statement.toYaml() )
+console.log( statement.toJson() )
 
 
 // console.log( statement.accessLevels )
