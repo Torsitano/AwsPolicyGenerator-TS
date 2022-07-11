@@ -235,15 +235,30 @@ export class Statement {
 
         const actions = this.getActionsWithoutResource()
         for ( let action of actions ) {
-            if ( globalServices.includes( action.service ) ) {
-                serviceArns.push( `arn:\${Partition}:${action.service}::\${Account}:*` )
-            } else {
-                serviceArns.push( `arn:\${Partition}:${action.service}:\${Region}:\${Account}:*` )
+
+            if ( action.service === 's3' ) {
+                let serviceArn = `arn:\${Partition}:${action.service}:::*`
+
+                if ( !serviceArns.includes( serviceArn ) ) {
+                    serviceArns.push( serviceArn )
+                }
+                continue
             }
 
+            if ( globalServices.includes( action.service ) ) {
+                let serviceArn = `arn:\${Partition}:${action.service}::\${Account}:*`
 
+                if ( !serviceArns.includes( serviceArn ) ) {
+                    serviceArns.push( serviceArn )
+                }
 
+            } else {
+                let serviceArn = `arn:\${Partition}:${action.service}:\${Region}:\${Account}:*`
 
+                if ( !serviceArns.includes( serviceArn ) ) {
+                    serviceArns.push( serviceArn )
+                }
+            }
         }
 
         return serviceArns
