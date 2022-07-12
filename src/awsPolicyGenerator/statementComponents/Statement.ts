@@ -226,15 +226,41 @@ export class Statement {
     /**
      * 
      */
+    //@ts-ignore
     private addRequiredResources(): void {
         const requiredResources = this.getRequiredResources()
 
         for ( let requiredResource of requiredResources ) {
             // Get the service from the Resource ARN
-            let service = requiredResource.resourceArn.split( ':' )[ 2 ]
-            this.createResource( service, requiredResource.resourceName )
+
+            let match = false
+            const currentResources = this.getResourceArns()
+            for ( let currentResource of currentResources ) {
+                if ( this.compareArns( currentResource, requiredResource.resourceArn ) ) {
+                    match = true
+                }
+            }
+
+            if ( !match ) {
+                let service = requiredResource.resourceArn.split( ':' )[ 2 ]
+                this.createResource( service, requiredResource.resourceName )
+            }
         }
     }
+
+
+    //@ts-ignore
+    private compareArns( arn1: string, arn2: string ): boolean {
+
+        const arn1Service = arn1.split( ':' )[ 2 ]
+        const arn1ResourceType = arn1.split( ':' )[ 5 ].split( '/' )[ 0 ]
+
+        const arn2Service = arn2.split( ':' )[ 2 ]
+        const arn2ResourceType = arn2.split( ':' )[ 5 ].split( '/' )[ 0 ]
+
+        return ( ( arn1Service == arn2Service ) && ( ( arn1ResourceType == arn2ResourceType ) || ( arn1ResourceType == '*' ) ) )
+    }
+
 
     /**
      * 
@@ -376,9 +402,9 @@ export class Statement {
             }
         }
 
-        if ( arns.length === 0 ) {
-            return [ '*' ]
-        }
+        // if ( arns.length === 0 ) {
+        //     return [ '*' ]
+        // }
 
         arns.push( ...this.addServicesForActions() )
 

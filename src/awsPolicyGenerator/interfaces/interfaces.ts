@@ -227,7 +227,7 @@ export interface AddActionsForResourceTypeParams {
 
 export interface AddActionsForResourceParams extends AddActionsForResourceTypeParams {
     /** The full ARN for the specific resource */
-    resourceArn: string
+    resourceArn?: string
 }
 
 export interface AddActionsForServiceParams {
