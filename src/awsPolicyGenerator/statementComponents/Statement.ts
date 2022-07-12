@@ -60,6 +60,16 @@ export class Statement {
         const returnStatement = new Statement( parsedStatement.effect )
         returnStatement.addSpecificActions( parsedStatement.action )
 
+        for ( let resource of parsedStatement.resource ) {
+            if ( resource === '*' ) {
+                continue
+            }
+            let resourceInfo = Statement.parseResourceArn( resource )
+            if ( resourceInfo.resource != '*' ) {
+                returnStatement.addSpecificResource( resourceInfo.service, resourceInfo.resource )
+            }
+        }
+
         return returnStatement
     }
 
@@ -73,6 +83,18 @@ export class Statement {
         let privilege = action.split( ':' )[ 1 ]
 
         return [ service, privilege ]
+    }
+
+    /**
+     * 
+     */
+    private static parseResourceArn( arn: string ): { service: string, resource: string } {
+        const item: { service: string, resource: string } = { service: '', resource: '' }
+
+        item.service = arn.split( ':' )[ 2 ]
+        item.resource = arn.split( ':' )[ 5 ].split( '/' )[ 0 ]
+
+        return item
     }
 
     /**
@@ -91,6 +113,17 @@ export class Statement {
         this.resources.push( resource )
 
         return this
+    }
+
+    public addSpecificResource( service: string, resource: string ): void {
+        const createdResource = this.createResource( service, resource )
+        const check = this.resources.some(
+            item => item.arn === createdResource.arn
+        )
+
+        if ( !check ) {
+            this.resources.push( createdResource )
+        }
     }
 
     /**

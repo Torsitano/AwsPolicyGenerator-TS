@@ -31,11 +31,11 @@ import { Statement } from './../src/awsPolicyGenerator/statementComponents/State
 //@ts-ignore
 
 
-const statement = new Statement( 'Allow' )
-    .addActionsForResource( { service: 'iam', resource: 'role', privLevels: [ 'readPrivileges', 'listPrivileges' ] } )
-    .addSpecificActions( [ 's3:CreateBucket', 'kms:CreateKey', 's3:ListAllMyBuckets' ] )
+// const statement = new Statement( 'Allow' )
+//     .addActionsForResource( { service: 'iam', resource: 'role', privLevels: [ 'readPrivileges', 'listPrivileges' ] } )
+//     .addSpecificActions( [ 's3:CreateBucket', 'kms:CreateKey', 's3:ListAllMyBuckets' ] )
 
-console.log( statement.toJson() )
+// console.log( statement.toYaml() )
 
 
 // console.log( statement.accessLevels )
