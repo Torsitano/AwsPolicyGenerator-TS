@@ -216,13 +216,18 @@ export interface PolicyObject {
 export type PrivilegeLevel = 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'
 
 
-export interface AddActionsForResourceParams {
+export interface AddActionsForResourceTypeParams {
     /** The AWS Service you want to add actions for */
     service: string,
     /** The resource you want to add permissions for */
     resource: string,
     /** The privilege levels to include. Options: 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'  */
     privLevels: PrivilegeLevel[]
+}
+
+export interface AddActionsForResourceParams extends AddActionsForResourceTypeParams {
+    /** The full ARN for the specific resource */
+    resourceArn: string
 }
 
 export interface AddActionsForServiceParams {

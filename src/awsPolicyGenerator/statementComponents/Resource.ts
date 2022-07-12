@@ -14,9 +14,10 @@ export class Resource {
     public readonly tagPrivileges: string[]
 
 
-    constructor ( resourceDefinition: NormalizedResource ) {
+    constructor ( resourceDefinition: NormalizedResource, resourceArn?: string ) {
         this.resource = resourceDefinition.resourceName
-        this.arn = resourceDefinition.resourceArn
+        // Use the resource ARN if provided, if not default to the generic one
+        this.arn = resourceArn ?? resourceDefinition.resourceArn
         this.service = resourceDefinition.service
         this.allowedConditions = Object.keys( resourceDefinition.resourceConditions ).sort()
         this.listPrivileges = Object.keys( resourceDefinition.listPrivileges ).sort()

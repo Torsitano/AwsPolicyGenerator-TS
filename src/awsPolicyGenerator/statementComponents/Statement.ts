@@ -1,4 +1,4 @@
-import { NormalizedDefinition, AddActionsForResourceParams, PolicyStatement, AccessLevel } from '../interfaces/interfaces'
+import { NormalizedDefinition, PolicyStatement, AccessLevel, AddActionsForResourceParams } from '../interfaces/interfaces'
 import { Action, ResourceOnAction } from './Action'
 import { Condition } from './Condition'
 import { Resource } from './Resource'
@@ -58,7 +58,7 @@ export class Statement {
     public static buildFrom( parsedStatement: PolicyStatement ): Statement {
 
         const returnStatement = new Statement( parsedStatement.effect )
-        returnStatement.addSpecificActions( parsedStatement.action )
+        returnStatement.addActions( parsedStatement.action )
 
         for ( let resource of parsedStatement.resource ) {
             if ( resource === '*' ) {
@@ -66,7 +66,7 @@ export class Statement {
             }
             let resourceInfo = Statement.parseResourceArn( resource )
             if ( resourceInfo.resource != '*' ) {
-                returnStatement.addSpecificResource( resourceInfo.service, resourceInfo.resource )
+                returnStatement.addResource( resourceInfo.service, resourceInfo.resource )
             }
         }
 
@@ -103,7 +103,7 @@ export class Statement {
      * @returns 
      */
     public addActionsForResource( props: AddActionsForResourceParams ): Statement {
-        let resource = this.createResource( props.service, props.resource )
+        let resource = this.createResource( props.service, props.resource, props.resourceArn )
 
         for ( let privLevel of props.privLevels ) {
             for ( let privilege of resource[ privLevel ] ) {
@@ -115,7 +115,7 @@ export class Statement {
         return this
     }
 
-    public addSpecificResource( service: string, resource: string ): void {
+    public addResource( service: string, resource: string ): void {
         const createdResource = this.createResource( service, resource )
         const check = this.resources.some(
             item => item.arn === createdResource.arn
@@ -132,8 +132,8 @@ export class Statement {
      * @param resource 
      * @returns 
      */
-    private createResource( service: string, resource: string ): Resource {
-        const createdResource = new Resource( iamDefinition.resources[ service ][ resource ] )
+    private createResource( service: string, resource: string, resourceArn?: string ): Resource {
+        const createdResource = new Resource( iamDefinition.resources[ service ][ resource ], resourceArn )
         this.addConditions( createdResource )
         this.resources.push( createdResource )
 
@@ -156,7 +156,7 @@ export class Statement {
      * @param actions 
      * @returns 
      */
-    public addSpecificActions( actions: string[] ): Statement {
+    public addActions( actions: string[] ): Statement {
         for ( let action of actions ) {
             const [ service, privilege ] = Statement.actionSplit( action )
 
