@@ -17,3 +17,32 @@ const statement = new Statement( 'Allow' )
 console.log( statement.toYaml() )
 
 
+console.log( statement.allowedConditions )
+
+// const yaml = `
+// effect: Allow
+// action:
+//   - iam:CreateServiceLinkedRole
+//   - iam:GenerateServiceLastAccessedDetails
+//   - iam:GetContextKeysForPrincipalPolicy
+//   - iam:GetRole
+//   - iam:GetRolePolicy
+//   - iam:GetServiceLinkedRoleDeletionStatus
+//   - iam:ListAttachedRolePolicies
+//   - iam:ListInstanceProfilesForRole
+//   - iam:ListPoliciesGrantingServiceAccess
+//   - iam:ListRolePolicies
+//   - iam:ListRoleTags
+//   - iam:SimulatePrincipalPolicy
+//   - kms:CreateKey
+//   - kms:PutKeyPolicy
+//   - kms:TagResource
+//   - s3:CreateBucket
+//   - s3:ListAllMyBuckets
+// resource:
+//   - '*'
+// `
+
+// const statement = Statement.fromYaml( yaml )
+
+// console.log( statement.allowedConditions )

@@ -38,12 +38,37 @@ export class Action {
 
     }
 
+    /**
+     * 
+     * @param actions 
+     * @returns 
+     */
+    public static getRequiredResources( actions: Action[] ): ResourceOnAction[] {
+        const requiredResources: ResourceOnAction[] = []
+
+        for ( let action of actions ) {
+            for ( let resource of action.resources ) {
+                if ( resource.required ) {
+                    const check = requiredResources.some(
+                        item => item.resourceArn === resource.resourceArn
+                    )
+
+                    if ( !check ) {
+                        requiredResources.push( resource )
+                    }
+                }
+            }
+        }
+
+        return requiredResources.sort()
+    }
+
 
     /**
      * 
      * @param privilegeDefintion 
      */
-    getAllowedConditions( privilegeDefintion: NormalizedPrivilege ): void {
+    public getAllowedConditions( privilegeDefintion: NormalizedPrivilege ): void {
         for ( let condition in privilegeDefintion.privConditions ) {
             this.allowedConditions.push( condition )
             //this.allowedConditions.push( privilegeDefintion.privConditions[ condition ] )
@@ -59,7 +84,7 @@ export class Action {
         this.allowedConditions = this.allowedConditions.sort()
     }
 
-    getResources( privilegeDefintion: NormalizedPrivilege ): void {
+    public getResources( privilegeDefintion: NormalizedPrivilege ): void {
         for ( let resource in privilegeDefintion.resources ) {
             this.resources.push( privilegeDefintion.resources[ resource ] )
         }

@@ -166,7 +166,8 @@ export interface NormalizedDefinition {
     },
     services: {
         [ key: string ]: NormalizedService
-    }
+    },
+    conditions: ImportConditions
 }
 
 
@@ -186,7 +187,11 @@ export interface PolicyStatement {
     effect: 'Allow' | 'Deny',
     action: string[],
     principal?: string[],
-    condition?: string[],
+    condition?: {
+        [ key: string ]: {
+            [ key: string ]: string
+        }
+    },
     resource: string[]
 }
 

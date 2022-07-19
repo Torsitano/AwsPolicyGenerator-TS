@@ -205,7 +205,7 @@ export class Statement {
                 this.createAction( service, privilege )
                 actionList.push( dependentAction )
 
-                console.log( `Added Dependent Action ${dependentAction}` )
+                //console.log( `Added Dependent Action ${dependentAction}` )
             }
         }
     }
@@ -228,7 +228,7 @@ export class Statement {
      */
     //@ts-ignore
     private addRequiredResources(): void {
-        const requiredResources = this.getRequiredResources()
+        const requiredResources = Action.getRequiredResources( this.actions )
 
         for ( let requiredResource of requiredResources ) {
             // Get the service from the Resource ARN
@@ -262,29 +262,29 @@ export class Statement {
     }
 
 
-    /**
-     * 
-     * @returns 
-     */
-    public getRequiredResources(): ResourceOnAction[] {
-        const requiredResources: ResourceOnAction[] = []
+    // /**
+    //  * 
+    //  * @returns 
+    //  */
+    // public getRequiredResources(): ResourceOnAction[] {
+    //     const requiredResources: ResourceOnAction[] = []
 
-        for ( let action of this.actions ) {
-            for ( let resource of action.resources ) {
-                if ( resource.required ) {
-                    const check = requiredResources.some(
-                        item => item.resourceArn === resource.resourceArn
-                    )
+    //     for ( let action of this.actions ) {
+    //         for ( let resource of action.resources ) {
+    //             if ( resource.required ) {
+    //                 const check = requiredResources.some(
+    //                     item => item.resourceArn === resource.resourceArn
+    //                 )
 
-                    if ( !check ) {
-                        requiredResources.push( resource )
-                    }
-                }
-            }
-        }
+    //                 if ( !check ) {
+    //                     requiredResources.push( resource )
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        return requiredResources.sort()
-    }
+    //     return requiredResources.sort()
+    // }
 
     /**
      * 
@@ -401,15 +401,39 @@ export class Statement {
                 arns.push( resource.arn )
             }
         }
-
-        // if ( arns.length === 0 ) {
-        //     return [ '*' ]
-        // }
-
         arns.push( ...this.addServicesForActions() )
 
         return arns.sort()
     }
+
+    /**
+     * 
+     * @param condition 
+     * @param override 
+     * @returns 
+     */
+    public addCondition( condition: string, override: boolean = false ): void {
+        if ( !this.allowedConditions.has( condition ) && override == false ) {
+            console.error(
+                `Condition '${condition}' is not allowed with the current set of actions and resources.` +
+                `\n If you would like to override this and add it anyway, pass a second argument of boolean true.`
+            )
+            return
+        }
+
+        this.conditions.push( new Condition( iamDefinition.conditions[ condition ] ) )
+
+    }
+
+    public getConditions(): string[] {
+        const conditions: string[] = []
+        for ( let condition of this.conditions ) {
+            conditions.push( condition.condition )
+        }
+
+        return conditions
+    }
+
 
     /**
      * 
@@ -424,6 +448,10 @@ export class Statement {
             effect: this.effect,
             action: this.getActions(),
             resource: this.getResourceArns()
+        }
+
+        if ( this.conditions.length > 0 ) {
+            policyStatement.condition = this.getConditions()
         }
 
         return policyStatement

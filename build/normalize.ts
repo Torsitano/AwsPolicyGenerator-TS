@@ -253,7 +253,8 @@ export function main() {
     const normalizedDefinition: NormalizedDefinition = {
         privileges: {},
         resources: {},
-        services: {}
+        services: {},
+        conditions: {}
     }
 
     for ( let service of directories ) {
@@ -274,6 +275,7 @@ export function main() {
         normalizedDefinition.privileges[ service ] = normalizedPrivs
         normalizedDefinition.resources[ service ] = normalizedResources
         normalizedDefinition.services[ service ] = normalizedService
+        normalizedDefinition.conditions = { ...normalizedDefinition.conditions, ...serviceConditions }
     }
     fs.writeFileSync( `./lib/normalizedDefinition.json`, JSON.stringify( normalizedDefinition, null, 4 ), 'utf-8' )
 
