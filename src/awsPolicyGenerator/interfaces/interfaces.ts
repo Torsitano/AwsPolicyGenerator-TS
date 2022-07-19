@@ -182,16 +182,18 @@ export interface NormalizedDefinition {
 //     services(): string[]
 // }
 
+export type StatementCondition = {
+    [ key: string ]: {
+        [ key: string ]: string
+    }
+}
+
 
 export interface PolicyStatement {
     effect: 'Allow' | 'Deny',
     action: string[],
     principal?: string[],
-    condition?: {
-        [ key: string ]: {
-            [ key: string ]: string
-        }
-    },
+    condition?: StatementCondition,
     resource: string[]
 }
 

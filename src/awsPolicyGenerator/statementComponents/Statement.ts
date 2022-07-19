@@ -1,3 +1,4 @@
+import { StatementCondition } from './../interfaces/interfaces'
 import { NormalizedDefinition, PolicyStatement, AccessLevel, AddActionsForResourceParams } from '../interfaces/interfaces'
 import { Action, ResourceOnAction } from './Action'
 import { Condition } from './Condition'
@@ -425,10 +426,10 @@ export class Statement {
 
     }
 
-    public getConditions(): string[] {
-        const conditions: string[] = []
+    public getConditions(): StatementCondition {
+        const conditions: StatementCondition = {}
         for ( let condition of this.conditions ) {
-            conditions.push( condition.condition )
+            conditions[ condition.condition ] = {}
         }
 
         return conditions
