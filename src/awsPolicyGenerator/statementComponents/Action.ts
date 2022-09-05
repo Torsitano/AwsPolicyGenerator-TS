@@ -47,13 +47,16 @@ export class Action {
         const requiredResources: ResourceOnAction[] = []
 
         for ( let action of actions ) {
+            //console.log( `Required Resources for action ${action.action}` )
             for ( let resource of action.resources ) {
                 if ( resource.required ) {
+                    //console.log( `Resource found before check: ${resource.resourceArn}` )
                     const check = requiredResources.some(
                         item => item.resourceArn === resource.resourceArn
                     )
 
                     if ( !check ) {
+                        //console.log( `Adding resource: ${resource.resourceArn}` )
                         requiredResources.push( resource )
                     }
                 }

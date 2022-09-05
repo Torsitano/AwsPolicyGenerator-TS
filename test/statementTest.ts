@@ -9,12 +9,18 @@ const statement = new Statement( 'Allow' )
         privLevels: [ 'readPrivileges', 'listPrivileges' ],
         resourceArn: 'arn:aws:iam::123456789123:role/myiamrole'
     } )
-//.addActions( [ 's3:CreateBucket', 'kms:CreateKey', 's3:ListAllMyBuckets' ] )
+    .addActions( [ 's3:ListAllMyBuckets' ] )
 
 // const statement = new Statement( 'Allow' )
 //     .addActions( [ 's3:CreateBucket', 's3:ListAllMyBuckets' ] )
 
-console.log( statement.toYaml() )
+
+//console.log( statement.resources )
+
+//@ts-ignore
+const yamlOutput = statement.toYaml()
+
+//console.log( statement.toYaml() )
 
 
 // const yaml = `

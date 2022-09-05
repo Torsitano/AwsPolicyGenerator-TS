@@ -6,6 +6,7 @@ import { Resource } from './Resource'
 import * as fs from 'fs'
 import { camelize } from 'humps'
 import { parse, stringify } from 'yaml'
+import { PolicyStatement as CdkPolicyStatement } from 'aws-cdk-lib/aws-iam'
 
 
 export type Effect = 'Allow' | 'Deny'
@@ -17,7 +18,7 @@ const globalServices: string[] = [ 'account', 'cloudfront', 'iam', 's3' ]
 
 export class Statement {
     public readonly effect: Effect
-    //@ts-ignore
+    public readonly includeRequiredResources: boolean
     private readonly conditions: Condition[] = []
     private readonly actions: Action[] = []
     private readonly resources: Resource[] = []
@@ -26,8 +27,9 @@ export class Statement {
     public readonly affectedResources: Set<string> = new Set<string>()
 
 
-    constructor ( effect: Effect ) {
+    constructor ( effect: Effect, includeRequiredResources: boolean = false ) {
         this.effect = effect
+        this.includeRequiredResources = includeRequiredResources
     }
 
     /**
@@ -231,6 +233,8 @@ export class Statement {
     private addRequiredResources(): void {
         const requiredResources = Action.getRequiredResources( this.actions )
 
+        const resourcesToAdd: ResourceOnAction[] = []
+
         for ( let requiredResource of requiredResources ) {
             // Get the service from the Resource ARN
 
@@ -243,14 +247,36 @@ export class Statement {
             }
 
             if ( !match ) {
-                let service = requiredResource.resourceArn.split( ':' )[ 2 ]
-                this.createResource( service, requiredResource.resourceName )
+                resourcesToAdd.push( requiredResource )
             }
         }
+        if ( this.includeRequiredResources ) {
+            console.log( `The following resources were listed as required and automatically added:\n` )
+            resourcesToAdd.map( ( resource: ResourceOnAction ): void => {
+                console.log( resource.resourceName )
+                let service = resource.resourceArn.split( ':' )[ 2 ]
+                this.createResource( service, resource.resourceName )
+            } )
+        } else {
+            console.log( `The following resources are listed as required but were not included:\n` )
+            resourcesToAdd.map( ( resource: ResourceOnAction ): void => {
+                console.log( resource.resourceName )
+            } )
+        }
+
     }
 
 
-    //@ts-ignore
+    // TODO: Add check for Account as well
+    /**
+     * This method will check the service and resource types of ARNs to determine if a new wildcard ARN should be 
+     * added to the statement. If a specific Resource ARN has been passed in, only that ARN will be in the statement.
+     * If no Resource ARN has been passed in that is a required resource for an Action, then a wildcard ARN will
+     * be added.
+     * @param arn1 
+     * @param arn2 
+     * @returns 
+     */
     private compareArns( arn1: string, arn2: string ): boolean {
 
         const arn1Service = arn1.split( ':' )[ 2 ]
@@ -392,7 +418,7 @@ export class Statement {
 
     /**
      * 
-     * @returns 
+     * @returns A list of all the ARNs from the resources that exist on the statement object
      */
     public getResourceArns(): string[] {
         const arns: string[] = []
@@ -472,6 +498,14 @@ export class Statement {
      */
     public toYaml(): string {
         return stringify( this.build() )
+    }
+
+    public toCdk(): CdkPolicyStatement {
+        const statement = new CdkPolicyStatement( {
+
+        } )
+
+        return statement
     }
 
 }
