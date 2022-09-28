@@ -1,15 +1,15 @@
-import { Statement } from './../src/awsPolicyGenerator/statementComponents/Statement'
+import { Statement, Effect } from './../src/awsPolicyGenerator/statementComponents/Statement'
 
 
 
-const statement = new Statement( 'Allow' )
-    .addActionsForResource( {
-        service: 'iam',
-        resource: 'role',
-        privLevels: [ 'readPrivileges', 'listPrivileges' ],
-        resourceArn: 'arn:aws:iam::123456789123:role/myiamrole'
-    } )
-    .addActions( [ 's3:ListAllMyBuckets' ] )
+const statement = new Statement( Effect.ALLOW, true )
+    // .addActionsForResource( {
+    //     service: 'iam',
+    //     resource: 'role',
+    //     privLevels: [ 'readPrivileges', 'listPrivileges' ],
+    //     resourceArn: 'arn:aws:iam::123456789123:role/myiamrole'
+    // } )
+    .addActions( [ 'ec2:RunInstances' ] )
 
 // const statement = new Statement( 'Allow' )
 //     .addActions( [ 's3:CreateBucket', 's3:ListAllMyBuckets' ] )
@@ -19,6 +19,8 @@ const statement = new Statement( 'Allow' )
 
 //@ts-ignore
 const yamlOutput = statement.toYaml()
+
+console.log( yamlOutput )
 
 //console.log( statement.toYaml() )
 

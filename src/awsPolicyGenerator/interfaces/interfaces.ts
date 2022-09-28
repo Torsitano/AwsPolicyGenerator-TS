@@ -1,3 +1,4 @@
+import { Effect } from '../statementComponents/Statement'
 
 export interface IamDefinition {
     [ key: string ]: {
@@ -190,7 +191,7 @@ export type StatementCondition = {
 
 
 export interface PolicyStatement {
-    effect: 'Allow' | 'Deny',
+    effect: Effect,
     action: string[],
     principal?: string[],
     condition?: StatementCondition,

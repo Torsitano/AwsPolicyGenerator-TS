@@ -8,8 +8,13 @@ import { camelize } from 'humps'
 import { parse, stringify } from 'yaml'
 import { PolicyStatement as CdkPolicyStatement } from 'aws-cdk-lib/aws-iam'
 
+//export type Effect = 'Allow' | 'Deny'
 
-export type Effect = 'Allow' | 'Deny'
+export enum Effect {
+    ALLOW = 'Allow',
+    DENY = 'Deny'
+}
+
 
 const iamDefinition: NormalizedDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
 
@@ -502,7 +507,11 @@ export class Statement {
 
     public toCdk(): CdkPolicyStatement {
         const statement = new CdkPolicyStatement( {
-
+            actions: this.actions.map( ( action ) => {
+                return action.action
+            } ),
+            effect: this.effect,
+            //resources: this.resources
         } )
 
         return statement
