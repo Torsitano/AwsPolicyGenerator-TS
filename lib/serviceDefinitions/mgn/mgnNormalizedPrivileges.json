@@ -55,6 +55,27 @@
             }
         }
     },
+    "createLaunchConfigurationTemplate": {
+        "privilege": "CreateLaunchConfigurationTemplate",
+        "description": "Grants permission to create launch configuration template",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/APIReference/API_CreateLaunchConfigurationTemplate.html",
+        "service": "mgn",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
     "createReplicationConfigurationTemplate": {
         "privilege": "CreateReplicationConfigurationTemplate",
         "description": "Grants permission to create replication configuration template",
@@ -71,7 +92,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -92,7 +113,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -109,6 +130,29 @@
             "jobResource": {
                 "resourceName": "JobResource",
                 "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:job/${JobID}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLaunchConfigurationTemplate": {
+        "privilege": "DeleteLaunchConfigurationTemplate",
+        "description": "Grants permission to delete launch configuration template",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/APIReference/API_DeleteLaunchConfigurationTemplate.html",
+        "service": "mgn",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchConfigurationTemplateResource": {
+                "resourceName": "LaunchConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:launch-configuration-template/${LaunchConfigurationTemplateID}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -217,6 +261,16 @@
         "description": "Grants permission to describe jobs",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/APIReference/API_DescribeJobs.html",
+        "service": "mgn",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeLaunchConfigurationTemplates": {
+        "privilege": "DescribeLaunchConfigurationTemplates",
+        "description": "Grants permission to describe launch configuration template",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/APIReference/API_DescribeLaunchConfigurationTemplates.html",
         "service": "mgn",
         "dependentActions": [],
         "privConditions": {},
@@ -537,6 +591,29 @@
         "privConditions": {},
         "resources": {}
     },
+    "issueClientCertificateForMgn": {
+        "privilege": "IssueClientCertificateForMgn",
+        "description": "Grants permission to issue a client certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/ug/mgn-apis.html",
+        "service": "mgn",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
         "description": "Grants permission to list tags for a resource",
@@ -701,7 +778,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -927,7 +1004,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1021,7 +1098,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1060,10 +1137,71 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
-        "resources": {}
+        "resources": {
+            "jobResource": {
+                "resourceName": "JobResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:job/${JobID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "launchConfigurationTemplateResource": {
+                "resourceName": "LaunchConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:launch-configuration-template/${LaunchConfigurationTemplateID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationConfigurationTemplateResource": {
+                "resourceName": "ReplicationConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:replication-configuration-template/${ReplicationConfigurationTemplateID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vcenterClientResource": {
+                "resourceName": "VcenterClientResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:vcenter-client/${VcenterClientID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "terminateTargetInstances": {
         "privilege": "TerminateTargetInstances",
@@ -1086,7 +1224,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1115,10 +1253,71 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
-        "resources": {}
+        "resources": {
+            "jobResource": {
+                "resourceName": "JobResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:job/${JobID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "launchConfigurationTemplateResource": {
+                "resourceName": "LaunchConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:launch-configuration-template/${LaunchConfigurationTemplateID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationConfigurationTemplateResource": {
+                "resourceName": "ReplicationConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:replication-configuration-template/${ReplicationConfigurationTemplateID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vcenterClientResource": {
+                "resourceName": "VcenterClientResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:vcenter-client/${VcenterClientID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateAgentBacklogForMgn": {
         "privilege": "UpdateAgentBacklogForMgn",
@@ -1258,6 +1457,29 @@
             }
         }
     },
+    "updateLaunchConfigurationTemplate": {
+        "privilege": "UpdateLaunchConfigurationTemplate",
+        "description": "Grants permission to update launch configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/APIReference/API_UpdateLaunchConfigurationTemplate.html",
+        "service": "mgn",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "launchConfigurationTemplateResource": {
+                "resourceName": "LaunchConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:mgn:${Region}:${Account}:launch-configuration-template/${LaunchConfigurationTemplateID}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "updateReplicationConfiguration": {
         "privilege": "UpdateReplicationConfiguration",
         "description": "Grants permission to update replication configuration",
@@ -1326,5 +1548,15 @@
                 }
             }
         }
+    },
+    "verifyClientRoleForMgn": {
+        "privilege": "VerifyClientRoleForMgn",
+        "description": "Grants permission to verify client role",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mgn/latest/ug/mgn-apis.html",
+        "service": "mgn",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     }
 }

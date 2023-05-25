@@ -62,7 +62,13 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/emr/latest/APIReference/API_AddJobFlowSteps.html",
         "service": "elasticmapreduce",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "elasticmapreduce:ExecutionRoleArn": {
+                "condition": "elasticmapreduce:ExecutionRoleArn",
+                "description": "Filters access by whether the execution role ARN is provided with the action",
+                "type": "String"
+            }
+        },
         "resources": {
             "cluster": {
                 "resourceName": "cluster",
@@ -99,7 +105,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "elasticmapreduce:RequestTag/${TagKey}": {
                 "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -128,6 +134,40 @@
             "editor": {
                 "resourceName": "editor",
                 "resourceArn": "arn:${Partition}:elasticmapreduce:${Region}:${Account}:editor/${EditorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    },
+                    "elasticmapreduce:ResourceTag/${TagKey}": {
+                        "condition": "elasticmapreduce:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "notebookExecution": {
+                "resourceName": "notebook-execution",
+                "resourceArn": "arn:${Partition}:elasticmapreduce:${Region}:${Account}:notebook-execution/${NotebookExecutionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    },
+                    "elasticmapreduce:ResourceTag/${TagKey}": {
+                        "condition": "elasticmapreduce:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:elasticmapreduce:${Region}:${Account}:studio/${StudioId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -216,7 +256,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "elasticmapreduce:RequestTag/${TagKey}": {
                 "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -308,7 +348,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "elasticmapreduce:RequestTag/${TagKey}": {
                 "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -1514,7 +1554,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1551,6 +1591,40 @@
                         "type": "String"
                     }
                 }
+            },
+            "notebookExecution": {
+                "resourceName": "notebook-execution",
+                "resourceArn": "arn:${Partition}:elasticmapreduce:${Region}:${Account}:notebook-execution/${NotebookExecutionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    },
+                    "elasticmapreduce:ResourceTag/${TagKey}": {
+                        "condition": "elasticmapreduce:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "studio": {
+                "resourceName": "studio",
+                "resourceArn": "arn:${Partition}:elasticmapreduce:${Region}:${Account}:studio/${StudioId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    },
+                    "elasticmapreduce:ResourceTag/${TagKey}": {
+                        "condition": "elasticmapreduce:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag and value pair associated with an Amazon EMR resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1570,7 +1644,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "elasticmapreduce:RequestTag/${TagKey}": {
                 "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -1669,7 +1743,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "elasticmapreduce:RequestTag/${TagKey}": {
                 "condition": "elasticmapreduce:RequestTag/${TagKey}",

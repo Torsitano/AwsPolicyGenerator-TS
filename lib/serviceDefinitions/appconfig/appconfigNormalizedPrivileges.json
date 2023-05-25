@@ -14,24 +14,11 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access based on whether mandatory tags are included in the request",
-                "type": "String"
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
             }
         },
-        "resources": {
-            "application": {
-                "resourceName": "application",
-                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
-                        "type": "String"
-                    }
-                }
-            }
-        }
+        "resources": {}
     },
     "createConfigurationProfile": {
         "privilege": "CreateConfigurationProfile",
@@ -48,26 +35,14 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access based on whether mandatory tags are included in the request",
-                "type": "String"
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "application": {
                 "resourceName": "application",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
-                        "type": "String"
-                    }
-                }
-            },
-            "configurationprofile": {
-                "resourceName": "configurationprofile",
-                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/configurationprofile/${ConfigurationProfileId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -94,24 +69,11 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access based on whether mandatory tags are included in the request",
-                "type": "String"
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
             }
         },
-        "resources": {
-            "deploymentstrategy": {
-                "resourceName": "deploymentstrategy",
-                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:deploymentstrategy/${DeploymentStrategyId}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
-                        "type": "String"
-                    }
-                }
-            }
-        }
+        "resources": {}
     },
     "createEnvironment": {
         "privilege": "CreateEnvironment",
@@ -128,8 +90,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access based on whether mandatory tags are included in the request",
-                "type": "String"
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -144,20 +106,50 @@
                         "type": "String"
                     }
                 }
-            },
-            "environment": {
-                "resourceName": "environment",
-                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
-                        "type": "String"
-                    }
-                }
             }
         }
+    },
+    "createExtension": {
+        "privilege": "CreateExtension",
+        "description": "Grants permission to create an extension",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateExtension.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for a specified tag",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createExtensionAssociation": {
+        "privilege": "CreateExtensionAssociation",
+        "description": "Grants permission to create an extension association",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateExtensionAssociation.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for a specified tag",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
     },
     "createHostedConfigurationVersion": {
         "privilege": "CreateHostedConfigurationVersion",
@@ -191,12 +183,6 @@
                         "type": "String"
                     }
                 }
-            },
-            "hostedconfigurationversion": {
-                "resourceName": "hostedconfigurationversion",
-                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/configurationprofile/${ConfigurationProfileId}/hostedconfigurationversion/${VersionNumber}",
-                "required": true,
-                "resourceConditions": {}
             }
         }
     },
@@ -305,6 +291,52 @@
             "environment": {
                 "resourceName": "environment",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteExtension": {
+        "privilege": "DeleteExtension",
+        "description": "Grants permission to delete an extension",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_DeleteExtension.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "extension": {
+                "resourceName": "extension",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extension/${ExtensionId}/${ExtensionVersionNumber}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteExtensionAssociation": {
+        "privilege": "DeleteExtensionAssociation",
+        "description": "Grants permission to delete an extension association",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_DeleteExtensionAssociation.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "extensionassociation": {
+                "resourceName": "extensionassociation",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extensionassociation/${ExtensionAssociationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -603,6 +635,64 @@
             }
         }
     },
+    "getExtension": {
+        "privilege": "GetExtension",
+        "description": "Grants permission to view details about an extension",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetExtension.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "extension": {
+                "resourceName": "extension",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extension/${ExtensionId}/${ExtensionVersionNumber}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getExtensionAssociation": {
+        "privilege": "GetExtensionAssociation",
+        "description": "Grants permission to view details about an extension association",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetExtensionAssociation.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "extensionassociation": {
+                "resourceName": "extensionassociation",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extensionassociation/${ExtensionAssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "getHostedConfigurationVersion": {
         "privilege": "GetHostedConfigurationVersion",
         "description": "Grants permission to view details about a hosted configuration version",
@@ -774,6 +864,26 @@
             }
         }
     },
+    "listExtensionAssociations": {
+        "privilege": "ListExtensionAssociations",
+        "description": "Grants permission to list the extension associations in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_ListExtensionAssociations.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listExtensions": {
+        "privilege": "ListExtensions",
+        "description": "Grants permission to list the extensions in your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_ListExtensions.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listHostedConfigurationVersions": {
         "privilege": "ListHostedConfigurationVersions",
         "description": "Grants permission to list the hosted configuration versions for a configuration profile",
@@ -922,7 +1032,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartDeployment.html",
         "service": "appconfig",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for a specified tag",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "application": {
                 "resourceName": "application",
@@ -939,18 +1060,6 @@
             "configurationprofile": {
                 "resourceName": "configurationprofile",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/configurationprofile/${ConfigurationProfileId}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
-                        "type": "String"
-                    }
-                }
-            },
-            "deployment": {
-                "resourceName": "deployment",
-                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}/deployment/${DeploymentNumber}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1043,8 +1152,8 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access based on whether mandatory tags are included in the request",
-                "type": "String"
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -1070,6 +1179,18 @@
                     }
                 }
             },
+            "configuration": {
+                "resourceName": "configuration",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}/configuration/${ConfigurationProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
             "configurationprofile": {
                 "resourceName": "configurationprofile",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/configurationprofile/${ConfigurationProfileId}",
@@ -1109,6 +1230,30 @@
             "environment": {
                 "resourceName": "environment",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "extension": {
+                "resourceName": "extension",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extension/${ExtensionId}/${ExtensionVersionNumber}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "extensionassociation": {
+                "resourceName": "extensionassociation",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extensionassociation/${ExtensionAssociationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1130,14 +1275,26 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access based on whether mandatory tags are included in the request",
-                "type": "String"
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "application": {
                 "resourceName": "application",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "configuration": {
+                "resourceName": "configuration",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}/configuration/${ConfigurationProfileId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1186,6 +1343,30 @@
             "environment": {
                 "resourceName": "environment",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "extension": {
+                "resourceName": "extension",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extension/${ExtensionId}/${ExtensionVersionNumber}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "extensionassociation": {
+                "resourceName": "extensionassociation",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extensionassociation/${ExtensionAssociationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1326,6 +1507,64 @@
             "environment": {
                 "resourceName": "environment",
                 "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:application/${ApplicationId}/environment/${EnvironmentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateExtension": {
+        "privilege": "UpdateExtension",
+        "description": "Grants permission to modify an extension",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_UpdateExtension.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "extension": {
+                "resourceName": "extension",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extension/${ExtensionId}/${ExtensionVersionNumber}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateExtensionAssociation": {
+        "privilege": "UpdateExtensionAssociation",
+        "description": "Grants permission to modify an extension association",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_UpdateExtensionAssociation.html",
+        "service": "appconfig",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "extensionassociation": {
+                "resourceName": "extensionassociation",
+                "resourceArn": "arn:${Partition}:appconfig:${Region}:${Account}:extensionassociation/${ExtensionAssociationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

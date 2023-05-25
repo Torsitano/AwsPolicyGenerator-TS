@@ -2,11 +2,11 @@
     "channel": {
         "resourceName": "channel",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "The tag for a MediaLive resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -35,7 +35,7 @@
                 "privilege": "DescribeSchedule",
                 "description": "Grants permission to view a list of actions scheduled on a channel",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-actions-schedule.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/schedule-using-console-view.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -46,7 +46,7 @@
                 "privilege": "BatchUpdateSchedule",
                 "description": "Grants permission to add and remove actions from a channel's schedule",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/batching-actions.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/submitting-batch-command.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -59,13 +59,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -136,12 +136,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -156,8 +156,8 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -168,11 +168,11 @@
     "input": {
         "resourceName": "input",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "The tag for a MediaLive resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -207,13 +207,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -227,13 +227,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -243,17 +243,17 @@
                 "privilege": "CreatePartnerInput",
                 "description": "Grants permission to create a partner input",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/create-partner-input.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/input-create-cdi-partners.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -288,12 +288,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -308,8 +308,8 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -320,7 +320,7 @@
     "inputDevice": {
         "resourceName": "input-device",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
         "resourceConditions": {},
         "listPrivileges": {},
         "readPrivileges": {
@@ -328,7 +328,7 @@
                 "privilege": "DescribeInputDevice",
                 "description": "Grants permission to describe an input device",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -337,7 +337,7 @@
                 "privilege": "DescribeInputDeviceThumbnail",
                 "description": "Grants permission to describe an input device thumbnail",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -371,9 +371,27 @@
                 "dependentActions": [],
                 "required": true
             },
+            "RebootInputDevice": {
+                "privilege": "RebootInputDevice",
+                "description": "Grants permission to reboot an input device",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "RejectInputDeviceTransfer": {
                 "privilege": "RejectInputDeviceTransfer",
                 "description": "Grants permission to reject an input device transfer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartInputDeviceMaintenanceWindow": {
+                "privilege": "StartInputDeviceMaintenanceWindow",
+                "description": "Grants permission to start a maintenance window for an input device",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
                 "privConditions": {},
@@ -393,7 +411,7 @@
                 "privilege": "UpdateInputDevice",
                 "description": "Grants permission to update an input device",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -405,11 +423,11 @@
     "inputSecurityGroup": {
         "resourceName": "input-security-group",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "The tag for a MediaLive resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -444,13 +462,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -464,13 +482,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -490,7 +508,18 @@
                 "description": "Grants permission to update an input security group",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-security-group.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }
@@ -505,12 +534,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -525,8 +554,8 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -537,11 +566,11 @@
     "multiplex": {
         "resourceName": "multiplex",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "The tag for a MediaLive resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -561,7 +590,7 @@
                 "privilege": "DescribeMultiplex",
                 "description": "Grants permission to describe a multiplex",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-multiplex-configuration.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex-program-channel.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -581,17 +610,17 @@
                 "privilege": "CreateMultiplex",
                 "description": "Grants permission to create a multiplex",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-multiplex.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/multiplex-create.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -610,7 +639,7 @@
                 "privilege": "DeleteMultiplex",
                 "description": "Grants permission to delete a multiplex",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-multiplex.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-multiplex-program.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -628,7 +657,7 @@
                 "privilege": "StartMultiplex",
                 "description": "Grants permission to start a multiplex",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-a-multiplex.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/start-multiplex.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -637,7 +666,7 @@
                 "privilege": "StopMultiplex",
                 "description": "Grants permission to stop a multiplex",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-a-multiplex.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/stop-multiplex.title.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -646,7 +675,7 @@
                 "privilege": "UpdateMultiplex",
                 "description": "Grants permission to update a multiplex",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex-program-channel.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -671,12 +700,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -691,8 +720,8 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -703,11 +732,11 @@
     "reservation": {
         "resourceName": "reservation",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "The tag for a MediaLive resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -751,13 +780,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -783,12 +812,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -803,8 +832,8 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -815,7 +844,7 @@
     "offering": {
         "resourceName": "offering",
         "service": "medialive",
-        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:*",
+        "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:${OfferingId}",
         "resourceConditions": {},
         "listPrivileges": {},
         "readPrivileges": {
@@ -838,13 +867,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "The tag for a MediaLive request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "The tag keys for a MediaLive resource or request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],

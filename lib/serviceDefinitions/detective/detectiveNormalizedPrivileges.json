@@ -9,6 +9,39 @@
         "privConditions": {},
         "resources": {}
     },
+    "batchGetGraphMemberDatasources": {
+        "privilege": "BatchGetGraphMemberDatasources",
+        "description": "Grants permission to retrieve the datasource package history for the specified member accounts in a behavior graph managed by this account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_BatchGetGraphMemberDatasources.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "batchGetMembershipDatasources": {
+        "privilege": "BatchGetMembershipDatasources",
+        "description": "Grants permission to retrieve the datasource package history of the caller account for the specified graphs",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_BatchGetMembershipDatasources.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "createGraph": {
         "privilege": "CreateGraph",
         "description": "Grants permission to create a behavior graph and begin to aggregate security information",
@@ -25,7 +58,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by specifying the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -276,6 +309,29 @@
             }
         }
     },
+    "listDatasourcePackages": {
+        "privilege": "ListDatasourcePackages",
+        "description": "Grants permission to list a graph's datasource package ingest states and timestamps for the most recent state changes in a behavior graph managed by this account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_ListDatasourcePackages.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "listGraphs": {
         "privilege": "ListGraphs",
         "description": "Grants permission to list behavior graphs managed by this account",
@@ -440,7 +496,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by specifying the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -479,9 +535,32 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by specifying the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
+        "resources": {
+            "graph": {
+                "resourceName": "Graph",
+                "resourceArn": "arn:${Partition}:detective:${Region}:${Account}:graph:${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by specifying the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateDatasourcePackages": {
+        "privilege": "UpdateDatasourcePackages",
+        "description": "Grants permission to enable or disable datasource package(s) in a behavior graph managed by this account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/detective/latest/APIReference/API_UpdateDatasourcePackages.html",
+        "service": "detective",
+        "dependentActions": [],
+        "privConditions": {},
         "resources": {
             "graph": {
                 "resourceName": "Graph",

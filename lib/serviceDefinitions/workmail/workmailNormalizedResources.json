@@ -101,6 +101,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "ListImpersonationRoles": {
+                "privilege": "ListImpersonationRoles",
+                "description": "Grants permission to list the impersonation roles for the given Amazon WorkMail organization",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_ListImpersonationRoles.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "ListInboundMailFlowRules": {
                 "privilege": "ListInboundMailFlowRules",
                 "description": "Grants permission to list inbound mail flow rules configured for an organization",
@@ -178,7 +187,18 @@
                 "description": "Grants permission to list the tags applied to an Amazon WorkMail organization resource",
                 "accessLevel": "List",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_ListTagsForResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -261,6 +281,24 @@
                 "description": "Grants permission to retrieve the retention policy associated at an organizational level",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_GetDefaultRetentionPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetImpersonationRole": {
+                "privilege": "GetImpersonationRole",
+                "description": "Grants permission to retrieve an impersonation role for the given Amazon WorkMail organization",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_GetImpersonationRole.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetImpersonationRoleEffect": {
+                "privilege": "GetImpersonationRoleEffect",
+                "description": "Grants permission to get the effect of the rules associated to an impersonation role for a specific user",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_GetImpersonationRoleEffect.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -373,6 +411,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "ListAvailabilityConfigurations": {
+                "privilege": "ListAvailabilityConfigurations",
+                "description": "Grants permission to list all the AvailabilityConfiguration's for the given Amazon WorkMail organization",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_ListAvailabilityConfigurations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "ListMembersInMailGroup": {
                 "privilege": "ListMembersInMailGroup",
                 "description": "Grants permission to get a list of all the members in a mail group",
@@ -408,6 +455,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "TestAvailabilityConfiguration": {
+                "privilege": "TestAvailabilityConfiguration",
+                "description": "Grants permission to performs a test on an availability provider to ensure that access is allowed",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_TestAvailabilityConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
             }
         },
         "writePrivileges": {
@@ -438,6 +494,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "AssumeImpersonationRole": {
+                "privilege": "AssumeImpersonationRole",
+                "description": "Grants permission to assume an impersonation role for the given Amazon WorkMail organization",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_AssumeImpersonationRole.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "CancelMailboxExportJob": {
                 "privilege": "CancelMailboxExportJob",
                 "description": "Grants permission to cancel a currently running mailbox export job",
@@ -456,11 +521,29 @@
                 "dependentActions": [],
                 "required": true
             },
+            "CreateAvailabilityConfiguration": {
+                "privilege": "CreateAvailabilityConfiguration",
+                "description": "Grants permission to create an AvailabilityConfiguration for the given Amazon WorkMail organization and domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_CreateAvailabilityConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "CreateGroup": {
                 "privilege": "CreateGroup",
                 "description": "Grants permission to create a group that can be used in WorkMail by calling the RegisterToWorkMail operation",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_CreateGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateImpersonationRole": {
+                "privilege": "CreateImpersonationRole",
+                "description": "Grants permission to create an impersonation role for the given Amazon WorkMail organization",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_CreateImpersonationRole.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -555,6 +638,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "DeleteAvailabilityConfiguration": {
+                "privilege": "DeleteAvailabilityConfiguration",
+                "description": "Grants permission to delete the AvailabilityConfiguration for the given Amazon WorkMail organization and domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_DeleteAvailabilityConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "DeleteEmailMonitoringConfiguration": {
                 "privilege": "DeleteEmailMonitoringConfiguration",
                 "description": "Grants permission to delete the email monitoring configuration for an organization",
@@ -569,6 +661,15 @@
                 "description": "Grants permission to delete a group from WorkMail",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_DeleteGroup.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteImpersonationRole": {
+                "privilege": "DeleteImpersonationRole",
+                "description": "Grants permission to delete an impersonation role for the given Amazon WorkMail organization",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_DeleteImpersonationRole.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -924,11 +1025,29 @@
                 "dependentActions": [],
                 "required": true
             },
+            "UpdateAvailabilityConfiguration": {
+                "privilege": "UpdateAvailabilityConfiguration",
+                "description": "Grants permission to update an existing AvailabilityConfiguration for the given Amazon WorkMail organization and domain",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_UpdateAvailabilityConfiguration.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "UpdateDefaultMailDomain": {
                 "privilege": "UpdateDefaultMailDomain",
                 "description": "Grants permission to update which domain is the default domain for an organization",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_UpdateDefaultMailDomain.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateImpersonationRole": {
+                "privilege": "UpdateImpersonationRole",
+                "description": "Grants permission to update an existing impersonation role for the given Amazon WorkMail organization",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_UpdateImpersonationRole.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -1032,7 +1151,18 @@
                 "description": "Grants permission to tag the specified Amazon WorkMail organization resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_TagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -1041,7 +1171,18 @@
                 "description": "Grants permission to untag the specified Amazon WorkMail organization resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/workmail/latest/APIReference/API_UntagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }

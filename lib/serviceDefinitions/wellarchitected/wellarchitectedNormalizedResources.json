@@ -6,7 +6,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters access based on tag key-value pairs attached to the resource",
+                "description": "Filters access by tag key-value pairs attached to the resource",
                 "type": "String"
             }
         },
@@ -102,7 +102,7 @@
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 },
@@ -117,12 +117,12 @@
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         },
         "writePrivileges": {
@@ -198,15 +198,6 @@
                 "dependentActions": [],
                 "required": true
             },
-            "UpdateShareInvitation": {
-                "privilege": "UpdateShareInvitation",
-                "description": "Grants permission to update status of the specified workload share invitation",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_UpdateShareInvitation.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
             "UpdateWorkload": {
                 "privilege": "UpdateWorkload",
                 "description": "Grants permission to update properties of the specified workload",
@@ -245,17 +236,17 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by tag key-value pairs in the request",
                         "type": "String"
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "UntagResource": {
                 "privilege": "UntagResource",
@@ -265,12 +256,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         }
     },
@@ -278,7 +269,13 @@
         "resourceName": "lens",
         "service": "wellarchitected",
         "resourceArn": "arn:${Partition}:wellarchitected:${Region}:${Account}:lens/${ResourceId}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListLensShares": {
                 "privilege": "ListLensShares",
@@ -305,7 +302,13 @@
                 "description": "Grants permission to get an existing lens",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_DeleteLensShare.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -317,6 +320,21 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a Well-Architected resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -358,6 +376,42 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag a Well-Architected resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag a Well-Architected resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

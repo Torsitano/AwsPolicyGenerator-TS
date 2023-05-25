@@ -3,7 +3,13 @@
         "resourceName": "trail",
         "service": "cloudtrail",
         "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by value associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetEventSelectors": {
@@ -49,7 +55,18 @@
                 "description": "Grants permission to create a trail that specifies the settings for delivery of log data to an Amazon S3 bucket",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_CreateTrail.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [
                     "s3:PutObject"
                 ],
@@ -117,7 +134,18 @@
                 "description": "Grants permission to add one or more tags to a trail, up to a limit of 10",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AddTags.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -126,7 +154,13 @@
                 "description": "Grants permission to remove tags from a trail",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_RemoveTags.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -170,7 +204,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by value associated with the resource",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -211,7 +245,18 @@
                 "description": "Grants permission to add one or more tags to a trail, up to a limit of 10",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AddTags.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -220,10 +265,65 @@
                 "description": "Grants permission to remove tags from a trail",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_RemoveTags.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
         }
+    },
+    "channel": {
+        "resourceName": "channel",
+        "service": "cloudtrail",
+        "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:channel/${ChannelId}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetServiceLinkedChannel": {
+                "privilege": "GetServiceLinkedChannel",
+                "description": "Grants permission to list settings for the service-linked channel",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "API_GetServiceLinkedChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateServiceLinkedChannel": {
+                "privilege": "CreateServiceLinkedChannel",
+                "description": "Grants permission to create a service-linked channel that specifies the settings for delivery of log data to an AWS service",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "API_CreateServiceLinkedChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteServiceLinkedChannel": {
+                "privilege": "DeleteServiceLinkedChannel",
+                "description": "Grants permission to delete a service-linked channel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "API_DeleteServiceLinkedChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateServiceLinkedChannel": {
+                "privilege": "UpdateServiceLinkedChannel",
+                "description": "Grants permission to update the settings that specify delivery of log files",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "API_UpdateServiceLinkedChannel.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
     }
 }

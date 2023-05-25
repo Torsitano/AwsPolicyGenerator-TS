@@ -534,6 +534,84 @@
             }
         }
     },
+    "createTransitGatewayPeering": {
+        "privilege": "CreateTransitGatewayPeering",
+        "description": "Grants permission to create a Transit Gateway peering",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_CreateTransitGatewayPeering.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "networkmanager:tgwArn": {
+                "condition": "networkmanager:tgwArn",
+                "description": "Filters access by which transit gateways can be registered or deregistered",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "coreNetwork": {
+                "resourceName": "core-network",
+                "resourceArn": "arn:${Partition}:networkmanager::${Account}:core-network/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createTransitGatewayRouteTableAttachment": {
+        "privilege": "CreateTransitGatewayRouteTableAttachment",
+        "description": "Grants permission to create a TGW RTB attachment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_CreateTransitGatewayRouteTableAttachment.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "networkmanager:tgwRtbArn": {
+                "condition": "networkmanager:tgwRtbArn",
+                "description": "Filters access by which Transit Gateway Route Table can be used to create an attachment",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "peering": {
+                "resourceName": "peering",
+                "resourceArn": "arn:${Partition}:networkmanager::${Account}:peering/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "createVpcAttachment": {
         "privilege": "CreateVpcAttachment",
         "description": "Grants permission to create a VPC attachment",
@@ -787,6 +865,29 @@
             "link": {
                 "resourceName": "link",
                 "resourceArn": "arn:${Partition}:networkmanager::${Account}:link/${GlobalNetworkId}/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePeering": {
+        "privilege": "DeletePeering",
+        "description": "Grants permission to delete a peering",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_DeletePeering.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "peering": {
+                "resourceName": "peering",
+                "resourceArn": "arn:${Partition}:networkmanager::${Account}:peering/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1168,6 +1269,29 @@
         "description": "Grants permission to retrieve a core network",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetCoreNetwork.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "coreNetwork": {
+                "resourceName": "core-network",
+                "resourceArn": "arn:${Partition}:networkmanager::${Account}:core-network/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getCoreNetworkChangeEvents": {
+        "privilege": "GetCoreNetworkChangeEvents",
+        "description": "Grants permission to retrieve a list of core network change events",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetCoreNetworkChangeEvents.html",
         "service": "networkmanager",
         "dependentActions": [],
         "privConditions": {},
@@ -1614,6 +1738,29 @@
             }
         }
     },
+    "getTransitGatewayPeering": {
+        "privilege": "GetTransitGatewayPeering",
+        "description": "Grants permission to retrieve a Transit Gateway peering",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetTransitGatewayPeering.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "peering": {
+                "resourceName": "peering",
+                "resourceArn": "arn:${Partition}:networkmanager::${Account}:peering/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "getTransitGatewayRegistrations": {
         "privilege": "GetTransitGatewayRegistrations",
         "description": "Grants permission to describe transit gateway registrations",
@@ -1626,6 +1773,29 @@
             "globalNetwork": {
                 "resourceName": "global-network",
                 "resourceArn": "arn:${Partition}:networkmanager::${Account}:global-network/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getTransitGatewayRouteTableAttachment": {
+        "privilege": "GetTransitGatewayRouteTableAttachment",
+        "description": "Grants permission to retrieve a TGW RTB attachment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetTransitGatewayRouteTableAttachment.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "attachment": {
+                "resourceName": "attachment",
+                "resourceArn": "arn:${Partition}:networkmanager::${Account}:attachment/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1734,6 +1904,26 @@
         "description": "Grants permission to list core networks",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_ListCoreNetworks.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listOrganizationServiceAccessStatus": {
+        "privilege": "ListOrganizationServiceAccessStatus",
+        "description": "Grants permission to list organization service access status",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_ListOrganizationServiceAccessStatus.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPeerings": {
+        "privilege": "ListPeerings",
+        "description": "Grants permission to describe peerings",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_ListPeerings.html",
         "service": "networkmanager",
         "dependentActions": [],
         "privConditions": {},
@@ -1972,6 +2162,16 @@
                 }
             }
         }
+    },
+    "startOrganizationServiceAccessUpdate": {
+        "privilege": "StartOrganizationServiceAccessUpdate",
+        "description": "Grants permission to start organization service access update",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_StartOrganizationServiceAccessUpdate.html",
+        "service": "networkmanager",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "startRouteAnalysis": {
         "privilege": "StartRouteAnalysis",

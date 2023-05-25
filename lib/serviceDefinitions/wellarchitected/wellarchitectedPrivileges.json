@@ -194,6 +194,14 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_DeleteLensShare.html"
@@ -284,7 +292,10 @@
             "": {
                 "resourceType": "",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },
@@ -407,9 +418,15 @@
         "description": "Grants permission to list tags for a Well-Architected resource",
         "accessLevel": "Read",
         "resourceTypes": {
+            "lens": {
+                "resourceType": "lens",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "workload": {
                 "resourceType": "workload",
-                "required": true,
+                "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
             },
@@ -457,9 +474,15 @@
         "description": "Grants permission to tag a Well-Architected resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "lens": {
+                "resourceType": "lens",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "workload": {
                 "resourceType": "workload",
-                "required": true,
+                "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
             },
@@ -480,9 +503,15 @@
         "description": "Grants permission to untag a Well-Architected resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "lens": {
+                "resourceType": "lens",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "workload": {
                 "resourceType": "workload",
-                "required": true,
+                "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
             },
@@ -511,6 +540,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_UpdateAnswer.html"
     },
+    "updateGlobalSettings": {
+        "privilege": "UpdateGlobalSettings",
+        "description": "Grants permission to update settings to enable aws-organization support",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/wellarchitected/latest/APIReference/API_UpdateGlobalSettings.html"
+    },
     "updateLensReview": {
         "privilege": "UpdateLensReview",
         "description": "Grants permission to update properties of the specified lens review",
@@ -530,9 +573,9 @@
         "description": "Grants permission to update status of the specified workload share invitation",
         "accessLevel": "Write",
         "resourceTypes": {
-            "workload": {
-                "resourceType": "workload",
-                "required": true,
+            "": {
+                "resourceType": "",
+                "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
             }

@@ -1,7 +1,7 @@
 {
     "createLifecyclePolicy": {
         "privilege": "CreateLifecyclePolicy",
-        "description": "Create a data lifecycle policy to manage the scheduled creation and retention of Amazon EBS snapshots. You may have up to 100 policies.",
+        "description": "Grants permission to create a data lifecycle policy to manage the scheduled creation and retention of Amazon EBS snapshots. You may have up to 100 policies",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_CreateLifecyclePolicy.html",
         "service": "dlm",
@@ -9,20 +9,20 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
     },
     "deleteLifecyclePolicy": {
         "privilege": "DeleteLifecyclePolicy",
-        "description": "Delete an existing data lifecycle policy. In addition, this action halts the creation and deletion of snapshots that the policy specified. Existing snapshots are not affected.",
+        "description": "Grants permission to delete an existing data lifecycle policy. In addition, this action halts the creation and deletion of snapshots that the policy specified. Existing snapshots are not affected",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_DeleteLifecyclePolicy.html",
         "service": "dlm",
@@ -36,7 +36,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -45,7 +45,7 @@
     },
     "getLifecyclePolicies": {
         "privilege": "GetLifecyclePolicies",
-        "description": "Returns a list of summary descriptions of data lifecycle policies.",
+        "description": "Grants permission to returns a list of summary descriptions of data lifecycle policies",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicies.html",
         "service": "dlm",
@@ -55,7 +55,7 @@
     },
     "getLifecyclePolicy": {
         "privilege": "GetLifecyclePolicy",
-        "description": "Returns a complete description of a single data lifecycle policy.",
+        "description": "Grants permission to return a complete description of a single data lifecycle policy",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicy.html",
         "service": "dlm",
@@ -69,7 +69,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -78,7 +78,7 @@
     },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
-        "description": "Grants permission to list the tags associated with a resource.",
+        "description": "Grants permission to list the tags associated with a resource",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_ListTagsForResource.html",
         "service": "dlm",
@@ -92,7 +92,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -101,12 +101,23 @@
     },
     "tagResource": {
         "privilege": "TagResource",
-        "description": "Grants permission to add or update tags of a resource.",
+        "description": "Grants permission to add or update tags of a resource",
         "accessLevel": "Tagging",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_TagResource.html",
         "service": "dlm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "policy": {
                 "resourceName": "policy",
@@ -115,7 +126,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -124,12 +135,23 @@
     },
     "untagResource": {
         "privilege": "UntagResource",
-        "description": "Grants permission to remove associated with a resource.",
+        "description": "Grants permission to remove tags associated with a resource",
         "accessLevel": "Tagging",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_UntagResource.html",
         "service": "dlm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "policy": {
                 "resourceName": "policy",
@@ -138,7 +160,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -147,7 +169,7 @@
     },
     "updateLifecyclePolicy": {
         "privilege": "UpdateLifecyclePolicy",
-        "description": "Updates an existing data lifecycle policy.",
+        "description": "Grants permission to update an existing data lifecycle policy",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/dlm/latest/APIReference/API_UpdateLifecyclePolicy.html",
         "service": "dlm",
@@ -161,7 +183,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }

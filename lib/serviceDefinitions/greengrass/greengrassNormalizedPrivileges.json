@@ -50,7 +50,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -94,7 +94,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -148,7 +148,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -169,7 +169,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -213,7 +213,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -257,7 +257,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -324,7 +324,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -368,7 +368,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -422,7 +422,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -1630,7 +1630,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1723,7 +1723,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -1767,7 +1767,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1837,7 +1837,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -2229,7 +2229,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by checking tag keys passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -2284,6 +2284,31 @@
             "coreDevice": {
                 "resourceName": "coreDevice",
                 "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:coreDevices:${CoreDeviceThingName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by checking tag key/value pairs associated with a specific resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteDeployment": {
+        "privilege": "DeleteDeployment",
+        "description": "Grants permission to delete a deployment. To delete an active deployment, it needs to be cancelled first",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/greengrass/v2/APIReference/API_DeleteDeployment.html",
+        "service": "greengrass",
+        "dependentActions": [
+            "iot:DeleteJob"
+        ],
+        "privConditions": {},
+        "resources": {
+            "deployment": {
+                "resourceName": "deployment",
+                "resourceArn": "arn:${Partition}:greengrass:${Region}:${Account}:deployments:${DeploymentId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

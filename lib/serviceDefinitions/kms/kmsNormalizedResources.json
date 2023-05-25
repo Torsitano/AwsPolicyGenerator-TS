@@ -731,6 +731,36 @@
                 "dependentActions": [],
                 "required": true
             },
+            "GenerateMac": {
+                "privilege": "GenerateMac",
+                "description": "Controls permission to use the AWS KMS key to generate message authentication codes",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateMac.html",
+                "privConditions": {
+                    "kms:CallerAccount": {
+                        "condition": "kms:CallerAccount",
+                        "description": "Filters access to specified AWS KMS operations based on the AWS account ID of the caller. You can use this condition key to allow or deny access to all IAM users and roles in an AWS account in a single policy statement",
+                        "type": "String"
+                    },
+                    "kms:MacAlgorithm": {
+                        "condition": "kms:MacAlgorithm",
+                        "description": "Filters access to the GenerateMac and VerifyMac operations based on the MacAlgorithm parameter in the request",
+                        "type": "String"
+                    },
+                    "kms:RequestAlias": {
+                        "condition": "kms:RequestAlias",
+                        "description": "Filters access to cryptographic operations, DescribeKey, and GetPublicKey based on the alias in the request",
+                        "type": "String"
+                    },
+                    "kms:ViaService": {
+                        "condition": "kms:ViaService",
+                        "description": "Filters access when a request made on the principal's behalf comes from a specified AWS service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "ImportKeyMaterial": {
                 "privilege": "ImportKeyMaterial",
                 "description": "Controls permission to import cryptographic material into an AWS KMS key",
@@ -1034,6 +1064,36 @@
                     "kms:SigningAlgorithm": {
                         "condition": "kms:SigningAlgorithm",
                         "description": "Filters access to the Sign and Verify operations based on the signing algorithm in the request",
+                        "type": "String"
+                    },
+                    "kms:ViaService": {
+                        "condition": "kms:ViaService",
+                        "description": "Filters access when a request made on the principal's behalf comes from a specified AWS service",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "VerifyMac": {
+                "privilege": "VerifyMac",
+                "description": "Controls permission to use the AWS KMS key to verify message authentication codes",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/kms/latest/APIReference/API_VerifyMac.html",
+                "privConditions": {
+                    "kms:CallerAccount": {
+                        "condition": "kms:CallerAccount",
+                        "description": "Filters access to specified AWS KMS operations based on the AWS account ID of the caller. You can use this condition key to allow or deny access to all IAM users and roles in an AWS account in a single policy statement",
+                        "type": "String"
+                    },
+                    "kms:MacAlgorithm": {
+                        "condition": "kms:MacAlgorithm",
+                        "description": "Filters access to the GenerateMac and VerifyMac operations based on the MacAlgorithm parameter in the request",
+                        "type": "String"
+                    },
+                    "kms:RequestAlias": {
+                        "condition": "kms:RequestAlias",
+                        "description": "Filters access to cryptographic operations, DescribeKey, and GetPublicKey based on the alias in the request",
                         "type": "String"
                     },
                     "kms:ViaService": {

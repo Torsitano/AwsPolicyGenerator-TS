@@ -6,7 +6,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "description": "Filters access by tag key-value pairs attached to the resource",
                 "type": "String"
             }
         },
@@ -39,6 +39,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags assigned to the specified playback configuration resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -82,7 +91,48 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "prefetchSchedule": {
         "resourceName": "prefetchSchedule",
@@ -122,7 +172,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "description": "Filters access by tag key-value pairs attached to the resource",
                 "type": "String"
             }
         },
@@ -163,6 +213,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags assigned to the specified playback configuration resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -241,19 +300,54 @@
                 "required": true
             }
         },
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "program": {
         "resourceName": "program",
         "service": "mediatailor",
         "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:program/${ResourceId}",
-        "resourceConditions": {
-            "aws:ResourceTag/${TagKey}": {
-                "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on tag key-value pairs attached to the resource",
-                "type": "String"
-            }
-        },
+        "resourceConditions": {},
         "listPrivileges": {},
         "readPrivileges": {
             "DescribeProgram": {
@@ -287,12 +381,21 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "description": "Filters access by tag key-value pairs attached to the resource",
                 "type": "String"
             }
         },
         "listPrivileges": {},
         "readPrivileges": {
+            "DescribeLiveSource": {
+                "privilege": "DescribeLiveSource",
+                "description": "Grants permission to retrieve the live source with the specified live source name on the source location with the specified source location name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "DescribeSourceLocation": {
                 "privilege": "DescribeSourceLocation",
                 "description": "Grants permission to retrieve the source location with the specified source location name",
@@ -311,6 +414,24 @@
                 "dependentActions": [],
                 "required": true
             },
+            "ListLiveSources": {
+                "privilege": "ListLiveSources",
+                "description": "Grants permission to retrieve the list of existing live sources on the source location with the specified source location name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesources.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags assigned to the specified playback configuration resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            },
             "ListVodSources": {
                 "privilege": "ListVodSources",
                 "description": "Grants permission to retrieve the list of existing VOD sources on the source location with the specified source location name",
@@ -322,6 +443,26 @@
             }
         },
         "writePrivileges": {
+            "CreateLiveSource": {
+                "privilege": "CreateLiveSource",
+                "description": "Grants permission to create a new live source on the source location with the specified source location name",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "CreateVodSource": {
                 "privilege": "CreateVodSource",
                 "description": "Grants permission to create a new VOD source on the source location with the specified source location name",
@@ -330,15 +471,24 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteLiveSource": {
+                "privilege": "DeleteLiveSource",
+                "description": "Grants permission to delete the live source with the specified live source name on the source location with the specified source location name",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+                "privConditions": {},
                 "dependentActions": [],
                 "required": true
             },
@@ -356,6 +506,15 @@
                 "description": "Grants permission to delete the VOD source with the specified VOD source name on the source location with the specified source location name",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-vodsource-vodsourcename.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateLiveSource": {
+                "privilege": "UpdateLiveSource",
+                "description": "Grants permission to update the live source with the specified live source name on the source location with the specified source location name",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -380,7 +539,48 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "vodSource": {
         "resourceName": "vodSource",
@@ -389,7 +589,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on tag key-value pairs attached to the resource",
+                "description": "Filters access by tag key-value pairs attached to the resource",
                 "type": "String"
             }
         },
@@ -403,6 +603,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags assigned to the specified playback configuration resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -426,6 +635,143 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "liveSource": {
+        "resourceName": "liveSource",
+        "service": "mediatailor",
+        "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeLiveSource": {
+                "privilege": "DescribeLiveSource",
+                "description": "Grants permission to retrieve the live source with the specified live source name on the source location with the specified source location name",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags assigned to the specified playback configuration resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteLiveSource": {
+                "privilege": "DeleteLiveSource",
+                "description": "Grants permission to delete the live source with the specified live source name on the source location with the specified source location name",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateLiveSource": {
+                "privilege": "UpdateLiveSource",
+                "description": "Grants permission to update the live source with the specified live source name on the source location with the specified source location name",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from the specified playback configuration resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

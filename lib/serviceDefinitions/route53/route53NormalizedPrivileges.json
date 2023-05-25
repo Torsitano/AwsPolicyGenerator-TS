@@ -27,16 +27,27 @@
         ],
         "privConditions": {},
         "resources": {
-            "vpc": {
-                "resourceName": "vpc",
-                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:vpc/${VpcId}",
-                "required": true,
-                "resourceConditions": {}
-            },
             "hostedzone": {
                 "resourceName": "hostedzone",
                 "resourceArn": "arn:${Partition}:route53:::hostedzone/${Id}",
                 "required": false,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "changeCidrCollection": {
+        "privilege": "ChangeCidrCollection",
+        "description": "Grants permission to create or delete CIDR blocks within a CIDR collection",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeCidrCollection.html",
+        "service": "route53",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cidrcollection": {
+                "resourceName": "cidrcollection",
+                "resourceArn": "arn:${Partition}:route53:::cidrcollection/${Id}",
+                "required": true,
                 "resourceConditions": {}
             }
         }
@@ -48,7 +59,23 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html",
         "service": "route53",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "route53:ChangeResourceRecordSetsNormalizedRecordNames": {
+                "condition": "route53:ChangeResourceRecordSetsNormalizedRecordNames",
+                "description": "Filters access by the normalized DNS record names in a ChangeResourceRecordSets request",
+                "type": "ArrayOfString"
+            },
+            "route53:ChangeResourceRecordSetsRecordTypes": {
+                "condition": "route53:ChangeResourceRecordSetsRecordTypes",
+                "description": "Filters access by the DNS record types in a ChangeResourceRecordSets request",
+                "type": "ArrayOfString"
+            },
+            "route53:ChangeResourceRecordSetsActions": {
+                "condition": "route53:ChangeResourceRecordSetsActions",
+                "description": "Filters access by the change actions, CREATE, UPSERT, or DELETE, in a ChangeResourceRecordSets request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "hostedzone": {
                 "resourceName": "hostedzone",
@@ -80,6 +107,16 @@
                 "resourceConditions": {}
             }
         }
+    },
+    "createCidrCollection": {
+        "privilege": "CreateCidrCollection",
+        "description": "Grants permission to create a new CIDR collection",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateCidrCollection.html",
+        "service": "route53",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "createHealthCheck": {
         "privilege": "CreateHealthCheck",
@@ -226,6 +263,23 @@
             "hostedzone": {
                 "resourceName": "hostedzone",
                 "resourceArn": "arn:${Partition}:route53:::hostedzone/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteCidrCollection": {
+        "privilege": "DeleteCidrCollection",
+        "description": "Grants permission to delete a CIDR collection",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteCidrCollection.html",
+        "service": "route53",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cidrcollection": {
+                "resourceName": "cidrcollection",
+                "resourceArn": "arn:${Partition}:route53:::cidrcollection/${Id}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -398,12 +452,6 @@
             "hostedzone": {
                 "resourceName": "hostedzone",
                 "resourceArn": "arn:${Partition}:route53:::hostedzone/${Id}",
-                "required": false,
-                "resourceConditions": {}
-            },
-            "vpc": {
-                "resourceName": "vpc",
-                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:vpc/${VpcId}",
                 "required": false,
                 "resourceConditions": {}
             }
@@ -689,6 +737,50 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "listCidrBlocks": {
+        "privilege": "ListCidrBlocks",
+        "description": "Grants permission to get a list of the CIDR blocks within a specified CIDR collection",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListCidrBlocks.html",
+        "service": "route53",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cidrcollection": {
+                "resourceName": "cidrcollection",
+                "resourceArn": "arn:${Partition}:route53:::cidrcollection/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listCidrCollections": {
+        "privilege": "ListCidrCollections",
+        "description": "Grants permission to get a list of the CIDR collections that are associated with the current AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListCidrCollections.html",
+        "service": "route53",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listCidrLocations": {
+        "privilege": "ListCidrLocations",
+        "description": "Grants permission to get a list of the CIDR locations that belong to a specified CIDR collection",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListCidrLocations.html",
+        "service": "route53",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "cidrcollection": {
+                "resourceName": "cidrcollection",
+                "resourceArn": "arn:${Partition}:route53:::cidrcollection/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "listGeoLocations": {
         "privilege": "ListGeoLocations",

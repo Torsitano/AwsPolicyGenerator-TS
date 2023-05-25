@@ -17,7 +17,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -34,16 +34,50 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
+    },
+    "createLiveSource": {
+        "privilege": "CreateLiveSource",
+        "description": "Grants permission to create a new live source on the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "createPrefetchSchedule": {
         "privilege": "CreatePrefetchSchedule",
@@ -61,7 +95,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -84,7 +118,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -101,13 +135,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -122,13 +156,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -139,7 +173,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -162,7 +196,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -185,7 +219,42 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteLiveSource": {
+        "privilege": "DeleteLiveSource",
+        "description": "Grants permission to delete the live source with the specified live source name on the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "liveSource": {
+                "resourceName": "liveSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -208,7 +277,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -231,7 +300,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -260,7 +329,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -269,13 +338,7 @@
                 "resourceName": "program",
                 "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:program/${ResourceId}",
                 "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
-                        "type": "String"
-                    }
-                }
+                "resourceConditions": {}
             }
         }
     },
@@ -295,7 +358,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -318,7 +381,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -330,7 +393,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -353,7 +416,42 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeLiveSource": {
+        "privilege": "DescribeLiveSource",
+        "description": "Grants permission to retrieve the live source with the specified live source name on the source location with the specified source location name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "liveSource": {
+                "resourceName": "liveSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -376,7 +474,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -385,13 +483,7 @@
                 "resourceName": "program",
                 "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:program/${ResourceId}",
                 "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
-                        "type": "String"
-                    }
-                }
+                "resourceConditions": {}
             }
         }
     },
@@ -411,7 +503,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -434,7 +526,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -446,7 +538,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -469,7 +561,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -492,7 +584,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -515,7 +607,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -538,7 +630,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -571,6 +663,29 @@
         "privConditions": {},
         "resources": {}
     },
+    "listLiveSources": {
+        "privilege": "ListLiveSources",
+        "description": "Grants permission to retrieve the list of existing live sources on the source location with the specified source location name",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesources.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "listPlaybackConfigurations": {
         "privilege": "ListPlaybackConfigurations",
         "description": "Grants permission to retrieve the list of available configurations",
@@ -597,7 +712,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -622,7 +737,68 @@
         "service": "mediatailor",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "liveSource": {
+                "resourceName": "liveSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vodSource": {
+                "resourceName": "vodSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:vodSource/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "listVodSources": {
         "privilege": "ListVodSources",
@@ -640,7 +816,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -663,7 +839,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -680,13 +856,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -707,7 +883,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -730,7 +906,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -747,16 +923,77 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
-        "resources": {}
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "liveSource": {
+                "resourceName": "liveSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vodSource": {
+                "resourceName": "vodSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:vodSource/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "untagResource": {
         "privilege": "UntagResource",
@@ -768,16 +1005,77 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
-        "resources": {}
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:channel/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "liveSource": {
+                "resourceName": "liveSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "playbackConfiguration": {
+                "resourceName": "playbackConfiguration",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:playbackConfiguration/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "vodSource": {
+                "resourceName": "vodSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:vodSource/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateChannel": {
         "privilege": "UpdateChannel",
@@ -795,7 +1093,42 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateLiveSource": {
+        "privilege": "UpdateLiveSource",
+        "description": "Grants permission to update the live source with the specified live source name on the source location with the specified source location name",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/mediatailor/latest/apireference/sourcelocation-sourcelocationname-livesource-livesourcename.html",
+        "service": "mediatailor",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "liveSource": {
+                "resourceName": "liveSource",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:liveSource/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceLocation": {
+                "resourceName": "sourceLocation",
+                "resourceArn": "arn:${Partition}:mediatailor:${Region}:${Account}:sourceLocation/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -818,7 +1151,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -841,7 +1174,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -853,7 +1186,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }

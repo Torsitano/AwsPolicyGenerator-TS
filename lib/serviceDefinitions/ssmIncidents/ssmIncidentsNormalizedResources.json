@@ -3,7 +3,13 @@
         "resourceName": "response-plan",
         "service": "ssmIncidents",
         "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListRelatedItems": {
                 "privilege": "ListRelatedItems",
@@ -68,7 +74,7 @@
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_ListTagsForResource.html",
                 "privConditions": {},
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         },
         "writePrivileges": {
@@ -122,9 +128,21 @@
                 "description": "Grants permission to update the contents of a response plan",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_UpdateResponsePlan.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "ssm-incidents:TagResource"
                 ],
                 "required": true
             },
@@ -164,18 +182,35 @@
                 "description": "Grants permission to add tags to a response plan",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_TagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "UntagResource": {
                 "privilege": "UntagResource",
                 "description": "Grants permission to remove tags from a response plan",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_UntagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         }
     },
@@ -183,7 +218,13 @@
         "resourceName": "incident-record",
         "service": "ssmIncidents",
         "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListRelatedItems": {
                 "privilege": "ListRelatedItems",
@@ -222,6 +263,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -281,7 +331,43 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a response plan",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a response plan",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "replicationSet": {
         "resourceName": "replication-set",

@@ -218,6 +218,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "ListTaskTemplates": {
+                "privilege": "ListTaskTemplates",
+                "description": "Grants permission to list task template resources in an Amazon Connect instance",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTaskTemplates.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "ListUseCases": {
                 "privilege": "ListUseCases",
                 "description": "Grants permission to list the use cases of an integration association",
@@ -358,6 +367,94 @@
                     }
                 },
                 "dependentActions": [],
+                "required": true
+            },
+            "SearchQueues": {
+                "privilege": "SearchQueues",
+                "description": "Grants permission to search queue resources in an Amazon Connect instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchQueues.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    },
+                    "connect:SearchTag/${TagKey}": {
+                        "condition": "connect:SearchTag/${TagKey}",
+                        "description": "Filters access by TagFilter condition passed in the search request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "connect:DescribeQueue"
+                ],
+                "required": true
+            },
+            "SearchRoutingProfiles": {
+                "privilege": "SearchRoutingProfiles",
+                "description": "Grants permission to search routing profile resources in an Amazon Connect instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    },
+                    "connect:SearchTag/${TagKey}": {
+                        "condition": "connect:SearchTag/${TagKey}",
+                        "description": "Filters access by TagFilter condition passed in the search request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "connect:DescribeRoutingProfile"
+                ],
+                "required": true
+            },
+            "SearchSecurityProfiles": {
+                "privilege": "SearchSecurityProfiles",
+                "description": "Grants permission to search security profile resources in an Amazon Connect instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchSecurityProfiles.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    },
+                    "connect:SearchTag/${TagKey}": {
+                        "condition": "connect:SearchTag/${TagKey}",
+                        "description": "Filters access by TagFilter condition passed in the search request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "connect:DescribeSecurityProfile"
+                ],
+                "required": true
+            },
+            "SearchUsers": {
+                "privilege": "SearchUsers",
+                "description": "Grants permission to search user resources in an Amazon Connect instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchUsers.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    },
+                    "connect:SearchTag/${TagKey}": {
+                        "condition": "connect:SearchTag/${TagKey}",
+                        "description": "Filters access by TagFilter condition passed in the search request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "connect:DescribeUser"
+                ],
                 "required": true
             }
         },
@@ -512,6 +609,56 @@
                 "dependentActions": [],
                 "required": true
             },
+            "BatchAssociateAnalyticsDataSet": {
+                "privilege": "BatchAssociateAnalyticsDataSet",
+                "description": "Grants permission to grant access and to associate the datasets with the specified AWS account",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/adminguide/optimization-apis.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchDisassociateAnalyticsDataSet": {
+                "privilege": "BatchDisassociateAnalyticsDataSet",
+                "description": "Grants permission to revoke access and to disassociate the datasets with the specified AWS account",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/adminguide/optimization-apis.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ClaimPhoneNumber": {
+                "privilege": "ClaimPhoneNumber",
+                "description": "Grants permission to claim phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "CreateIntegrationAssociation": {
                 "privilege": "CreateIntegrationAssociation",
                 "description": "Grants permission to create an integration association with an Amazon Connect instance",
@@ -532,6 +679,31 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateTrafficDistributionGroup": {
+                "privilege": "CreateTrafficDistributionGroup",
+                "description": "Grants permission to create a traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -752,6 +924,26 @@
                 ],
                 "required": true
             },
+            "PutUserStatus": {
+                "privilege": "PutUserStatus",
+                "description": "Grants permission to switch User Status in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_PutUserStatus.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "StartContactStreaming": {
                 "privilege": "StartContactStreaming",
                 "description": "Grants permission to start chat streaming using the Amazon Connect API",
@@ -767,6 +959,21 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_StopContactStreaming.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "TransferContact": {
+                "privilege": "TransferContact",
+                "description": "Grants permission to transfer the contact to another queue or agent",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TransferContact.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -827,6 +1034,21 @@
                 ],
                 "required": true
             },
+            "UpdatePhoneNumber": {
+                "privilege": "UpdatePhoneNumber",
+                "description": "Grants permission to update phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "UpdateUserHierarchyStructure": {
                 "privilege": "UpdateUserHierarchyStructure",
                 "description": "Grants permission to update user hierarchy structure in an Amazon Connect instance",
@@ -844,7 +1066,43 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "contact": {
         "resourceName": "contact",
@@ -967,6 +1225,21 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SuspendContactRecording.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "TransferContact": {
+                "privilege": "TransferContact",
+                "description": "Grants permission to transfer the contact to another queue or agent",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TransferContact.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -1139,6 +1412,26 @@
                 "dependentActions": [],
                 "required": true
             },
+            "PutUserStatus": {
+                "privilege": "PutUserStatus",
+                "description": "Grants permission to switch User Status in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_PutUserStatus.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "UpdateQuickConnectConfig": {
                 "privilege": "UpdateQuickConnectConfig",
                 "description": "Grants permission to update the configuration of a quick connect in an Amazon Connect instance",
@@ -1292,11 +1585,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -1598,11 +1886,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -1824,11 +2107,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -2014,11 +2292,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -2085,6 +2358,21 @@
                 "description": "Grants permission to retrieve current metric data for the queues in an Amazon Connect instance",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetCurrentMetricData.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "GetCurrentUserData": {
+                "privilege": "GetCurrentUserData",
+                "description": "Grants permission to retrieve current user data in an Amazon Connect instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetCurrentUserData.html",
                 "privConditions": {
                     "connect:InstanceId": {
                         "condition": "connect:InstanceId",
@@ -2435,11 +2723,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -2701,11 +2984,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -2784,6 +3062,26 @@
             }
         },
         "writePrivileges": {
+            "AssociatePhoneNumberContactFlow": {
+                "privilege": "AssociatePhoneNumberContactFlow",
+                "description": "Grants permission to associate contact flow resources to phone number resources in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociatePhoneNumberContactFlow.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "CreateContactFlow": {
                 "privilege": "CreateContactFlow",
                 "description": "Grants permission to create a contact flow in an Amazon Connect instance",
@@ -2893,6 +3191,21 @@
                 "description": "Grants permission to initiate a task using the Amazon Connect API",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_StartTaskContact.html",
+                "privConditions": {
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "TransferContact": {
+                "privilege": "TransferContact",
+                "description": "Grants permission to transfer the contact to another queue or agent",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TransferContact.html",
                 "privConditions": {
                     "connect:InstanceId": {
                         "condition": "connect:InstanceId",
@@ -3036,11 +3349,130 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "taskTemplate": {
+        "resourceName": "task-template",
+        "service": "connect",
+        "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:instance/${InstanceId}/task-template/${TaskTemplateId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by using tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetTaskTemplate": {
+                "privilege": "GetTaskTemplate",
+                "description": "Grants permission to get details about specified task template in an Amazon Connect instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetTaskTemplate.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateTaskTemplate": {
+                "privilege": "CreateTaskTemplate",
+                "description": "Grants permission to create a task template in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTaskTemplate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteTaskTemplate": {
+                "privilege": "DeleteTaskTemplate",
+                "description": "Grants permission to delete a task template in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTaskTemplate.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateTaskTemplate": {
+                "privilege": "UpdateTaskTemplate",
+                "description": "Grants permission to update task template belonging to a Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTaskTemplate.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
                         "description": "Filters access by using tag key-value pairs in the request",
                         "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3236,11 +3668,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -3462,11 +3889,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -3549,6 +3971,26 @@
                 "dependentActions": [],
                 "required": true
             },
+            "PutUserStatus": {
+                "privilege": "PutUserStatus",
+                "description": "Grants permission to switch User Status in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_PutUserStatus.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "UpdateAgentStatus": {
                 "privilege": "UpdateAgentStatus",
                 "description": "Grants permission to update agent status in an Amazon Connect instance",
@@ -3602,11 +4044,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -3635,14 +4072,103 @@
         "permManPrivileges": {},
         "tagPrivileges": {}
     },
-    "phoneNumber": {
-        "resourceName": "phone-number",
+    "legacyPhoneNumber": {
+        "resourceName": "legacy-phone-number",
         "service": "connect",
         "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:instance/${InstanceId}/phone-number/${PhoneNumberId}",
         "resourceConditions": {},
         "listPrivileges": {},
         "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "wildcardLegacyPhoneNumber": {
+        "resourceName": "wildcard-legacy-phone-number",
+        "service": "connect",
+        "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:instance/${InstanceId}/phone-number/*",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListPhoneNumbers": {
+                "privilege": "ListPhoneNumbers",
+                "description": "Grants permission to list phone number resources in an Amazon Connect instance",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {},
+        "writePrivileges": {},
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "phoneNumber": {
+        "resourceName": "phone-number",
+        "service": "connect",
+        "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:phone-number/${PhoneNumberId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by using tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribePhoneNumber": {
+                "privilege": "DescribePhoneNumber",
+                "description": "Grants permission to describe phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an Amazon Connect resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
+            "AssociatePhoneNumberContactFlow": {
+                "privilege": "AssociatePhoneNumberContactFlow",
+                "description": "Grants permission to associate contact flow resources to phone number resources in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociatePhoneNumberContactFlow.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "CreateQueue": {
                 "privilege": "CreateQueue",
                 "description": "Grants permission to create a queue in an Amazon Connect instance",
@@ -3668,6 +4194,56 @@
                 "dependentActions": [],
                 "required": false
             },
+            "DisassociatePhoneNumberContactFlow": {
+                "privilege": "DisassociatePhoneNumberContactFlow",
+                "description": "Grants permission to disassociate contact flow resources from phone number resources in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociatePhoneNumberContactFlow.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ReleasePhoneNumber": {
+                "privilege": "ReleasePhoneNumber",
+                "description": "Grants permission to release phone number resources in an Amazon Connect instance",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ReleasePhoneNumber.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePhoneNumber": {
+                "privilege": "UpdatePhoneNumber",
+                "description": "Grants permission to update phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "UpdateQueueOutboundCallerConfig": {
                 "privilege": "UpdateQueueOutboundCallerConfig",
                 "description": "Grants permission to update queue outbound caller config in an Amazon Connect instance",
@@ -3690,28 +4266,152 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "wildcardPhoneNumber": {
         "resourceName": "wildcard-phone-number",
         "service": "connect",
-        "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:instance/${InstanceId}/phone-number/*",
-        "resourceConditions": {},
+        "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:phone-number/*",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by using tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
-            "ListPhoneNumbers": {
-                "privilege": "ListPhoneNumbers",
+            "ListPhoneNumbersV2": {
+                "privilege": "ListPhoneNumbersV2",
                 "description": "Grants permission to list phone number resources in an Amazon Connect instance",
                 "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "SearchAvailablePhoneNumbers": {
+                "privilege": "SearchAvailablePhoneNumbers",
+                "description": "Grants permission to search phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
-        "readPrivileges": {},
-        "writePrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an Amazon Connect resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ClaimPhoneNumber": {
+                "privilege": "ClaimPhoneNumber",
+                "description": "Grants permission to claim phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "integrationAssociation": {
         "resourceName": "integration-association",
@@ -3841,11 +4541,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -3956,11 +4651,6 @@
                         "condition": "aws:TagKeys",
                         "description": "Filters access by using tag keys in the request",
                         "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by using tag key-value pairs in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -4066,6 +4756,242 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "trafficDistributionGroup": {
+        "resourceName": "traffic-distribution-group",
+        "service": "connect",
+        "resourceArn": "arn:${Partition}:connect:${Region}:${Account}:traffic-distribution-group/${TrafficDistributionGroupId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by using tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "GetTrafficDistribution": {
+                "privilege": "GetTrafficDistribution",
+                "description": "Grants permission to read traffic distribution for a traffic distribution group",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetTrafficDistribution.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTrafficDistributionGroups": {
+                "privilege": "ListTrafficDistributionGroups",
+                "description": "Grants permission to list traffic distribution groups",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTrafficDistributionGroups.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "DescribeTrafficDistributionGroup": {
+                "privilege": "DescribeTrafficDistributionGroup",
+                "description": "Grants permission to describe a traffic distribution group",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeTrafficDistributionGroup.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an Amazon Connect resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "ClaimPhoneNumber": {
+                "privilege": "ClaimPhoneNumber",
+                "description": "Grants permission to claim phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateTrafficDistributionGroup": {
+                "privilege": "CreateTrafficDistributionGroup",
+                "description": "Grants permission to create a traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "connect:InstanceId": {
+                        "condition": "connect:InstanceId",
+                        "description": "Filters access by restricting federation into specified Amazon Connect instances",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteTrafficDistributionGroup": {
+                "privilege": "DeleteTrafficDistributionGroup",
+                "description": "Grants permission to delete a traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdatePhoneNumber": {
+                "privilege": "UpdatePhoneNumber",
+                "description": "Grants permission to update phone number resources in an Amazon Connect instance or traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateTrafficDistribution": {
+                "privilege": "UpdateTrafficDistribution",
+                "description": "Grants permission to update traffic distribution for a traffic distribution group",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistribution.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by using tag key-value pairs in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an Amazon Connect resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by using tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

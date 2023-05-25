@@ -106,7 +106,9 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateResource.html",
         "service": "servicecatalog",
-        "dependentActions": [],
+        "dependentActions": [
+            "cloudformation:DescribeStacks"
+        ],
         "privConditions": {},
         "resources": {
             "application": {
@@ -229,7 +231,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -263,7 +265,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -320,7 +322,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -377,7 +379,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1315,7 +1317,7 @@
     },
     "listApplications": {
         "privilege": "ListApplications",
-        "description": "Grants permission to list the applications in your account",
+        "description": "Grants permission to list your applications",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListApplications.html",
         "service": "servicecatalog",
@@ -1371,13 +1373,36 @@
     },
     "listAttributeGroups": {
         "privilege": "ListAttributeGroups",
-        "description": "Grants permission to list the attribute groups in your account",
+        "description": "Grants permission to list your attribute groups",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListAttributeGroups.html",
         "service": "servicecatalog",
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "listAttributeGroupsForApplication": {
+        "privilege": "ListAttributeGroupsForApplication",
+        "description": "Grants permission to list the associated attribute groups for a given application",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_ListAttributeGroupsForApplication.html",
+        "service": "servicecatalog",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:servicecatalog:${Region}:${Account}:/applications/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "listBudgetsForResource": {
         "privilege": "ListBudgetsForResource",
@@ -1850,7 +1875,9 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_SyncResource.html",
         "service": "servicecatalog",
-        "dependentActions": [],
+        "dependentActions": [
+            "cloudformation:UpdateStack"
+        ],
         "privConditions": {},
         "resources": {}
     },
@@ -1865,7 +1892,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -1937,7 +1964,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -2046,7 +2073,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -2103,7 +2130,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {

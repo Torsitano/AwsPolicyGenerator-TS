@@ -60,6 +60,24 @@
             }
         },
         "writePrivileges": {
+            "BatchDeleteDetector": {
+                "privilege": "BatchDeleteDetector",
+                "description": "Grants permission to delete a detector instance within the AWS IoT Events system",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchUpdateDetector": {
+                "privilege": "BatchUpdateDetector",
+                "description": "Grants permission to update a detector instance within the AWS IoT Events system",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchUpdateDetector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "CreateDetectorModel": {
                 "privilege": "CreateDetectorModel",
                 "description": "Grants permission to create a detector model to monitor an AWS IoT Events input attribute",
@@ -187,9 +205,63 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list the tags (metadata) which you have assigned to the resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
+            "BatchAcknowledgeAlarm": {
+                "privilege": "BatchAcknowledgeAlarm",
+                "description": "Grants permission to send one or more acknowledge action requests to AWS IoT Events",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchDisableAlarm": {
+                "privilege": "BatchDisableAlarm",
+                "description": "Grants permission to disable one or more alarm instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchEnableAlarm": {
+                "privilege": "BatchEnableAlarm",
+                "description": "Grants permission to enable one or more alarm instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchResetAlarm": {
+                "privilege": "BatchResetAlarm",
+                "description": "Grants permission to reset one or more alarm instances",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "BatchSnoozeAlarm": {
+                "privilege": "BatchSnoozeAlarm",
+                "description": "Grants permission to change one or more alarm instances to the snooze mode",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "CreateAlarmModel": {
                 "privilege": "CreateAlarmModel",
                 "description": "Grants permission to create an alarm model to monitor an AWS IoT Events input attribute or an AWS IoT SiteWise asset property",
@@ -230,7 +302,43 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to adds to or modifies the tags of the given resource.Tags are metadata which can be used to manage a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions by the tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove the given tags (metadata) from the resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions by the tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "input": {
         "resourceName": "input",
@@ -265,65 +373,11 @@
             }
         },
         "writePrivileges": {
-            "BatchAcknowledgeAlarm": {
-                "privilege": "BatchAcknowledgeAlarm",
-                "description": "Grants permission to send one or more acknowledge action requests to AWS IoT Events",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "BatchDisableAlarm": {
-                "privilege": "BatchDisableAlarm",
-                "description": "Grants permission to disable one or more alarm instances",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "BatchEnableAlarm": {
-                "privilege": "BatchEnableAlarm",
-                "description": "Grants permission to enable one or more alarm instances",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
             "BatchPutMessage": {
                 "privilege": "BatchPutMessage",
                 "description": "Grants permission to send a set of messages to the AWS IoT Events system",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "BatchResetAlarm": {
-                "privilege": "BatchResetAlarm",
-                "description": "Grants permission to reset one or more alarm instances",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "BatchSnoozeAlarm": {
-                "privilege": "BatchSnoozeAlarm",
-                "description": "Grants permission to change one or more alarm instances to the snooze mode",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "BatchUpdateDetector": {
-                "privilege": "BatchUpdateDetector",
-                "description": "Grants permission to update a detector instance within the AWS IoT Events system",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchUpdateDetector.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true

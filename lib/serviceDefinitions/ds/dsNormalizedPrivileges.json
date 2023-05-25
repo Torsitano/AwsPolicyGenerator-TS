@@ -89,8 +89,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access by the value of the tag",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -188,8 +188,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access by the value of the tag",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -287,8 +287,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access by the value of the tag",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -308,8 +308,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access by the value of the tag",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -361,8 +361,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access by the value of the tag",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -751,6 +751,29 @@
             }
         }
     },
+    "describeSettings": {
+        "privilege": "DescribeSettings",
+        "description": "Grants permission to retrieve information about the configurable settings for the specified directory",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/directoryservice/latest/devguide/API_DescribeSettings.html",
+        "service": "ds",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directory": {
+                "resourceName": "directory",
+                "resourceArn": "arn:${Partition}:ds:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the AWS DS Resource being acted upon",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "describeSharedDirectories": {
         "privilege": "DescribeSharedDirectories",
         "description": "Grants permission to return the shared directories in your account",
@@ -793,6 +816,29 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "describeUpdateDirectory": {
+        "privilege": "DescribeUpdateDirectory",
+        "description": "Grants permission to describe the updates of a directory for a particular update type",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/directoryservice/latest/devguide/API_DescribeUpdateDirectory.html",
+        "service": "ds",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directory": {
+                "resourceName": "directory",
+                "resourceArn": "arn:${Partition}:ds:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the AWS DS Resource being acted upon",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "disableClientAuthentication": {
         "privilege": "DisableClientAuthentication",
@@ -1293,8 +1339,8 @@
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters access by the value of the tag",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1473,6 +1519,29 @@
             }
         }
     },
+    "updateDirectorySetup": {
+        "privilege": "UpdateDirectorySetup",
+        "description": "Grants permission to update the directory for a particular update type",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/directoryservice/latest/devguide/API_UpdateDirectorySetup.html",
+        "service": "ds",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directory": {
+                "resourceName": "directory",
+                "resourceArn": "arn:${Partition}:ds:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the AWS DS Resource being acted upon",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "updateNumberOfDomainControllers": {
         "privilege": "UpdateNumberOfDomainControllers",
         "description": "Grants permission to add or remove domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request",
@@ -1501,6 +1570,29 @@
         "description": "Grants permission to update the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector directory",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/directoryservice/latest/devguide/API_UpdateRadius.html",
+        "service": "ds",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directory": {
+                "resourceName": "directory",
+                "resourceArn": "arn:${Partition}:ds:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the AWS DS Resource being acted upon",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateSettings": {
+        "privilege": "UpdateSettings",
+        "description": "Grants permission to update the configurable settings for the specified directory",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/directoryservice/latest/devguide/API_UpdateSettings.html",
         "service": "ds",
         "dependentActions": [],
         "privConditions": {},

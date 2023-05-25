@@ -97,7 +97,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -163,7 +163,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -204,7 +204,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -219,7 +219,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -329,7 +329,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -349,7 +349,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -399,7 +399,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -414,7 +414,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -478,7 +478,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -498,7 +498,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -530,7 +530,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -545,7 +545,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -570,7 +570,7 @@
                 "privilege": "DescribeTunnel",
                 "description": "Grants permission to describe a tunnel",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeTunnel.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-secure-tunneling_DescribeTunnel.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -581,12 +581,37 @@
                 "privilege": "CloseTunnel",
                 "description": "Grants permission to close a tunnel",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_CloseTunnel.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-secure-tunneling_CloseTunnel.html",
                 "privConditions": {
                     "iot:Delete": {
                         "condition": "iot:Delete",
                         "description": "Filters access by a flag indicating whether or not to also delete an IoT Tunnel immediately when making iot:CloseTunnel request",
                         "type": "Bool"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "RotateTunnelAccessToken": {
+                "privilege": "RotateTunnelAccessToken",
+                "description": "Grants permission to rotate the access token of a tunnel",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-secure-tunneling_RotateTunnelAccessToken.html",
+                "privConditions": {
+                    "iot:ThingGroupArn": {
+                        "condition": "iot:ThingGroupArn",
+                        "description": "Filters access by a list of IoT Thing Group ARNs that the destination IoT Thing belongs to for an IoT Tunnel",
+                        "type": "ArrayOfString"
+                    },
+                    "iot:TunnelDestinationService": {
+                        "condition": "iot:TunnelDestinationService",
+                        "description": "Filters access by a list of destination services for an IoT Tunnel",
+                        "type": "ArrayOfString"
+                    },
+                    "iot:ClientMode": {
+                        "condition": "iot:ClientMode",
+                        "description": "Filters access by the mode of the client for IoT Tunnel",
+                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -625,6 +650,15 @@
                 "description": "Grants permission to list the job executions for the specified thing",
                 "accessLevel": "List",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_ListJobExecutionsForThing.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListMetricValues": {
+                "privilege": "ListMetricValues",
+                "description": "Adds support to list metric datapoints collected for IoT devices",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_ListMetricValues.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -672,15 +706,6 @@
                 "description": "Grants permission to get information about the specified thing",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeThing.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "GetPendingJobExecutions": {
-                "privilege": "GetPendingJobExecutions",
-                "description": "Grants permission to get the list of all jobs for a thing that are not in a terminal state",
-                "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_GetPendingJobExecutions.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -746,7 +771,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -802,24 +827,6 @@
                 "description": "Grants permission to remove thing from the specified thing group",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_RemoveThingFromThingGroup.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "StartNextPendingJobExecution": {
-                "privilege": "StartNextPendingJobExecution",
-                "description": "Grants permission to get and start the next pending job execution for a thing",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_StartNextPendingJobExecution.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "UpdateJobExecution": {
-                "privilege": "UpdateJobExecution",
-                "description": "Grants permission to update a job execution",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_UpdateJobExecution.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -948,7 +955,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -968,7 +975,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1055,7 +1062,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1070,7 +1077,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1144,7 +1151,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1203,7 +1210,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1218,7 +1225,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1264,7 +1271,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1305,7 +1312,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1320,7 +1327,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1375,7 +1382,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1416,7 +1423,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1431,7 +1438,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1556,7 +1563,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [
@@ -1601,7 +1608,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1616,7 +1623,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1680,7 +1687,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1731,7 +1738,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1746,7 +1753,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1829,7 +1836,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1889,7 +1896,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1904,7 +1911,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2113,7 +2120,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2128,7 +2135,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2183,7 +2190,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2224,7 +2231,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2239,7 +2246,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2294,7 +2301,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2326,7 +2333,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2341,7 +2348,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2396,7 +2403,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2437,7 +2444,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2452,7 +2459,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2507,7 +2514,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2548,7 +2555,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2563,7 +2570,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2664,7 +2671,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2723,7 +2730,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2738,7 +2745,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2812,7 +2819,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2832,7 +2839,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2900,7 +2907,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2915,7 +2922,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -2989,7 +2996,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3009,7 +3016,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3077,7 +3084,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3092,7 +3099,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3147,7 +3154,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3206,7 +3213,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3221,7 +3228,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3362,7 +3369,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [
@@ -3425,7 +3432,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3440,7 +3447,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3495,7 +3502,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "iot:DomainName": {
                         "condition": "iot:DomainName",
@@ -3541,7 +3548,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -3556,7 +3563,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by a list of tag keys associated to the IoT resource in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],

@@ -1,0 +1,63 @@
+{
+    "thing": {
+        "resourceName": "thing",
+        "service": "iotjobsdata",
+        "resourceArn": "arn:${Partition}:iot:${Region}:${Account}:thing/${ThingName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeJobExecution": {
+                "privilege": "DescribeJobExecution",
+                "description": "Grants permission to describe a job execution",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-jobs-data_DescribeJobExecution.html",
+                "privConditions": {
+                    "iot:JobId": {
+                        "condition": "iot:JobId",
+                        "description": "Filters access by jobId for iotjobsdata:DescribeJobExecution and iotjobsdata:UpdateJobExecution APIs",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "GetPendingJobExecutions": {
+                "privilege": "GetPendingJobExecutions",
+                "description": "Grants permission to get the list of all jobs for a thing that are not in a terminal state",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-jobs-data_GetPendingJobExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "StartNextPendingJobExecution": {
+                "privilege": "StartNextPendingJobExecution",
+                "description": "Grants permission to get and start the next pending job execution for a thing",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-jobs-data_StartNextPendingJobExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateJobExecution": {
+                "privilege": "UpdateJobExecution",
+                "description": "Grants permission to update a job execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot/latest/apireference/API_iot-jobs-data_UpdateJobExecution.html",
+                "privConditions": {
+                    "iot:JobId": {
+                        "condition": "iot:JobId",
+                        "description": "Filters access by jobId for iotjobsdata:DescribeJobExecution and iotjobsdata:UpdateJobExecution APIs",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    }
+}

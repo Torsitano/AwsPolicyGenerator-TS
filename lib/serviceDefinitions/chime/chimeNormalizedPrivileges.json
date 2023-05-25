@@ -43,7 +43,7 @@
         "privilege": "AssociateChannelFlow",
         "description": "Grants permission to associate a flow with a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_AssociateChannelFlow.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_AssociateChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -163,7 +163,7 @@
         "privilege": "BatchCreateChannelMembership",
         "description": "Grants permission to add multiple users to a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_BatchCreateChannelMembership.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_BatchCreateChannelMembership.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -234,6 +234,29 @@
         "privConditions": {},
         "resources": {}
     },
+    "batchUpdateAttendeeCapabilitiesExcept": {
+        "privilege": "BatchUpdateAttendeeCapabilitiesExcept",
+        "description": "Grants permission to update AttendeeCapabilities except the capabilities listed in an ExcludedAttendeeIds table",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_BatchUpdateAttendeeCapabilitiesExcept.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "meeting": {
+                "resourceName": "meeting",
+                "resourceArn": "arn:${Partition}:chime::${AccountId}:meeting/${MeetingId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "batchUpdatePhoneNumber": {
         "privilege": "BatchUpdatePhoneNumber",
         "description": "Grants permission to update phone number details within the UpdatePhoneNumberRequestItem object for up to 50 phone numbers",
@@ -258,7 +281,7 @@
         "privilege": "ChannelFlowCallback",
         "description": "Grants permission to callback for a message on a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ChannelFlowCallback.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ChannelFlowCallback.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -281,7 +304,7 @@
         "privilege": "Connect",
         "description": "Grants permission to establish a web socket connection for app instance user to the messaging session endpoint",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_Connect.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_Connect.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -336,14 +359,14 @@
         "privilege": "CreateAppInstance",
         "description": "Grants permission to create an app instance under the AWS account",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_CreateAppInstance.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstance.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -357,7 +380,7 @@
         "privilege": "CreateAppInstanceAdmin",
         "description": "Grants permission to promote an AppInstanceUser to an AppInstanceAdmin",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_CreateAppInstanceAdmin.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstanceAdmin.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -392,14 +415,14 @@
         "privilege": "CreateAppInstanceUser",
         "description": "Grants permission to create a user under an Amazon Chime AppInstance",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_CreateAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -442,16 +465,6 @@
         "privConditions": {},
         "resources": {}
     },
-    "createBotMembership": {
-        "privilege": "CreateBotMembership",
-        "description": "Grants permission to add a bot to a chat room in your Amazon Chime Enterprise account",
-        "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateBotMembership.html",
-        "service": "chime",
-        "dependentActions": [],
-        "privConditions": {},
-        "resources": {}
-    },
     "createCDRBucket": {
         "privilege": "CreateCDRBucket",
         "description": "Grants permission to create a new Call Detail Record S3 bucket",
@@ -469,14 +482,14 @@
         "privilege": "CreateChannel",
         "description": "Grants permission to create a channel for an app instance under the AWS account",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_CreateChannel.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannel.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -503,7 +516,7 @@
         "privilege": "CreateChannelBan",
         "description": "Grants permission to ban a user from a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_CreateChannelBan.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelBan.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -538,14 +551,14 @@
         "privilege": "CreateChannelFlow",
         "description": "Grants permission to create a channel flow for an app instance under the AWS account",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_CreateChannelFlow.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -572,7 +585,7 @@
         "privilege": "CreateChannelMembership",
         "description": "Grants permission to add a user to a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_CreateChannelMembership.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelMembership.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -607,7 +620,7 @@
         "privilege": "CreateChannelModerator",
         "description": "Grants permission to create a channel moderator",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_CreateChannelModerator.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -642,10 +655,67 @@
         "privilege": "CreateMediaCapturePipeline",
         "description": "Grants permission to create a media capture pipeline",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateMediaCapturePipeline.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_CreateMediaCapturePipeline.html",
+        "service": "chime",
+        "dependentActions": [
+            "s3:GetBucketPolicy"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys in a request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag's key and value in a request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createMediaConcatenationPipeline": {
+        "privilege": "CreateMediaConcatenationPipeline",
+        "description": "Grants permission to create a media concatenation pipeline",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_CreateMediaConcatenationPipeline.html",
+        "service": "chime",
+        "dependentActions": [
+            "s3:GetBucketPolicy"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys in a request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag's key and value in a request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createMediaLiveConnectorPipeline": {
+        "privilege": "CreateMediaLiveConnectorPipeline",
+        "description": "Grants permission to create a media live connector pipeline",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_CreateMediaLiveConnectorPipeline.html",
         "service": "chime",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys in a request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag's key and value in a request",
+                "type": "String"
+            }
+        },
         "resources": {}
     },
     "createMeeting": {
@@ -664,7 +734,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -708,7 +778,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -847,7 +917,7 @@
         "privilege": "DeleteAppInstance",
         "description": "Grants permission to delete an AppInstance",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DeleteAppInstance.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstance.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -870,7 +940,7 @@
         "privilege": "DeleteAppInstanceAdmin",
         "description": "Grants permission to demote an AppInstanceAdmin to an AppInstanceUser",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DeleteAppInstanceAdmin.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceAdmin.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -905,7 +975,7 @@
         "privilege": "DeleteAppInstanceStreamingConfigurations",
         "description": "Grants permission to disable data streaming for the app instance",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_DeleteAppInstanceStreamingConfigurations.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_DeleteAppInstanceStreamingConfigurations.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -928,7 +998,7 @@
         "privilege": "DeleteAppInstanceUser",
         "description": "Grants permission to delete an AppInstanceUser",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DeleteAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -986,7 +1056,7 @@
         "privilege": "DeleteChannel",
         "description": "Grants permission to delete a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DeleteChannel.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannel.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1021,7 +1091,7 @@
         "privilege": "DeleteChannelBan",
         "description": "Grants permission to remove a user from a channel's ban list",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DeleteChannelBan.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelBan.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1056,7 +1126,7 @@
         "privilege": "DeleteChannelFlow",
         "description": "Grants permission to delete a channel flow",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DeleteChannelFlow.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1079,7 +1149,7 @@
         "privilege": "DeleteChannelMembership",
         "description": "Grants permission to remove a member from a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DeleteChannelMembership.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelMembership.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1114,7 +1184,7 @@
         "privilege": "DeleteChannelMessage",
         "description": "Grants permission to delete a channel message",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DeleteChannelMessage.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelMessage.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1149,7 +1219,7 @@
         "privilege": "DeleteChannelModerator",
         "description": "Grants permission to delete a channel moderator",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DeleteChannelModerator.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelModerator.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1224,11 +1294,47 @@
         "privilege": "DeleteMediaCapturePipeline",
         "description": "Grants permission to delete a media capture pipeline",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_DeleteMediaCapturePipeline.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_DeleteMediaCapturePipeline.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "mediaPipeline": {
+                "resourceName": "media-pipeline",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:media-pipeline/${MediaPipelineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteMediaPipeline": {
+        "privilege": "DeleteMediaPipeline",
+        "description": "Grants permission to delete a media pipeline",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_DeleteMediaPipeline.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "mediaPipeline": {
+                "resourceName": "media-pipeline",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:media-pipeline/${MediaPipelineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "deleteMeeting": {
         "privilege": "DeleteMeeting",
@@ -1319,7 +1425,12 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_DeleteVoiceConnector.html",
         "service": "chime",
-        "dependentActions": [],
+        "dependentActions": [
+            "logs:CreateLogDelivery",
+            "logs:DeleteLogDelivery",
+            "logs:GetLogDelivery",
+            "logs:ListLogDeliveries"
+        ],
         "privConditions": {},
         "resources": {}
     },
@@ -1397,7 +1508,7 @@
         "privilege": "DeregisterAppInstanceUserEndpoint",
         "description": "Grants permission to deregister an endpoint for an app instance user",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DeregisterAppInstanceUserEndpoint.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeregisterAppInstanceUserEndpoint.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1420,7 +1531,7 @@
         "privilege": "DescribeAppInstance",
         "description": "Grants permission to get the full details of an AppInstance",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DescribeAppInstance.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstance.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1443,7 +1554,7 @@
         "privilege": "DescribeAppInstanceAdmin",
         "description": "Grants permission to get the full details of an AppInstanceAdmin",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DescribeAppInstanceAdmin.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstanceAdmin.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1478,7 +1589,7 @@
         "privilege": "DescribeAppInstanceUser",
         "description": "Grants permission to get the full details of an AppInstanceUser",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DescribeAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1501,7 +1612,7 @@
         "privilege": "DescribeAppInstanceUserEndpoint",
         "description": "Grants permission to describe an endpoint registered for an app instance user",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_DescribeAppInstanceUserEndpoint.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstanceUserEndpoint.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1524,7 +1635,7 @@
         "privilege": "DescribeChannel",
         "description": "Grants permission to get the full details of a channel",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannel.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannel.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1559,7 +1670,7 @@
         "privilege": "DescribeChannelBan",
         "description": "Grants permission to get the full details of a channel ban",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannelBan.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelBan.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1594,7 +1705,7 @@
         "privilege": "DescribeChannelFlow",
         "description": "Grants permission to get the full details of a channel flow",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannelFlow.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1617,7 +1728,7 @@
         "privilege": "DescribeChannelMembership",
         "description": "Grants permission to get the full details of a channel membership",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannelMembership.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembership.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1652,7 +1763,7 @@
         "privilege": "DescribeChannelMembershipForAppInstanceUser",
         "description": "Grants permission to get the details of a channel based on the membership of the specified AppInstanceUser",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannelMembershipForAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembershipForAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1687,7 +1798,7 @@
         "privilege": "DescribeChannelModeratedByAppInstanceUser",
         "description": "Grants permission to get the full details of a channel moderated by the specified AppInstanceUser",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannelModeratedByAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelModeratedByAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1722,7 +1833,7 @@
         "privilege": "DescribeChannelModerator",
         "description": "Grants permission to get the full details of a single ChannelModerator",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DescribeChannelModerator.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelModerator.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1757,7 +1868,7 @@
         "privilege": "DisassociateChannelFlow",
         "description": "Grants permission to disassociate a flow from a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_DisassociateChannelFlow.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DisassociateChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1894,7 +2005,7 @@
         "privilege": "GetAppInstanceRetentionSettings",
         "description": "Grants permission to get retention settings for an app instance",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_GetAppInstanceRetentionSettings.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_GetAppInstanceRetentionSettings.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1917,7 +2028,7 @@
         "privilege": "GetAppInstanceStreamingConfigurations",
         "description": "Grants permission to get the streaming configurations for an app instance",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_GetAppInstanceStreamingConfigurations.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_GetAppInstanceStreamingConfigurations.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -1989,7 +2100,7 @@
         "privilege": "GetChannelMembershipPreferences",
         "description": "Grants permission to get the preferences for a channel membership",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_GetChannelMembershipPreferences.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetChannelMembershipPreferences.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2024,7 +2135,7 @@
         "privilege": "GetChannelMessage",
         "description": "Grants permission to get the full details of a channel message",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_GetChannelMessage.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetChannelMessage.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2059,7 +2170,7 @@
         "privilege": "GetChannelMessageStatus",
         "description": "Grants permission to get the status of a channel message",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_GetChannelMessageStatus.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetChannelMessageStatus.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2124,11 +2235,47 @@
         "privilege": "GetMediaCapturePipeline",
         "description": "Grants permission to get an existing media capture pipeline",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_GetMediaCapturePipeline.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_GetMediaCapturePipeline.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "mediaPipeline": {
+                "resourceName": "media-pipeline",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:media-pipeline/${MediaPipelineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getMediaPipeline": {
+        "privilege": "GetMediaPipeline",
+        "description": "Grants permission to get an existing media pipeline",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_GetMediaPipeline.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "mediaPipeline": {
+                "resourceName": "media-pipeline",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:media-pipeline/${MediaPipelineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "getMeeting": {
         "privilege": "GetMeeting",
@@ -2167,7 +2314,7 @@
         "privilege": "GetMessagingSessionEndpoint",
         "description": "Grants permission to get the endpoint for the messaging session",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_GetMessagingSessionEndpoint.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetMessagingSessionEndpoint.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2427,7 +2574,7 @@
         "privilege": "InviteUsersFromProvider",
         "description": "Grants permission to invite users from a third party provider to your Amazon Chime account",
         "accessLevel": "Write",
-        "apiDocumentationLink": null,
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/ag/control-access.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2467,7 +2614,7 @@
         "privilege": "ListAppInstanceAdmins",
         "description": "Grants permission to list administrators in the app instance",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_ListAppInstanceAdmins.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstanceAdmins.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2502,7 +2649,7 @@
         "privilege": "ListAppInstanceUserEndpoints",
         "description": "Grants permission to list the endpoints registered for an app instance user",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_ListAppInstanceUserEndpoints.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstanceUserEndpoints.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2525,7 +2672,7 @@
         "privilege": "ListAppInstanceUsers",
         "description": "Grants permission to list all AppInstanceUsers created under a single app instance",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_ListAppInstanceUsers.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstanceUsers.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2548,7 +2695,7 @@
         "privilege": "ListAppInstances",
         "description": "Grants permission to list all Amazon Chime app instances created under a single AWS account",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_ListAppInstances.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstances.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2650,7 +2797,7 @@
         "privilege": "ListChannelBans",
         "description": "Grants permission to list all the users banned from a particular channel",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelBans.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelBans.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2685,7 +2832,7 @@
         "privilege": "ListChannelFlows",
         "description": "Grants permission to list all the Channel Flows created under a single Chime AppInstance",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelFlows.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelFlows.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2708,7 +2855,7 @@
         "privilege": "ListChannelMemberships",
         "description": "Grants permission to list all channel memberships in a channel",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMemberships.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMemberships.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2743,7 +2890,7 @@
         "privilege": "ListChannelMembershipsForAppInstanceUser",
         "description": "Grants permission to list all channels that a particular AppInstanceUser is a part of",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2766,7 +2913,7 @@
         "privilege": "ListChannelMessages",
         "description": "Grants permission to list all the messages in a channel",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMessages.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMessages.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2801,7 +2948,7 @@
         "privilege": "ListChannelModerators",
         "description": "Grants permission to list all the moderators for a channel",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelModerators.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelModerators.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2836,7 +2983,7 @@
         "privilege": "ListChannels",
         "description": "Grants permission to list all the Channels created under a single Chime AppInstance",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannels.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannels.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2852,26 +2999,14 @@
                         "type": "String"
                     }
                 }
-            },
-            "channel": {
-                "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/channel/${ChannelId}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by the tag key-value pairs attached to the resource",
-                        "type": "String"
-                    }
-                }
             }
         }
     },
     "listChannelsAssociatedWithChannelFlow": {
         "privilege": "ListChannelsAssociatedWithChannelFlow",
-        "description": "Grants permission to list all the Channel Flows created under a single Chime AppInstance",
+        "description": "Grants permission to list all the Channels associated with a single Chime Channel Flow",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelFlows.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelsAssociatedWithChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2894,7 +3029,7 @@
         "privilege": "ListChannelsModeratedByAppInstanceUser",
         "description": "Grants permission to list all channels moderated by an app instance user",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelsModeratedByAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelsModeratedByAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -2957,7 +3092,17 @@
         "privilege": "ListMediaCapturePipelines",
         "description": "Grants permission to list media capture pipelines",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_ListMediaCapturePipelines.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_ListMediaCapturePipelines.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listMediaPipelines": {
+        "privilege": "ListMediaPipelines",
+        "description": "Grants permission to list media pipelines",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_ListMediaPipelines.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3086,6 +3231,41 @@
         "privConditions": {},
         "resources": {}
     },
+    "listSubChannels": {
+        "privilege": "ListSubChannels",
+        "description": "Grants permission to list all the SubChannels under a single Channel",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListSubChannels.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "appInstanceUser": {
+                "resourceName": "app-instance-user",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/user/${AppInstanceUserId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/channel/${ChannelId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "listSupportedPhoneNumberCountries": {
         "privilege": "ListSupportedPhoneNumberCountries",
         "description": "Grants permission to list the phone number countries supported by the AWS account",
@@ -3173,7 +3353,7 @@
         "privilege": "PutAppInstanceRetentionSettings",
         "description": "Grants permission to enable data retention for the app instance",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_PutAppInstanceRetentionSettings.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_PutAppInstanceRetentionSettings.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3196,7 +3376,7 @@
         "privilege": "PutAppInstanceStreamingConfigurations",
         "description": "Grants permission to configure data streaming for the app instance",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_PutAppInstanceStreamingConfigurations.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_PutAppInstanceStreamingConfigurations.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3219,7 +3399,7 @@
         "privilege": "PutChannelMembershipPreferences",
         "description": "Grants permission to put the preferences for a channel membership",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_PutChannelMembershipPreferences.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_PutChannelMembershipPreferences.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3361,7 +3541,7 @@
         "privilege": "RedactChannelMessage",
         "description": "Grants permission to redact message content",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_RedactChannelMessage.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_RedactChannelMessage.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3426,9 +3606,11 @@
         "privilege": "RegisterAppInstanceUserEndpoint",
         "description": "Grants permission to register an endpoint for an app instance user",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_RegisterAppInstanceUserEndpoint.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_RegisterAppInstanceUserEndpoint.html",
         "service": "chime",
-        "dependentActions": [],
+        "dependentActions": [
+            "mobiletargeting:GetApp"
+        ],
         "privConditions": {},
         "resources": {
             "appInstanceUser": {
@@ -3515,11 +3697,34 @@
         "privConditions": {},
         "resources": {}
     },
+    "searchChannels": {
+        "privilege": "SearchChannels",
+        "description": "Grants permission to search channels that an AppInstanceUser belongs to, or search channels across the AppInstance for an AppInstaceAdmin",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_SearchChannels.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "appInstanceUser": {
+                "resourceName": "app-instance-user",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/user/${AppInstanceUserId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "sendChannelMessage": {
         "privilege": "SendChannelMessage",
         "description": "Grants permission to send a message to a particular channel that the member is a part of",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_SendChannelMessage.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_SendChannelMessage.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3634,7 +3839,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -3673,7 +3878,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys in a request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -3687,9 +3892,69 @@
             }
         },
         "resources": {
+            "appInstance": {
+                "resourceName": "app-instance",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "appInstanceUser": {
+                "resourceName": "app-instance-user",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/user/${AppInstanceUserId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "channel": {
                 "resourceName": "channel",
                 "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/channel/${ChannelId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "channelFlow": {
+                "resourceName": "channel-flow",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/channel-flow/${ChannelFlowId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "mediaPipeline": {
+                "resourceName": "media-pipeline",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:media-pipeline/${MediaPipelineId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "meeting": {
+                "resourceName": "meeting",
+                "resourceArn": "arn:${Partition}:chime::${AccountId}:meeting/${MeetingId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -3764,11 +4029,77 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_UntagResource.html",
         "service": "chime",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys in a request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
+            "appInstance": {
+                "resourceName": "app-instance",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "appInstanceUser": {
+                "resourceName": "app-instance-user",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/user/${AppInstanceUserId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "channel": {
                 "resourceName": "channel",
                 "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/channel/${ChannelId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "channelFlow": {
+                "resourceName": "channel-flow",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/channel-flow/${ChannelFlowId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "mediaPipeline": {
+                "resourceName": "media-pipeline",
+                "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:media-pipeline/${MediaPipelineId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "meeting": {
+                "resourceName": "meeting",
+                "resourceArn": "arn:${Partition}:chime::${AccountId}:meeting/${MeetingId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -3824,7 +4155,7 @@
         "privilege": "UpdateAppInstance",
         "description": "Grants permission to update AppInstance metadata",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_UpdateAppInstance.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstance.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3847,7 +4178,7 @@
         "privilege": "UpdateAppInstanceUser",
         "description": "Grants permission to update the details for an AppInstanceUser",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_UpdateAppInstanceUser.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstanceUser.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3870,7 +4201,7 @@
         "privilege": "UpdateAppInstanceUserEndpoint",
         "description": "Grants permission to update an endpoint registered for an app instance user",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_identity-chime_UpdateAppInstanceUserEndpoint.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstanceUserEndpoint.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3878,6 +4209,29 @@
             "appInstanceUser": {
                 "resourceName": "app-instance-user",
                 "resourceArn": "arn:${Partition}:chime:${Region}:${AccountId}:app-instance/${AppInstanceId}/user/${AppInstanceUserId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateAttendeeCapabilities": {
+        "privilege": "UpdateAttendeeCapabilities",
+        "description": "Grants permission to the capabilties that you want to update",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_UpdateAttendeeCapabilities.html",
+        "service": "chime",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "meeting": {
+                "resourceName": "meeting",
+                "resourceArn": "arn:${Partition}:chime::${AccountId}:meeting/${MeetingId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -3917,7 +4271,7 @@
         "privilege": "UpdateChannel",
         "description": "Grants permission to update a channel's attributes",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_UpdateChannel.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannel.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3952,7 +4306,7 @@
         "privilege": "UpdateChannelFlow",
         "description": "Grants permission to update a channel flow",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_UpdateChannelFlow.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannelFlow.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -3975,7 +4329,7 @@
         "privilege": "UpdateChannelMessage",
         "description": "Grants permission to update the content of a message",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_UpdateChannelMessage.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannelMessage.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},
@@ -4010,7 +4364,7 @@
         "privilege": "UpdateChannelReadMarker",
         "description": "Grants permission to set the timestamp to the point when a user last read messages in a channel",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_UpdateChannelReadMarker.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannelReadMarker.html",
         "service": "chime",
         "dependentActions": [],
         "privConditions": {},

@@ -28,6 +28,11 @@
                 "condition": "lambda:Principal",
                 "description": "Filters access by restricting the AWS service or account that can invoke a function",
                 "type": "String"
+            },
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
             }
         },
         "resources": {
@@ -35,7 +40,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -52,7 +63,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -114,6 +131,16 @@
                 "condition": "lambda:CodeSigningConfigArn",
                 "description": "Filters access by the ARN of an AWS Lambda code signing config",
                 "type": "String"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -121,7 +148,47 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFunctionUrlConfig": {
+        "privilege": "CreateFunctionUrlConfig",
+        "description": "Grants permission to create a function url configuration for a Lambda function",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunctionUrlConfig.html",
+        "service": "lambda",
+        "dependentActions": [],
+        "privConditions": {
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
+            },
+            "lambda:FunctionArn": {
+                "condition": "lambda:FunctionArn",
+                "description": "Filters access by the ARN of an AWS Lambda function",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "function": {
+                "resourceName": "function",
+                "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -138,7 +205,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -195,7 +268,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -212,7 +291,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -229,7 +314,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -246,7 +337,47 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFunctionUrlConfig": {
+        "privilege": "DeleteFunctionUrlConfig",
+        "description": "Grants permission to delete function url configuration for a Lambda function",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunctionUrlConfig.html",
+        "service": "lambda",
+        "dependentActions": [],
+        "privConditions": {
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
+            },
+            "lambda:FunctionArn": {
+                "condition": "lambda:FunctionArn",
+                "description": "Filters access by the ARN of an AWS Lambda function",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "function": {
+                "resourceName": "function",
+                "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -280,13 +411,25 @@
                 "resourceName": "function alias",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Alias}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "functionVersion": {
                 "resourceName": "function version",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Version}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -303,7 +446,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -320,7 +469,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -347,7 +502,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -404,7 +565,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -421,7 +588,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -438,7 +611,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -455,7 +634,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -472,7 +657,47 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getFunctionUrlConfig": {
+        "privilege": "GetFunctionUrlConfig",
+        "description": "Grants permission to read function url configuration for a Lambda function",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionUrlConfig.html",
+        "service": "lambda",
+        "dependentActions": [],
+        "privConditions": {
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
+            },
+            "lambda:FunctionArn": {
+                "condition": "lambda:FunctionArn",
+                "description": "Filters access by the ARN of an AWS Lambda function",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "function": {
+                "resourceName": "function",
+                "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -523,7 +748,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -540,13 +771,25 @@
                 "resourceName": "function alias",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Alias}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "functionVersion": {
                 "resourceName": "function version",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Version}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -563,7 +806,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -580,7 +829,47 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "invokeFunctionUrl": {
+        "privilege": "InvokeFunctionUrl",
+        "description": "Grants permission to invoke an AWS Lambda function through url",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_InvokeFunctionUrl.html",
+        "service": "lambda",
+        "dependentActions": [],
+        "privConditions": {
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
+            },
+            "lambda:FunctionArn": {
+                "condition": "lambda:FunctionArn",
+                "description": "Filters access by the ARN of an AWS Lambda function",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "function": {
+                "resourceName": "function",
+                "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -597,7 +886,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -634,7 +929,42 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listFunctionUrlConfigs": {
+        "privilege": "ListFunctionUrlConfigs",
+        "description": "Grants permission to read function url configurations for a function",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionUrlConfigs.html",
+        "service": "lambda",
+        "dependentActions": [],
+        "privConditions": {
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "function": {
+                "resourceName": "function",
+                "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -698,7 +1028,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -715,7 +1051,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -732,7 +1074,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -766,7 +1114,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -795,7 +1149,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -812,7 +1172,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -829,7 +1195,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -846,13 +1218,25 @@
                 "resourceName": "function alias",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Alias}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "functionVersion": {
                 "resourceName": "function version",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Version}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -885,6 +1269,11 @@
                 "condition": "lambda:Principal",
                 "description": "Filters access by restricting the AWS service or account that can invoke a function",
                 "type": "String"
+            },
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
             }
         },
         "resources": {
@@ -892,7 +1281,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -903,13 +1298,30 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_TagResources.html",
         "service": "lambda",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "function": {
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -920,13 +1332,25 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_UntagResource.html",
         "service": "lambda",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "function": {
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -943,7 +1367,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1000,7 +1430,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1023,7 +1459,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1061,7 +1503,13 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1078,7 +1526,47 @@
                 "resourceName": "function",
                 "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFunctionUrlConfig": {
+        "privilege": "UpdateFunctionUrlConfig",
+        "description": "Grants permission to update a function url configuration for a Lambda function",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionUrlConfig.html",
+        "service": "lambda",
+        "dependentActions": [],
+        "privConditions": {
+            "lambda:FunctionUrlAuthType": {
+                "condition": "lambda:FunctionUrlAuthType",
+                "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                "type": "String"
+            },
+            "lambda:FunctionArn": {
+                "condition": "lambda:FunctionArn",
+                "description": "Filters access by the ARN of an AWS Lambda function",
+                "type": "ARN"
+            }
+        },
+        "resources": {
+            "function": {
+                "resourceName": "function",
+                "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     }

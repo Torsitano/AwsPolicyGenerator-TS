@@ -238,13 +238,31 @@
             "cluster": {
                 "resourceType": "cluster",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "elasticache:CacheNodeType",
+                    "elasticache:EngineVersion",
+                    "elasticache:EngineType",
+                    "elasticache:MultiAZEnabled",
+                    "elasticache:AuthTokenEnabled",
+                    "elasticache:SnapshotRetentionLimit",
+                    "elasticache:CacheParameterGroupName"
+                ],
                 "dependentActions": []
             },
             "replicationgroup": {
                 "resourceType": "replicationgroup",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "elasticache:CacheNodeType",
+                    "elasticache:EngineVersion",
+                    "elasticache:EngineType",
+                    "elasticache:MultiAZEnabled",
+                    "elasticache:AuthTokenEnabled",
+                    "elasticache:SnapshotRetentionLimit",
+                    "elasticache:CacheParameterGroupName"
+                ],
                 "dependentActions": []
             },
             "securitygroup": {
@@ -269,16 +287,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
-                    "elasticache:CacheNodeType",
-                    "elasticache:EngineVersion",
-                    "elasticache:EngineType",
-                    "elasticache:MultiAZEnabled",
-                    "elasticache:AuthTokenEnabled",
-                    "elasticache:SnapshotRetentionLimit",
-                    "elasticache:CacheParameterGroupName"
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             }
@@ -302,6 +311,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys",
                     "elasticache:CacheParameterGroupName"
@@ -328,6 +338,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
@@ -353,6 +364,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
@@ -417,13 +429,45 @@
             "globalreplicationgroup": {
                 "resourceType": "globalreplicationgroup",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "elasticache:NumNodeGroups",
+                    "elasticache:CacheNodeType",
+                    "elasticache:ReplicasPerNodeGroup",
+                    "elasticache:EngineVersion",
+                    "elasticache:EngineType",
+                    "elasticache:AtRestEncryptionEnabled",
+                    "elasticache:TransitEncryptionEnabled",
+                    "elasticache:AutomaticFailoverEnabled",
+                    "elasticache:MultiAZEnabled",
+                    "elasticache:ClusterModeEnabled",
+                    "elasticache:AuthTokenEnabled",
+                    "elasticache:SnapshotRetentionLimit",
+                    "elasticache:KmsKeyId",
+                    "elasticache:CacheParameterGroupName"
+                ],
                 "dependentActions": []
             },
             "replicationgroup": {
                 "resourceType": "replicationgroup",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "elasticache:NumNodeGroups",
+                    "elasticache:CacheNodeType",
+                    "elasticache:ReplicasPerNodeGroup",
+                    "elasticache:EngineVersion",
+                    "elasticache:EngineType",
+                    "elasticache:AtRestEncryptionEnabled",
+                    "elasticache:TransitEncryptionEnabled",
+                    "elasticache:AutomaticFailoverEnabled",
+                    "elasticache:MultiAZEnabled",
+                    "elasticache:ClusterModeEnabled",
+                    "elasticache:AuthTokenEnabled",
+                    "elasticache:SnapshotRetentionLimit",
+                    "elasticache:KmsKeyId",
+                    "elasticache:CacheParameterGroupName"
+                ],
                 "dependentActions": []
             },
             "securitygroup": {
@@ -454,23 +498,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
-                    "elasticache:NumNodeGroups",
-                    "elasticache:CacheNodeType",
-                    "elasticache:ReplicasPerNodeGroup",
-                    "elasticache:EngineVersion",
-                    "elasticache:EngineType",
-                    "elasticache:AtRestEncryptionEnabled",
-                    "elasticache:TransitEncryptionEnabled",
-                    "elasticache:AutomaticFailoverEnabled",
-                    "elasticache:MultiAZEnabled",
-                    "elasticache:ClusterModeEnabled",
-                    "elasticache:AuthTokenEnabled",
-                    "elasticache:SnapshotRetentionLimit",
-                    "elasticache:KmsKeyId",
-                    "elasticache:CacheParameterGroupName"
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             }
@@ -485,7 +513,11 @@
             "snapshot": {
                 "resourceType": "snapshot",
                 "required": true,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "elasticache:KmsKeyId"
+                ],
                 "dependentActions": [
                     "elasticache:AddTagsToResource",
                     "s3:DeleteObject",
@@ -509,10 +541,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
-                    "elasticache:KmsKeyId"
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             }
@@ -536,8 +565,9 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
                 ],
                 "dependentActions": []
             }
@@ -560,15 +590,16 @@
             "usergroup": {
                 "resourceType": "usergroup",
                 "required": true,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}",
                     "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -635,7 +666,9 @@
             "cluster": {
                 "resourceType": "cluster",
                 "required": true,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "dependentActions": [
                     "ec2:CreateNetworkInterface",
                     "ec2:DeleteNetworkInterface",
@@ -648,14 +681,6 @@
                 "resourceType": "snapshot",
                 "required": false,
                 "conditionKeys": [],
-                "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}"
-                ],
                 "dependentActions": []
             }
         },
@@ -756,7 +781,9 @@
             "replicationgroup": {
                 "resourceType": "replicationgroup",
                 "required": true,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "dependentActions": [
                     "ec2:CreateNetworkInterface",
                     "ec2:DeleteNetworkInterface",
@@ -769,14 +796,6 @@
                 "resourceType": "snapshot",
                 "required": false,
                 "conditionKeys": [],
-                "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}"
-                ],
                 "dependentActions": []
             }
         },
@@ -1298,8 +1317,50 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "parametergroup": {
+                "resourceType": "parametergroup",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "replicationgroup": {
+                "resourceType": "replicationgroup",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "reservedInstance": {
+                "resourceType": "reserved-instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "securitygroup": {
+                "resourceType": "securitygroup",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "snapshot": {
                 "resourceType": "snapshot",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "subnetgroup": {
+                "resourceType": "subnetgroup",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "user": {
+                "resourceType": "user",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "usergroup": {
+                "resourceType": "usergroup",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1323,7 +1384,14 @@
             "cluster": {
                 "resourceType": "cluster",
                 "required": true,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "elasticache:CacheNodeType",
+                    "elasticache:EngineVersion",
+                    "elasticache:MultiAZEnabled",
+                    "elasticache:AuthTokenEnabled",
+                    "elasticache:SnapshotRetentionLimit",
+                    "elasticache:CacheParameterGroupName"
+                ],
                 "dependentActions": []
             },
             "parametergroup": {
@@ -1342,13 +1410,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "elasticache:CacheNodeType",
-                    "elasticache:EngineVersion",
-                    "elasticache:MultiAZEnabled",
-                    "elasticache:AuthTokenEnabled",
-                    "elasticache:SnapshotRetentionLimit",
-                    "elasticache:CacheParameterGroupName"
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             }
@@ -1432,7 +1494,15 @@
             "replicationgroup": {
                 "resourceType": "replicationgroup",
                 "required": true,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "elasticache:CacheNodeType",
+                    "elasticache:EngineVersion",
+                    "elasticache:AutomaticFailoverEnabled",
+                    "elasticache:MultiAZEnabled",
+                    "elasticache:AuthTokenEnabled",
+                    "elasticache:SnapshotRetentionLimit",
+                    "elasticache:CacheParameterGroupName"
+                ],
                 "dependentActions": [
                     "ec2:CreateNetworkInterface",
                     "ec2:DeleteNetworkInterface",
@@ -1463,14 +1533,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "elasticache:CacheNodeType",
-                    "elasticache:EngineVersion",
-                    "elasticache:AutomaticFailoverEnabled",
-                    "elasticache:MultiAZEnabled",
-                    "elasticache:AuthTokenEnabled",
-                    "elasticache:SnapshotRetentionLimit",
-                    "elasticache:CacheParameterGroupName"
+                    "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             }
@@ -1573,8 +1636,9 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
                 ],
                 "dependentActions": []
             }

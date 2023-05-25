@@ -18,9 +18,21 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_CreateResponsePlan.html",
         "service": "ssmIncidents",
         "dependentActions": [
-            "iam:PassRole"
+            "iam:PassRole",
+            "ssm-incidents:TagResource"
         ],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
         "resources": {}
     },
     "createTimelineEvent": {
@@ -36,13 +48,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -59,7 +83,13 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -93,7 +123,13 @@
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -110,7 +146,13 @@
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -127,7 +169,13 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -144,13 +192,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -184,7 +244,13 @@
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -201,7 +267,13 @@
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -218,13 +290,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -251,13 +335,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -290,11 +386,29 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {
+            "incidentRecord": {
+                "resourceName": "incident-record",
+                "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
-                "required": true,
-                "resourceConditions": {}
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -311,13 +425,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -334,7 +460,13 @@
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -351,7 +483,13 @@
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -362,13 +500,42 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_TagResource.html",
         "service": "ssmIncidents",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
         "resources": {
+            "incidentRecord": {
+                "resourceName": "incident-record",
+                "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
-                "required": true,
-                "resourceConditions": {}
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -379,13 +546,37 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_UntagResource.html",
         "service": "ssmIncidents",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
+            "incidentRecord": {
+                "resourceName": "incident-record",
+                "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
-                "required": true,
-                "resourceConditions": {}
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -419,13 +610,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -442,13 +645,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -476,15 +691,33 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_UpdateResponsePlan.html",
         "service": "ssmIncidents",
         "dependentActions": [
-            "iam:PassRole"
+            "iam:PassRole",
+            "ssm-incidents:TagResource"
         ],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
         "resources": {
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -501,13 +734,25 @@
                 "resourceName": "incident-record",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:incident-record/${ResponsePlan}/${IncidentRecord}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             },
             "responsePlan": {
                 "resourceName": "response-plan",
                 "resourceArn": "arn:${Partition}:ssm-incidents::${Account}:response-plan/${ResponsePlan}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     }

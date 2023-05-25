@@ -14,7 +14,13 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -30,8 +36,42 @@
             "sso:DescribeRegisteredRegions",
             "sso:GetSharedSsoConfiguration"
         ],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            }
+        },
         "resources": {}
+    },
+    "createWorkspaceApiKey": {
+        "privilege": "CreateWorkspaceApiKey",
+        "description": "Grants permission to create API keys for a workspace",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/userguide/AMG-and-IAM.html",
+        "service": "grafana",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "workspace": {
+                "resourceName": "workspace",
+                "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "deleteWorkspace": {
         "privilege": "DeleteWorkspace",
@@ -48,7 +88,36 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteWorkspaceApiKey": {
+        "privilege": "DeleteWorkspaceApiKey",
+        "description": "Grants permission to delete API keys from a workspace",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/userguide/AMG-and-IAM.html",
+        "service": "grafana",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "workspace": {
+                "resourceName": "workspace",
+                "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -65,13 +134,19 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
     "describeWorkspaceAuthentication": {
         "privilege": "DescribeWorkspaceAuthentication",
-        "description": "Grants permission to describe authetication providers on a workspace",
+        "description": "Grants permission to describe authentication providers on a workspace",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/userguide/AMG-and-IAM.html",
         "service": "grafana",
@@ -82,7 +157,13 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -99,7 +180,13 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -116,7 +203,36 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags associated with a workspace",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListTagsForResource.html",
+        "service": "grafana",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "workspace": {
+                "resourceName": "workspace",
+                "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -129,6 +245,74 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add tags to, or update tag values of, a workspace",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/APIReference/API_TagResource.html",
+        "service": "grafana",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "workspace": {
+                "resourceName": "workspace",
+                "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tags from a workspace",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/APIReference/API_UntagResource.html",
+        "service": "grafana",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "workspace": {
+                "resourceName": "workspace",
+                "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updatePermissions": {
         "privilege": "UpdatePermissions",
@@ -143,7 +327,13 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -160,13 +350,19 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
     "updateWorkspaceAuthentication": {
         "privilege": "UpdateWorkspaceAuthentication",
-        "description": "Grants permission to modify authetication providers on a workspace",
+        "description": "Grants permission to modify authentication providers on a workspace",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/grafana/latest/userguide/AMG-and-IAM.html",
         "service": "grafana",
@@ -177,7 +373,13 @@
                 "resourceName": "workspace",
                 "resourceArn": "arn:${Partition}:grafana:${Region}:${Account}:/workspaces/${ResourceId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     }

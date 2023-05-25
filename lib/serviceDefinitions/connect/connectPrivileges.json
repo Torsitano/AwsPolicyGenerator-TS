@@ -177,6 +177,35 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/console/connect/amazon-connect-console/grant-instance-permissions"
     },
+    "associatePhoneNumberContactFlow": {
+        "privilege": "AssociatePhoneNumberContactFlow",
+        "description": "Grants permission to associate contact flow resources to phone number resources in an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "contactFlow": {
+                "resourceType": "contact-flow",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "phoneNumber": {
+                "resourceType": "phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociatePhoneNumberContactFlow.html"
+    },
     "associateQueueQuickConnects": {
         "privilege": "AssociateQueueQuickConnects",
         "description": "Grants permission to associate quick connects with a queue in an Amazon Connect instance",
@@ -256,6 +285,85 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/console/connect/amazon-connect-console/grant-instance-permissions"
+    },
+    "batchAssociateAnalyticsDataSet": {
+        "privilege": "BatchAssociateAnalyticsDataSet",
+        "description": "Grants permission to grant access and to associate the datasets with the specified AWS account",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/adminguide/optimization-apis.html"
+    },
+    "batchDisassociateAnalyticsDataSet": {
+        "privilege": "BatchDisassociateAnalyticsDataSet",
+        "description": "Grants permission to revoke access and to disassociate the datasets with the specified AWS account",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/adminguide/optimization-apis.html"
+    },
+    "claimPhoneNumber": {
+        "privilege": "ClaimPhoneNumber",
+        "description": "Grants permission to claim phone number resources in an Amazon Connect instance or traffic distribution group",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "wildcardPhoneNumber": {
+                "resourceType": "wildcard-phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html"
     },
     "createAgentStatus": {
         "privilege": "CreateAgentStatus",
@@ -393,10 +501,14 @@
                 "conditionKeys": [],
                 "dependentActions": [
                     "app-integrations:CreateEventIntegrationAssociation",
+                    "cases:GetDomain",
                     "connect:DescribeInstance",
                     "ds:DescribeDirectories",
                     "events:PutRule",
                     "events:PutTargets",
+                    "iam:AttachRolePolicy",
+                    "iam:CreateServiceLinkedRole",
+                    "iam:PutRolePolicy",
                     "mobiletargeting:GetApp",
                     "voiceid:DescribeDomain",
                     "wisdom:GetAssistant",
@@ -565,6 +677,50 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateSecurityProfile.html"
+    },
+    "createTaskTemplate": {
+        "privilege": "CreateTaskTemplate",
+        "description": "Grants permission to create a task template in an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "taskTemplate": {
+                "resourceType": "task-template",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTaskTemplate.html"
+    },
+    "createTrafficDistributionGroup": {
+        "privilege": "CreateTrafficDistributionGroup",
+        "description": "Grants permission to create a traffic distribution group",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html"
     },
     "createUseCase": {
         "privilege": "CreateUseCase",
@@ -872,6 +1028,51 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteSecurityProfile.html"
     },
+    "deleteTaskTemplate": {
+        "privilege": "DeleteTaskTemplate",
+        "description": "Grants permission to delete a task template in an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "taskTemplate": {
+                "resourceType": "task-template",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTaskTemplate.html"
+    },
+    "deleteTrafficDistributionGroup": {
+        "privilege": "DeleteTrafficDistributionGroup",
+        "description": "Grants permission to delete a traffic distribution group",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html"
+    },
     "deleteUseCase": {
         "privilege": "DeleteUseCase",
         "description": "Grants permission to delete a use case from an integration association",
@@ -1156,6 +1357,28 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/console/connect/amazon-connect-console/grant-instance-permissions"
     },
+    "describePhoneNumber": {
+        "privilege": "DescribePhoneNumber",
+        "description": "Grants permission to describe phone number resources in an Amazon Connect instance or traffic distribution group",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "phoneNumber": {
+                "resourceType": "phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html"
+    },
     "describeQueue": {
         "privilege": "DescribeQueue",
         "description": "Grants permission to describe a queue in an Amazon Connect instance",
@@ -1247,6 +1470,28 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeSecurityProfile.html"
+    },
+    "describeTrafficDistributionGroup": {
+        "privilege": "DescribeTrafficDistributionGroup",
+        "description": "Grants permission to describe a traffic distribution group",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeTrafficDistributionGroup.html"
     },
     "describeUser": {
         "privilege": "DescribeUser",
@@ -1482,6 +1727,29 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/console/connect/amazon-connect-console/grant-instance-permissions"
     },
+    "disassociatePhoneNumberContactFlow": {
+        "privilege": "DisassociatePhoneNumberContactFlow",
+        "description": "Grants permission to disassociate contact flow resources from phone number resources in an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "phoneNumber": {
+                "resourceType": "phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociatePhoneNumberContactFlow.html"
+    },
     "disassociateQueueQuickConnects": {
         "privilege": "DisassociateQueueQuickConnects",
         "description": "Grants permission to disassociate quick connects from a queue in an Amazon Connect instance",
@@ -1600,6 +1868,28 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetCurrentMetricData.html"
     },
+    "getCurrentUserData": {
+        "privilege": "GetCurrentUserData",
+        "description": "Grants permission to retrieve current user data in an Amazon Connect instance",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "queue": {
+                "resourceType": "queue",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetCurrentUserData.html"
+    },
     "getFederationToken": {
         "privilege": "GetFederationToken",
         "description": "Grants permission to federate into an Amazon Connect instance when using SAML-based authentication for identity management",
@@ -1661,6 +1951,51 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html"
+    },
+    "getTaskTemplate": {
+        "privilege": "GetTaskTemplate",
+        "description": "Grants permission to get details about specified task template in an Amazon Connect instance",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "taskTemplate": {
+                "resourceType": "task-template",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetTaskTemplate.html"
+    },
+    "getTrafficDistribution": {
+        "privilege": "GetTrafficDistribution",
+        "description": "Grants permission to read traffic distribution for a traffic distribution group",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_GetTrafficDistribution.html"
     },
     "listAgentStatuses": {
         "privilege": "ListAgentStatuses",
@@ -1948,6 +2283,20 @@
         "description": "Grants permission to list phone number resources in an Amazon Connect instance",
         "accessLevel": "List",
         "resourceTypes": {
+            "wildcardLegacyPhoneNumber": {
+                "resourceType": "wildcard-legacy-phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html"
+    },
+    "listPhoneNumbersV2": {
+        "privilege": "ListPhoneNumbersV2",
+        "description": "Grants permission to list phone number resources in an Amazon Connect instance",
+        "accessLevel": "List",
+        "resourceTypes": {
             "wildcardPhoneNumber": {
                 "resourceType": "wildcard-phone-number",
                 "required": true,
@@ -1955,7 +2304,7 @@
                 "dependentActions": []
             }
         },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html"
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html"
     },
     "listPrompts": {
         "privilege": "ListPrompts",
@@ -2197,6 +2546,12 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "phoneNumber": {
+                "resourceType": "phone-number",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "queue": {
                 "resourceType": "queue",
                 "required": false,
@@ -2221,6 +2576,12 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "useCase": {
                 "resourceType": "use-case",
                 "required": false,
@@ -2229,6 +2590,12 @@
             },
             "user": {
                 "resourceType": "user",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "wildcardPhoneNumber": {
+                "resourceType": "wildcard-phone-number",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -2243,6 +2610,34 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTagsForResource.html"
+    },
+    "listTaskTemplates": {
+        "privilege": "ListTaskTemplates",
+        "description": "Grants permission to list task template resources in an Amazon Connect instance",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTaskTemplates.html"
+    },
+    "listTrafficDistributionGroups": {
+        "privilege": "ListTrafficDistributionGroups",
+        "description": "Grants permission to list traffic distribution groups",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListTrafficDistributionGroups.html"
     },
     "listUseCases": {
         "privilege": "ListUseCases",
@@ -2313,6 +2708,92 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ListUsers.html"
     },
+    "putUserStatus": {
+        "privilege": "PutUserStatus",
+        "description": "Grants permission to switch User Status in an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "agentStatus": {
+                "resourceType": "agent-status",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "user": {
+                "resourceType": "user",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_PutUserStatus.html"
+    },
+    "releasePhoneNumber": {
+        "privilege": "ReleasePhoneNumber",
+        "description": "Grants permission to release phone number resources in an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "phoneNumber": {
+                "resourceType": "phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ReleasePhoneNumber.html"
+    },
+    "replicateInstance": {
+        "privilege": "ReplicateInstance",
+        "description": "Grants permission to create a replica of an Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": [
+                    "ds:AuthorizeApplication",
+                    "ds:CheckAlias",
+                    "ds:CreateAlias",
+                    "ds:CreateDirectory",
+                    "ds:CreateIdentityPoolDirectory",
+                    "ds:DeleteDirectory",
+                    "ds:DescribeDirectories",
+                    "ds:UnauthorizeApplication",
+                    "iam:AttachRolePolicy",
+                    "iam:CreateServiceLinkedRole",
+                    "iam:PutRolePolicy"
+                ]
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/console/connect/amazon-connect-console/grant-instance-permissions"
+    },
     "resumeContactRecording": {
         "privilege": "ResumeContactRecording",
         "description": "Grants permission to resume recording for the specified contact",
@@ -2326,6 +2807,120 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_ResumeContactRecording.html"
+    },
+    "searchAvailablePhoneNumbers": {
+        "privilege": "SearchAvailablePhoneNumbers",
+        "description": "Grants permission to search phone number resources in an Amazon Connect instance or traffic distribution group",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "wildcardPhoneNumber": {
+                "resourceType": "wildcard-phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html"
+    },
+    "searchQueues": {
+        "privilege": "SearchQueues",
+        "description": "Grants permission to search queue resources in an Amazon Connect instance",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "connect:DescribeQueue"
+                ]
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId",
+                    "connect:SearchTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchQueues.html"
+    },
+    "searchRoutingProfiles": {
+        "privilege": "SearchRoutingProfiles",
+        "description": "Grants permission to search routing profile resources in an Amazon Connect instance",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "connect:DescribeRoutingProfile"
+                ]
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId",
+                    "connect:SearchTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html"
+    },
+    "searchSecurityProfiles": {
+        "privilege": "SearchSecurityProfiles",
+        "description": "Grants permission to search security profile resources in an Amazon Connect instance",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "connect:DescribeSecurityProfile"
+                ]
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId",
+                    "connect:SearchTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchSecurityProfiles.html"
+    },
+    "searchUsers": {
+        "privilege": "SearchUsers",
+        "description": "Grants permission to search user resources in an Amazon Connect instance",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "connect:DescribeUser"
+                ]
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId",
+                    "connect:SearchTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchUsers.html"
     },
     "searchVocabularies": {
         "privilege": "SearchVocabularies",
@@ -2526,8 +3121,20 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "instance": {
+                "resourceType": "instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "integrationAssociation": {
                 "resourceType": "integration-association",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "phoneNumber": {
+                "resourceType": "phone-number",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -2556,6 +3163,18 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "taskTemplate": {
+                "resourceType": "task-template",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "useCase": {
                 "resourceType": "use-case",
                 "required": false,
@@ -2564,6 +3183,18 @@
             },
             "user": {
                 "resourceType": "user",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "vocabulary": {
+                "resourceType": "vocabulary",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "wildcardPhoneNumber": {
+                "resourceType": "wildcard-phone-number",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -2579,6 +3210,40 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TagResource.html"
+    },
+    "transferContact": {
+        "privilege": "TransferContact",
+        "description": "Grants permission to transfer the contact to another queue or agent",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "contact": {
+                "resourceType": "contact",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "contactFlow": {
+                "resourceType": "contact-flow",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_TransferContact.html"
     },
     "untagResource": {
         "privilege": "UntagResource",
@@ -2615,8 +3280,20 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "instance": {
+                "resourceType": "instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "integrationAssociation": {
                 "resourceType": "integration-association",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "phoneNumber": {
+                "resourceType": "phone-number",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -2645,6 +3322,18 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "taskTemplate": {
+                "resourceType": "task-template",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "useCase": {
                 "resourceType": "use-case",
                 "required": false,
@@ -2657,12 +3346,23 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "vocabulary": {
+                "resourceType": "vocabulary",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "wildcardPhoneNumber": {
+                "resourceType": "wildcard-phone-number",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
+                    "aws:TagKeys"
                 ],
                 "dependentActions": []
             }
@@ -2958,6 +3658,40 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/console/connect/amazon-connect-console/grant-instance-permissions"
+    },
+    "updatePhoneNumber": {
+        "privilege": "UpdatePhoneNumber",
+        "description": "Grants permission to update phone number resources in an Amazon Connect instance or traffic distribution group",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "phoneNumber": {
+                "resourceType": "phone-number",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html"
     },
     "updateQueueHoursOfOperation": {
         "privilege": "UpdateQueueHoursOfOperation",
@@ -3276,6 +4010,51 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateSecurityProfile.html"
+    },
+    "updateTaskTemplate": {
+        "privilege": "UpdateTaskTemplate",
+        "description": "Grants permission to update task template belonging to a Amazon Connect instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "taskTemplate": {
+                "resourceType": "task-template",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "connect:InstanceId"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTaskTemplate.html"
+    },
+    "updateTrafficDistribution": {
+        "privilege": "UpdateTrafficDistribution",
+        "description": "Grants permission to update traffic distribution for a traffic distribution group",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "trafficDistributionGroup": {
+                "resourceType": "traffic-distribution-group",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistribution.html"
     },
     "updateUserHierarchy": {
         "privilege": "UpdateUserHierarchy",

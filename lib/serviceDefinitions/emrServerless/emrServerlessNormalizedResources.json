@@ -1,0 +1,234 @@
+{
+    "application": {
+        "resourceName": "application",
+        "service": "emrServerless",
+        "resourceArn": "arn:${Partition}:emr-serverless:${Region}:${Account}:/applications/${ApplicationId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListJobRuns": {
+                "privilege": "ListJobRuns",
+                "description": "Grants permission to list job runs associated with an application",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_ListJobRuns.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {
+            "GetApplication": {
+                "privilege": "GetApplication",
+                "description": "Grants permission to get application",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteApplication": {
+                "privilege": "DeleteApplication",
+                "description": "Grants permission to delete an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_DeleteApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartApplication": {
+                "privilege": "StartApplication",
+                "description": "Grants permission to Start an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_StartApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartJobRun": {
+                "privilege": "StartJobRun",
+                "description": "Grants permission to start a job run",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_StartJobRun.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
+            "StopApplication": {
+                "privilege": "StopApplication",
+                "description": "Grants permission to Stop an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_StopApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateApplication": {
+                "privilege": "UpdateApplication",
+                "description": "Grants permission to Update an application",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_UpdateApplication.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "jobRun": {
+        "resourceName": "jobRun",
+        "service": "emrServerless",
+        "resourceArn": "arn:${Partition}:emr-serverless:${Region}:${Account}:/applications/${ApplicationId}/jobruns/${JobRunId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetDashboardForJobRun": {
+                "privilege": "GetDashboardForJobRun",
+                "description": "Grants permission to get job run dashboard",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetDashboardForJobRun.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetJobRun": {
+                "privilege": "GetJobRun",
+                "description": "Grants permission to get a job run",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetJobRun.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for the specified resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CancelJobRun": {
+                "privilege": "CancelJobRun",
+                "description": "Grants permission to cancel a job run",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_CancelJobRun.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag the specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    }
+}

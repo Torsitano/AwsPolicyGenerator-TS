@@ -385,7 +385,7 @@
         "privilege": "ListEnvironments",
         "description": "Grants permission to list all environments",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_ListEnvironment.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_ListEnvironments.html",
         "service": "refactorSpaces",
         "dependentActions": [],
         "privConditions": {},
@@ -597,6 +597,35 @@
                 "resourceName": "service",
                 "resourceArn": "arn:${Partition}:refactor-spaces:${Region}:${Account}:environment/${EnvironmentId}/application/${ApplicationId}/service/${ServiceId}",
                 "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateRoute": {
+        "privilege": "UpdateRoute",
+        "description": "Grants permission to update a route from an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_UpdateRoute.html",
+        "service": "refactorSpaces",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "route": {
+                "resourceName": "route",
+                "resourceArn": "arn:${Partition}:refactor-spaces:${Region}:${Account}:environment/${EnvironmentId}/application/${ApplicationId}/route/${RouteId}",
+                "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",

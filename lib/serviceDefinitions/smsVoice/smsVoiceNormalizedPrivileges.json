@@ -1,12 +1,25 @@
 {
     "createConfigurationSet": {
         "privilege": "CreateConfigurationSet",
-        "description": "Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.",
+        "description": "Grants permission to create a configuration set",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint-sms-voice/latest/APIReference/v1-sms-voice-configuration-sets.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_CreateConfigurationSet.html",
         "service": "smsVoice",
-        "dependentActions": [],
-        "privConditions": {},
+        "dependentActions": [
+            "sms-voice:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "createConfigurationSetEventDestination": {
@@ -23,13 +36,26 @@
     },
     "deleteConfigurationSet": {
         "privilege": "DeleteConfigurationSet",
-        "description": "Deletes an existing configuration set.",
+        "description": "Grants permission to delete a configuration set",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint-sms-voice/latest/APIReference/v1-sms-voice-configuration-sets-configurationsetname.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteConfigurationSet.html",
         "service": "smsVoice",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "deleteConfigurationSetEventDestination": {
         "privilege": "DeleteConfigurationSetEventDestination",
@@ -63,13 +89,38 @@
     },
     "sendVoiceMessage": {
         "privilege": "SendVoiceMessage",
-        "description": "Create a new voice message and send it to a recipient's phone number.",
+        "description": "Grants permission to send a voice message to a destination phone number",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint-sms-voice/latest/APIReference/v1-sms-voice-voice-message.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SendVoiceMessage.html",
         "service": "smsVoice",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateConfigurationSetEventDestination": {
         "privilege": "UpdateConfigurationSetEventDestination",
@@ -82,5 +133,1151 @@
         ],
         "privConditions": {},
         "resources": {}
+    },
+    "associateOriginationIdentity": {
+        "privilege": "AssociateOriginationIdentity",
+        "description": "Grants permission to associate an origination phone number or sender ID to a pool",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createEventDestination": {
+        "privilege": "CreateEventDestination",
+        "description": "Grants permission to create an event destination within a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_CreateEventDestination.html",
+        "service": "smsVoice",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createOptOutList": {
+        "privilege": "CreateOptOutList",
+        "description": "Grants permission to create an opt-out list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_CreateOptOutList.html",
+        "service": "smsVoice",
+        "dependentActions": [
+            "sms-voice:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createPool": {
+        "privilege": "CreatePool",
+        "description": "Grants permission to create a pool",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_CreatePool.html",
+        "service": "smsVoice",
+        "dependentActions": [
+            "sms-voice:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteDefaultMessageType": {
+        "privilege": "DeleteDefaultMessageType",
+        "description": "Grants permission to delete the default message type for a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteDefaultMessageType.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteDefaultSenderId": {
+        "privilege": "DeleteDefaultSenderId",
+        "description": "Grants permission to delete the default sender ID for a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteDefaultSenderId.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEventDestination": {
+        "privilege": "DeleteEventDestination",
+        "description": "Grants permission to delete an event destination within a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteEventDestination.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteKeyword": {
+        "privilege": "DeleteKeyword",
+        "description": "Grants permission to delete a keyword for a pool or origination phone number",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteKeyword.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteOptOutList": {
+        "privilege": "DeleteOptOutList",
+        "description": "Grants permission to delete an opt-out list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteOptOutList.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteOptedOutNumber": {
+        "privilege": "DeleteOptedOutNumber",
+        "description": "Grants permission to delete a destination phone number from an opt-out list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteOptedOutNumber.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deletePool": {
+        "privilege": "DeletePool",
+        "description": "Grants permission to delete a pool",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeletePool.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteTextMessageSpendLimitOverride": {
+        "privilege": "DeleteTextMessageSpendLimitOverride",
+        "description": "Grants permission to delete an override for your account's text messaging monthly spend limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteTextMessageSpendLimitOverride.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "deleteVoiceMessageSpendLimitOverride": {
+        "privilege": "DeleteVoiceMessageSpendLimitOverride",
+        "description": "Grants permission to delete an override for your account's voice messaging monthly spend limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DeleteVoiceMessageSpendLimitOverride.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeAccountAttributes": {
+        "privilege": "DescribeAccountAttributes",
+        "description": "Grants permission to describe the attributes of your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeAccountAttributes.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeAccountLimits": {
+        "privilege": "DescribeAccountLimits",
+        "description": "Grants permission to describe the service quotas for your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeAccountLimits.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "describeConfigurationSets": {
+        "privilege": "DescribeConfigurationSets",
+        "description": "Grants permission to describe the configuration sets in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeConfigurationSets.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeKeywords": {
+        "privilege": "DescribeKeywords",
+        "description": "Grants permission to describe the keywords for a pool or origination phone number",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeKeywords.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeOptOutLists": {
+        "privilege": "DescribeOptOutLists",
+        "description": "Grants permission to describe the opt-out lists in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeOptOutLists.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeOptedOutNumbers": {
+        "privilege": "DescribeOptedOutNumbers",
+        "description": "Grants permission to describe the destination phone numbers in an opt-out list",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeOptedOutNumbers.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describePhoneNumbers": {
+        "privilege": "DescribePhoneNumbers",
+        "description": "Grants permission to describe the origination phone numbers in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePhoneNumbers.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describePools": {
+        "privilege": "DescribePools",
+        "description": "Grants permission to describe the pools in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePools.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSenderIds": {
+        "privilege": "DescribeSenderIds",
+        "description": "Grants permission to describe the sender IDs in your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeSenderIds.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeSpendLimits": {
+        "privilege": "DescribeSpendLimits",
+        "description": "Grants permission to describe the monthly spend limits for your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeSpendLimits.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "disassociateOriginationIdentity": {
+        "privilege": "DisassociateOriginationIdentity",
+        "description": "Grants permission to disassociate an origination phone number or sender ID from a pool",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DisassociateOriginationIdentity.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listPoolOriginationIdentities": {
+        "privilege": "ListPoolOriginationIdentities",
+        "description": "Grants permission to list all origination phone numbers and sender IDs associated to a pool",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_ListPoolOriginationIdentities.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list the tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_ListTagsForResource.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putKeyword": {
+        "privilege": "PutKeyword",
+        "description": "Grants permission to create or update a keyword for a pool or origination phone number",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_PutKeyword.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "putOptedOutNumber": {
+        "privilege": "PutOptedOutNumber",
+        "description": "Grants permission to put a destination phone number into an opt-out list",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_PutOptedOutNumber.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "releasePhoneNumber": {
+        "privilege": "ReleasePhoneNumber",
+        "description": "Grants permission to release an origination phone number",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_ReleasePhoneNumber.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "requestPhoneNumber": {
+        "privilege": "RequestPhoneNumber",
+        "description": "Grants permission to request an origination phone number",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_RequestPhoneNumber.html",
+        "service": "smsVoice",
+        "dependentActions": [
+            "sms-voice:AssociateOriginationIdentity",
+            "sms-voice:TagResource"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "sendTextMessage": {
+        "privilege": "SendTextMessage",
+        "description": "Grants permission to send a text message to a destination phone number",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SendTextMessage.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setDefaultMessageType": {
+        "privilege": "SetDefaultMessageType",
+        "description": "Grants permission to set the default message type for a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SetDefaultMessageType.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setDefaultSenderId": {
+        "privilege": "SetDefaultSenderId",
+        "description": "Grants permission to set the default sender ID for a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SetDefaultSenderId.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "setTextMessageSpendLimitOverride": {
+        "privilege": "SetTextMessageSpendLimitOverride",
+        "description": "Grants permission to set an override for your account's text messaging monthly spend limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SetTextMessageSpendLimitOverride.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "setVoiceMessageSpendLimitOverride": {
+        "privilege": "SetVoiceMessageSpendLimitOverride",
+        "description": "Grants permission to set an override for your account's voice messaging monthly spend limit",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SetVoiceMessageSpendLimitOverride.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to add tags to a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_TagResource.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to remove tags from a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UntagResource.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "optOutList": {
+                "resourceName": "OptOutList",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:opt-out-list/${OptOutListName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "senderId": {
+                "resourceName": "SenderId",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:sender-id/${SenderId}/${IsoCountryCode}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateEventDestination": {
+        "privilege": "UpdateEventDestination",
+        "description": "Grants permission to update an event destination within a configuration set",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdateEventDestination.html",
+        "service": "smsVoice",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "configurationSet": {
+                "resourceName": "ConfigurationSet",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:configuration-set/${ConfigurationSetName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updatePhoneNumber": {
+        "privilege": "UpdatePhoneNumber",
+        "description": "Grants permission to update an origination phone number's configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdatePhoneNumber.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "phoneNumber": {
+                "resourceName": "PhoneNumber",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:phone-number/${PhoneNumberId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updatePool": {
+        "privilege": "UpdatePool",
+        "description": "Grants permission to update a pool's configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdatePool.html",
+        "service": "smsVoice",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "pool": {
+                "resourceName": "Pool",
+                "resourceArn": "arn:${Partition}:sms-voice:${Region}:${Account}:pool/${PoolId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     }
 }

@@ -277,6 +277,119 @@
             }
         }
     },
+    "fileCache": {
+        "resourceName": "file-cache",
+        "service": "fsx",
+        "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an Amazon FSx resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "CreateFileCache": {
+                "privilege": "CreateFileCache",
+                "description": "Grants permission to create a new, empty, Amazon file cache",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileCache.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DeleteFileCache": {
+                "privilege": "DeleteFileCache",
+                "description": "Grants permission to delete a file cache, deleting its contents",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteFileCache.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateFileCache": {
+                "privilege": "UpdateFileCache",
+                "description": "Grants permission to update file cache configuration",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileCache.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an Amazon FSx resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from an Amazon FSx resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
     "backup": {
         "resourceName": "backup",
         "service": "fsx",
@@ -720,7 +833,7 @@
     "association": {
         "resourceName": "association",
         "service": "fsx",
-        "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+        "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
@@ -761,6 +874,26 @@
                 "dependentActions": [],
                 "required": true
             },
+            "CreateFileCache": {
+                "privilege": "CreateFileCache",
+                "description": "Grants permission to create a new, empty, Amazon file cache",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileCache.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
             "DeleteDataRepositoryAssociation": {
                 "privilege": "DeleteDataRepositoryAssociation",
                 "description": "Grants permission to delete a data repository association",
@@ -769,6 +902,26 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "DeleteFileCache": {
+                "privilege": "DeleteFileCache",
+                "description": "Grants permission to delete a file cache, deleting its contents",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteFileCache.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
             },
             "UpdateDataRepositoryAssociation": {
                 "privilege": "UpdateDataRepositoryAssociation",

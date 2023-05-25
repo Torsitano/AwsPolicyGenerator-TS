@@ -111,6 +111,44 @@
             }
         }
     },
+    "associateUserAccessLoggingSettings": {
+        "privilege": "AssociateUserAccessLoggingSettings",
+        "description": "Grants permission to associate user access logging settings with web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_AssociateUserAccessLoggingSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [
+            "kinesis:PutRecord",
+            "kinesis:PutRecords"
+        ],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "userAccessLoggingSettings": {
+                "resourceName": "userAccessLoggingSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userAccessLoggingSettings/${UserAccessLoggingSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "associateUserSettings": {
         "privilege": "AssociateUserSettings",
         "description": "Grants permission to associate user settings with web portals",
@@ -266,6 +304,27 @@
         },
         "resources": {}
     },
+    "createUserAccessLoggingSettings": {
+        "privilege": "CreateUserAccessLoggingSettings",
+        "description": "Grants permission to create user access logging settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_CreateUserAccessLoggingSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
     "createUserSettings": {
         "privilege": "CreateUserSettings",
         "description": "Grants permission to create user settings",
@@ -389,6 +448,29 @@
             }
         }
     },
+    "deleteUserAccessLoggingSettings": {
+        "privilege": "DeleteUserAccessLoggingSettings",
+        "description": "Grants permission to delete user access logging settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DeleteUserAccessLoggingSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "userAccessLoggingSettings": {
+                "resourceName": "userAccessLoggingSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userAccessLoggingSettings/${UserAccessLoggingSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "deleteUserSettings": {
         "privilege": "DeleteUserSettings",
         "description": "Grants permission to delete user settings",
@@ -463,6 +545,29 @@
         "description": "Grants permission to disassociate trust stores from web portals",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DisassociateTrustStore.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "disassociateUserAccessLoggingSettings": {
+        "privilege": "DisassociateUserAccessLoggingSettings",
+        "description": "Grants permission to disassociate user access logging settings from web portals",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_DisassociateUserAccessLoggingSettings.html",
         "service": "workspacesWeb",
         "dependentActions": [],
         "privConditions": {},
@@ -652,6 +757,29 @@
             }
         }
     },
+    "getUserAccessLoggingSettings": {
+        "privilege": "GetUserAccessLoggingSettings",
+        "description": "Grants permission to get details on user access logging settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_GetUserAccessLoggingSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "userAccessLoggingSettings": {
+                "resourceName": "userAccessLoggingSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userAccessLoggingSettings/${UserAccessLoggingSettingsId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "getUserSettings": {
         "privilege": "GetUserSettings",
         "description": "Grants permission to get details on user settings",
@@ -745,6 +873,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "listUserAccessLoggingSettings": {
+        "privilege": "ListUserAccessLoggingSettings",
+        "description": "Grants permission to list user access logging settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_ListUserAccessLoggingSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listUserSettings": {
         "privilege": "ListUserSettings",
         "description": "Grants permission to list user settings",
@@ -774,7 +912,80 @@
                 "type": "String"
             }
         },
-        "resources": {}
+        "resources": {
+            "browserSettings": {
+                "resourceName": "browserSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:browserSettings/${BrowserSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "networkSettings": {
+                "resourceName": "networkSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:networkSettings/${NetworkSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "userAccessLoggingSettings": {
+                "resourceName": "userAccessLoggingSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userAccessLoggingSettings/${UserAccessLoggingSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "userSettings": {
+                "resourceName": "userSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userSettings/${UserSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "untagResource": {
         "privilege": "UntagResource",
@@ -795,7 +1006,80 @@
                 "type": "String"
             }
         },
-        "resources": {}
+        "resources": {
+            "browserSettings": {
+                "resourceName": "browserSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:browserSettings/${BrowserSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "networkSettings": {
+                "resourceName": "networkSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:networkSettings/${NetworkSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "portal": {
+                "resourceName": "portal",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:portal/${PortalId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "trustStore": {
+                "resourceName": "trustStore",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "userAccessLoggingSettings": {
+                "resourceName": "userAccessLoggingSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userAccessLoggingSettings/${UserAccessLoggingSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "userSettings": {
+                "resourceName": "userSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userSettings/${UserSettingsId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateBrowserSettings": {
         "privilege": "UpdateBrowserSettings",
@@ -836,7 +1120,14 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateNetworkSettings.html",
         "service": "workspacesWeb",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:CreateNetworkInterfacePermission",
+            "ec2:CreateTags",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DeleteNetworkInterfacePermission",
+            "ec2:ModifyNetworkInterfaceAttribute"
+        ],
         "privConditions": {},
         "resources": {
             "networkSettings": {
@@ -888,6 +1179,32 @@
             "trustStore": {
                 "resourceName": "trustStore",
                 "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:trustStore/${TrustStoreId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateUserAccessLoggingSettings": {
+        "privilege": "UpdateUserAccessLoggingSettings",
+        "description": "Grants permission to update user access logging settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces-web/latest/APIReference/API_UpdateUserAccessLoggingSettings.html",
+        "service": "workspacesWeb",
+        "dependentActions": [
+            "kinesis:PutRecord",
+            "kinesis:PutRecords"
+        ],
+        "privConditions": {},
+        "resources": {
+            "userAccessLoggingSettings": {
+                "resourceName": "userAccessLoggingSettings",
+                "resourceArn": "arn:${Partition}:workspaces-web:${Region}:${Account}:userAccessLoggingSettings/${UserAccessLoggingSettingsId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

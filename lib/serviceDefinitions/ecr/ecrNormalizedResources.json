@@ -131,7 +131,18 @@
                 "description": "Grants permission to list the tags for an Amazon ECR resource",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_ListTagsForResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }
@@ -152,26 +163,6 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_CompleteLayerUpload.html",
                 "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "CreateRepository": {
-                "privilege": "CreateRepository",
-                "description": "Grants permission to create an image repository",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_CreateRepository.html",
-                "privConditions": {
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by the allowed set of values for each of the tags",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
-                    }
-                },
                 "dependentActions": [],
                 "required": true
             },
@@ -310,7 +301,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -321,7 +312,18 @@
                 "description": "Grants permission to untag an Amazon ECR resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_UntagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }

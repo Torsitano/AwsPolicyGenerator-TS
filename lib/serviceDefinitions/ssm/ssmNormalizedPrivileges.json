@@ -6,8 +6,43 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
             "document": {
                 "resourceName": "document",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
@@ -16,6 +51,28 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
+                    }
+                }
+            },
+            "instance": {
+                "resourceName": "instance",
+                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -65,6 +122,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 }
             },
@@ -83,6 +145,18 @@
             "patchbaseline": {
                 "resourceName": "patchbaseline",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:patchbaseline/${PatchBaselineIdResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task/${TaskId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -135,7 +209,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "maintenancewindow": {
+                "resourceName": "maintenancewindow",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:maintenancewindow/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "createActivation": {
         "privilege": "CreateActivation",
@@ -144,7 +231,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateActivation.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "createAssociation": {
@@ -154,7 +252,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "document": {
                 "resourceName": "document",
@@ -165,6 +274,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -176,6 +290,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -212,6 +331,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -223,6 +347,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -259,7 +388,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -272,6 +401,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -293,7 +427,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -314,7 +448,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -335,7 +469,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -356,7 +490,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -407,7 +541,13 @@
                 "resourceName": "association",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
             },
             "document": {
                 "resourceName": "document",
@@ -418,6 +558,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -429,6 +574,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -465,6 +615,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -520,6 +675,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -733,7 +893,13 @@
                 "resourceName": "association",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
             },
             "document": {
                 "resourceName": "document",
@@ -744,6 +910,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -755,6 +926,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -781,7 +957,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "describeAssociationExecutions": {
         "privilege": "DescribeAssociationExecutions",
@@ -791,7 +980,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "describeAutomationExecutions": {
         "privilege": "DescribeAutomationExecutions",
@@ -811,7 +1013,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "describeAvailablePatches": {
         "privilege": "DescribeAvailablePatches",
@@ -841,6 +1056,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -864,6 +1084,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -887,6 +1112,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -904,11 +1134,16 @@
             "instance": {
                 "resourceName": "instance",
                 "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
-                "required": false,
+                "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -916,7 +1151,7 @@
             "managedInstance": {
                 "resourceName": "managed-instance",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:managed-instance/${InstanceId}",
-                "required": false,
+                "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -962,11 +1197,16 @@
             "instance": {
                 "resourceName": "instance",
                 "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
-                "required": false,
+                "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -974,7 +1214,7 @@
             "managedInstance": {
                 "resourceName": "managed-instance",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:managed-instance/${InstanceId}",
-                "required": false,
+                "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -1063,7 +1303,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "maintenancewindow": {
+                "resourceName": "maintenancewindow",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:maintenancewindow/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "describeMaintenanceWindowExecutions": {
         "privilege": "DescribeMaintenanceWindowExecutions",
@@ -1265,7 +1518,48 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getCalendar": {
+        "privilege": "GetCalendar",
+        "description": "Grants permission to view details of a specific calendar",
+        "accessLevel": "Read",
+        "apiDocumentationLink": null,
+        "service": "ssm",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "document": {
+                "resourceName": "document",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
+                    }
+                }
+            }
+        }
     },
     "getCalendarState": {
         "privilege": "GetCalendarState",
@@ -1285,6 +1579,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -1307,8 +1606,61 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetConnectionStatus.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
-        "resources": {}
+        "privConditions": {
+            "ssm:resourceTag/${TagKey}": {
+                "condition": "ssm:resourceTag/${TagKey}",
+                "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                "type": "String"
+            },
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "instance": {
+                "resourceName": "instance",
+                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "managedInstance": {
+                "resourceName": "managed-instance",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:managed-instance/${InstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task/${TaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "getDefaultPatchBaseline": {
         "privilege": "GetDefaultPatchBaseline",
@@ -1353,7 +1705,7 @@
         "privConditions": {
             "ssm:DocumentCategories": {
                 "condition": "ssm:DocumentCategories",
-                "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category",
+                "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
                 "type": "ArrayOfString"
             }
         },
@@ -1367,6 +1719,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -1519,6 +1876,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 }
             }
@@ -1617,7 +1979,13 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParametersByPath.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "ssm:Recursive": {
+                "condition": "ssm:Recursive",
+                "description": "Filters access by allowing traversing hierarchical structure of the Systems Manager parameters",
+                "type": "String"
+            }
+        },
         "resources": {
             "parameter": {
                 "resourceName": "parameter",
@@ -1727,7 +2095,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "listAssociations": {
         "privilege": "ListAssociations",
@@ -1742,7 +2123,7 @@
     "listCommandInvocations": {
         "privilege": "ListCommandInvocations",
         "description": "Grants permission to list information about command invocations sent to a specified instance",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListCommandInvocations.html",
         "service": "ssm",
         "dependentActions": [],
@@ -1752,7 +2133,7 @@
     "listCommands": {
         "privilege": "ListCommands",
         "description": "Grants permission to list the commands sent to a specified instance",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListCommands.html",
         "service": "ssm",
         "dependentActions": [],
@@ -1797,6 +2178,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -1820,6 +2206,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -1853,6 +2244,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 }
             },
@@ -1883,7 +2279,7 @@
     "listOpsItemEvents": {
         "privilege": "ListOpsItemEvents",
         "description": "Grants permission to view details about OpsItemEvents",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListOpsItemEvents.html",
         "service": "ssm",
         "dependentActions": [],
@@ -1893,7 +2289,7 @@
     "listOpsItemRelatedItems": {
         "privilege": "ListOpsItemRelatedItems",
         "description": "Grants permission to view details about OpsItem RelatedItems",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListOpsItemRelatedItems.html",
         "service": "ssm",
         "dependentActions": [],
@@ -1945,6 +2341,30 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
             "document": {
                 "resourceName": "document",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
@@ -1954,6 +2374,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -2002,6 +2427,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 }
             },
@@ -2049,6 +2479,39 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
+                    }
+                }
+            }
+        }
+    },
+    "putCalendar": {
+        "privilege": "PutCalendar",
+        "description": "Grants permission to create/edit a specific calendar",
+        "accessLevel": "Write",
+        "apiDocumentationLink": null,
+        "service": "ssm",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "document": {
+                "resourceName": "document",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -2071,6 +2534,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2125,6 +2593,11 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                "type": "ArrayOfString"
+            },
+            "ssm:Overwrite": {
+                "condition": "ssm:Overwrite",
+                "description": "Filters access by allowing Systems Manager parameters to be overwritten",
                 "type": "String"
             }
         },
@@ -2182,7 +2655,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -2263,8 +2736,38 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
             "document": {
                 "resourceName": "document",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
@@ -2273,6 +2776,28 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
+                    }
+                }
+            },
+            "instance": {
+                "resourceName": "instance",
+                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2322,6 +2847,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 }
             },
@@ -2340,6 +2870,18 @@
             "patchbaseline": {
                 "resourceName": "patchbaseline",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:patchbaseline/${PatchBaselineIdResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "task": {
+                "resourceName": "task",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task/${TaskId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -2393,7 +2935,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "sendCommand": {
         "privilege": "SendCommand",
@@ -2407,6 +2962,11 @@
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                 "type": "String"
+            },
+            "ssm:resourceTag/${TagKey}": {
+                "condition": "ssm:resourceTag/${TagKey}",
+                "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                "type": "String"
             }
         },
         "resources": {
@@ -2419,6 +2979,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -2436,6 +3001,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2467,7 +3037,13 @@
                 "resourceName": "association",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -2495,7 +3071,13 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartChangeRequestExecution.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "ssm:AutoApprove": {
+                "condition": "ssm:AutoApprove",
+                "description": "Filters access by verifying that a user has permission to start Change Manager workflows without a review step (with the exception of change freeze events)",
+                "type": "String"
+            }
+        },
         "resources": {
             "automationDefinition": {
                 "resourceName": "automation-definition",
@@ -2518,6 +3100,11 @@
                 "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
                 "type": "Bool"
             },
+            "ssm:resourceTag/${TagKey}": {
+                "condition": "ssm:resourceTag/${TagKey}",
+                "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
@@ -2534,6 +3121,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -2545,6 +3137,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2583,7 +3180,20 @@
         "service": "ssm",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "automationExecution": {
+                "resourceName": "automation-execution",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "terminateSession": {
         "privilege": "TerminateSession",
@@ -2638,7 +3248,13 @@
                 "resourceName": "association",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
             },
             "document": {
                 "resourceName": "document",
@@ -2649,6 +3265,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -2660,6 +3281,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2685,7 +3311,13 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "ssm:SourceInstanceARN": {
+                "condition": "ssm:SourceInstanceARN",
+                "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                "type": "String"
+            }
+        },
         "resources": {
             "document": {
                 "resourceName": "document",
@@ -2696,6 +3328,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             },
@@ -2707,6 +3344,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2743,6 +3385,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -2766,6 +3413,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -2789,6 +3441,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:DocumentCategories": {
+                        "condition": "ssm:DocumentCategories",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                        "type": "ArrayOfString"
                     }
                 }
             }
@@ -2801,13 +3458,25 @@
         "apiDocumentationLink": null,
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "ssm:SourceInstanceARN": {
+                "condition": "ssm:SourceInstanceARN",
+                "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                "type": "String"
+            }
+        },
         "resources": {
             "association": {
                 "resourceName": "association",
                 "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
             },
             "instance": {
                 "resourceName": "instance",
@@ -2817,6 +3486,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }
@@ -2842,8 +3516,44 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ssm",
         "dependentActions": [],
-        "privConditions": {},
-        "resources": {}
+        "privConditions": {
+            "ssm:SourceInstanceARN": {
+                "condition": "ssm:SourceInstanceARN",
+                "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "instance": {
+                "resourceName": "instance",
+                "resourceArn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "managedInstance": {
+                "resourceName": "managed-instance",
+                "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:managed-instance/${InstanceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateMaintenanceWindow": {
         "privilege": "UpdateMaintenanceWindow",
@@ -2977,6 +3687,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 }

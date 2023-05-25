@@ -3,17 +3,32 @@
         "resourceName": "campaign",
         "service": "iotfleetwise",
         "resourceArn": "arn:${Partition}:iotfleetwise:${Region}:${Account}:campaign/${CampaignName}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetCampaign": {
                 "privilege": "GetCampaign",
                 "description": "Grants permission to get summary information for a given campaign",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetCampaign.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetCampaign.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -21,7 +36,7 @@
                 "privilege": "DeleteCampaign",
                 "description": "Grants permission to delete a campaign",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DeleteCampaign.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -30,26 +45,68 @@
                 "privilege": "UpdateCampaign",
                 "description": "Grants permission to update the given campaign",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateCampaign.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateCampaign.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "decodermanifest": {
         "resourceName": "decodermanifest",
         "service": "iotfleetwise",
         "resourceArn": "arn:${Partition}:iotfleetwise:${Region}:${Account}:decoder-manifest/${Name}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListDecoderManifestNetworkInterfaces": {
                 "privilege": "ListDecoderManifestNetworkInterfaces",
                 "description": "Grants permission to list network interfaces associated to the existing decoder manifest",
                 "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_ListDecoderManifestNetworkInterfaces.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListDecoderManifestNetworkInterfaces.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -58,7 +115,7 @@
                 "privilege": "ListDecoderManifestSignals",
                 "description": "Grants permission to list decoder manifest signals",
                 "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_ListDecoderManifestSignals.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListDecoderManifestSignals.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -69,10 +126,19 @@
                 "privilege": "GetDecoderManifest",
                 "description": "Grants permission to get summary information for a given decoder manifest definition",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetDecoderManifest.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetDecoderManifest.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -80,8 +146,19 @@
                 "privilege": "CreateVehicle",
                 "description": "Grants permission to create a vehicle",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateVehicle.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateVehicle.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -89,7 +166,16 @@
                 "privilege": "DeleteDecoderManifest",
                 "description": "Grants permission to delete the given decoder manifest",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DeleteDecoderManifest.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteDecoderManifest.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ImportDecoderManifest": {
+                "privilege": "ImportDecoderManifest",
+                "description": "Grants permission to import an existing decoder manifest",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ImportDecoderManifest.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -98,7 +184,7 @@
                 "privilege": "UpdateDecoderManifest",
                 "description": "Grants permission to update a decoder manifest defnition",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateDecoderManifest.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateDecoderManifest.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -107,7 +193,7 @@
                 "privilege": "UpdateVehicle",
                 "description": "Grants permission to update the vehicle",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateVehicle.html",
                 "privConditions": {
                     "iotfleetwise:UpdateToModelManifestArn": {
                         "condition": "iotfleetwise:UpdateToModelManifestArn",
@@ -125,40 +211,91 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "fleet": {
         "resourceName": "fleet",
         "service": "iotfleetwise",
         "resourceArn": "arn:${Partition}:iotfleetwise:${Region}:${Account}:fleet/${FleetId}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetFleet": {
                 "privilege": "GetFleet",
                 "description": "Grants permission to get summary information for a fleet",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetFleet.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             },
             "ListVehiclesInFleet": {
                 "privilege": "ListVehiclesInFleet",
                 "description": "Grants permission to list vehicles in the given fleet",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_ListVehiclesInFleet.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListVehiclesInFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
         "writePrivileges": {
-            "AssociateVehicle": {
-                "privilege": "AssociateVehicle",
+            "AssociateVehicleFleet": {
+                "privilege": "AssociateVehicleFleet",
                 "description": "Grants permission to associate the given vehicle to a fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_AssociateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_AssociateVehicleFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -167,8 +304,19 @@
                 "privilege": "CreateCampaign",
                 "description": "Grants permission to create a campaign",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateCampaign.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -176,16 +324,16 @@
                 "privilege": "DeleteFleet",
                 "description": "Grants permission to delete a fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DeleteFleet.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             },
-            "DisassociateVehicle": {
-                "privilege": "DisassociateVehicle",
+            "DisassociateVehicleFleet": {
+                "privilege": "DisassociateVehicleFleet",
                 "description": "Grants permission to disassociate a vehicle from an existing fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DisassociateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DisassociateVehicleFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -194,26 +342,68 @@
                 "privilege": "UpdateFleet",
                 "description": "Grants permission to update the fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateFleet.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "modelmanifest": {
         "resourceName": "modelmanifest",
         "service": "iotfleetwise",
         "resourceArn": "arn:${Partition}:iotfleetwise:${Region}:${Account}:model-manifest/${Name}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListModelManifestNodes": {
                 "privilege": "ListModelManifestNodes",
                 "description": "Grants permission to list all nodes for the given model manifest",
                 "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_ListModelManifestNodes.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListModelManifestNodes.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -224,10 +414,19 @@
                 "privilege": "GetModelManifest",
                 "description": "Grants permission to get summary information for a given model manifest definition",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetModelManifest.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetModelManifest.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -235,8 +434,19 @@
                 "privilege": "CreateDecoderManifest",
                 "description": "Grants permission to create a decoder manifest for an existing model",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateDecoderManifest.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateDecoderManifest.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -244,8 +454,19 @@
                 "privilege": "CreateVehicle",
                 "description": "Grants permission to create a vehicle",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateVehicle.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateVehicle.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -253,7 +474,7 @@
                 "privilege": "DeleteModelManifest",
                 "description": "Grants permission to delete the given model manifest",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DeleteModelManifest.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteModelManifest.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -262,7 +483,7 @@
                 "privilege": "UpdateModelManifest",
                 "description": "Grants permission to update the given model manifest definition",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateModelManifest.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateModelManifest.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -271,7 +492,7 @@
                 "privilege": "UpdateVehicle",
                 "description": "Grants permission to update the vehicle",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateVehicle.html",
                 "privConditions": {
                     "iotfleetwise:UpdateToModelManifestArn": {
                         "condition": "iotfleetwise:UpdateToModelManifestArn",
@@ -289,20 +510,62 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "signalcatalog": {
         "resourceName": "signalcatalog",
         "service": "iotfleetwise",
         "resourceArn": "arn:${Partition}:iotfleetwise:${Region}:${Account}:signal-catalog/${Name}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetSignalCatalog": {
                 "privilege": "GetSignalCatalog",
                 "description": "Grants permission to get summary information for a specific signal catalog",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetSignalCatalog.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetSignalCatalog.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -311,10 +574,19 @@
                 "privilege": "ListSignalCatalogNodes",
                 "description": "Grants permission to list all nodes for a given signal catalog",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListSignalCatalogNodes.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -322,8 +594,19 @@
                 "privilege": "CreateCampaign",
                 "description": "Grants permission to create a campaign",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateCampaign.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -331,8 +614,19 @@
                 "privilege": "CreateFleet",
                 "description": "Grants permission to create a fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateFleet.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateFleet.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -340,8 +634,19 @@
                 "privilege": "CreateModelManifest",
                 "description": "Grants permission to create a model manifest definition",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateModelManifest.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateModelManifest.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -349,7 +654,7 @@
                 "privilege": "DeleteSignalCatalog",
                 "description": "Grants permission to delete a specific signal catalog",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DeleteSignalCatalog.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteSignalCatalog.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -358,27 +663,69 @@
                 "privilege": "UpdateSignalCatalog",
                 "description": "Grants permission to update a specific signal catalog definition",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateSignalCatalog.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateSignalCatalog.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "vehicle": {
         "resourceName": "vehicle",
         "service": "iotfleetwise",
         "resourceArn": "arn:${Partition}:iotfleetwise:${Region}:${Account}:vehicle/${VehicleId}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag key-value pairs attached to the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetVehicle": {
                 "privilege": "GetVehicle",
                 "description": "Grants permission to get summary information for a vehicle",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetVehicle.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -387,7 +734,7 @@
                 "privilege": "GetVehicleStatus",
                 "description": "Grants permission to get the status of the campaigns running on a specific vehicle",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_GetVehicleStatus.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_GetVehicleStatus.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -396,18 +743,27 @@
                 "privilege": "ListFleetsForVehicle",
                 "description": "Grants permission to list all the fleets that the given vehicle is associated with",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_ListFleetsForVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListFleetsForVehicle.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for a resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
-            "AssociateVehicle": {
-                "privilege": "AssociateVehicle",
+            "AssociateVehicleFleet": {
+                "privilege": "AssociateVehicleFleet",
                 "description": "Grants permission to associate the given vehicle to a fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_AssociateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_AssociateVehicleFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -416,8 +772,19 @@
                 "privilege": "CreateCampaign",
                 "description": "Grants permission to create a campaign",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_CreateCampaign.html",
-                "privConditions": {},
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -425,16 +792,16 @@
                 "privilege": "DeleteVehicle",
                 "description": "Grants permission to delete a vehicle",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DeleteVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteVehicle.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             },
-            "DisassociateVehicle": {
-                "privilege": "DisassociateVehicle",
+            "DisassociateVehicleFleet": {
+                "privilege": "DisassociateVehicleFleet",
                 "description": "Grants permission to disassociate a vehicle from an existing fleet",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_DisassociateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DisassociateVehicleFleet.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -443,7 +810,7 @@
                 "privilege": "UpdateVehicle",
                 "description": "Grants permission to update the vehicle",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/apireference/API_UpdateVehicle.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UpdateVehicle.html",
                 "privConditions": {
                     "iotfleetwise:UpdateToModelManifestArn": {
                         "condition": "iotfleetwise:UpdateToModelManifestArn",
@@ -461,6 +828,42 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add tags to a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from a resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

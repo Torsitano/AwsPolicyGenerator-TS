@@ -188,7 +188,7 @@
         "resources": {
             "association": {
                 "resourceName": "association",
-                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -250,6 +250,62 @@
                 "resourceName": "task",
                 "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:task/${TaskId}",
                 "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createFileCache": {
+        "privilege": "CreateFileCache",
+        "description": "Grants permission to create a new, empty, Amazon file cache",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileCache.html",
+        "service": "fsx",
+        "dependentActions": [
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs",
+            "fsx:CreateDataRepositoryAssociation",
+            "fsx:TagResource",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "s3:ListBucket"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "fileCache": {
+                "resourceName": "file-cache",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
+                "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -597,8 +653,56 @@
         "resources": {
             "association": {
                 "resourceName": "association",
-                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
                 "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteFileCache": {
+        "privilege": "DeleteFileCache",
+        "description": "Grants permission to delete a file cache, deleting its contents",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteFileCache.html",
+        "service": "fsx",
+        "dependentActions": [
+            "fsx:DeleteDataRepositoryAssociation"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "fileCache": {
+                "resourceName": "file-cache",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "association": {
+                "resourceName": "association",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
+                "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -813,6 +917,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "describeFileCaches": {
+        "privilege": "DescribeFileCaches",
+        "description": "Grants permission to return the descriptions of all file caches owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "describeFileSystemAliases": {
         "privilege": "DescribeFileSystemAliases",
         "description": "Grants permission to return the description of all DNS aliases owned by your Amazon FSx for Windows File Server file system",
@@ -933,7 +1047,7 @@
         "resources": {
             "association": {
                 "resourceName": "association",
-                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -946,6 +1060,18 @@
             "backup": {
                 "resourceName": "backup",
                 "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileCache": {
+                "resourceName": "file-cache",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1120,7 +1246,7 @@
         "resources": {
             "association": {
                 "resourceName": "association",
-                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1133,6 +1259,18 @@
             "backup": {
                 "resourceName": "backup",
                 "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileCache": {
+                "resourceName": "file-cache",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1221,7 +1359,7 @@
         "resources": {
             "association": {
                 "resourceName": "association",
-                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1234,6 +1372,18 @@
             "backup": {
                 "resourceName": "backup",
                 "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:backup/${BackupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fileCache": {
+                "resourceName": "file-cache",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1316,7 +1466,30 @@
         "resources": {
             "association": {
                 "resourceName": "association",
-                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemId}/${DataRepositoryAssociationId}",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:association/${FileSystemIdOrFileCacheId}/${DataRepositoryAssociationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFileCache": {
+        "privilege": "UpdateFileCache",
+        "description": "Grants permission to update file cache configuration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileCache.html",
+        "service": "fsx",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "fileCache": {
+                "resourceName": "file-cache",
+                "resourceArn": "arn:${Partition}:fsx:${Region}:${Account}:file-cache/${FileCacheId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

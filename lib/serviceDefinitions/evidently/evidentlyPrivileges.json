@@ -76,10 +76,30 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "dependentActions": []
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "iam:GetRole"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html"
+    },
+    "createSegment": {
+        "privilege": "CreateSegment",
+        "description": "Grants permission to create a segment",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html"
     },
     "deleteExperiment": {
         "privilege": "DeleteExperiment",
@@ -136,6 +156,20 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteProject.html"
+    },
+    "deleteSegment": {
+        "privilege": "DeleteSegment",
+        "description": "Grants permission to delete a segment",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "segment": {
+                "resourceType": "Segment",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteSegment.html"
     },
     "evaluateFeature": {
         "privilege": "EvaluateFeature",
@@ -221,6 +255,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_GetProject.html"
     },
+    "getSegment": {
+        "privilege": "GetSegment",
+        "description": "Grants permission to get segment details",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "segment": {
+                "resourceType": "Segment",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_GetSegment.html"
+    },
     "listExperiments": {
         "privilege": "ListExperiments",
         "description": "Grants permission to list experiments",
@@ -276,6 +324,34 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListProjects.html"
+    },
+    "listSegmentReferences": {
+        "privilege": "ListSegmentReferences",
+        "description": "Grants permission to list resources referencing a segment",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListSegmentReferences.html"
+    },
+    "listSegments": {
+        "privilege": "ListSegments",
+        "description": "Grants permission to list segments",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListSegments.html"
     },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
@@ -366,6 +442,36 @@
         "description": "Grants permission to tag resources",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "experiment": {
+                "resourceType": "Experiment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "feature": {
+                "resourceType": "Feature",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "launch": {
+                "resourceType": "Launch",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "project": {
+                "resourceType": "Project",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "segment": {
+                "resourceType": "Segment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -378,11 +484,55 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html"
     },
+    "testSegmentPattern": {
+        "privilege": "TestSegmentPattern",
+        "description": "Grants permission to test a segment pattern",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TestSegmentPattern.html"
+    },
     "untagResource": {
         "privilege": "UntagResource",
         "description": "Grants permission to untag resources",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "experiment": {
+                "resourceType": "Experiment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "feature": {
+                "resourceType": "Feature",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "launch": {
+                "resourceType": "Launch",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "project": {
+                "resourceType": "Project",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "segment": {
+                "resourceType": "Segment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -446,7 +596,10 @@
                 "resourceType": "Project",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
+                "dependentActions": [
+                    "iam:CreateServiceLinkedRole",
+                    "iam:GetRole"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html"

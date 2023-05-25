@@ -13,6 +13,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_AcceptEnvironmentAccountConnection.html"
     },
+    "cancelComponentDeployment": {
+        "privilege": "CancelComponentDeployment",
+        "description": "Grants permission to cancel component deployment",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_CancelComponentDeployment.html"
+    },
     "cancelEnvironmentDeployment": {
         "privilege": "CancelEnvironmentDeployment",
         "description": "Grants permission to cancel an environment deployment",
@@ -78,6 +92,29 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_CancelServicePipelineDeployment.html"
+    },
+    "createComponent": {
+        "privilege": "CreateComponent",
+        "description": "Grants permission to create component",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_CreateComponent.html"
     },
     "createEnvironment": {
         "privilege": "CreateEnvironment",
@@ -223,6 +260,15 @@
                 "resourceType": "repository",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
                 "dependentActions": []
             }
         },
@@ -373,6 +419,20 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_DeleteAccountRoles.html"
+    },
+    "deleteComponent": {
+        "privilege": "DeleteComponent",
+        "description": "Grants permission to delete component",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_DeleteComponent.html"
     },
     "deleteEnvironment": {
         "privilege": "DeleteEnvironment",
@@ -598,7 +658,21 @@
                 "dependentActions": []
             }
         },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_GetAccountRoles.html"
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_GetAccountSettings.html"
+    },
+    "getComponent": {
+        "privilege": "GetComponent",
+        "description": "Grants permission to describe a component",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_GetComponent.html"
     },
     "getEnvironment": {
         "privilege": "GetEnvironment",
@@ -823,6 +897,60 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_GetTemplateSyncStatus.html"
+    },
+    "listComponentOutputs": {
+        "privilege": "ListComponentOutputs",
+        "description": "Grants permission to list component outputs",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_ListComponentOutputs.html"
+    },
+    "listComponentProvisionedResources": {
+        "privilege": "ListComponentProvisionedResources",
+        "description": "Grants permission to list component provisioned resources",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_ListComponentProvisionedResources.html"
+    },
+    "listComponents": {
+        "privilege": "ListComponents",
+        "description": "Grants permission to list components",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "environment": {
+                "resourceType": "environment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "service": {
+                "resourceType": "service",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "serviceInstance": {
+                "resourceType": "service-instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_ListComponents.html"
     },
     "listEnvironmentAccountConnections": {
         "privilege": "ListEnvironmentAccountConnections",
@@ -1121,8 +1249,20 @@
         "description": "Grants permission to list tags of a resource",
         "accessLevel": "Read",
         "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "environment": {
                 "resourceType": "environment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "environmentAccountConnection": {
+                "resourceType": "environment-account-connection",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1147,6 +1287,12 @@
             },
             "environmentTemplateVersion": {
                 "resourceType": "environment-template-version",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "repository": {
+                "resourceType": "repository",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1229,8 +1375,20 @@
         "description": "Grants permission to add tags to a resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "environment": {
                 "resourceType": "environment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "environmentAccountConnection": {
+                "resourceType": "environment-account-connection",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1255,6 +1413,12 @@
             },
             "environmentTemplateVersion": {
                 "resourceType": "environment-template-version",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "repository": {
+                "resourceType": "repository",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1312,8 +1476,20 @@
         "description": "Grants permission to remove tags from a resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "environment": {
                 "resourceType": "environment",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "environmentAccountConnection": {
+                "resourceType": "environment-account-connection",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1338,6 +1514,12 @@
             },
             "environmentTemplateVersion": {
                 "resourceType": "environment-template-version",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "repository": {
+                "resourceType": "repository",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1419,7 +1601,21 @@
                 ]
             }
         },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_UpdateAccountRoles.html"
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_UpdateAccountSettings.html"
+    },
+    "updateComponent": {
+        "privilege": "UpdateComponent",
+        "description": "Grants permission to update component",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "component": {
+                "resourceType": "component",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_UpdateComponent.html"
     },
     "updateEnvironment": {
         "privilege": "UpdateEnvironment",
@@ -1514,20 +1710,6 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_UpdateEnvironmentTemplateVersion.html"
-    },
-    "updateRepository": {
-        "privilege": "UpdateRepository",
-        "description": "Grants permission to update a repository",
-        "accessLevel": "Write",
-        "resourceTypes": {
-            "repository": {
-                "resourceType": "repository",
-                "required": true,
-                "conditionKeys": [],
-                "dependentActions": []
-            }
-        },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/proton/latest/APIReference/API_UpdateRepository.html"
     },
     "updateService": {
         "privilege": "UpdateService",

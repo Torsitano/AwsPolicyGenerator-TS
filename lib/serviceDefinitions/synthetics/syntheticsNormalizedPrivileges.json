@@ -1,4 +1,38 @@
 {
+    "associateResource": {
+        "privilege": "AssociateResource",
+        "description": "Grants permission to associate a resource with a group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_AssociateResource.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "createCanary": {
         "privilege": "CreateCanary",
         "description": "Grants permission to create a canary",
@@ -15,7 +49,28 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createGroup": {
+        "privilege": "CreateGroup",
+        "description": "Grants permission to create a group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CreateGroup.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -27,11 +82,56 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
                 "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteGroup": {
+        "privilege": "DeleteGroup",
+        "description": "Grants permission to delete a group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteGroup.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -85,14 +185,59 @@
         "privConditions": {},
         "resources": {}
     },
+    "disassociateResource": {
+        "privilege": "DisassociateResource",
+        "description": "Grants permission to disassociate a resource from a group",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DisassociateResource.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "getCanary": {
         "privilege": "GetCanary",
-        "description": "Grants permission to get a canary details",
+        "description": "Grants permission to view the details of a canary",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
@@ -115,7 +260,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
@@ -131,9 +287,121 @@
             }
         }
     },
+    "getGroup": {
+        "privilege": "GetGroup",
+        "description": "Grants permission to view the details of a group",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetGroup.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listAssociatedGroups": {
+        "privilege": "ListAssociatedGroups",
+        "description": "Grants permission to list information about the associated groups of a canary",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_ListAssociatedGroups.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "canary": {
+                "resourceName": "canary",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listGroupResources": {
+        "privilege": "ListGroupResources",
+        "description": "Grants permission to list information about canaries in a group",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_ListGroupResources.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listGroups": {
+        "privilege": "ListGroups",
+        "description": "Grants permission to list information of all groups",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_ListGroups.html",
+        "service": "synthetics",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
-        "description": "Grants permission to list all tags and values associated with a canary",
+        "description": "Grants permission to list all tags and values associated with a resource",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_ListTagsForResource.html",
         "service": "synthetics",
@@ -143,6 +411,18 @@
             "canary": {
                 "resourceName": "canary",
                 "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -161,7 +441,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_StartCanary.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
@@ -184,7 +475,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_StopCanary.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
@@ -202,16 +504,39 @@
     },
     "tagResource": {
         "privilege": "TagResource",
-        "description": "Grants permission to add one or more tags to a canary",
+        "description": "Grants permission to add one or more tags to a resource",
         "accessLevel": "Tagging",
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
                 "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -225,16 +550,39 @@
     },
     "untagResource": {
         "privilege": "UntagResource",
-        "description": "Grants permission to remove one or more tags from a canary",
+        "description": "Grants permission to remove one or more tags from a resource",
         "accessLevel": "Tagging",
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UntagResource.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",
                 "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:canary:${CanaryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "group": {
+                "resourceName": "group",
+                "resourceArn": "arn:${Partition}:synthetics:${Region}:${Account}:group:${GroupId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -253,7 +601,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html",
         "service": "synthetics",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "canary": {
                 "resourceName": "canary",

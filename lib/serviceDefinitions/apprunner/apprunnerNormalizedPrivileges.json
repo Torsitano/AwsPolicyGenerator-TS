@@ -38,7 +38,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by actions based on the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -72,13 +72,47 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by actions based on the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createObservabilityConfiguration": {
+        "privilege": "CreateObservabilityConfiguration",
+        "description": "Grants permission to create an AWS App Runner observability configuration resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_CreateObservabilityConfiguration.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by actions based on the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by actions based on the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -106,7 +140,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by actions based on the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "apprunner:ConnectionArn": {
                 "condition": "apprunner:ConnectionArn",
@@ -116,6 +150,11 @@
             "apprunner:AutoScalingConfigurationArn": {
                 "condition": "apprunner:AutoScalingConfigurationArn",
                 "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated AutoScalingConfiguration resource",
+                "type": "ARN"
+            },
+            "apprunner:ObservabilityConfigurationArn": {
+                "condition": "apprunner:ObservabilityConfigurationArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated ObservabilityConfiguration resource",
                 "type": "ARN"
             },
             "apprunner:VpcConnectorArn": {
@@ -161,6 +200,18 @@
                     }
                 }
             },
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "vpcconnector": {
                 "resourceName": "vpcconnector",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:vpcconnector/${VpcConnectorName}/${VpcConnectorVersion}/${VpcConnectorId}",
@@ -191,7 +242,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by actions based on the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -244,6 +295,29 @@
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteObservabilityConfiguration": {
+        "privilege": "DeleteObservabilityConfiguration",
+        "description": "Grants permission to delete an AWS App Runner observability configuration resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteObservabilityConfiguration.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -336,6 +410,29 @@
             "service": {
                 "resourceName": "service",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:service/${ServiceName}/${ServiceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeObservabilityConfiguration": {
+        "privilege": "DescribeObservabilityConfiguration",
+        "description": "Grants permission to retrieve the description of an AWS App Runner observability configuration resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeObservabilityConfiguration.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -459,6 +556,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "listObservabilityConfigurations": {
+        "privilege": "ListObservabilityConfigurations",
+        "description": "Grants permission to retrieve a list of AWS App Runner observability configurations in your AWS account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/apprunner/latest/api/API_ListObservabilityConfigurations.html",
+        "service": "apprunner",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listOperations": {
         "privilege": "ListOperations",
         "description": "Grants permission to retrieve a list of operations that occurred on an AWS App Runner service resource",
@@ -516,6 +623,18 @@
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -641,7 +760,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by actions based on the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -665,6 +784,18 @@
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -711,7 +842,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by actions based on the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -730,6 +861,18 @@
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -783,6 +926,11 @@
                 "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated AutoScalingConfiguration resource",
                 "type": "ARN"
             },
+            "apprunner:ObservabilityConfigurationArn": {
+                "condition": "apprunner:ObservabilityConfigurationArn",
+                "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated ObservabilityConfiguration resource",
+                "type": "ARN"
+            },
             "apprunner:VpcConnectorArn": {
                 "condition": "apprunner:VpcConnectorArn",
                 "description": "Filters access by the CreateService and UpdateService actions based on the ARN of an associated VpcConnector resource",
@@ -817,6 +965,18 @@
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:connection/${ConnectionName}/${ConnectionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by actions based on tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "observabilityconfiguration": {
+                "resourceName": "observabilityconfiguration",
+                "resourceArn": "arn:${Partition}:apprunner:${Region}:${Account}:observabilityconfiguration/${ObservabilityConfigurationName}/${ObservabilityConfigurationVersion}/${ObservabilityConfigurationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

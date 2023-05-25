@@ -15,7 +15,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -59,7 +59,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -200,7 +200,16 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_AssociateFileSystem.html",
         "service": "storagegateway",
-        "dependentActions": [],
+        "dependentActions": [
+            "ds:DescribeDirectories",
+            "ec2:DescribeNetworkInterfaces",
+            "fsx:DescribeFileSystems",
+            "iam:CreateServiceLinkedRole",
+            "logs:CreateLogDelivery",
+            "logs:GetLogDelivery",
+            "logs:ListLogDeliveries",
+            "logs:UpdateLogDelivery"
+        ],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -210,7 +219,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -372,7 +381,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -418,7 +427,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -452,7 +461,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -477,7 +486,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_CreateSnapshot.html",
         "service": "storagegateway",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "volume": {
                 "resourceName": "volume",
@@ -500,7 +520,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_CreateSnapshotFromVolumeRecoveryPoint.html",
         "service": "storagegateway",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "volume": {
                 "resourceName": "volume",
@@ -532,7 +563,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -566,7 +597,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -587,7 +618,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -633,7 +664,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1752,7 +1783,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -2118,7 +2149,13 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_UpdateFileSystemAssociation.html",
         "service": "storagegateway",
-        "dependentActions": [],
+        "dependentActions": [
+            "logs:CreateLogDelivery",
+            "logs:DeleteLogDelivery",
+            "logs:GetLogDelivery",
+            "logs:ListLogDeliveries",
+            "logs:UpdateLogDelivery"
+        ],
         "privConditions": {},
         "resources": {
             "fsAssociation": {
@@ -2326,7 +2363,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_UpdateSnapshotSchedule.html",
         "service": "storagegateway",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "volume": {
                 "resourceName": "volume",

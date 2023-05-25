@@ -3,7 +3,13 @@
         "resourceName": "contact",
         "service": "ssmContacts",
         "resourceArn": "arn:${Partition}:ssm-contacts:${Region}:${Account}:contact/${ContactAlias}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListContactChannels": {
                 "privilege": "ListContactChannels",
@@ -18,7 +24,7 @@
                 "privilege": "ListPagesByContact",
                 "description": "Grants permission to list all pages sent to a contact",
                 "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_ListPagesByContacts.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_ListPagesByContact.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -59,7 +65,18 @@
                 "description": "Grants permission to create a contact",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_CreateContact.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [
                     "ssm-contacts:AssociateContact"
                 ],
@@ -79,15 +96,6 @@
                 "description": "Grants permission to delete a contact",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_DeleteContact.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "DeleteContactPolicy": {
-                "privilege": "DeleteContactPolicy",
-                "description": "Grants permission to delete a contact's resource policy",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_DeleteContactPolicy.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -120,15 +128,6 @@
                     "ssm-contacts:AssociateContact"
                 ],
                 "required": true
-            },
-            "UpdateContactPolicy": {
-                "privilege": "UpdateContactPolicy",
-                "description": "Grants permission to update a contact's resource policy",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_UpdateContactPolicy.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
             }
         },
         "permManPrivileges": {
@@ -148,7 +147,18 @@
                 "description": "Grants permission to add tags to a response plan",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_TagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -157,7 +167,13 @@
                 "description": "Grants permission to remove tags from a response plan",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_SSMContacts_UntagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }

@@ -292,6 +292,7 @@
             "ec2:MetadataHttpTokens",
             "ec2:NewInstanceProfile",
             "ec2:PlacementGroup",
+            "ec2:ProductCode",
             "ec2:Region",
             "ec2:ResourceTag/${TagKey}",
             "ec2:RootDeviceType",
@@ -315,6 +316,7 @@
         "arn": "arn:${Partition}:ec2::${Account}:ipam/${IpamId}",
         "conditionKeys": [
             "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
             "aws:TagKeys",
             "ec2:Attribute",
             "ec2:Attribute/${AttributeName}",
@@ -327,6 +329,7 @@
         "arn": "arn:${Partition}:ec2::${Account}:ipam-pool/${IpamPoolId}",
         "conditionKeys": [
             "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
             "aws:TagKeys",
             "ec2:Attribute",
             "ec2:Attribute/${AttributeName}",
@@ -339,9 +342,21 @@
         "arn": "arn:${Partition}:ec2::${Account}:ipam-scope/${IpamScopeId}",
         "conditionKeys": [
             "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
             "aws:TagKeys",
             "ec2:Attribute",
             "ec2:Attribute/${AttributeName}",
+            "ec2:Region",
+            "ec2:ResourceTag/${TagKey}"
+        ]
+    },
+    "coipPool": {
+        "resource": "coip-pool",
+        "arn": "arn:${Partition}:ec2:${Region}:${Account}:coip-pool/${Ipv4PoolCoipId}",
+        "conditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
+            "aws:TagKeys",
             "ec2:Region",
             "ec2:ResourceTag/${TagKey}"
         ]
@@ -498,6 +513,7 @@
         "arn": "arn:${Partition}:ec2:${Region}:${Account}:network-insights-access-scope-analysis/${NetworkInsightsAccessScopeAnalysisId}",
         "conditionKeys": [
             "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
             "aws:TagKeys",
             "ec2:Region",
             "ec2:ResourceTag/${TagKey}"
@@ -508,6 +524,7 @@
         "arn": "arn:${Partition}:ec2:${Region}:${Account}:network-insights-access-scope/${NetworkInsightsAccessScopeId}",
         "conditionKeys": [
             "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
             "aws:TagKeys",
             "ec2:Region",
             "ec2:ResourceTag/${TagKey}"
@@ -840,6 +857,28 @@
             "ec2:ResourceTag/${TagKey}"
         ]
     },
+    "transitGatewayPolicyTable": {
+        "resource": "transit-gateway-policy-table",
+        "arn": "arn:${Partition}:ec2:${Region}:${Account}:transit-gateway-policy-table/${TransitGatewayPolicyTableId}",
+        "conditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
+            "aws:TagKeys",
+            "ec2:Region",
+            "ec2:ResourceTag/${TagKey}"
+        ]
+    },
+    "transitGatewayRouteTableAnnouncement": {
+        "resource": "transit-gateway-route-table-announcement",
+        "arn": "arn:${Partition}:ec2:${Region}:${Account}:transit-gateway-route-table-announcement/${TransitGatewayRouteTableAnnouncementId}",
+        "conditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
+            "aws:TagKeys",
+            "ec2:Region",
+            "ec2:ResourceTag/${TagKey}"
+        ]
+    },
     "transitGatewayRouteTable": {
         "resource": "transit-gateway-route-table",
         "arn": "arn:${Partition}:ec2:${Region}:${Account}:transit-gateway-route-table/${TransitGatewayRouteTableId}",
@@ -877,6 +916,17 @@
             "ec2:VolumeType"
         ]
     },
+    "vpcEndpointConnection": {
+        "resource": "vpc-endpoint-connection",
+        "arn": "arn:${Partition}:ec2:${Region}:${Account}:vpc-endpoint-connection/${VpcEndpointConnectionId}",
+        "conditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
+            "aws:TagKeys",
+            "ec2:Region",
+            "ec2:ResourceTag/${TagKey}"
+        ]
+    },
     "vpcEndpoint": {
         "resource": "vpc-endpoint",
         "arn": "arn:${Partition}:ec2:${Region}:${Account}:vpc-endpoint/${VpcEndpointId}",
@@ -904,6 +954,17 @@
             "ec2:Region",
             "ec2:ResourceTag/${TagKey}",
             "ec2:VpceServicePrivateDnsName"
+        ]
+    },
+    "vpcEndpointServicePermission": {
+        "resource": "vpc-endpoint-service-permission",
+        "arn": "arn:${Partition}:ec2:${Region}:${Account}:vpc-endpoint-service-permission/${VpcEndpointServicePermissionId}",
+        "conditionKeys": [
+            "aws:RequestTag/${TagKey}",
+            "aws:ResourceTag/${TagKey}",
+            "aws:TagKeys",
+            "ec2:Region",
+            "ec2:ResourceTag/${TagKey}"
         ]
     },
     "vpcFlowLog": {
@@ -954,11 +1015,7 @@
         "resource": "vpn-connection-device-type",
         "arn": "arn:${Partition}:ec2:${Region}:${Account}:vpn-connection-device-type/${VpnConnectionDeviceTypeId}",
         "conditionKeys": [
-            "aws:RequestTag/${TagKey}",
-            "aws:ResourceTag/${TagKey}",
-            "aws:TagKeys",
-            "ec2:Region",
-            "ec2:ResourceTag/${TagKey}"
+            "ec2:Region"
         ]
     },
     "vpnConnection": {

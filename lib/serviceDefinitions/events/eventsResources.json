@@ -11,9 +11,16 @@
             "aws:ResourceTag/${TagKey}"
         ]
     },
-    "rule": {
-        "resource": "rule",
-        "arn": "arn:${Partition}:events:${Region}:${Account}:rule/[${EventBusName}/]${RuleName}",
+    "ruleOnDefaultEventBus": {
+        "resource": "rule-on-default-event-bus",
+        "arn": "arn:${Partition}:events:${Region}:${Account}:rule/${RuleName}",
+        "conditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+        ]
+    },
+    "ruleOnCustomEventBus": {
+        "resource": "rule-on-custom-event-bus",
+        "arn": "arn:${Partition}:events:${Region}:${Account}:rule/${EventBusName}/${RuleName}",
         "conditionKeys": [
             "aws:ResourceTag/${TagKey}"
         ]
@@ -36,6 +43,11 @@
     "apiDestination": {
         "resource": "api-destination",
         "arn": "arn:${Partition}:events:${Region}:${Account}:api-destination/${ApiDestinationName}",
+        "conditionKeys": []
+    },
+    "endpoint": {
+        "resource": "endpoint",
+        "arn": "arn:${Partition}:events:${Region}:${Account}:endpoint/${EndpointName}",
         "conditionKeys": []
     }
 }

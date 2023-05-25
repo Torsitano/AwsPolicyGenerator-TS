@@ -2,11 +2,11 @@
     "user": {
         "resourceName": "user",
         "service": "transfer",
-        "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -23,7 +23,7 @@
             },
             "ListTagsForResource": {
                 "privilege": "ListTagsForResource",
-                "description": "Grants permission to list tags for a server, a user, or a workflow",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
                 "privConditions": {},
@@ -84,18 +84,18 @@
         "tagPrivileges": {
             "TagResource": {
                 "privilege": "TagResource",
-                "description": "Grants permission to tag a server or a user",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -104,14 +104,14 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permission to untag a server, a user, or a workflow",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -122,11 +122,11 @@
     "server": {
         "resourceName": "server",
         "service": "transfer",
-        "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -169,9 +169,27 @@
                 "dependentActions": [],
                 "required": true
             },
+            "ListAgreements": {
+                "privilege": "ListAgreements",
+                "description": "Grants permission to list agreements",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListAgreements.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListHostKeys": {
+                "privilege": "ListHostKeys",
+                "description": "Grants permission to list host keys associated with a server",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListHostKeys.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "ListTagsForResource": {
                 "privilege": "ListTagsForResource",
-                "description": "Grants permission to list tags for a server, a user, or a workflow",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
                 "privConditions": {},
@@ -191,6 +209,28 @@
                 ],
                 "required": true
             },
+            "CreateAgreement": {
+                "privilege": "CreateAgreement",
+                "description": "Grants permission to add an agreement associated with a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateAgreement.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            },
             "CreateUser": {
                 "privilege": "CreateUser",
                 "description": "Grants permission to add a user associated with a server",
@@ -199,12 +239,12 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -228,6 +268,26 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteServer.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ImportHostKey": {
+                "privilege": "ImportHostKey",
+                "description": "Grants permission to add a host key to a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ImportHostKey.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -265,18 +325,18 @@
         "tagPrivileges": {
             "TagResource": {
                 "privilege": "TagResource",
-                "description": "Grants permission to tag a server or a user",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -285,14 +345,14 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permission to untag a server, a user, or a workflow",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -303,11 +363,11 @@
     "workflow": {
         "resourceName": "workflow",
         "service": "transfer",
-        "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by the tags associated with the resource",
                 "type": "String"
             }
         },
@@ -342,7 +402,7 @@
             },
             "ListTagsForResource": {
                 "privilege": "ListTagsForResource",
-                "description": "Grants permission to list tags for a server, a user, or a workflow",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
                 "privConditions": {},
@@ -374,18 +434,18 @@
         "tagPrivileges": {
             "TagResource": {
                 "privilege": "TagResource",
-                "description": "Grants permission to tag a server or a user",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
                     }
                 },
@@ -394,14 +454,482 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permission to untag a server, a user, or a workflow",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "certificate": {
+        "resourceName": "certificate",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeCertificate": {
+                "privilege": "DescribeCertificate",
+                "description": "Grants permission to describe a certificate",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeCertificate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteCertificate": {
+                "privilege": "DeleteCertificate",
+                "description": "Grants permission to delete certificate",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteCertificate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateCertificate": {
+                "privilege": "UpdateCertificate",
+                "description": "Grants permission to update a certificate",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateCertificate.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
                         "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "connector": {
+        "resourceName": "connector",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeConnector": {
+                "privilege": "DescribeConnector",
+                "description": "Grants permission to describe a connector",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeConnector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteConnector": {
+                "privilege": "DeleteConnector",
+                "description": "Grants permission to delete connector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteConnector.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StartFileTransfer": {
+                "privilege": "StartFileTransfer",
+                "description": "Grants permission to initiate a connector file transfer",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_StartFileTransfer.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateConnector": {
+                "privilege": "UpdateConnector",
+                "description": "Grants permission to update a connector",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateConnector.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "profile": {
+        "resourceName": "profile",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeProfile": {
+                "privilege": "DescribeProfile",
+                "description": "Grants permission to describe a profile",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteProfile": {
+                "privilege": "DeleteProfile",
+                "description": "Grants permission to delete profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateProfile": {
+                "privilege": "UpdateProfile",
+                "description": "Grants permission to update a profile",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateProfile.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "agreement": {
+        "resourceName": "agreement",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeAgreement": {
+                "privilege": "DescribeAgreement",
+                "description": "Grants permission to describe an agreement assigned to a server",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeAgreement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteAgreement": {
+                "privilege": "DeleteAgreement",
+                "description": "Grants permission to delete agreement",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteAgreement.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAgreement": {
+                "privilege": "UpdateAgreement",
+                "description": "Grants permission to update an agreement",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateAgreement.html",
+                "privConditions": {},
+                "dependentActions": [
+                    "iam:PassRole"
+                ],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "hostKey": {
+        "resourceName": "host-key",
+        "service": "transfer",
+        "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeHostKey": {
+                "privilege": "DescribeHostKey",
+                "description": "Grants permission to describe a host key associated with a server",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeHostKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an AWS Transfer Family resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteHostKey": {
+                "privilege": "DeleteHostKey",
+                "description": "Grants permission to delete a host key associated with a server",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteHostKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateHostKey": {
+                "privilege": "UpdateHostKey",
+                "description": "Grants permission to update a host key",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateHostKey.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to tag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to untag an AWS Transfer Family resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],

@@ -67,7 +67,7 @@
                 "privilege": "DeletePartnerEventSource",
                 "description": "Grants permission to delete partner event sources",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DeletePartnerEventSource",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DeletePartnerEventSource.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -116,6 +116,15 @@
             }
         },
         "writePrivileges": {
+            "CreateArchive": {
+                "privilege": "CreateArchive",
+                "description": "Grants permission to create a new archive",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateArchive.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "CreateEventBus": {
                 "privilege": "CreateEventBus",
                 "description": "Grants permission to create event buses",
@@ -130,7 +139,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the tags in the request to event bus and rule actions",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -140,7 +149,7 @@
                 "privilege": "DeleteEventBus",
                 "description": "Grants permission to delete event buses",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DeletePartnerEventSource",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DeletePartnerEventSource.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -160,16 +169,6 @@
                         "condition": "events:eventBusInvocation",
                         "description": "Filters access by whether the event was generated via API or cross-account bus invocation to PutEvents actions",
                         "type": "String"
-                    },
-                    "aws:SourceArn": {
-                        "condition": "aws:SourceArn",
-                        "description": "Filters access by the Amazon Resource Name (ARN) of the source making the request to PutEvents actions",
-                        "type": "String"
-                    },
-                    "aws:SourceAccount": {
-                        "condition": "aws:SourceAccount",
-                        "description": "Filters access by the source account of the request to PutEvents actions",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -187,7 +186,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the tags in the request to event bus and rule actions",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -212,7 +211,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the tags in the request to event bus and rule actions",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "events:creatorAccount": {
                         "condition": "events:creatorAccount",
@@ -225,10 +224,10 @@
             }
         }
     },
-    "rule": {
-        "resourceName": "rule",
+    "ruleOnDefaultEventBus": {
+        "resourceName": "rule-on-default-event-bus",
         "service": "events",
-        "resourceArn": "arn:${Partition}:events:${Region}:${Account}:rule/[${EventBusName}/]${RuleName}",
+        "resourceArn": "arn:${Partition}:events:${Region}:${Account}:rule/${RuleName}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
@@ -265,7 +264,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         },
         "readPrivileges": {
@@ -282,7 +281,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         },
         "writePrivileges": {
@@ -304,7 +303,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "DisableRule": {
                 "privilege": "DisableRule",
@@ -324,7 +323,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "EnableRule": {
                 "privilege": "EnableRule",
@@ -344,7 +343,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "PutRule": {
                 "privilege": "PutRule",
@@ -380,7 +379,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the tags in the request to event bus and rule actions",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "events:creatorAccount": {
                         "condition": "events:creatorAccount",
@@ -394,7 +393,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "PutTargets": {
                 "privilege": "PutTargets",
@@ -419,7 +418,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             },
             "RemoveTargets": {
                 "privilege": "RemoveTargets",
@@ -439,7 +438,7 @@
                     }
                 },
                 "dependentActions": [],
-                "required": true
+                "required": false
             }
         },
         "permManPrivileges": {},
@@ -453,7 +452,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the tags in the request to event bus and rule actions",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -478,7 +477,273 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the tags in the request to event bus and rule actions",
+                        "type": "ArrayOfString"
+                    },
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
                         "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
+    "ruleOnCustomEventBus": {
+        "resourceName": "rule-on-custom-event-bus",
+        "service": "events",
+        "resourceArn": "arn:${Partition}:events:${Region}:${Account}:rule/${EventBusName}/${RuleName}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tag-value associated with the resource to event bus and rule actions",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve a list of tags associated with an Amazon EventBridge resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "ListTargetsByRule": {
+                "privilege": "ListTargetsByRule",
+                "description": "Grants permission to retrieve a list of targets defined for a rule",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeRule": {
+                "privilege": "DescribeRule",
+                "description": "Grants permission to retrieve details about rules",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DescribeRule.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteRule": {
+                "privilege": "DeleteRule",
+                "description": "Grants permission to delete rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DeleteRule.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    },
+                    "events:ManagedBy": {
+                        "condition": "events:ManagedBy",
+                        "description": "Filters access by AWS services. If a rule is created by an AWS service on your behalf, the value is the principal name of the service that created the rule",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "DisableRule": {
+                "privilege": "DisableRule",
+                "description": "Grants permission to disable rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DisableRule.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    },
+                    "events:ManagedBy": {
+                        "condition": "events:ManagedBy",
+                        "description": "Filters access by AWS services. If a rule is created by an AWS service on your behalf, the value is the principal name of the service that created the rule",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "EnableRule": {
+                "privilege": "EnableRule",
+                "description": "Grants permission to enable rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_EnableRule.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    },
+                    "events:ManagedBy": {
+                        "condition": "events:ManagedBy",
+                        "description": "Filters access by AWS services. If a rule is created by an AWS service on your behalf, the value is the principal name of the service that created the rule",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PutRule": {
+                "privilege": "PutRule",
+                "description": "Grants permission to create or updates rules",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutRule.html",
+                "privConditions": {
+                    "events:detail.userIdentity.principalId": {
+                        "condition": "events:detail.userIdentity.principalId",
+                        "description": "Filters access by the literal string for the detail.useridentity.principalid field of the event to PutRule actions",
+                        "type": "String"
+                    },
+                    "events:source": {
+                        "condition": "events:source",
+                        "description": "Filters access by the AWS service or AWS partner event source that generated the event to PutEvents and PutRule actions. Matches the literal string of the source field of the event",
+                        "type": "ArrayOfString"
+                    },
+                    "events:detail.service": {
+                        "condition": "events:detail.service",
+                        "description": "Filters access by the literal string for the detail.service field of the event to PutRule actions",
+                        "type": "String"
+                    },
+                    "events:detail.eventTypeCode": {
+                        "condition": "events:detail.eventTypeCode",
+                        "description": "Filters access by the literal string for the detail.eventTypeCode field of the event to PutRule actions",
+                        "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags to event bus and rule actions",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tags in the request to event bus and rule actions",
+                        "type": "ArrayOfString"
+                    },
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    },
+                    "events:ManagedBy": {
+                        "condition": "events:ManagedBy",
+                        "description": "Filters access by AWS services. If a rule is created by an AWS service on your behalf, the value is the principal name of the service that created the rule",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "PutTargets": {
+                "privilege": "PutTargets",
+                "description": "Grants permission to add targets to a rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html",
+                "privConditions": {
+                    "events:TargetArn": {
+                        "condition": "events:TargetArn",
+                        "description": "Filters access by the ARN of a target that can be put to a rule to PutTargets actions",
+                        "type": "ArrayOfARN"
+                    },
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    },
+                    "events:ManagedBy": {
+                        "condition": "events:ManagedBy",
+                        "description": "Filters access by AWS services. If a rule is created by an AWS service on your behalf, the value is the principal name of the service that created the rule",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTargets": {
+                "privilege": "RemoveTargets",
+                "description": "Grants permission to removes targets from a rule",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemoveTargets.html",
+                "privConditions": {
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    },
+                    "events:ManagedBy": {
+                        "condition": "events:ManagedBy",
+                        "description": "Filters access by AWS services. If a rule is created by an AWS service on your behalf, the value is the principal name of the service that created the rule",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add a tag to an Amazon EventBridge resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_TagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tags in the request to event bus and rule actions",
+                        "type": "ArrayOfString"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags to event bus and rule actions",
+                        "type": "String"
+                    },
+                    "events:creatorAccount": {
+                        "condition": "events:creatorAccount",
+                        "description": "Filters access by the account the rule was created in to rule actions",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove a tag from an Amazon EventBridge resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UntagResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tags in the request to event bus and rule actions",
+                        "type": "ArrayOfString"
                     },
                     "events:creatorAccount": {
                         "condition": "events:creatorAccount",
@@ -707,6 +972,67 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdateApiDestination.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
+    "endpoint": {
+        "resourceName": "endpoint",
+        "service": "events",
+        "resourceArn": "arn:${Partition}:events:${Region}:${Account}:endpoint/${EndpointName}",
+        "resourceConditions": {},
+        "listPrivileges": {},
+        "readPrivileges": {
+            "DescribeEndpoint": {
+                "privilege": "DescribeEndpoint",
+                "description": "Grants permission to retrieve details about an endpoint",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DescribeEndpoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateEndpoint": {
+                "privilege": "CreateEndpoint",
+                "description": "Grants permission to create an endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEndpoint.html",
+                "privConditions": {
+                    "events:EventBusArn": {
+                        "condition": "events:EventBusArn",
+                        "description": "Filters access by the ARN of the event buses that can be associated with an endpoint to CreateEndpoint and UpdateEndpoint actions",
+                        "type": "ArrayOfARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteEndpoint": {
+                "privilege": "DeleteEndpoint",
+                "description": "Grants permission to delete an endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DeleteEndpoint.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateEndpoint": {
+                "privilege": "UpdateEndpoint",
+                "description": "Grants permission to update an endpoint",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UpdateEndpoint.html",
+                "privConditions": {
+                    "events:EventBusArn": {
+                        "condition": "events:EventBusArn",
+                        "description": "Filters access by the ARN of the event buses that can be associated with an endpoint to CreateEndpoint and UpdateEndpoint actions",
+                        "type": "ArrayOfARN"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }

@@ -79,7 +79,10 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "dependentActions": []
+                "dependentActions": [
+                    "iam:DeleteRolePolicy",
+                    "iam:PutRolePolicy"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateIPSet.html"
@@ -258,6 +261,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteThreatIntelSet.html"
     },
+    "describeMalwareScans": {
+        "privilege": "DescribeMalwareScans",
+        "description": "Grants permission to retrieve details about malware scans",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeMalwareScans.html"
+    },
     "describeOrganizationConfiguration": {
         "privilege": "DescribeOrganizationConfiguration",
         "description": "Grants permission to retrieve details about the delegated administrator associated with a GuardDuty detector",
@@ -302,7 +319,7 @@
     },
     "disassociateFromMasterAccount": {
         "privilege": "DisassociateFromMasterAccount",
-        "description": "Grants permission to disassociate a GuardDuty member account from its GuardDuty master account",
+        "description": "Grants permission to disassociate a GuardDuty member account from its GuardDuty administrator account",
         "accessLevel": "Write",
         "resourceTypes": {
             "": {
@@ -316,7 +333,7 @@
     },
     "disassociateMembers": {
         "privilege": "DisassociateMembers",
-        "description": "Grants permission to disassociate GuardDuty member accounts from their master GuardDuty account",
+        "description": "Grants permission to disassociate GuardDuty member accounts from their administrator GuardDuty account",
         "accessLevel": "Write",
         "resourceTypes": {
             "": {
@@ -426,9 +443,23 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetInvitationsCount.html"
     },
+    "getMalwareScanSettings": {
+        "privilege": "GetMalwareScanSettings",
+        "description": "Grants permission to retrieve the malware scan settings",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetMalwareScanSettings.html"
+    },
     "getMasterAccount": {
         "privilege": "GetMasterAccount",
-        "description": "Grants permission to retrieve details of the GuardDuty master account associated with a member account",
+        "description": "Grants permission to retrieve details of the GuardDuty administrator account associated with a member account",
         "accessLevel": "Read",
         "resourceTypes": {
             "": {
@@ -456,7 +487,7 @@
     },
     "getMembers": {
         "privilege": "GetMembers",
-        "description": "Grants permission to retrieve the member accounts associated with a master account",
+        "description": "Grants permission to retrieve the member accounts associated with an administrator account",
         "accessLevel": "Read",
         "resourceTypes": {
             "": {
@@ -568,7 +599,7 @@
     },
     "listInvitations": {
         "privilege": "ListInvitations",
-        "description": "Grants permission to retrieve a lists of all of the GuardDuty membership invitations that were sent to an AWS account",
+        "description": "Grants permission to retrieve a list of all of the GuardDuty membership invitations that were sent to an AWS account",
         "accessLevel": "List",
         "resourceTypes": {
             "": {
@@ -582,7 +613,7 @@
     },
     "listMembers": {
         "privilege": "ListMembers",
-        "description": "Grants permission to retrierve a lsit of GuardDuty member accounts associated with a master account",
+        "description": "Grants permission to retrieve a list of GuardDuty member accounts associated with an administrator account",
         "accessLevel": "List",
         "resourceTypes": {
             "": {
@@ -842,10 +873,27 @@
                 "resourceType": "ipset",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
+                "dependentActions": [
+                    "iam:DeleteRolePolicy",
+                    "iam:PutRolePolicy"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html"
+    },
+    "updateMalwareScanSettings": {
+        "privilege": "UpdateMalwareScanSettings",
+        "description": "Grants permission to update the malware scan settings",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateMalwareScanSettings.html"
     },
     "updateMemberDetectors": {
         "privilege": "UpdateMemberDetectors",
@@ -901,7 +949,10 @@
                 "resourceType": "threatintelset",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
+                "dependentActions": [
+                    "iam:DeleteRolePolicy",
+                    "iam:PutRolePolicy"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html"

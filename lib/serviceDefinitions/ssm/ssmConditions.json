@@ -12,21 +12,26 @@
     "aws:TagKeys": {
         "condition": "aws:TagKeys",
         "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+        "type": "ArrayOfString"
+    },
+    "ssm:AutoApprove": {
+        "condition": "ssm:AutoApprove",
+        "description": "Filters access by verifying that a user has permission to start Change Manager workflows without a review step (with the exception of change freeze events)",
         "type": "String"
     },
     "ssm:DocumentCategories": {
         "condition": "ssm:DocumentCategories",
-        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category",
+        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
         "type": "ArrayOfString"
     },
     "ssm:Overwrite": {
         "condition": "ssm:Overwrite",
-        "description": "Filters access by controlling whether the values for specified resources can be overwritten",
+        "description": "Filters access by allowing Systems Manager parameters to be overwritten",
         "type": "String"
     },
     "ssm:Recursive": {
         "condition": "ssm:Recursive",
-        "description": "Filters access by resources created in a hierarchical structure",
+        "description": "Filters access by allowing traversing hierarchical structure of the Systems Manager parameters",
         "type": "String"
     },
     "ssm:SessionDocumentAccessCheck": {
@@ -34,14 +39,24 @@
         "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
         "type": "Bool"
     },
+    "ssm:SourceInstanceARN": {
+        "condition": "ssm:SourceInstanceARN",
+        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+        "type": "String"
+    },
     "ssm:SyncType": {
         "condition": "ssm:SyncType",
         "description": "Filters access by verifying that a user also has access to the ResourceDataSync SyncType specified in the request",
         "type": "String"
     },
+    "ssm:resourceTag/${TagKey}": {
+        "condition": "ssm:resourceTag/${TagKey}",
+        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+        "type": "String"
+    },
     "ssm:resourceTag/tagKey": {
         "condition": "ssm:resourceTag/tag-key",
-        "description": "Filters access by based on a tag key-value pair assigned to the Systems Manager resource",
+        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
         "type": "String"
     }
 }

@@ -3,14 +3,20 @@
         "resourceName": "collection",
         "service": "rekognition",
         "resourceArn": "arn:${Partition}:rekognition:${Region}:${Account}:collection/${CollectionId}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "DescribeCollection": {
                 "privilege": "DescribeCollection",
                 "description": "Grants permission to read details about a collection",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DescribeCollection.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeCollection.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -19,7 +25,7 @@
                 "privilege": "ListCollections",
                 "description": "Grants permission to read the collection Id's in your account",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_ListCollections.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListCollections.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -28,7 +34,7 @@
                 "privilege": "ListFaces",
                 "description": "Grants permission to read metadata for faces in the specificed collection",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_ListFaces.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListFaces.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -37,7 +43,7 @@
                 "privilege": "SearchFaces",
                 "description": "Grants permission to search the specificed collection for the supplied face ID",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_SearchFaces.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFaces.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -46,7 +52,7 @@
                 "privilege": "SearchFacesByImage",
                 "description": "Grants permission to search the specificed collection for the largest face in the input image",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_SearchFacesByImage.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFacesByImage.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -57,7 +63,7 @@
                 "privilege": "CreateStreamProcessor",
                 "description": "Grants permission to create an Amazon Rekognition stream processor",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_CreateStreamProcessor.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateStreamProcessor.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -67,7 +73,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -77,7 +83,7 @@
                 "privilege": "DeleteCollection",
                 "description": "Grants permission to delete the specified collection",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DeleteCollection.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteCollection.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -86,7 +92,7 @@
                 "privilege": "DeleteFaces",
                 "description": "Grants permission to delete faces from a collection",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DeleteFaces.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteFaces.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -95,7 +101,7 @@
                 "privilege": "IndexFaces",
                 "description": "Grants permission to update an existing collection with faces detected in the input image",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_IndexFaces.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_IndexFaces.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -104,7 +110,7 @@
                 "privilege": "StartFaceSearch",
                 "description": "Grants permission to start an asynchronous search for faces in a collection that match the faces of persons detected in a stored video",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_StartFaceSearch.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceSearch.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -116,7 +122,7 @@
                 "privilege": "TagResource",
                 "description": "Grants permission to add one or more tags to a resource",
                 "accessLevel": "Tagging",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_TagResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_TagResource.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -126,7 +132,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -136,12 +142,12 @@
                 "privilege": "UntagResource",
                 "description": "Grants permission to remove one or more tags from a resource",
                 "accessLevel": "Tagging",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_UntagResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -153,13 +159,19 @@
         "resourceName": "streamprocessor",
         "service": "rekognition",
         "resourceArn": "arn:${Partition}:rekognition:${Region}:${Account}:streamprocessor/${StreamprocessorId}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListStreamProcessors": {
                 "privilege": "ListStreamProcessors",
                 "description": "Grants permission to get a list of your stream processors",
                 "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_ListStreamProcessors.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListStreamProcessors.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -170,7 +182,7 @@
                 "privilege": "DescribeStreamProcessor",
                 "description": "Grants permission to get information about the specified stream processor",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DescribeStreamProcessorh.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeStreamProcessor.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -181,7 +193,7 @@
                 "privilege": "DeleteStreamProcessor",
                 "description": "Grants permission to delete the specified stream processor",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DeleteStreamProcessor.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteStreamProcessor.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -190,7 +202,7 @@
                 "privilege": "StartStreamProcessor",
                 "description": "Grants permission to start running a stream processor",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_StartStreamProcessor.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartStreamProcessor.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -199,7 +211,16 @@
                 "privilege": "StopStreamProcessor",
                 "description": "Grants permission to stop a running stream processor",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_StopStreamProcessor.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopStreamProcessor.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateStreamProcessor": {
+                "privilege": "UpdateStreamProcessor",
+                "description": "Grants permission to modify properties for a stream processor",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateStreamProcessor.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -211,7 +232,7 @@
                 "privilege": "TagResource",
                 "description": "Grants permission to add one or more tags to a resource",
                 "accessLevel": "Tagging",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_TagResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_TagResource.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -221,7 +242,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -231,12 +252,12 @@
                 "privilege": "UntagResource",
                 "description": "Grants permission to remove one or more tags from a resource",
                 "accessLevel": "Tagging",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_UntagResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -255,36 +276,27 @@
                 "privilege": "DescribeProjectVersions",
                 "description": "Grants permission to list the versions of a model in an Amazon Rekognition Custom Labels project",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DescribeProjectVersions.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeProjectVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListProjectPolicies": {
+                "privilege": "ListProjectPolicies",
+                "description": "Grants permission to list the resource policies attached to a project",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListProjectPolicies.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
         "writePrivileges": {
-            "CreateDataset": {
-                "privilege": "CreateDataset",
-                "description": "Grants permission to create a new Amazon Rekognition Custom Labels dataset",
+            "CopyProjectVersion": {
+                "privilege": "CopyProjectVersion",
+                "description": "Grants permission to copy an existing model version to a new model version",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_CreateDataset.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "CreateProject": {
-                "privilege": "CreateProject",
-                "description": "Grants permission to create an Amazon Rekognition Custom Labels project",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_CreateProject.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": true
-            },
-            "CreateProjectVersion": {
-                "privilege": "CreateProjectVersion",
-                "description": "Grants permission to begin training a new version of a model",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_CreateProjectVersion.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CopyProjectVersion.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -294,7 +306,45 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateDataset": {
+                "privilege": "CreateDataset",
+                "description": "Grants permission to create a new Amazon Rekognition Custom Labels dataset",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateDataset.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateProject": {
+                "privilege": "CreateProject",
+                "description": "Grants permission to create an Amazon Rekognition Custom Labels project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateProjectVersion": {
+                "privilege": "CreateProjectVersion",
+                "description": "Grants permission to begin training a new version of a model",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProjectVersion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -304,7 +354,25 @@
                 "privilege": "DeleteProject",
                 "description": "Grants permission to delete a project",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DeleteProject.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProject.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteProjectPolicy": {
+                "privilege": "DeleteProjectPolicy",
+                "description": "Grants permission to delete a resource policy attached to a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProjectPolicy.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "PutProjectPolicy": {
+                "privilege": "PutProjectPolicy",
+                "description": "Grants permission to attach a resource policy to a project",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_PutProjectPolicy.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -317,14 +385,20 @@
         "resourceName": "projectversion",
         "service": "rekognition",
         "resourceArn": "arn:${Partition}:rekognition:${Region}:${Account}:project/${ProjectName}/version/${VersionName}/${CreationTimestamp}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "DetectCustomLabels": {
                 "privilege": "DetectCustomLabels",
                 "description": "Grants permission to detect custom labels in a supplied image",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DetectCustomLabels.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectCustomLabels.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -333,18 +407,38 @@
                 "privilege": "ListTagsForResource",
                 "description": "Grants permission to return a list of tags associated with a resource",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_ListTagsForResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListTagsForResource.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
             }
         },
         "writePrivileges": {
+            "CopyProjectVersion": {
+                "privilege": "CopyProjectVersion",
+                "description": "Grants permission to copy an existing model version to a new model version",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CopyProjectVersion.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "DeleteProjectVersion": {
                 "privilege": "DeleteProjectVersion",
                 "description": "Grants permission to delete a model",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DeleteProjectVersion.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProjectVersion.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -353,7 +447,7 @@
                 "privilege": "StartProjectVersion",
                 "description": "Grants permission to start running a model version",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_StartProjectVersion.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartProjectVersion.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -362,7 +456,7 @@
                 "privilege": "StopProjectVersion",
                 "description": "Grants permission to stop a running model version",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_StopProjectVersion.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopProjectVersion.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -374,7 +468,7 @@
                 "privilege": "TagResource",
                 "description": "Grants permission to add one or more tags to a resource",
                 "accessLevel": "Tagging",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_TagResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_TagResource.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
@@ -384,7 +478,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -394,12 +488,12 @@
                 "privilege": "UntagResource",
                 "description": "Grants permission to remove one or more tags from a resource",
                 "accessLevel": "Tagging",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_UntagResource.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by tag keys that are passed in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -418,7 +512,7 @@
                 "privilege": "DescribeDataset",
                 "description": "Grants permission to describe an Amazon Rekognition Custom Labels dataset",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DescribeDataset.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeDataset.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -427,7 +521,7 @@
                 "privilege": "ListDatasetEntries",
                 "description": "Grants permission to list the dataset entries in an existing Amazon Rekognition Custom Labels dataset",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_ListDatasetEntries.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetEntries.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -436,7 +530,7 @@
                 "privilege": "ListDatasetLabels",
                 "description": "Grants permission to list the labels in a dataset",
                 "accessLevel": "Read",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_ListDatasetLabels.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetLabels.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -447,7 +541,7 @@
                 "privilege": "DeleteDataset",
                 "description": "Grants permission to delete an existing Amazon Rekognition Custom Labels dataset",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DeleteDataset.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteDataset.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -456,7 +550,7 @@
                 "privilege": "DistributeDatasetEntries",
                 "description": "Grants permission to distribute the entries in a training dataset across the training dataset and the test dataset for a project",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_DistributeDatasetEntries.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DistributeDatasetEntries.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -465,7 +559,7 @@
                 "privilege": "UpdateDatasetEntries",
                 "description": "Grants permission to add or update one or more JSON Lines (entries) in a dataset",
                 "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/dg/API_UpdateDatasetEntries.html",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateDatasetEntries.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true

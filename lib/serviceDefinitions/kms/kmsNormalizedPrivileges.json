@@ -1368,6 +1368,80 @@
             }
         }
     },
+    "generateMac": {
+        "privilege": "GenerateMac",
+        "description": "Controls permission to use the AWS KMS key to generate message authentication codes",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateMac.html",
+        "service": "kms",
+        "dependentActions": [],
+        "privConditions": {
+            "kms:CallerAccount": {
+                "condition": "kms:CallerAccount",
+                "description": "Filters access to specified AWS KMS operations based on the AWS account ID of the caller. You can use this condition key to allow or deny access to all IAM users and roles in an AWS account in a single policy statement",
+                "type": "String"
+            },
+            "kms:MacAlgorithm": {
+                "condition": "kms:MacAlgorithm",
+                "description": "Filters access to the GenerateMac and VerifyMac operations based on the MacAlgorithm parameter in the request",
+                "type": "String"
+            },
+            "kms:RequestAlias": {
+                "condition": "kms:RequestAlias",
+                "description": "Filters access to cryptographic operations, DescribeKey, and GetPublicKey based on the alias in the request",
+                "type": "String"
+            },
+            "kms:ViaService": {
+                "condition": "kms:ViaService",
+                "description": "Filters access when a request made on the principal's behalf comes from a specified AWS service",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "key": {
+                "resourceName": "key",
+                "resourceArn": "arn:${Partition}:kms:${Region}:${Account}:key/${KeyId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access to the specified AWS KMS operations based on tags assigned to the AWS KMS key",
+                        "type": "String"
+                    },
+                    "kms:KeyOrigin": {
+                        "condition": "kms:KeyOrigin",
+                        "description": "Filters access to an API operation based on the Origin property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key",
+                        "type": "String"
+                    },
+                    "kms:KeySpec": {
+                        "condition": "kms:KeySpec",
+                        "description": "Filters access to an API operation based on the KeySpec property of the AWS KMS key that is created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "String"
+                    },
+                    "kms:KeyUsage": {
+                        "condition": "kms:KeyUsage",
+                        "description": "Filters access to an API operation based on the KeyUsage property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "String"
+                    },
+                    "kms:MultiRegion": {
+                        "condition": "kms:MultiRegion",
+                        "description": "Filters access to an API operation based on the MultiRegion property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "Bool"
+                    },
+                    "kms:MultiRegionKeyType": {
+                        "condition": "kms:MultiRegionKeyType",
+                        "description": "Filters access to an API operation based on the MultiRegionKeyType property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "String"
+                    },
+                    "kms:ResourceAliases": {
+                        "condition": "kms:ResourceAliases",
+                        "description": "Filters access to specified AWS KMS operations based on aliases associated with the AWS KMS key",
+                        "type": "ArrayOfString"
+                    }
+                }
+            }
+        }
+    },
     "generateRandom": {
         "privilege": "GenerateRandom",
         "description": "Controls permission to get a cryptographically secure random byte string from AWS KMS",
@@ -3026,6 +3100,80 @@
             "kms:SigningAlgorithm": {
                 "condition": "kms:SigningAlgorithm",
                 "description": "Filters access to the Sign and Verify operations based on the signing algorithm in the request",
+                "type": "String"
+            },
+            "kms:ViaService": {
+                "condition": "kms:ViaService",
+                "description": "Filters access when a request made on the principal's behalf comes from a specified AWS service",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "key": {
+                "resourceName": "key",
+                "resourceArn": "arn:${Partition}:kms:${Region}:${Account}:key/${KeyId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access to the specified AWS KMS operations based on tags assigned to the AWS KMS key",
+                        "type": "String"
+                    },
+                    "kms:KeyOrigin": {
+                        "condition": "kms:KeyOrigin",
+                        "description": "Filters access to an API operation based on the Origin property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key",
+                        "type": "String"
+                    },
+                    "kms:KeySpec": {
+                        "condition": "kms:KeySpec",
+                        "description": "Filters access to an API operation based on the KeySpec property of the AWS KMS key that is created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "String"
+                    },
+                    "kms:KeyUsage": {
+                        "condition": "kms:KeyUsage",
+                        "description": "Filters access to an API operation based on the KeyUsage property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "String"
+                    },
+                    "kms:MultiRegion": {
+                        "condition": "kms:MultiRegion",
+                        "description": "Filters access to an API operation based on the MultiRegion property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "Bool"
+                    },
+                    "kms:MultiRegionKeyType": {
+                        "condition": "kms:MultiRegionKeyType",
+                        "description": "Filters access to an API operation based on the MultiRegionKeyType property of the AWS KMS key created by or used in the operation. Use it to qualify authorization of the CreateKey operation or any operation that is authorized for a KMS key resource",
+                        "type": "String"
+                    },
+                    "kms:ResourceAliases": {
+                        "condition": "kms:ResourceAliases",
+                        "description": "Filters access to specified AWS KMS operations based on aliases associated with the AWS KMS key",
+                        "type": "ArrayOfString"
+                    }
+                }
+            }
+        }
+    },
+    "verifyMac": {
+        "privilege": "VerifyMac",
+        "description": "Controls permission to use the AWS KMS key to verify message authentication codes",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/kms/latest/APIReference/API_VerifyMac.html",
+        "service": "kms",
+        "dependentActions": [],
+        "privConditions": {
+            "kms:CallerAccount": {
+                "condition": "kms:CallerAccount",
+                "description": "Filters access to specified AWS KMS operations based on the AWS account ID of the caller. You can use this condition key to allow or deny access to all IAM users and roles in an AWS account in a single policy statement",
+                "type": "String"
+            },
+            "kms:MacAlgorithm": {
+                "condition": "kms:MacAlgorithm",
+                "description": "Filters access to the GenerateMac and VerifyMac operations based on the MacAlgorithm parameter in the request",
+                "type": "String"
+            },
+            "kms:RequestAlias": {
+                "condition": "kms:RequestAlias",
+                "description": "Filters access to cryptographic operations, DescribeKey, and GetPublicKey based on the alias in the request",
                 "type": "String"
             },
             "kms:ViaService": {

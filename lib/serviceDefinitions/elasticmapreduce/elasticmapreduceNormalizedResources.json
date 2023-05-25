@@ -141,7 +141,13 @@
                 "description": "Grants permission to add new steps to a running cluster",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/emr/latest/APIReference/API_AddJobFlowSteps.html",
-                "privConditions": {},
+                "privConditions": {
+                    "elasticmapreduce:ExecutionRoleArn": {
+                        "condition": "elasticmapreduce:ExecutionRoleArn",
+                        "description": "Filters access by whether the execution role ARN is provided with the action",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -168,7 +174,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "elasticmapreduce:RequestTag/${TagKey}": {
                         "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -328,7 +334,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "elasticmapreduce:RequestTag/${TagKey}": {
                         "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -365,7 +371,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "elasticmapreduce:RequestTag/${TagKey}": {
                         "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -385,7 +391,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -491,7 +497,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "elasticmapreduce:RequestTag/${TagKey}": {
                         "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -556,7 +562,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     },
                     "elasticmapreduce:RequestTag/${TagKey}": {
                         "condition": "elasticmapreduce:RequestTag/${TagKey}",
@@ -576,7 +582,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -624,7 +630,48 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Amazon EMR resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr/latest/APIReference/API_AddTags.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by whether the tag and value pair is provided with the action",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
+                        "type": "ArrayOfString"
+                    },
+                    "elasticmapreduce:RequestTag/${TagKey}": {
+                        "condition": "elasticmapreduce:RequestTag/${TagKey}",
+                        "description": "Filters access by whether the tag and value pair is provided with the action",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Amazon EMR resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr/latest/APIReference/API_RemoveTags.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "studio": {
         "resourceName": "studio",
@@ -720,6 +767,47 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "AddTags": {
+                "privilege": "AddTags",
+                "description": "Grants permission to add tags to an Amazon EMR resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr/latest/APIReference/API_AddTags.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by whether the tag and value pair is provided with the action",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
+                        "type": "ArrayOfString"
+                    },
+                    "elasticmapreduce:RequestTag/${TagKey}": {
+                        "condition": "elasticmapreduce:RequestTag/${TagKey}",
+                        "description": "Filters access by whether the tag and value pair is provided with the action",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTags": {
+                "privilege": "RemoveTags",
+                "description": "Grants permission to remove tags from an Amazon EMR resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/emr/latest/APIReference/API_RemoveTags.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by whether the tag keys are provided with the action regardless of tag value",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

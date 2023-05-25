@@ -35,7 +35,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -56,7 +56,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -80,7 +80,10 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateIPSet.html",
         "service": "guardduty",
-        "dependentActions": [],
+        "dependentActions": [
+            "iam:DeleteRolePolicy",
+            "iam:PutRolePolicy"
+        ],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -90,7 +93,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -144,7 +147,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -288,6 +291,16 @@
             }
         }
     },
+    "describeMalwareScans": {
+        "privilege": "DescribeMalwareScans",
+        "description": "Grants permission to retrieve details about malware scans",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeMalwareScans.html",
+        "service": "guardduty",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "describeOrganizationConfiguration": {
         "privilege": "DescribeOrganizationConfiguration",
         "description": "Grants permission to retrieve details about the delegated administrator associated with a GuardDuty detector",
@@ -327,7 +340,7 @@
     },
     "disassociateFromMasterAccount": {
         "privilege": "DisassociateFromMasterAccount",
-        "description": "Grants permission to disassociate a GuardDuty member account from its GuardDuty master account",
+        "description": "Grants permission to disassociate a GuardDuty member account from its GuardDuty administrator account",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateFromMasterAccount.html",
         "service": "guardduty",
@@ -337,7 +350,7 @@
     },
     "disassociateMembers": {
         "privilege": "DisassociateMembers",
-        "description": "Grants permission to disassociate GuardDuty member accounts from their master GuardDuty account",
+        "description": "Grants permission to disassociate GuardDuty member accounts from their administrator GuardDuty account",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html",
         "service": "guardduty",
@@ -454,9 +467,19 @@
         "privConditions": {},
         "resources": {}
     },
+    "getMalwareScanSettings": {
+        "privilege": "GetMalwareScanSettings",
+        "description": "Grants permission to retrieve the malware scan settings",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetMalwareScanSettings.html",
+        "service": "guardduty",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "getMasterAccount": {
         "privilege": "GetMasterAccount",
-        "description": "Grants permission to retrieve details of the GuardDuty master account associated with a member account",
+        "description": "Grants permission to retrieve details of the GuardDuty administrator account associated with a member account",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetMasterAccount.html",
         "service": "guardduty",
@@ -476,7 +499,7 @@
     },
     "getMembers": {
         "privilege": "GetMembers",
-        "description": "Grants permission to retrieve the member accounts associated with a master account",
+        "description": "Grants permission to retrieve the member accounts associated with an administrator account",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetMembers.html",
         "service": "guardduty",
@@ -569,7 +592,7 @@
     },
     "listInvitations": {
         "privilege": "ListInvitations",
-        "description": "Grants permission to retrieve a lists of all of the GuardDuty membership invitations that were sent to an AWS account",
+        "description": "Grants permission to retrieve a list of all of the GuardDuty membership invitations that were sent to an AWS account",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListInvitations.html",
         "service": "guardduty",
@@ -579,7 +602,7 @@
     },
     "listMembers": {
         "privilege": "ListMembers",
-        "description": "Grants permission to retrierve a lsit of GuardDuty member accounts associated with a master account",
+        "description": "Grants permission to retrieve a list of GuardDuty member accounts associated with an administrator account",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListMembers.html",
         "service": "guardduty",
@@ -712,7 +735,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -787,7 +810,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -903,7 +926,10 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateIPSet.html",
         "service": "guardduty",
-        "dependentActions": [],
+        "dependentActions": [
+            "iam:DeleteRolePolicy",
+            "iam:PutRolePolicy"
+        ],
         "privConditions": {},
         "resources": {
             "ipset": {
@@ -919,6 +945,16 @@
                 }
             }
         }
+    },
+    "updateMalwareScanSettings": {
+        "privilege": "UpdateMalwareScanSettings",
+        "description": "Grants permission to update the malware scan settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateMalwareScanSettings.html",
+        "service": "guardduty",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "updateMemberDetectors": {
         "privilege": "UpdateMemberDetectors",
@@ -966,7 +1002,10 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateThreatIntelSet.html",
         "service": "guardduty",
-        "dependentActions": [],
+        "dependentActions": [
+            "iam:DeleteRolePolicy",
+            "iam:PutRolePolicy"
+        ],
         "privConditions": {},
         "resources": {
             "threatintelset": {

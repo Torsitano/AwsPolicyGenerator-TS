@@ -1,4 +1,95 @@
 {
+    "allowList": {
+        "resourceName": "AllowList",
+        "service": "macie2",
+        "resourceArn": "arn:${Partition}:macie2:${Region}:${Account}:allow-list/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair of a resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetAllowList": {
+                "privilege": "GetAllowList",
+                "description": "Grants permission to retrieve the settings and status of an allow list",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/allow-lists-id.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for an Amazon Macie resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "writePrivileges": {
+            "DeleteAllowList": {
+                "privilege": "DeleteAllowList",
+                "description": "Grants permission to delete an allow list",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/allow-lists-id.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "UpdateAllowList": {
+                "privilege": "UpdateAllowList",
+                "description": "Grants permission to update the settings for an allow list",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/allow-lists-id.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update the tags for an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
+    },
     "classificationJob": {
         "resourceName": "ClassificationJob",
         "service": "macie2",
@@ -6,7 +97,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters access based on tag key-value pairs that are associated with the resource",
+                "description": "Filters access by a tag key and value pair of a resource",
                 "type": "String"
             }
         },
@@ -20,6 +111,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for an Amazon Macie resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -31,13 +131,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -51,13 +151,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -65,7 +165,43 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update the tags for an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "customDataIdentifier": {
         "resourceName": "CustomDataIdentifier",
@@ -74,7 +210,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters access based on tag key-value pairs that are associated with the resource",
+                "description": "Filters access by a tag key and value pair of a resource",
                 "type": "String"
             }
         },
@@ -97,6 +233,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for an Amazon Macie resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -108,13 +253,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -131,7 +276,43 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update the tags for an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "findingsFilter": {
         "resourceName": "FindingsFilter",
@@ -140,7 +321,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters access based on tag key-value pairs that are associated with the resource",
+                "description": "Filters access by a tag key and value pair of a resource",
                 "type": "String"
             }
         },
@@ -154,6 +335,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for an Amazon Macie resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -165,13 +355,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -194,13 +384,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -208,7 +398,43 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update the tags for an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "member": {
         "resourceName": "Member",
@@ -217,7 +443,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters access based on tag key-value pairs that are associated with the resource",
+                "description": "Filters access by a tag key and value pair of a resource",
                 "type": "String"
             }
         },
@@ -231,6 +457,15 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to retrieve the tags for an Amazon Macie resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
             }
         },
         "writePrivileges": {
@@ -242,13 +477,13 @@
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access based on the presence of tag key-value pairs in the request",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters access based on the presence of tag keys in the request",
-                        "type": "String"
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -265,7 +500,7 @@
             },
             "DisassociateMember": {
                 "privilege": "DisassociateMember",
-                "description": "Grants an Amazon Macie administrator account with permission to disassociate from a Macie member account",
+                "description": "Grants permission to an Amazon Macie administrator account to disassociate from a Macie member account",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/members-disassociate-id.html",
                 "privConditions": {},
@@ -274,6 +509,42 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "TagResource": {
+                "privilege": "TagResource",
+                "description": "Grants permission to add or update the tags for an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair that is allowed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UntagResource": {
+                "privilege": "UntagResource",
+                "description": "Grants permission to remove tags from an Amazon Macie resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/macie/latest/APIReference/tags-resourcearn.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of tag keys in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

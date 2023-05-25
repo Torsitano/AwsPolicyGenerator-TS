@@ -23,9 +23,13 @@
             "": {
                 "resourceType": "",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
                 "dependentActions": [
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "ssm-incidents:TagResource"
                 ]
             }
         },
@@ -270,9 +274,15 @@
         "description": "Grants permission to view a list of resource tags for a specified resource",
         "accessLevel": "Read",
         "resourceTypes": {
+            "incidentRecord": {
+                "resourceType": "incident-record",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "responsePlan": {
                 "resourceType": "response-plan",
-                "required": true,
+                "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -332,10 +342,25 @@
         "description": "Grants permission to add tags to a response plan",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "incidentRecord": {
+                "resourceType": "incident-record",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "responsePlan": {
                 "resourceType": "response-plan",
-                "required": true,
+                "required": false,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
                 "dependentActions": []
             }
         },
@@ -346,10 +371,24 @@
         "description": "Grants permission to remove tags from a response plan",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "incidentRecord": {
+                "resourceType": "incident-record",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "responsePlan": {
                 "resourceType": "response-plan",
-                "required": true,
+                "required": false,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },
@@ -433,8 +472,18 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": [
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "ssm-incidents:TagResource"
                 ]
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/incident-manager/latest/APIReference/API_UpdateResponsePlan.html"

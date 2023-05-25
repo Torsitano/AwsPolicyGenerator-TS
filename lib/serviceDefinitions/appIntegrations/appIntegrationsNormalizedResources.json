@@ -6,7 +6,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by tags associated with the resource",
                 "type": "String"
             }
         },
@@ -14,13 +14,13 @@
         "readPrivileges": {
             "GetEventIntegration": {
                 "privilege": "GetEventIntegration",
-                "description": "Grants permissions to view details about EventIntegrations",
+                "description": "Grants permission to view details about EventIntegrations",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_GetEventIntegration.html",
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -35,7 +35,7 @@
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -46,27 +46,31 @@
         "writePrivileges": {
             "CreateEventIntegration": {
                 "privilege": "CreateEventIntegration",
-                "description": "Grants permissions to create a new EventIntegration",
+                "description": "Grants permission to create a new EventIntegration",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateEventIntegration.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
-                "dependentActions": [],
+                "dependentActions": [
+                    "iam:AttachRolePolicy",
+                    "iam:CreateServiceLinkedRole",
+                    "iam:PutRolePolicy"
+                ],
                 "required": true
             },
             "CreateEventIntegrationAssociation": {
                 "privilege": "CreateEventIntegrationAssociation",
-                "description": "Grants permissions to create an EventIntegrationAssociation",
+                "description": "Grants permission to create an EventIntegrationAssociation",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateEventIntegrationAssociation.html",
                 "privConditions": {},
@@ -78,13 +82,13 @@
             },
             "DeleteEventIntegration": {
                 "privilege": "DeleteEventIntegration",
-                "description": "Grants permissions to delete an EventIntegration",
+                "description": "Grants permission to delete an EventIntegration",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteEventIntegration.html",
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -93,13 +97,13 @@
             },
             "UpdateEventIntegration": {
                 "privilege": "UpdateEventIntegration",
-                "description": "Grants permissions to modify an EventIntegration",
+                "description": "Grants permission to modify an EventIntegration",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_UpdateEventIntegration.html",
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -117,17 +121,17 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -136,18 +140,18 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permissions to untag an Amazon AppIntegration resource",
+                "description": "Grants permission to untag an Amazon AppIntegration resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -163,7 +167,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by tags associated with the resource",
                 "type": "String"
             }
         },
@@ -177,7 +181,7 @@
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -188,7 +192,7 @@
         "writePrivileges": {
             "DeleteEventIntegrationAssociation": {
                 "privilege": "DeleteEventIntegrationAssociation",
-                "description": "Grants permissions to delete an EventIntegrationAssociation",
+                "description": "Grants permission to delete an EventIntegrationAssociation",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteEventIntegrationAssociation.html",
                 "privConditions": {},
@@ -210,17 +214,17 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -229,18 +233,18 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permissions to untag an Amazon AppIntegration resource",
+                "description": "Grants permission to untag an Amazon AppIntegration resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -256,7 +260,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by tags associated with the resource",
                 "type": "String"
             }
         },
@@ -264,13 +268,13 @@
         "readPrivileges": {
             "GetDataIntegration": {
                 "privilege": "GetDataIntegration",
-                "description": "Grants permissions to view details about DataIntegrations",
+                "description": "Grants permission to view details about DataIntegrations",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_GetDataIntegration.html",
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -285,7 +289,7 @@
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -296,27 +300,32 @@
         "writePrivileges": {
             "CreateDataIntegration": {
                 "privilege": "CreateDataIntegration",
-                "description": "Grants permissions to create a new DataIntegration",
+                "description": "Grants permission to create a new DataIntegration",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html",
                 "privConditions": {
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
-                "dependentActions": [],
+                "dependentActions": [
+                    "appflow:CreateFlow",
+                    "iam:AttachRolePolicy",
+                    "iam:CreateServiceLinkedRole",
+                    "iam:PutRolePolicy"
+                ],
                 "required": true
             },
             "CreateDataIntegrationAssociation": {
                 "privilege": "CreateDataIntegrationAssociation",
-                "description": "Grants permissions to create a DataIntegrationAssociation",
+                "description": "Grants permission to create a DataIntegrationAssociation",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegrationAssociation.html",
                 "privConditions": {},
@@ -325,13 +334,13 @@
             },
             "DeleteDataIntegration": {
                 "privilege": "DeleteDataIntegration",
-                "description": "Grants permissions to delete a DataIntegration",
+                "description": "Grants permission to delete a DataIntegration",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html",
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -340,13 +349,13 @@
             },
             "UpdateDataIntegration": {
                 "privilege": "UpdateDataIntegration",
-                "description": "Grants permissions to modify a DataIntegration",
+                "description": "Grants permission to modify a DataIntegration",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_UpdateDataIntegration.html",
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -364,17 +373,17 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -383,18 +392,18 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permissions to untag an Amazon AppIntegration resource",
+                "description": "Grants permission to untag an Amazon AppIntegration resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -410,7 +419,7 @@
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
-                "description": "Filters actions based on the tags associated with the resource",
+                "description": "Filters access by tags associated with the resource",
                 "type": "String"
             }
         },
@@ -424,7 +433,7 @@
                 "privConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -435,7 +444,7 @@
         "writePrivileges": {
             "DeleteDataIntegrationAssociation": {
                 "privilege": "DeleteDataIntegrationAssociation",
-                "description": "Grants permissions to delete a DataIntegrationAssociation",
+                "description": "Grants permission to delete a DataIntegrationAssociation",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegrationAssociation.html",
                 "privConditions": {},
@@ -453,17 +462,17 @@
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
+                        "description": "Filters access by tags that are passed in the request",
                         "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },
@@ -472,18 +481,18 @@
             },
             "UntagResource": {
                 "privilege": "UntagResource",
-                "description": "Grants permissions to untag an Amazon AppIntegration resource",
+                "description": "Grants permission to untag an Amazon AppIntegration resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_UntagResource.html",
                 "privConditions": {
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "String"
+                        "description": "Filters access by tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by tags associated with the resource",
                         "type": "String"
                     }
                 },

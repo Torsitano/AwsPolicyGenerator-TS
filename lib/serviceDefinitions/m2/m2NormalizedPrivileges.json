@@ -1,0 +1,781 @@
+{
+    "cancelBatchJobExecution": {
+        "privilege": "CancelBatchJobExecution",
+        "description": "Grants permission to cancel the execution of a batch job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_CancelBatchJobExecution.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createApplication": {
+        "privilege": "CreateApplication",
+        "description": "Grants permission to create an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateApplication.html",
+        "service": "m2",
+        "dependentActions": [
+            "s3:GetObject",
+            "s3:ListBucket"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createDataSetImportTask": {
+        "privilege": "CreateDataSetImportTask",
+        "description": "Grants permission to create a data set import task",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html",
+        "service": "m2",
+        "dependentActions": [
+            "s3:GetObject"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createDeployment": {
+        "privilege": "CreateDeployment",
+        "description": "Grants permission to create a deployment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDeployment.html",
+        "service": "m2",
+        "dependentActions": [
+            "elasticloadbalancing:CreateListener",
+            "elasticloadbalancing:CreateTargetGroup",
+            "elasticloadbalancing:RegisterTargets"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createEnvironment": {
+        "privilege": "CreateEnvironment",
+        "description": "Grants permission to Create an environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateEnvironment.html",
+        "service": "m2",
+        "dependentActions": [
+            "ec2:CreateNetworkInterface",
+            "ec2:CreateNetworkInterfacePermission",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcAttribute",
+            "ec2:DescribeVpcs",
+            "ec2:ModifyNetworkInterfaceAttribute",
+            "elasticfilesystem:DescribeMountTargets",
+            "elasticloadbalancing:CreateLoadBalancer",
+            "fsx:DescribeFileSystems",
+            "iam:CreateServiceLinkedRole"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "deleteApplication": {
+        "privilege": "DeleteApplication",
+        "description": "Grants permission to delete an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_DeleteApplication.html",
+        "service": "m2",
+        "dependentActions": [
+            "elasticloadbalancing:DeleteListener",
+            "elasticloadbalancing:DeleteTargetGroup"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteApplicationFromEnvironment": {
+        "privilege": "DeleteApplicationFromEnvironment",
+        "description": "Grants permission to delete an application from a runtime environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_DeleteApplicationFromEnvironment.html",
+        "service": "m2",
+        "dependentActions": [
+            "elasticloadbalancing:DeleteListener",
+            "elasticloadbalancing:DeleteTargetGroup"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteEnvironment": {
+        "privilege": "DeleteEnvironment",
+        "description": "Grants permission to delete a runtime environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_DeleteEnvironment.html",
+        "service": "m2",
+        "dependentActions": [
+            "elasticloadbalancing:DeleteLoadBalancer"
+        ],
+        "privConditions": {},
+        "resources": {
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getApplication": {
+        "privilege": "GetApplication",
+        "description": "Grants permission to retrieve an application",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetApplication.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getApplicationVersion": {
+        "privilege": "GetApplicationVersion",
+        "description": "Grants permission to retrieve an application version",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetApplicationVersion.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getBatchJobExecution": {
+        "privilege": "GetBatchJobExecution",
+        "description": "Grants permission to retrieve a batch job execution",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetBatchJobExecution.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getDataSetDetails": {
+        "privilege": "GetDataSetDetails",
+        "description": "Grants permission to retrieve data set details",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetDataSetDetails.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getDataSetImportTask": {
+        "privilege": "GetDataSetImportTask",
+        "description": "Grants permission to retrieve a data set import task",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetDataSetImportTask.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getDeployment": {
+        "privilege": "GetDeployment",
+        "description": "Grants permission to retrieve a deployment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetDeployment.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getEnvironment": {
+        "privilege": "GetEnvironment",
+        "description": "Grants permission to retrieve a runtime environment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_GetEnvironment.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listApplicationVersions": {
+        "privilege": "ListApplicationVersions",
+        "description": "Grants permission to list the versions of an application",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListApplicationVersions.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listApplications": {
+        "privilege": "ListApplications",
+        "description": "Grants permission to list applications",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListApplications.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listBatchJobDefinitions": {
+        "privilege": "ListBatchJobDefinitions",
+        "description": "Grants permission to list batch job definitions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListBatchJobDefinitions.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listBatchJobExecutions": {
+        "privilege": "ListBatchJobExecutions",
+        "description": "Grants permission to list executions for a batch job",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListBatchJobExecutions.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDataSetImportHistory": {
+        "privilege": "ListDataSetImportHistory",
+        "description": "Grants permission to list data set import history",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListDataSetImportHistory.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDataSets": {
+        "privilege": "ListDataSets",
+        "description": "Grants permission to list data sets",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListDataSets.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listDeployments": {
+        "privilege": "ListDeployments",
+        "description": "Grants permission to list deployments",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListDeployments.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listEngineVersions": {
+        "privilege": "ListEngineVersions",
+        "description": "Grants permission to list engine versions",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListEngineVersions.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listEnvironments": {
+        "privilege": "ListEnvironments",
+        "description": "Grants permission to list runtime environments",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListEnvironments.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to list tags for a resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_ListTagsForResource.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "startApplication": {
+        "privilege": "StartApplication",
+        "description": "Grants permission to start an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_StartApplication.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startBatchJob": {
+        "privilege": "StartBatchJob",
+        "description": "Grants permission to start a batch job",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_StartBatchJob.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stopApplication": {
+        "privilege": "StopApplication",
+        "description": "Grants permission to stop an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_StopApplication.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "tagResource": {
+        "privilege": "TagResource",
+        "description": "Grants permission to tag a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_TagResource.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key and value pair that is allowed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "untagResource": {
+        "privilege": "UntagResource",
+        "description": "Grants permission to untag a resource",
+        "accessLevel": "Tagging",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_UntagResource.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by a list of tag keys that are allowed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateApplication": {
+        "privilege": "UpdateApplication",
+        "description": "Grants permission to update an application",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_UpdateApplication.html",
+        "service": "m2",
+        "dependentActions": [
+            "s3:GetObject",
+            "s3:ListBucket"
+        ],
+        "privConditions": {},
+        "resources": {
+            "application": {
+                "resourceName": "Application",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:app/${ApplicationId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateEnvironment": {
+        "privilege": "UpdateEnvironment",
+        "description": "Grants permission to update a runtime environment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/m2/latest/APIReference/API_UpdateEnvironment.html",
+        "service": "m2",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "environment": {
+                "resourceName": "Environment",
+                "resourceArn": "arn:${Partition}:m2:${Region}:${Account}:env/${EnvironmentId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by a tag key and value pair of a resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    }
+}

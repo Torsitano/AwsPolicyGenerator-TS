@@ -15,7 +15,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -36,7 +36,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -62,7 +62,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -102,6 +102,16 @@
                 "condition": "ecs:service",
                 "description": "Filters access by the ARN of an Amazon ECS service",
                 "type": "ARN"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -912,9 +922,9 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {
-            "capacityProvider": {
-                "resourceName": "capacity-provider",
-                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:capacity-provider/${CapacityProviderName}",
+            "cluster": {
+                "resourceName": "cluster",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:cluster/${ClusterName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -947,7 +957,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -986,7 +996,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -1012,7 +1022,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1056,7 +1066,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1242,7 +1252,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -1251,6 +1261,23 @@
             }
         },
         "resources": {
+            "capacityProvider": {
+                "resourceName": "capacity-provider",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:capacity-provider/${CapacityProviderName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "ecs:ResourceTag/${TagKey}": {
+                        "condition": "ecs:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "cluster": {
                 "resourceName": "cluster",
                 "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:cluster/${ClusterName}",
@@ -1322,6 +1349,23 @@
             "taskDefinition": {
                 "resourceName": "task-definition",
                 "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task-definition/${TaskDefinitionFamilyName}:${TaskDefinitionRevisionNumber}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "ecs:ResourceTag/${TagKey}": {
+                        "condition": "ecs:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "taskSet": {
+                "resourceName": "task-set",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task-set/${ClusterName}/${ServiceName}/${TaskSetId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1349,7 +1393,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -1358,6 +1402,23 @@
             }
         },
         "resources": {
+            "capacityProvider": {
+                "resourceName": "capacity-provider",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:capacity-provider/${CapacityProviderName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "ecs:ResourceTag/${TagKey}": {
+                        "condition": "ecs:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "cluster": {
                 "resourceName": "cluster",
                 "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:cluster/${ClusterName}",
@@ -1429,6 +1490,23 @@
             "taskDefinition": {
                 "resourceName": "task-definition",
                 "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task-definition/${TaskDefinitionFamilyName}:${TaskDefinitionRevisionNumber}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "ecs:ResourceTag/${TagKey}": {
+                        "condition": "ecs:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "taskSet": {
+                "resourceName": "task-set",
+                "resourceArn": "arn:${Partition}:ecs:${Region}:${Account}:task-set/${ClusterName}/${ServiceName}/${TaskSetId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

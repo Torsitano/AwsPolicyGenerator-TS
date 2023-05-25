@@ -167,7 +167,7 @@
             "cloudformation:ResourceTypes": {
                 "condition": "cloudformation:ResourceTypes",
                 "description": "Filters access by the template resource types, such as AWS::EC2::Instance. Use to control which resource types IAM users can work with when they create or update a stack",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "cloudformation:ImportResourceTypes": {
                 "condition": "cloudformation:ImportResourceTypes",
@@ -197,7 +197,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -226,7 +226,7 @@
             "cloudformation:ResourceTypes": {
                 "condition": "cloudformation:ResourceTypes",
                 "description": "Filters access by the template resource types, such as AWS::EC2::Instance. Use to control which resource types IAM users can work with when they create or update a stack",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "cloudformation:RoleArn": {
                 "condition": "cloudformation:RoleArn",
@@ -251,7 +251,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -277,6 +277,11 @@
         "service": "cloudformation",
         "dependentActions": [],
         "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
             "cloudformation:TargetRegion": {
                 "condition": "cloudformation:TargetRegion",
                 "description": "Filters access by stack set target region. Use to control which regions IAM users can use when they create or update stack sets",
@@ -336,7 +341,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -1379,7 +1384,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_TagResource.html",
         "service": "cloudformation",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
         "resources": {
             "changeset": {
                 "resourceName": "changeset",
@@ -1436,7 +1452,13 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UntagResource.html",
         "service": "cloudformation",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "changeset": {
                 "resourceName": "changeset",
@@ -1487,7 +1509,7 @@
             "cloudformation:ResourceTypes": {
                 "condition": "cloudformation:ResourceTypes",
                 "description": "Filters access by the template resource types, such as AWS::EC2::Instance. Use to control which resource types IAM users can work with when they create or update a stack",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "cloudformation:RoleArn": {
                 "condition": "cloudformation:RoleArn",
@@ -1512,7 +1534,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1602,7 +1624,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {

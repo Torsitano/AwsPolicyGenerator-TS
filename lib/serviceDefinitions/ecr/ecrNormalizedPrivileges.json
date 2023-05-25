@@ -111,6 +111,16 @@
             }
         }
     },
+    "batchImportUpstreamImage": {
+        "privilege": "BatchImportUpstreamImage",
+        "description": "Grants permission to retrieve the image from the upstream registry and import it to your private registry",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_BatchImportUpstreamImage.html",
+        "service": "ecr",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "completeLayerUpload": {
         "privilege": "CompleteLayerUpload",
         "description": "Grants permission to inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed",
@@ -165,28 +175,10 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
-        "resources": {
-            "repository": {
-                "resourceName": "repository",
-                "resourceArn": "arn:${Partition}:ecr:${Region}:${Account}:repository/${RepositoryName}",
-                "required": true,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by tag-value associated with the resource",
-                        "type": "String"
-                    },
-                    "ecr:ResourceTag/${TagKey}": {
-                        "condition": "ecr:ResourceTag/${TagKey}",
-                        "description": "Filters access by tag-value associated with the resource",
-                        "type": "String"
-                    }
-                }
-            }
-        }
+        "resources": {}
     },
     "deleteLifecyclePolicy": {
         "privilege": "DeleteLifecyclePolicy",
@@ -629,7 +621,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_ListTagsForResource.html",
         "service": "ecr",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "repository": {
                 "resourceName": "repository",
@@ -920,7 +923,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -950,7 +953,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_UntagResource.html",
         "service": "ecr",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "repository": {
                 "resourceName": "repository",

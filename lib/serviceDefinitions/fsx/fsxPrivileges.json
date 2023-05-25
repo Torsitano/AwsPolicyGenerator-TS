@@ -165,6 +165,48 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateDataRepositoryTask.html"
     },
+    "createFileCache": {
+        "privilege": "CreateFileCache",
+        "description": "Grants permission to create a new, empty, Amazon file cache",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "fileCache": {
+                "resourceType": "file-cache",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeVpcs",
+                    "fsx:CreateDataRepositoryAssociation",
+                    "fsx:TagResource",
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents",
+                    "s3:ListBucket"
+                ]
+            },
+            "association": {
+                "resourceType": "association",
+                "required": false,
+                "conditionKeys": [
+                    "fsx:NfsDataRepositoryEncryptionInTransitEnabled",
+                    "fsx:NfsDataRepositoryAuthenticationEnabled"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileCache.html"
+    },
     "createFileSystem": {
         "privilege": "CreateFileSystem",
         "description": "Grants permission to create a new, empty, Amazon FSx file system",
@@ -382,6 +424,37 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteDataRepositoryAssociation.html"
     },
+    "deleteFileCache": {
+        "privilege": "DeleteFileCache",
+        "description": "Grants permission to delete a file cache, deleting its contents",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "fileCache": {
+                "resourceType": "file-cache",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "fsx:DeleteDataRepositoryAssociation"
+                ]
+            },
+            "association": {
+                "resourceType": "association",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DeleteFileCache.html"
+    },
     "deleteFileSystem": {
         "privilege": "DeleteFileSystem",
         "description": "Grants permission to delete a file system, deleting its contents and any existing automatic backups of the file system",
@@ -529,6 +602,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeDataRepositoryTasks.html"
     },
+    "describeFileCaches": {
+        "privilege": "DescribeFileCaches",
+        "description": "Grants permission to return the descriptions of all file caches owned by your AWS account in the AWS Region of the endpoint that you're calling",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html"
+    },
     "describeFileSystemAliases": {
         "privilege": "DescribeFileSystemAliases",
         "description": "Grants permission to return the description of all DNS aliases owned by your Amazon FSx for Windows File Server file system",
@@ -644,6 +731,12 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "fileCache": {
+                "resourceType": "file-cache",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "fileSystem": {
                 "resourceType": "file-system",
                 "required": false,
@@ -742,6 +835,12 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "fileCache": {
+                "resourceType": "file-cache",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "fileSystem": {
                 "resourceType": "file-system",
                 "required": false,
@@ -801,6 +900,12 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "fileCache": {
+                "resourceType": "file-cache",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "fileSystem": {
                 "resourceType": "file-system",
                 "required": false,
@@ -855,6 +960,20 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateDataRepositoryAssociation.html"
+    },
+    "updateFileCache": {
+        "privilege": "UpdateFileCache",
+        "description": "Grants permission to update file cache configuration",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "fileCache": {
+                "resourceType": "file-cache",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileCache.html"
     },
     "updateFileSystem": {
         "privilege": "UpdateFileSystem",

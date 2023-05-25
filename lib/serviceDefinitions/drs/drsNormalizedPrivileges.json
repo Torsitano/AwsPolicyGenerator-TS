@@ -77,6 +77,61 @@
         "privConditions": {},
         "resources": {}
     },
+    "createConvertedSnapshotForDrs": {
+        "privilege": "CreateConvertedSnapshotForDrs",
+        "description": "Grants permission to create converted snapshot",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/drs/latest/userguide/drs-apis.html",
+        "service": "drs",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createExtendedSourceServer": {
+        "privilege": "CreateExtendedSourceServer",
+        "description": "Grants permission to extend a source server",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/drs/latest/APIReference/API_CreateExtendedSourceServer.html",
+        "service": "drs",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
     "createRecoveryInstanceForDrs": {
         "privilege": "CreateRecoveryInstanceForDrs",
         "description": "Grants permission to create recovery instance",
@@ -93,7 +148,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -127,7 +182,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -158,7 +213,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -852,6 +907,26 @@
             }
         }
     },
+    "listExtensibleSourceServers": {
+        "privilege": "ListExtensibleSourceServers",
+        "description": "Grants permission to list extensible source servers",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/drs/latest/APIReference/API_ListExtensibleSourceServers.html",
+        "service": "drs",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listStagingAccounts": {
+        "privilege": "ListStagingAccounts",
+        "description": "Grants permission to list staging accounts",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/drs/latest/APIReference/API_ListStagingAccounts.html",
+        "service": "drs",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
         "description": "Grants permission to list tags for a resource",
@@ -1078,6 +1153,29 @@
             }
         }
     },
+    "notifyVolumeEventForDrs": {
+        "privilege": "NotifyVolumeEventForDrs",
+        "description": "Grants permission to notify replicator volume events",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/drs/latest/userguide/drs-apis.html",
+        "service": "drs",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "retryDataReplication": {
         "privilege": "RetryDataReplication",
         "description": "Grants permission to retry data replication",
@@ -1211,6 +1309,29 @@
         "privConditions": {},
         "resources": {}
     },
+    "sendVolumeStatsForDrs": {
+        "privilege": "SendVolumeStatsForDrs",
+        "description": "Grants permission to send volume throughput statistics",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/drs/latest/userguide/drs-apis.html",
+        "service": "drs",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "startFailbackLaunch": {
         "privilege": "StartFailbackLaunch",
         "description": "Grants permission to start failback launch",
@@ -1227,7 +1348,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1302,7 +1423,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1364,10 +1485,69 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            },
+            "drs:CreateAction": {
+                "condition": "drs:CreateAction",
+                "description": "Filters access by the name of a resource-creating API action",
                 "type": "String"
             }
         },
-        "resources": {}
+        "resources": {
+            "jobResource": {
+                "resourceName": "JobResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:job/${JobID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "recoveryInstanceResource": {
+                "resourceName": "RecoveryInstanceResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:recovery-instance/${RecoveryInstanceID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "drs:EC2InstanceARN": {
+                        "condition": "drs:EC2InstanceARN",
+                        "description": "Filters access by the EC2 instance the request originated from",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationConfigurationTemplateResource": {
+                "resourceName": "ReplicationConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:replication-configuration-template/${ReplicationConfigurationTemplateID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "terminateRecoveryInstances": {
         "privilege": "TerminateRecoveryInstances",
@@ -1390,7 +1570,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1424,10 +1604,64 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
-        "resources": {}
+        "resources": {
+            "jobResource": {
+                "resourceName": "JobResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:job/${JobID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "recoveryInstanceResource": {
+                "resourceName": "RecoveryInstanceResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:recovery-instance/${RecoveryInstanceID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    },
+                    "drs:EC2InstanceARN": {
+                        "condition": "drs:EC2InstanceARN",
+                        "description": "Filters access by the EC2 instance the request originated from",
+                        "type": "String"
+                    }
+                }
+            },
+            "replicationConfigurationTemplateResource": {
+                "resourceName": "ReplicationConfigurationTemplateResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:replication-configuration-template/${ReplicationConfigurationTemplateID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "sourceServerResource": {
+                "resourceName": "SourceServerResource",
+                "resourceArn": "arn:${Partition}:drs:${Region}:${Account}:source-server/${SourceServerID}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateAgentBacklogForDrs": {
         "privilege": "UpdateAgentBacklogForDrs",

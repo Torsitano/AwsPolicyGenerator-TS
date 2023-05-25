@@ -47,7 +47,13 @@
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -154,7 +160,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -177,12 +183,22 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
             }
         }
+    },
+    "batchGetCustomEntityTypes": {
+        "privilege": "BatchGetCustomEntityTypes",
+        "description": "Grants permission to retrieve one or more Custom Entity Types",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-sensitive-data-api.html#aws-glue-api-sensitive-data-api-BatchGetCustomEntityTypes",
+        "service": "glue",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "batchGetDevEndpoints": {
         "privilege": "BatchGetDevEndpoints",
@@ -200,7 +216,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -223,7 +239,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -275,7 +291,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -298,7 +314,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -313,7 +329,20 @@
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "job": {
+                "resourceName": "job",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:job/${JobName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "batchUpdatePartition": {
         "privilege": "BatchUpdatePartition",
@@ -360,7 +389,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -371,7 +400,7 @@
         "privilege": "CancelStatement",
         "description": "Grants permission to cancel a statement in an interactive session",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-CancelStatement",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-CancelStatement",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -383,7 +412,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -410,13 +439,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -441,13 +470,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -469,15 +498,25 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
+        "resources": {}
+    },
+    "createCustomEntityType": {
+        "privilege": "CreateCustomEntityType",
+        "description": "Grants permission to create a Custom Entity Type",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-sensitive-data-api.html#aws-glue-api-sensitive-data-api-CreateCustomEntityType",
+        "service": "glue",
+        "dependentActions": [],
+        "privConditions": {},
         "resources": {}
     },
     "createDatabase": {
@@ -494,6 +533,12 @@
                 "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:catalog",
                 "required": true,
                 "resourceConditions": {}
+            },
+            "database": {
+                "resourceName": "database",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:database/${DatabaseName}",
+                "required": true,
+                "resourceConditions": {}
             }
         }
     },
@@ -507,13 +552,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -528,13 +573,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             },
             "glue:VpcIds": {
                 "condition": "glue:VpcIds",
@@ -564,13 +609,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -640,7 +685,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-schema-registry-api.html#aws-glue-api-schema-registry-api-CreateRegistry",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "registry": {
                 "resourceName": "registry",
@@ -649,7 +705,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -663,7 +719,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-schema-registry-api.html#aws-glue-api-schema-registry-api-CreateSchema",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "registry": {
                 "resourceName": "registry",
@@ -672,7 +739,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -684,7 +751,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -715,19 +782,19 @@
         "privilege": "CreateSession",
         "description": "Grants permission to create an interactive session",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-api-session-CreateSession",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-api-interactive-sessions-CreateSession",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -765,13 +832,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -809,13 +876,13 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -836,7 +903,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -930,7 +997,13 @@
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -950,12 +1023,22 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
             }
         }
+    },
+    "deleteCustomEntityType": {
+        "privilege": "DeleteCustomEntityType",
+        "description": "Grants permission to delete a Custom Entity Type",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-sensitive-data-api.html#aws-glue-api-sensitive-data-api-DeleteCustomEntityType",
+        "service": "glue",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "deleteDatabase": {
         "privilege": "DeleteDatabase",
@@ -1008,7 +1091,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1031,7 +1114,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1054,7 +1137,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1135,7 +1218,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1175,7 +1258,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1187,7 +1270,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1210,7 +1293,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1222,7 +1305,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1243,7 +1326,7 @@
         "privilege": "DeleteSession",
         "description": "Grants permission to delete an interactive session after stopping the session if not already stopped",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-DeleteSession",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-DeleteSession",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -1255,7 +1338,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1336,7 +1419,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1388,7 +1471,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1411,7 +1494,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1434,7 +1517,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1457,7 +1540,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1578,7 +1661,13 @@
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1601,7 +1690,13 @@
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -1621,7 +1716,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1643,6 +1738,16 @@
         "description": "Grants permission to retrieve all crawlers",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-crawler-crawling.html#aws-glue-api-crawler-crawling-GetCrawlers",
+        "service": "glue",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getCustomEntityType": {
+        "privilege": "GetCustomEntityType",
+        "description": "Grants permission to read a Custom Entity Type",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-sensitive-data-api.html#aws-glue-api-sensitive-data-api-GetCustomEntityType",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -1737,7 +1842,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1770,7 +1875,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1795,7 +1900,20 @@
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "job": {
+                "resourceName": "job",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:job/${JobName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "getJobRuns": {
         "privilege": "GetJobRuns",
@@ -1805,7 +1923,20 @@
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "job": {
+                "resourceName": "job",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:job/${JobName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "getJobs": {
         "privilege": "GetJobs",
@@ -1833,7 +1964,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1856,7 +1987,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1879,7 +2010,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -1902,7 +2033,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2032,7 +2163,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2089,7 +2220,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2101,7 +2232,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2124,7 +2255,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2136,7 +2267,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2159,7 +2290,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2171,7 +2302,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2194,7 +2325,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2206,7 +2337,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2237,7 +2368,7 @@
         "privilege": "GetSession",
         "description": "Grants permission to retrieve an interactive session",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-GetSession",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-GetSession",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -2249,7 +2380,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2260,7 +2391,7 @@
         "privilege": "GetStatement",
         "description": "Grants permission to retrieve result and information about a statement in an interactive session",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-GetStatement",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-GetStatement",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -2272,7 +2403,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2411,7 +2542,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2423,7 +2554,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2435,7 +2566,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2447,7 +2578,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2459,7 +2590,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2471,7 +2602,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2494,7 +2625,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2585,7 +2716,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2608,7 +2739,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2631,7 +2762,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2654,7 +2785,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2685,7 +2816,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-workflow.html#aws-glue-api-workflow-ListBlueprints",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "listCrawlers": {
@@ -2695,7 +2837,49 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-crawler-crawling.html#aws-glue-api-crawler-crawling-ListCrawlers",
         "service": "glue",
         "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "listCrawls": {
+        "privilege": "ListCrawls",
+        "description": "Grants permission to retrieve crawl run history for a crawler",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-crawler-crawling.html#aws-glue-api-crawler-crawling-ListCrawls",
+        "service": "glue",
+        "dependentActions": [],
         "privConditions": {},
+        "resources": {}
+    },
+    "listCustomEntityTypes": {
+        "privilege": "ListCustomEntityTypes",
+        "description": "Grants permission to retrieve all Custom Entity Types",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-sensitive-data-api.html#aws-glue-api-sensitive-data-api-ListGetCustomEntityTypes",
+        "service": "glue",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "listDevEndpoints": {
@@ -2705,7 +2889,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-dev-endpoint.html#aws-glue-api-dev-endpoint-ListDevEndpoints",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "listJobs": {
@@ -2715,7 +2910,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-ListJobs",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "listMLTransforms": {
@@ -2725,7 +2931,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-machine-learning-api.html#aws-glue-api-machine-learning-api-ListMLTransforms",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "mlTransform": {
                 "resourceName": "mlTransform",
@@ -2734,7 +2951,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2767,7 +2984,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2779,7 +2996,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2802,7 +3019,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2813,7 +3030,7 @@
         "privilege": "ListSessions",
         "description": "Grants permission to retrieve a list of interactive session",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-ListSessions",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-ListSessions",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -2823,7 +3040,7 @@
         "privilege": "ListStatements",
         "description": "Grants permission to retrieve a list of statements in an interactive session",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-ListStatements",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-ListStatements",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -2835,7 +3052,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2849,7 +3066,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-trigger.html#aws-glue-api-jobs-trigger-ListTriggers",
         "service": "glue",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {}
     },
     "listWorkflows": {
@@ -2878,7 +3106,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2935,7 +3163,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2947,7 +3175,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2970,7 +3198,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -2993,7 +3221,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3005,7 +3233,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3028,7 +3256,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3040,7 +3268,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3063,7 +3291,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3075,7 +3303,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3108,7 +3336,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3119,7 +3347,7 @@
         "privilege": "RunStatement",
         "description": "Grants permission to run a code or statement in an interactive session",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-RunStatement",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-RunStatement",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -3131,7 +3359,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3183,7 +3411,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3206,7 +3434,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3239,7 +3467,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3262,7 +3490,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3277,7 +3505,20 @@
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "job": {
+                "resourceName": "job",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:job/${JobName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "startMLEvaluationTaskRun": {
         "privilege": "StartMLEvaluationTaskRun",
@@ -3295,7 +3536,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3318,7 +3559,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3341,7 +3582,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3364,7 +3605,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3387,7 +3628,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3408,7 +3649,7 @@
         "privilege": "StopSession",
         "description": "Grants permission to stop an interactive session",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-session.html#aws-glue-session-StopSession",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-interactive-sessions.html#aws-glue-interactive-sessions-StopSession",
         "service": "glue",
         "dependentActions": [],
         "privConditions": {},
@@ -3420,7 +3661,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3443,7 +3684,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3466,7 +3707,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3483,12 +3724,12 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             }
         },
@@ -3500,7 +3741,19 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3512,7 +3765,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3524,7 +3777,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3536,7 +3789,55 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "mlTransform": {
+                "resourceName": "mlTransform",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:mlTransform/${TransformId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "registry": {
+                "resourceName": "registry",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:registry/${RegistryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "schema": {
+                "resourceName": "schema",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:schema/${SchemaName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "session": {
+                "resourceName": "session",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:session/${SessionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3548,7 +3849,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3560,7 +3861,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3577,12 +3878,12 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the presence of tag keys in the request",
-                "type": "String"
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the presence of tag key-value pairs in the request",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
                 "type": "String"
             }
         },
@@ -3594,7 +3895,19 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connection": {
+                "resourceName": "connection",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3606,7 +3919,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3618,7 +3931,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3630,7 +3943,55 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "mlTransform": {
+                "resourceName": "mlTransform",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:mlTransform/${TransformId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "registry": {
+                "resourceName": "registry",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:registry/${RegistryName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "schema": {
+                "resourceName": "schema",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:schema/${SchemaName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "session": {
+                "resourceName": "session",
+                "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:session/${SessionId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3642,7 +4003,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3654,7 +4015,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3677,7 +4038,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3771,7 +4132,13 @@
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:glue:${Region}:${Account}:connection/${ConnectionName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -3791,7 +4158,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3847,7 +4214,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3886,7 +4253,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3909,7 +4276,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3961,7 +4328,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3984,7 +4351,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -3996,7 +4363,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -4048,7 +4415,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
@@ -4100,12 +4467,22 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }
             }
         }
+    },
+    "useGlueStudio": {
+        "privilege": "UseGlueStudio",
+        "description": "Grants permission to use Glue Studio and access its internal APIs",
+        "accessLevel": "Permissions management",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/glue/latest/ug/setting-up.html#getting-started-min-privs",
+        "service": "glue",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "useMLTransforms": {
         "privilege": "UseMLTransforms",
@@ -4123,7 +4500,7 @@
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on tag key-value pairs attached to the resource",
+                        "description": "Filters access by tag key-value pairs attached to the resource",
                         "type": "String"
                     }
                 }

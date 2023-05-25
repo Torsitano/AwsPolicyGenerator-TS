@@ -53,6 +53,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateAccountCustomization.html"
     },
+    "createAccountSubscription": {
+        "privilege": "CreateAccountSubscription",
+        "description": "Grants permission to subscribe to QuickSight",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateAccountSubscription.html"
+    },
     "createAdmin": {
         "privilege": "CreateAdmin",
         "description": "Grants permission to provision Amazon QuickSight administrators, authors, and readers",
@@ -62,15 +76,6 @@
                 "resourceType": "user",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
-                ],
                 "dependentActions": []
             }
         },
@@ -260,15 +265,6 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
-                ],
-                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateGroup.html"
@@ -344,16 +340,9 @@
                 "resourceType": "namespace",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
-                "dependentActions": []
+                "dependentActions": [
+                    "ds:CreateIdentityPoolDirectory"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateNamespace.html"
@@ -367,15 +356,6 @@
                 "resourceType": "user",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
-                ],
                 "dependentActions": []
             }
         },
@@ -482,15 +462,6 @@
                 "resourceType": "user",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
-            },
-            "": {
-                "resourceType": "",
-                "required": false,
-                "conditionKeys": [
-                    "aws:TagKeys",
-                    "aws:RequestTag/${TagKey}"
-                ],
                 "dependentActions": []
             }
         },
@@ -725,7 +696,9 @@
                 "resourceType": "namespace",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
+                "dependentActions": [
+                    "ds:DeleteDirectory"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DeleteNamespace.html"
@@ -855,6 +828,20 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAccountSettings.html"
+    },
+    "describeAccountSubscription": {
+        "privilege": "DescribeAccountSubscription",
+        "description": "Grants permission to describe a QuickSight account",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "account": {
+                "resourceType": "account",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAccountSubscription.html"
     },
     "describeAnalysis": {
         "privilege": "DescribeAnalysis",
@@ -1283,6 +1270,16 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}",
+                    "quicksight:AllowedEmbeddingDomains"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html"
@@ -1296,6 +1293,14 @@
                 "resourceType": "user",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "quicksight:AllowedEmbeddingDomains"
+                ],
                 "dependentActions": []
             }
         },
@@ -1313,7 +1318,7 @@
                 "dependentActions": []
             }
         },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html"
+        "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/user/iam-actions.html"
     },
     "getAuthCode": {
         "privilege": "GetAuthCode",
@@ -1923,6 +1928,12 @@
         "description": "Grants permission to add tags to a QuickSight resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "analysis": {
+                "resourceType": "analysis",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "customization": {
                 "resourceType": "customization",
                 "required": false,
@@ -1935,8 +1946,26 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "dataset": {
+                "resourceType": "dataset",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "datasource": {
+                "resourceType": "datasource",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "folder": {
                 "resourceType": "folder",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "ingestion": {
+                "resourceType": "ingestion",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1984,6 +2013,12 @@
         "description": "Grants permission to remove tags from a QuickSight resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "analysis": {
+                "resourceType": "analysis",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "customization": {
                 "resourceType": "customization",
                 "required": false,
@@ -1996,8 +2031,26 @@
                 "conditionKeys": [],
                 "dependentActions": []
             },
+            "dataset": {
+                "resourceType": "dataset",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "datasource": {
+                "resourceType": "datasource",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "folder": {
                 "resourceType": "folder",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "ingestion": {
+                "resourceType": "ingestion",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -2320,6 +2373,34 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateIpRestriction.html"
+    },
+    "updatePublicSharingSettings": {
+        "privilege": "UpdatePublicSharingSettings",
+        "description": "Grants permission to enable or disable public sharing on an account",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html"
+    },
+    "updateResourcePermissions": {
+        "privilege": "UpdateResourcePermissions",
+        "description": "Grants permission to update resource-level permissions in QuickSight",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html"
     },
     "updateTemplate": {
         "privilege": "UpdateTemplate",

@@ -1,4 +1,53 @@
 {
+    "cidrcollection": {
+        "resourceName": "cidrcollection",
+        "service": "route53",
+        "resourceArn": "arn:${Partition}:route53:::cidrcollection/${Id}",
+        "resourceConditions": {},
+        "listPrivileges": {
+            "ListCidrBlocks": {
+                "privilege": "ListCidrBlocks",
+                "description": "Grants permission to get a list of the CIDR blocks within a specified CIDR collection",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListCidrBlocks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListCidrLocations": {
+                "privilege": "ListCidrLocations",
+                "description": "Grants permission to get a list of the CIDR locations that belong to a specified CIDR collection",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListCidrLocations.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "readPrivileges": {},
+        "writePrivileges": {
+            "ChangeCidrCollection": {
+                "privilege": "ChangeCidrCollection",
+                "description": "Grants permission to create or delete CIDR blocks within a CIDR collection",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeCidrCollection.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DeleteCidrCollection": {
+                "privilege": "DeleteCidrCollection",
+                "description": "Grants permission to delete a CIDR collection",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteCidrCollection.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
+    },
     "change": {
         "resourceName": "change",
         "service": "route53",
@@ -254,7 +303,9 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html",
                 "privConditions": {},
-                "dependentActions": [],
+                "dependentActions": [
+                    "ec2:DescribeVpcs"
+                ],
                 "required": false
             },
             "ChangeResourceRecordSets": {
@@ -262,7 +313,23 @@
                 "description": "Grants permission to create, update, or delete a record, which contains authoritative DNS information for a specified domain or subdomain name",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html",
-                "privConditions": {},
+                "privConditions": {
+                    "route53:ChangeResourceRecordSetsNormalizedRecordNames": {
+                        "condition": "route53:ChangeResourceRecordSetsNormalizedRecordNames",
+                        "description": "Filters access by the normalized DNS record names in a ChangeResourceRecordSets request",
+                        "type": "ArrayOfString"
+                    },
+                    "route53:ChangeResourceRecordSetsRecordTypes": {
+                        "condition": "route53:ChangeResourceRecordSetsRecordTypes",
+                        "description": "Filters access by the DNS record types in a ChangeResourceRecordSets request",
+                        "type": "ArrayOfString"
+                    },
+                    "route53:ChangeResourceRecordSetsActions": {
+                        "condition": "route53:ChangeResourceRecordSetsActions",
+                        "description": "Filters access by the change actions, CREATE, UPSERT, or DELETE, in a ChangeResourceRecordSets request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -353,7 +420,9 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_DisassociateVPCFromHostedZone.html",
                 "privConditions": {},
-                "dependentActions": [],
+                "dependentActions": [
+                    "ec2:DescribeVpcs"
+                ],
                 "required": false
             },
             "EnableHostedZoneDNSSEC": {
@@ -543,26 +612,7 @@
         "resourceConditions": {},
         "listPrivileges": {},
         "readPrivileges": {},
-        "writePrivileges": {
-            "AssociateVPCWithHostedZone": {
-                "privilege": "AssociateVPCWithHostedZone",
-                "description": "Grants permission to associate an additional Amazon VPC with a private hosted zone",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": false
-            },
-            "DisassociateVPCFromHostedZone": {
-                "privilege": "DisassociateVPCFromHostedZone",
-                "description": "Grants permission to disassociate an Amazon Virtual Private Cloud from a Route 53 private hosted zone",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_DisassociateVPCFromHostedZone.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": false
-            }
-        },
+        "writePrivileges": {},
         "permManPrivileges": {},
         "tagPrivileges": {}
     }

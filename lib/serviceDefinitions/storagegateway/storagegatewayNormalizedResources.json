@@ -59,7 +59,13 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_UpdateFileSystemAssociation.html",
                 "privConditions": {},
-                "dependentActions": [],
+                "dependentActions": [
+                    "logs:CreateLogDelivery",
+                    "logs:DeleteLogDelivery",
+                    "logs:GetLogDelivery",
+                    "logs:ListLogDeliveries",
+                    "logs:UpdateLogDelivery"
+                ],
                 "required": true
             }
         },
@@ -294,10 +300,19 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
-                "dependentActions": [],
+                "dependentActions": [
+                    "ds:DescribeDirectories",
+                    "ec2:DescribeNetworkInterfaces",
+                    "fsx:DescribeFileSystems",
+                    "iam:CreateServiceLinkedRole",
+                    "logs:CreateLogDelivery",
+                    "logs:GetLogDelivery",
+                    "logs:ListLogDeliveries",
+                    "logs:UpdateLogDelivery"
+                ],
                 "required": true
             },
             "AttachVolume": {
@@ -341,7 +356,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -361,7 +376,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -381,7 +396,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -401,7 +416,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -421,7 +436,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -441,7 +456,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -672,7 +687,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -687,7 +702,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -800,7 +815,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -815,7 +830,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -927,7 +942,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -942,7 +957,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1006,7 +1021,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1026,7 +1041,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1178,7 +1193,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1189,7 +1204,18 @@
                 "description": "Grants permission to initiate a snapshot of a volume",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_CreateSnapshot.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -1198,7 +1224,18 @@
                 "description": "Grants permission to initiate a snapshot of a gateway from a volume recovery point",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_CreateSnapshotFromVolumeRecoveryPoint.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -1234,7 +1271,18 @@
                 "description": "Grants permission to update a snapshot schedule configured for a gateway volume",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_UpdateSnapshotSchedule.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the allowed set of values for each of the tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the presence of mandatory tags in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }
@@ -1255,7 +1303,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],
@@ -1270,7 +1318,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by the presence of mandatory tags in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [],

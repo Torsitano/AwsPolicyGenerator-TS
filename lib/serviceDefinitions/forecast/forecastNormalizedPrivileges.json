@@ -15,7 +15,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -36,7 +36,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -70,7 +70,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -104,7 +104,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -138,7 +138,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -172,7 +172,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -206,7 +206,41 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "predictor": {
+                "resourceName": "predictor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createForecastEndpoint": {
+        "privilege": "CreateForecastEndpoint",
+        "description": "Grants permission to create an endpoint using a Predictor resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -240,13 +274,47 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "forecast": {
                 "resourceName": "forecast",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createMonitor": {
+        "privilege": "CreateMonitor",
+        "description": "Grants permission to create an monitor using a Predictor resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_CreateMonitor.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "predictor": {
+                "resourceName": "predictor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -274,7 +342,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -308,13 +376,115 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createWhatIfAnalysis": {
+        "privilege": "CreateWhatIfAnalysis",
+        "description": "Grants permission to create a what-if analysis",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_CreateWhatIfAnalysis.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "forecast": {
+                "resourceName": "forecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createWhatIfForecast": {
+        "privilege": "CreateWhatIfForecast",
+        "description": "Grants permission to create a what-if forecast",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_CreateWhatIfForecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createWhatIfForecastExport": {
+        "privilege": "CreateWhatIfForecastExport",
+        "description": "Grants permission to create a what-if forecast export using what-if forecast resources",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_CreateWhatIfForecastExport.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -464,6 +634,29 @@
             }
         }
     },
+    "deleteForecastEndpoint": {
+        "privilege": "DeleteForecastEndpoint",
+        "description": "Grants permission to delete an endpoint resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "deleteForecastExportJob": {
         "privilege": "DeleteForecastExportJob",
         "description": "Grants permission to delete a forecast export job",
@@ -476,6 +669,29 @@
             "forecastExport": {
                 "resourceName": "forecastExport",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-export-job/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteMonitor": {
+        "privilege": "DeleteMonitor",
+        "description": "Grants permission to delete a monitor resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DeleteMonitor.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -578,6 +794,18 @@
                     }
                 }
             },
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "explainability": {
                 "resourceName": "explainability",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:explainability/${ResourceId}",
@@ -626,6 +854,18 @@
                     }
                 }
             },
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
@@ -641,6 +881,111 @@
             "predictorBacktestExportJob": {
                 "resourceName": "predictorBacktestExportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor-backtest-export-job/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteWhatIfAnalysis": {
+        "privilege": "DeleteWhatIfAnalysis",
+        "description": "Grants permission to delete a what-if analysis",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DeleteWhatIfAnalysis.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteWhatIfForecast": {
+        "privilege": "DeleteWhatIfForecast",
+        "description": "Grants permission to delete a what-if forecast",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DeleteWhatIfForecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteWhatIfForecastExport": {
+        "privilege": "DeleteWhatIfForecastExport",
+        "description": "Grants permission to delete a what-if forecast export",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DeleteWhatIfForecastExport.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -813,6 +1158,29 @@
             }
         }
     },
+    "describeForecastEndpoint": {
+        "privilege": "DescribeForecastEndpoint",
+        "description": "Grants permission to describe an endpoint resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "describeForecastExportJob": {
         "privilege": "DescribeForecastExportJob",
         "description": "Grants permission to describe a forecast export job",
@@ -825,6 +1193,29 @@
             "forecastExport": {
                 "resourceName": "forecastExport",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-export-job/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeMonitor": {
+        "privilege": "DescribeMonitor",
+        "description": "Grants permission to describe an monitor resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeMonitor.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -882,6 +1273,75 @@
             }
         }
     },
+    "describeWhatIfAnalysis": {
+        "privilege": "DescribeWhatIfAnalysis",
+        "description": "Grants permission to describe a what-if analysis",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeWhatIfAnalysis.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeWhatIfForecast": {
+        "privilege": "DescribeWhatIfForecast",
+        "description": "Grants permission to describe a what-if forecast",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeWhatIfForecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeWhatIfForecastExport": {
+        "privilege": "DescribeWhatIfForecastExport",
+        "description": "Grants permission to describe a what-if forecast export",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeWhatIfForecastExport.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "getAccuracyMetrics": {
         "privilege": "GetAccuracyMetrics",
         "description": "Grants permission to get the Accuracy Metrics for a predictor",
@@ -894,6 +1354,52 @@
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getRecentForecastContext": {
+        "privilege": "GetRecentForecastContext",
+        "description": "Grants permission to get the forecast context of a timeseries for an endpoint",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "invokeForecastEndpoint": {
+        "privilege": "InvokeForecastEndpoint",
+        "description": "Grants permission to invoke the endpoint to get forecast for a timeseries",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -975,6 +1481,39 @@
         "privConditions": {},
         "resources": {}
     },
+    "listMonitorEvaluations": {
+        "privilege": "ListMonitorEvaluations",
+        "description": "Grants permission to list all the monitor evaluation result for a monitor",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_ListMonitorEvaluations.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listMonitors": {
+        "privilege": "ListMonitors",
+        "description": "Grants permission to list all the monitor resources",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_ListMonitors.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listPredictorBacktestExportJobs": {
         "privilege": "ListPredictorBacktestExportJobs",
         "description": "Grants permission to list all the predictor backtest export jobs",
@@ -1040,6 +1579,18 @@
                     }
                 }
             },
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "explainability": {
                 "resourceName": "explainability",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:explainability/${ResourceId}",
@@ -1088,6 +1639,18 @@
                     }
                 }
             },
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
@@ -1111,8 +1674,74 @@
                         "type": "String"
                     }
                 }
+            },
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
+    },
+    "listWhatIfAnalyses": {
+        "privilege": "ListWhatIfAnalyses",
+        "description": "Grants permission to list all the what-if analyses",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_ListWhatIfAnalyses.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listWhatIfForecastExports": {
+        "privilege": "ListWhatIfForecastExports",
+        "description": "Grants permission to list all the what-if forecast exports",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_ListWhatIfForecastExports.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listWhatIfForecasts": {
+        "privilege": "ListWhatIfForecasts",
+        "description": "Grants permission to list all the what-if forecasts",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_ListWhatIfForecasts.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "queryForecast": {
         "privilege": "QueryForecast",
@@ -1126,6 +1755,63 @@
             "forecast": {
                 "resourceName": "forecast",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "queryWhatIfForecast": {
+        "privilege": "QueryWhatIfForecast",
+        "description": "Grants permission to retrieve a what-if forecast for a single item",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_forecastquery_QueryWhatIfForecast.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "resumeResource": {
+        "privilege": "ResumeResource",
+        "description": "Grants permission to resume Amazon Forecast resource jobs",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/forecast/latest/dg/API_ResumeResource.html",
+        "service": "forecast",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1153,13 +1839,25 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "datasetImportJob": {
                 "resourceName": "datasetImportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:dataset-import-job/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1217,6 +1915,18 @@
                     }
                 }
             },
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
@@ -1232,6 +1942,42 @@
             "predictorBacktestExportJob": {
                 "resourceName": "predictorBacktestExportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor-backtest-export-job/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1259,7 +2005,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1290,6 +2036,18 @@
             "datasetImportJob": {
                 "resourceName": "datasetImportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:dataset-import-job/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1347,6 +2105,18 @@
                     }
                 }
             },
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
@@ -1362,6 +2132,42 @@
             "predictorBacktestExportJob": {
                 "resourceName": "predictorBacktestExportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor-backtest-export-job/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1384,7 +2190,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1415,6 +2221,18 @@
             "datasetImportJob": {
                 "resourceName": "datasetImportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:dataset-import-job/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "endpoint": {
+                "resourceName": "endpoint",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:forecast-endpoint/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1472,6 +2290,18 @@
                     }
                 }
             },
+            "monitor": {
+                "resourceName": "monitor",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:monitor/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "predictor": {
                 "resourceName": "predictor",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor/${ResourceId}",
@@ -1487,6 +2317,42 @@
             "predictorBacktestExportJob": {
                 "resourceName": "predictorBacktestExportJob",
                 "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:predictor-backtest-export-job/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfAnalysis": {
+                "resourceName": "whatIfAnalysis",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-analysis/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecast": {
+                "resourceName": "whatIfForecast",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "whatIfForecastExport": {
+                "resourceName": "whatIfForecastExport",
+                "resourceArn": "arn:${Partition}:forecast:${Region}:${Account}:what-if-forecast-export/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

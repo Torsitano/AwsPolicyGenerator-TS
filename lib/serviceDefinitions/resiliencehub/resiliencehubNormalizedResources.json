@@ -2,7 +2,7 @@
     "resiliencyPolicy": {
         "resourceName": "resiliency-policy",
         "service": "resiliencehub",
-        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:resiliency-policy/${ResiliencyPolicyID}",
+        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:resiliency-policy/${ResiliencyPolicyId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
@@ -23,26 +23,6 @@
             }
         },
         "writePrivileges": {
-            "CreateApp": {
-                "privilege": "CreateApp",
-                "description": "Grants permission to create application",
-                "accessLevel": "Write",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/resilience-hub/latest/APIReference/API_CreateApp.html",
-                "privConditions": {
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters access by the presence of tag key-value pairs in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters access by the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    }
-                },
-                "dependentActions": [],
-                "required": false
-            },
             "DeleteResiliencyPolicy": {
                 "privilege": "DeleteResiliencyPolicy",
                 "description": "Grants permission to batch delete resiliency policy",
@@ -104,7 +84,7 @@
     "application": {
         "resourceName": "application",
         "service": "resiliencehub",
-        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:app/${AppID}",
+        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:app/${AppId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
@@ -121,15 +101,6 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
-            },
-            "ListAppAssessments": {
-                "privilege": "ListAppAssessments",
-                "description": "Grants permission to list application assessment",
-                "accessLevel": "List",
-                "apiDocumentationLink": "https://docs.aws.amazon.com/resilience-hub/latest/APIReference/API_ListAppAssessments.html",
-                "privConditions": {},
-                "dependentActions": [],
-                "required": false
             },
             "ListAppComponentCompliances": {
                 "privilege": "ListAppComponentCompliances",
@@ -411,6 +382,7 @@
                     "cloudwatch:GetMetricData",
                     "cloudwatch:GetMetricStatistics",
                     "cloudwatch:PutMetricData",
+                    "ec2:DescribeRegions",
                     "fis:GetExperimentTemplate",
                     "fis:ListExperimentTemplates",
                     "fis:ListExperiments",
@@ -474,7 +446,7 @@
     "appAssessment": {
         "resourceName": "app-assessment",
         "service": "resiliencehub",
-        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:app-assessment/${AppAssessmentID}",
+        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:app-assessment/${AppAssessmentId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
@@ -527,7 +499,7 @@
     "recommendationTemplate": {
         "resourceName": "recommendation-template",
         "service": "resiliencehub",
-        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:recommendation-template/${RecommendationTemplateID}",
+        "resourceArn": "arn:${Partition}:resiliencehub:${Region}:${Account}:recommendation-template/${RecommendationTemplateId}",
         "resourceConditions": {
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",

@@ -110,7 +110,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -167,7 +167,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -188,7 +188,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -209,7 +209,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -230,7 +230,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -266,7 +266,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -296,6 +296,40 @@
             }
         }
     },
+    "createWorkspaceImage": {
+        "privilege": "CreateWorkspaceImage",
+        "description": "Grants permission to create a new WorkSpace image",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_CreateWorkspaceImage.html",
+        "service": "workspaces",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "workspaceid": {
+                "resourceName": "workspaceid",
+                "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:workspace/${WorkspaceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "createWorkspaces": {
         "privilege": "CreateWorkspaces",
         "description": "Grants permission to create one or more WorkSpaces",
@@ -312,7 +346,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -343,6 +377,29 @@
             "workspaceid": {
                 "resourceName": "workspaceid",
                 "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:workspace/${WorkspaceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteClientBranding": {
+        "privilege": "DeleteClientBranding",
+        "description": "Grants permission to delete AWS WorkSpaces Client branding data within a directory",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_DeleteClientBranding.html",
+        "service": "workspaces",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directoryid": {
+                "resourceName": "directoryid",
+                "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:directory/${DirectoryId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -439,7 +496,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -532,6 +589,29 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "describeClientBranding": {
+        "privilege": "DescribeClientBranding",
+        "description": "Grants permission to retrieve AWS WorkSpaces Client branding data within a directory",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeClientBranding.html",
+        "service": "workspaces",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directoryid": {
+                "resourceName": "directoryid",
+                "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "describeClientProperties": {
         "privilege": "DescribeClientProperties",
@@ -799,6 +879,29 @@
             }
         }
     },
+    "importClientBranding": {
+        "privilege": "ImportClientBranding",
+        "description": "Grants permission to import AWS WorkSpaces Client branding data within a directory",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_ImportClientBranding.html",
+        "service": "workspaces",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directoryid": {
+                "resourceName": "directoryid",
+                "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "importWorkspaceImage": {
         "privilege": "ImportWorkspaceImage",
         "description": "Grants permission to import Bring Your Own License (BYOL) images into Amazon WorkSpaces",
@@ -872,6 +975,29 @@
         "description": "Grants permission to modify the properties of WorkSpaces clients",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_ModifyClientProperties.html",
+        "service": "workspaces",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "directoryid": {
+                "resourceName": "directoryid",
+                "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:directory/${DirectoryId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "modifySamlProperties": {
+        "privilege": "ModifySamlProperties",
+        "description": "Grants permission to modify the SAML properties of a directory",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_ModifySamlProperties.html",
         "service": "workspaces",
         "dependentActions": [],
         "privConditions": {},
@@ -1067,7 +1193,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -1166,6 +1292,35 @@
             "workspaceid": {
                 "resourceName": "workspaceid",
                 "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:workspace/${WorkspaceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "stream": {
+        "privilege": "Stream",
+        "description": "Grants permission to federated users to sign in by using their existing credentials and stream their workspace",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/workspaces/latest/api/API_Stream.html",
+        "service": "workspaces",
+        "dependentActions": [],
+        "privConditions": {
+            "workspaces:userId": {
+                "condition": "workspaces:userId",
+                "description": "Filters access by the ID of the Workspaces user",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "directoryid": {
+                "resourceName": "directoryid",
+                "resourceArn": "arn:${Partition}:workspaces:${Region}:${Account}:directory/${DirectoryId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

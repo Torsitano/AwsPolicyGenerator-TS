@@ -75,7 +75,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -121,7 +121,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -179,7 +179,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -748,7 +748,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -813,7 +813,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -895,6 +895,29 @@
         "description": "Grants permission to modify the description for a firewall",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateFirewallDescription.html",
+        "service": "networkFirewall",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "firewall": {
+                "resourceName": "Firewall",
+                "resourceArn": "arn:${Partition}:network-firewall:${Region}:${Account}:firewall/${Name}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tag value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateFirewallEncryptionConfiguration": {
+        "privilege": "UpdateFirewallEncryptionConfiguration",
+        "description": "Grants permission to modify the encryption configuration of a firewall",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_UpdateFirewallEncryptionConfiguration.html",
         "service": "networkFirewall",
         "dependentActions": [],
         "privConditions": {},

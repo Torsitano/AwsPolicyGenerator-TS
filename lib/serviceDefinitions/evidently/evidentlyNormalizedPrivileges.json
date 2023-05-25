@@ -10,7 +10,7 @@
         "resources": {
             "feature": {
                 "resourceName": "Feature",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/feature/${FeatureName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -38,7 +38,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -59,7 +59,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -80,7 +80,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -90,6 +90,30 @@
         "description": "Grants permission to create a project",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html",
+        "service": "evidently",
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole",
+            "iam:GetRole"
+        ],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed the request on behalf of the IAM principal",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "createSegment": {
+        "privilege": "CreateSegment",
+        "description": "Grants permission to create a segment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html",
         "service": "evidently",
         "dependentActions": [],
         "privConditions": {
@@ -101,7 +125,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -117,7 +141,7 @@
         "resources": {
             "experiment": {
                 "resourceName": "Experiment",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/experiment/${ExperimentName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -140,7 +164,7 @@
         "resources": {
             "feature": {
                 "resourceName": "Feature",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/feature/${FeatureName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -163,7 +187,7 @@
         "resources": {
             "launch": {
                 "resourceName": "Launch",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/launch/${LaunchName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -186,7 +210,30 @@
         "resources": {
             "project": {
                 "resourceName": "Project",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteSegment": {
+        "privilege": "DeleteSegment",
+        "description": "Grants permission to delete a segment",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteSegment.html",
+        "service": "evidently",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "segment": {
+                "resourceName": "Segment",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:segment/${SegmentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -209,7 +256,7 @@
         "resources": {
             "feature": {
                 "resourceName": "Feature",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/feature/${FeatureName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -232,7 +279,7 @@
         "resources": {
             "experiment": {
                 "resourceName": "Experiment",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/experiment/${ExperimentName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -255,7 +302,7 @@
         "resources": {
             "experiment": {
                 "resourceName": "Experiment",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/experiment/${ExperimentName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -278,7 +325,7 @@
         "resources": {
             "feature": {
                 "resourceName": "Feature",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/feature/${FeatureName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -301,7 +348,7 @@
         "resources": {
             "launch": {
                 "resourceName": "Launch",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/launch/${LaunchName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -324,7 +371,30 @@
         "resources": {
             "project": {
                 "resourceName": "Project",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getSegment": {
+        "privilege": "GetSegment",
+        "description": "Grants permission to get segment details",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_GetSegment.html",
+        "service": "evidently",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "segment": {
+                "resourceName": "Segment",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:segment/${SegmentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -376,6 +446,26 @@
         "privConditions": {},
         "resources": {}
     },
+    "listSegmentReferences": {
+        "privilege": "ListSegmentReferences",
+        "description": "Grants permission to list resources referencing a segment",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListSegmentReferences.html",
+        "service": "evidently",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSegments": {
+        "privilege": "ListSegments",
+        "description": "Grants permission to list segments",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListSegments.html",
+        "service": "evidently",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
         "description": "Grants permission to list tags for resources",
@@ -397,7 +487,7 @@
         "resources": {
             "project": {
                 "resourceName": "Project",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -420,7 +510,7 @@
         "resources": {
             "experiment": {
                 "resourceName": "Experiment",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/experiment/${ExperimentName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -443,7 +533,7 @@
         "resources": {
             "launch": {
                 "resourceName": "Launch",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/launch/${LaunchName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -466,7 +556,7 @@
         "resources": {
             "experiment": {
                 "resourceName": "Experiment",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/experiment/${ExperimentName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -489,7 +579,7 @@
         "resources": {
             "launch": {
                 "resourceName": "Launch",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/launch/${LaunchName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -517,9 +607,80 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
+        "resources": {
+            "experiment": {
+                "resourceName": "Experiment",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "feature": {
+                "resourceName": "Feature",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "launch": {
+                "resourceName": "Launch",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "project": {
+                "resourceName": "Project",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "segment": {
+                "resourceName": "Segment",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:segment/${SegmentName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "testSegmentPattern": {
+        "privilege": "TestSegmentPattern",
+        "description": "Grants permission to test a segment pattern",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TestSegmentPattern.html",
+        "service": "evidently",
+        "dependentActions": [],
+        "privConditions": {},
         "resources": {}
     },
     "untagResource": {
@@ -538,10 +699,71 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request on behalf of the IAM principal",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
-        "resources": {}
+        "resources": {
+            "experiment": {
+                "resourceName": "Experiment",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "feature": {
+                "resourceName": "Feature",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "launch": {
+                "resourceName": "Launch",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "project": {
+                "resourceName": "Project",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            },
+            "segment": {
+                "resourceName": "Segment",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:segment/${SegmentName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource that make the request on behalf of the IAM principal",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateExperiment": {
         "privilege": "UpdateExperiment",
@@ -554,7 +776,7 @@
         "resources": {
             "experiment": {
                 "resourceName": "Experiment",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/experiment/${ExperimentName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/experiment/${ExperimentName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -577,7 +799,7 @@
         "resources": {
             "feature": {
                 "resourceName": "Feature",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/feature/${FeatureName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/feature/${FeatureName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -600,7 +822,7 @@
         "resources": {
             "launch": {
                 "resourceName": "Launch",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}/launch/${LaunchName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}/launch/${LaunchName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -618,12 +840,15 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html",
         "service": "evidently",
-        "dependentActions": [],
+        "dependentActions": [
+            "iam:CreateServiceLinkedRole",
+            "iam:GetRole"
+        ],
         "privConditions": {},
         "resources": {
             "project": {
                 "resourceName": "Project",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -646,7 +871,7 @@
         "resources": {
             "project": {
                 "resourceName": "Project",
-                "resourceArn": "arn:${Partition}:evidently:${Region}:${OwnerAccountId}:project/${ProjectName}",
+                "resourceArn": "arn:${Partition}:evidently:${Region}:${Account}:project/${ProjectName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

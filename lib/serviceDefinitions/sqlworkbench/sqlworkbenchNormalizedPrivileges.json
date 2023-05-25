@@ -90,6 +90,29 @@
         "privConditions": {},
         "resources": {}
     },
+    "batchGetNotebookCell": {
+        "privilege": "BatchGetNotebookCell",
+        "description": "Grants permission to get notebook cells content on your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "createAccount": {
         "privilege": "CreateAccount",
         "description": "Grants permission to create SQLWorkbench account",
@@ -111,7 +134,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -145,7 +168,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -178,6 +201,142 @@
         "privConditions": {},
         "resources": {}
     },
+    "createNotebook": {
+        "privilege": "CreateNotebook",
+        "description": "Grants permission to create a new notebook on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createNotebookCell": {
+        "privilege": "CreateNotebookCell",
+        "description": "Grants permission to create a notebook cell on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createNotebookFromVersion": {
+        "privilege": "CreateNotebookFromVersion",
+        "description": "Grants permission to create a new notebook from a notebook version on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createNotebookVersion": {
+        "privilege": "CreateNotebookVersion",
+        "description": "Grants permission to create a notebook version on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "createSavedQuery": {
         "privilege": "CreateSavedQuery",
         "description": "Grants permission to create a new saved query on your account",
@@ -189,7 +348,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -258,6 +417,75 @@
             }
         }
     },
+    "deleteNotebook": {
+        "privilege": "DeleteNotebook",
+        "description": "Grants permission to remove notebooks on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteNotebookCell": {
+        "privilege": "DeleteNotebookCell",
+        "description": "Grants permission to remove notebooks cells on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteNotebookVersion": {
+        "privilege": "DeleteNotebookVersion",
+        "description": "Grants permission to remove notebooks cells on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "deleteSavedQuery": {
         "privilege": "DeleteSavedQuery",
         "description": "Grants permission to remove saved queries on your account",
@@ -314,6 +542,63 @@
             }
         }
     },
+    "duplicateNotebook": {
+        "privilege": "DuplicateNotebook",
+        "description": "Grants permission to create a new notebook by duplicating an existing one on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "exportNotebook": {
+        "privilege": "ExportNotebook",
+        "description": "Grants permission to export a notebook on your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "generateSession": {
         "privilege": "GenerateSession",
         "description": "Grants permission to generate a new session on your account",
@@ -327,6 +612,16 @@
     "getAccountInfo": {
         "privilege": "GetAccountInfo",
         "description": "Grants permission to get account info",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "getAccountSettings": {
+        "privilege": "GetAccountSettings",
+        "description": "Grants permission to get account settings",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
         "service": "sqlworkbench",
@@ -380,6 +675,62 @@
             }
         }
     },
+    "getNotebook": {
+        "privilege": "GetNotebook",
+        "description": "Grants permission to get notebook metadata on your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getNotebookVersion": {
+        "privilege": "GetNotebookVersion",
+        "description": "Grants permission to get the content of a notebook version on your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getQueryExecutionHistory": {
+        "privilege": "GetQueryExecutionHistory",
+        "description": "Grants permission to get the query execution history on your account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "getSavedQuery": {
         "privilege": "GetSavedQuery",
         "description": "Grants permission to get saved query on your account",
@@ -423,6 +774,40 @@
         "privConditions": {},
         "resources": {}
     },
+    "importNotebook": {
+        "privilege": "ImportNotebook",
+        "description": "Grants permission to import a notebook on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "listConnections": {
         "privilege": "ListConnections",
         "description": "Grants permission to list the connections on your account",
@@ -446,6 +831,49 @@
     "listFiles": {
         "privilege": "ListFiles",
         "description": "Grants permission to list files and folders",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listNotebookVersions": {
+        "privilege": "ListNotebookVersions",
+        "description": "Grants permission to get notebook versions metadata on your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listNotebooks": {
+        "privilege": "ListNotebooks",
+        "description": "Grants permission to list the notebooks on your account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listQueryExecutionHistory": {
+        "privilege": "ListQueryExecutionHistory",
+        "description": "Grants permission to list the query execution history on your account",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
         "service": "sqlworkbench",
@@ -549,6 +977,18 @@
                     }
                 }
             },
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "query": {
                 "resourceName": "query",
                 "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:query/${ResourceId}",
@@ -583,6 +1023,40 @@
         "privConditions": {},
         "resources": {}
     },
+    "restoreNotebookVersion": {
+        "privilege": "RestoreNotebookVersion",
+        "description": "Grants permission to restore a notebook on your account to a version",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "tagResource": {
         "privilege": "TagResource",
         "description": "Grants permission to tag an sqlworkbench resource",
@@ -594,7 +1068,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -618,6 +1092,18 @@
             "connection": {
                 "resourceName": "connection",
                 "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:connection/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -652,7 +1138,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -685,6 +1171,18 @@
                     }
                 }
             },
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "query": {
                 "resourceName": "query",
                 "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:query/${ResourceId}",
@@ -699,6 +1197,36 @@
             }
         }
     },
+    "updateAccountConnectionSettings": {
+        "privilege": "UpdateAccountConnectionSettings",
+        "description": "Grants permission to update account-wide connection settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateAccountExportSettings": {
+        "privilege": "UpdateAccountExportSettings",
+        "description": "Grants permission to update account-wide export settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "updateAccountGeneralSettings": {
+        "privilege": "UpdateAccountGeneralSettings",
+        "description": "Grants permission to update account-wide general settings",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "updateChart": {
         "privilege": "UpdateChart",
         "description": "Grants permission to update a chart on your account",
@@ -710,7 +1238,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -744,7 +1272,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
@@ -812,6 +1340,108 @@
         "privConditions": {},
         "resources": {}
     },
+    "updateNotebook": {
+        "privilege": "UpdateNotebook",
+        "description": "Grants permission to update a notebook metadata on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateNotebookCellContent": {
+        "privilege": "UpdateNotebookCellContent",
+        "description": "Grants permission to update a notebook cell content on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateNotebookCellLayout": {
+        "privilege": "UpdateNotebookCellLayout",
+        "description": "Grants permission to update a notebook cell layout on your account",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-policy-resources.resource-permissions.html",
+        "service": "sqlworkbench",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "notebook": {
+                "resourceName": "notebook",
+                "resourceArn": "arn:${Partition}:sqlworkbench:${Region}:${Account}:notebook/${ResourceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags that are associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "updateSavedQuery": {
         "privilege": "UpdateSavedQuery",
         "description": "Grants permission to update a saved query on your account",
@@ -823,7 +1453,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",

@@ -1,7 +1,7 @@
 {
     "associateAwsAccountWithPartnerAccount": {
         "privilege": "AssociateAwsAccountWithPartnerAccount",
-        "description": "Grants permission to link partner accounts with Aws account",
+        "description": "Grants permission to link partner accounts with AWS account",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_AssociateAwsAccountWithPartnerAccount.html",
         "service": "iotwireless",
@@ -323,6 +323,52 @@
         },
         "resources": {}
     },
+    "createNetworkAnalyzerConfiguration": {
+        "privilege": "CreateNetworkAnalyzerConfiguration",
+        "description": "Grants permission to create a NetworkAnalyzerConfiguration resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_CreateNetworkAnalyzerConfiguration.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by a tag key that is present in the request that the user makes to IoT Wireless",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the list of all the tag key names associated with the resource in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "createServiceProfile": {
         "privilege": "CreateServiceProfile",
         "description": "Grants permission to create a ServiceProfile resource",
@@ -511,6 +557,29 @@
             "multicastGroup": {
                 "resourceName": "MulticastGroup",
                 "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:MulticastGroup/${MulticastGroupId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteNetworkAnalyzerConfiguration": {
+        "privilege": "DeleteNetworkAnalyzerConfiguration",
+        "description": "Grants permission to delete the NetworkAnalyzerConfiguration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_DeleteNetworkAnalyzerConfiguration.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -912,6 +981,16 @@
             }
         }
     },
+    "getEventConfigurationByResourceTypes": {
+        "privilege": "GetEventConfigurationByResourceTypes",
+        "description": "Grants permission to get event configuration by resource types",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetEventConfigurationByResourceTypes.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "getFuotaTask": {
         "privilege": "GetFuotaTask",
         "description": "Grants permission to get the FuotaTask",
@@ -999,7 +1078,20 @@
         "service": "iotwireless",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "getPartnerAccount": {
         "privilege": "GetPartnerAccount",
@@ -1024,6 +1116,76 @@
             }
         }
     },
+    "getPosition": {
+        "privilege": "GetPosition",
+        "description": "Grants permission to get position for a given resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetPosition.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "getPositionConfiguration": {
+        "privilege": "GetPositionConfiguration",
+        "description": "Grants permission to get position configuration for a given resource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetPositionConfiguration.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "getResourceEventConfiguration": {
         "privilege": "GetResourceEventConfiguration",
         "description": "Grants permission to get an event configuration for an identifier",
@@ -1036,6 +1198,30 @@
             "sidewalkAccount": {
                 "resourceName": "SidewalkAccount",
                 "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:SidewalkAccount/${SidewalkAccountId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1319,6 +1505,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "listEventConfigurations": {
+        "privilege": "ListEventConfigurations",
+        "description": "Grants permission to list information of available event configurations based on the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_ListEventConfigurations.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listFuotaTasks": {
         "privilege": "ListFuotaTasks",
         "description": "Grants permission to list information of available FuotaTasks based on the AWS account",
@@ -1362,11 +1558,31 @@
             }
         }
     },
+    "listNetworkAnalyzerConfigurations": {
+        "privilege": "ListNetworkAnalyzerConfigurations",
+        "description": "Grants permission to list information of available NetworkAnalyzerConfigurations based on the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_ListNetworkAnalyzerConfigurations.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listPartnerAccounts": {
         "privilege": "ListPartnerAccounts",
         "description": "Grants permission to list the available partner accounts",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_ListPartnerAccounts.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listPositionConfigurations": {
+        "privilege": "ListPositionConfigurations",
+        "description": "Grants permission to list information of available position configurations based on the AWS account",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_ListPositionConfigurations.html",
         "service": "iotwireless",
         "dependentActions": [],
         "privConditions": {},
@@ -1416,6 +1632,42 @@
             "deviceProfile": {
                 "resourceName": "DeviceProfile",
                 "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:DeviceProfile/${DeviceProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fuotaTask": {
+                "resourceName": "FuotaTask",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:FuotaTask/${FuotaTaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "multicastGroup": {
+                "resourceName": "MulticastGroup",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:MulticastGroup/${MulticastGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1516,6 +1768,41 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "putPositionConfiguration": {
+        "privilege": "PutPositionConfiguration",
+        "description": "Grants permission to put position configuration for a given resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_PutPositionConfiguration.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "putResourceLogLevel": {
         "privilege": "PutResourceLogLevel",
@@ -1743,7 +2030,20 @@
         "service": "iotwireless",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "tagResource": {
         "privilege": "TagResource",
@@ -1780,6 +2080,42 @@
             "deviceProfile": {
                 "resourceName": "DeviceProfile",
                 "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:DeviceProfile/${DeviceProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "fuotaTask": {
+                "resourceName": "FuotaTask",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:FuotaTask/${FuotaTaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "multicastGroup": {
+                "resourceName": "MulticastGroup",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:MulticastGroup/${MulticastGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1913,6 +2249,42 @@
                     }
                 }
             },
+            "fuotaTask": {
+                "resourceName": "FuotaTask",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:FuotaTask/${FuotaTaskId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "multicastGroup": {
+                "resourceName": "MulticastGroup",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:MulticastGroup/${MulticastGroupId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
             "serviceProfile": {
                 "resourceName": "ServiceProfile",
                 "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:ServiceProfile/${ServiceProfileId}",
@@ -1998,6 +2370,16 @@
             }
         }
     },
+    "updateEventConfigurationByResourceTypes": {
+        "privilege": "UpdateEventConfigurationByResourceTypes",
+        "description": "Grants permission to update event configuration by resource types",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateEventConfigurationByResourceTypes.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "updateFuotaTask": {
         "privilege": "UpdateFuotaTask",
         "description": "Grants permission to update the FuotaTask",
@@ -2062,7 +2444,44 @@
         "service": "iotwireless",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "networkAnalyzerConfiguration": {
+                "resourceName": "NetworkAnalyzerConfiguration",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:NetworkAnalyzerConfiguration/${NetworkAnalyzerConfigurationName}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updatePartnerAccount": {
         "privilege": "UpdatePartnerAccount",
@@ -2087,6 +2506,41 @@
             }
         }
     },
+    "updatePosition": {
+        "privilege": "UpdatePosition",
+        "description": "Grants permission to update position for a given resource",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdatePosition.html",
+        "service": "iotwireless",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "updateResourceEventConfiguration": {
         "privilege": "UpdateResourceEventConfiguration",
         "description": "Grants permission to update an event configuration for an identifier",
@@ -2099,6 +2553,30 @@
             "sidewalkAccount": {
                 "resourceName": "SidewalkAccount",
                 "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:SidewalkAccount/${SidewalkAccountId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessDevice": {
+                "resourceName": "WirelessDevice",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessDevice/${WirelessDeviceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag key component of a tag attached to an IoT Wireless resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "wirelessGateway": {
+                "resourceName": "WirelessGateway",
+                "resourceArn": "arn:${Partition}:iotwireless:${Region}:${Account}:WirelessGateway/${WirelessGatewayId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

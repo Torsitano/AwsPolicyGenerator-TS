@@ -3,8 +3,33 @@
         "resourceName": "association",
         "service": "ssm",
         "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
-        "resourceConditions": {},
-        "listPrivileges": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListAssociationVersions": {
+                "privilege": "ListAssociationVersions",
+                "description": "Grants permission to list versions of the specified association",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListAssociationVersions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "readPrivileges": {
             "DescribeAssociation": {
                 "privilege": "DescribeAssociation",
@@ -14,6 +39,24 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": false
+            },
+            "DescribeAssociationExecutionTargets": {
+                "privilege": "DescribeAssociationExecutionTargets",
+                "description": "Grants permission to view information about a specified association execution",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAssociationExecutionTargets.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "DescribeAssociationExecutions": {
+                "privilege": "DescribeAssociationExecutions",
+                "description": "Grants permission to view all executions for a specified association",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAssociationExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
             }
         },
         "writePrivileges": {
@@ -49,24 +92,156 @@
                 "description": "Grants permission to SSM Agent to update the status of the association that it is currently running (internal Systems Manager call)",
                 "accessLevel": "Write",
                 "apiDocumentationLink": null,
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "automationExecution": {
         "resourceName": "automation-execution",
         "service": "ssm",
         "resourceArn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
-        "resourceConditions": {},
-        "listPrivileges": {},
-        "readPrivileges": {},
-        "writePrivileges": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to view a list of resource tags for a specified resource",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": false
+            }
+        },
+        "readPrivileges": {
+            "DescribeAutomationStepExecutions": {
+                "privilege": "DescribeAutomationStepExecutions",
+                "description": "Grants permission to view information about all active and terminated step executions in an Automation workflow",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeAutomationStepExecutions.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetAutomationExecution": {
+                "privilege": "GetAutomationExecution",
+                "description": "Grants permission to view details of a specified Automation execution",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AutomationExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "SendAutomationSignal": {
+                "privilege": "SendAutomationSignal",
+                "description": "Grants permission to send a signal to change the current behavior or status of a specified Automation execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_SendAutomationSignal.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "StopAutomationExecution": {
+                "privilege": "StopAutomationExecution",
+                "description": "Grants permission to stop a specified Automation execution that is already in progress",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StopAutomationExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "automationDefinition": {
         "resourceName": "automation-definition",
@@ -90,7 +265,13 @@
                 "description": "Grants permission to initiate the execution of an Automation Change Template document",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartChangeRequestExecution.html",
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:AutoApprove": {
+                        "condition": "ssm:AutoApprove",
+                        "description": "Filters access by verifying that a user has permission to start Change Manager workflows without a review step (with the exception of change freeze events)",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }
@@ -116,6 +297,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -134,6 +320,11 @@
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                 "type": "String"
+            },
+            "ssm:DocumentCategories": {
+                "condition": "ssm:DocumentCategories",
+                "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
+                "type": "ArrayOfString"
             }
         },
         "listPrivileges": {
@@ -202,6 +393,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "GetCalendar": {
+                "privilege": "GetCalendar",
+                "description": "Grants permission to view details of a specific calendar",
+                "accessLevel": "Read",
+                "apiDocumentationLink": null,
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "GetCalendarState": {
                 "privilege": "GetCalendarState",
                 "description": "Grants permission to view the calendar state for a change calendar or a list of change calendars",
@@ -219,7 +419,7 @@
                 "privConditions": {
                     "ssm:DocumentCategories": {
                         "condition": "ssm:DocumentCategories",
-                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category",
+                        "description": "Filters access by verifying that a user has permission to access a document belonging to a specific category enum",
                         "type": "ArrayOfString"
                     }
                 },
@@ -233,7 +433,18 @@
                 "description": "Grants permission to associate a specified Systems Manager document with specified instances or other targets",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -260,7 +471,7 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
-                        "type": "String"
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [
@@ -286,6 +497,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "PutCalendar": {
+                "privilege": "PutCalendar",
+                "description": "Grants permission to create/edit a specific calendar",
+                "accessLevel": "Write",
+                "apiDocumentationLink": null,
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "SendCommand": {
                 "privilege": "SendCommand",
                 "description": "Grants permission to run commands on one or more specified managed instances",
@@ -295,6 +515,11 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                         "type": "String"
                     }
                 },
@@ -311,6 +536,11 @@
                         "condition": "ssm:SessionDocumentAccessCheck",
                         "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
                         "type": "Bool"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -335,7 +565,13 @@
                 "description": "Grants permission to update the status of the SSM document associated with a specified instance",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -384,7 +620,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -393,7 +640,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -407,6 +660,11 @@
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            },
+            "ssm:resourceTag/${TagKey}": {
+                "condition": "ssm:resourceTag/${TagKey}",
+                "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                 "type": "String"
             }
         },
@@ -438,7 +696,7 @@
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeEffectiveInstanceAssociations.html",
                 "privConditions": {},
                 "dependentActions": [],
-                "required": false
+                "required": true
             },
             "DescribeInstanceAssociationsStatus": {
                 "privilege": "DescribeInstanceAssociationsStatus",
@@ -446,6 +704,26 @@
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeInstanceAssociationsStatus.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetConnectionStatus": {
+                "privilege": "GetConnectionStatus",
+                "description": "Grants permission to view the Session Manager connection status for a specified managed instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetConnectionStatus.html",
+                "privConditions": {
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -456,7 +734,18 @@
                 "description": "Grants permission to associate a specified Systems Manager document with specified instances or other targets",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -497,6 +786,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -512,6 +806,11 @@
                         "condition": "ssm:SessionDocumentAccessCheck",
                         "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
                         "type": "Bool"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -536,7 +835,13 @@
                 "description": "Grants permission to update the status of the SSM document associated with a specified instance",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -545,13 +850,70 @@
                 "description": "Grants permission to SSM Agent to update the status of the association that it is currently running (internal Systems Manager call)",
                 "accessLevel": "Write",
                 "apiDocumentationLink": null,
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateInstanceInformation": {
+                "privilege": "UpdateInstanceInformation",
+                "description": "Grants permission to SSM Agent to send a heartbeat signal to the Systems Manager service in the cloud",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     },
     "maintenancewindow": {
         "resourceName": "maintenancewindow",
@@ -565,6 +927,15 @@
             }
         },
         "listPrivileges": {
+            "DescribeMaintenanceWindowExecutionTasks": {
+                "privilege": "DescribeMaintenanceWindowExecutionTasks",
+                "description": "Grants permission to view details about the tasks that ran during a specified maintenance window execution",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeMaintenanceWindowExecutionTasks.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "DescribeMaintenanceWindowExecutions": {
                 "privilege": "DescribeMaintenanceWindowExecutions",
                 "description": "Grants permission to view the executions of a specified maintenance window",
@@ -623,6 +994,15 @@
             }
         },
         "writePrivileges": {
+            "CancelMaintenanceWindowExecution": {
+                "privilege": "CancelMaintenanceWindowExecution",
+                "description": "Grants permission to cancel an in-progress maintenance window execution",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CancelMaintenanceWindowExecution.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "DeleteMaintenanceWindow": {
                 "privilege": "DeleteMaintenanceWindow",
                 "description": "Grants permission to delete a specified maintenance window",
@@ -703,7 +1083,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -712,7 +1103,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -766,7 +1163,7 @@
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeEffectiveInstanceAssociations.html",
                 "privConditions": {},
                 "dependentActions": [],
-                "required": false
+                "required": true
             },
             "DescribeInstanceAssociationsStatus": {
                 "privilege": "DescribeInstanceAssociationsStatus",
@@ -774,6 +1171,26 @@
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeInstanceAssociationsStatus.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetConnectionStatus": {
+                "privilege": "GetConnectionStatus",
+                "description": "Grants permission to view the Session Manager connection status for a specified managed instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetConnectionStatus.html",
+                "privConditions": {
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -784,7 +1201,18 @@
                 "description": "Grants permission to associate a specified Systems Manager document with specified instances or other targets",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -834,6 +1262,11 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
                         "type": "String"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -849,6 +1282,11 @@
                         "condition": "ssm:SessionDocumentAccessCheck",
                         "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
                         "type": "Bool"
+                    },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
                     },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -873,7 +1311,13 @@
                 "description": "Grants permission to update the status of the SSM document associated with a specified instance",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html",
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -882,7 +1326,28 @@
                 "description": "Grants permission to SSM Agent to update the status of the association that it is currently running (internal Systems Manager call)",
                 "accessLevel": "Write",
                 "apiDocumentationLink": null,
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "UpdateInstanceInformation": {
+                "privilege": "UpdateInstanceInformation",
+                "description": "Grants permission to SSM Agent to send a heartbeat signal to the Systems Manager service in the cloud",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
+                "privConditions": {
+                    "ssm:SourceInstanceARN": {
+                        "condition": "ssm:SourceInstanceARN",
+                        "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -903,7 +1368,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -912,7 +1388,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -998,7 +1480,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -1007,7 +1500,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -1021,6 +1520,11 @@
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                "type": "String"
+            },
+            "ssm:resourceTag/${TagKey}": {
+                "condition": "ssm:resourceTag/${TagKey}",
+                "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
                 "type": "String"
             }
         },
@@ -1073,7 +1577,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -1082,7 +1597,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -1143,7 +1664,13 @@
                 "description": "Grants permission to view information about parameters in a specified hierarchy",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParametersByPath.html",
-                "privConditions": {},
+                "privConditions": {
+                    "ssm:Recursive": {
+                        "condition": "ssm:Recursive",
+                        "description": "Filters access by allowing traversing hierarchical structure of the Systems Manager parameters",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }
@@ -1190,6 +1717,11 @@
                     "aws:TagKeys": {
                         "condition": "aws:TagKeys",
                         "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "ssm:Overwrite": {
+                        "condition": "ssm:Overwrite",
+                        "description": "Filters access by allowing Systems Manager parameters to be overwritten",
                         "type": "String"
                     }
                 },
@@ -1213,7 +1745,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -1222,7 +1765,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -1342,7 +1891,18 @@
                 "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             },
@@ -1351,7 +1911,13 @@
                 "description": "Grants permission to remove a specified tag key from a specified resource",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": false
             }
@@ -1528,7 +2094,28 @@
             }
         },
         "listPrivileges": {},
-        "readPrivileges": {},
+        "readPrivileges": {
+            "GetConnectionStatus": {
+                "privilege": "GetConnectionStatus",
+                "description": "Grants permission to view the Session Manager connection status for a specified managed instance",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetConnectionStatus.html",
+                "privConditions": {
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "StartSession": {
                 "privilege": "StartSession",
@@ -1541,6 +2128,11 @@
                         "description": "Filters access by verifying that a user has permission to access either the default Session Manager configuration document or the custom configuration document specified in a request",
                         "type": "Bool"
                     },
+                    "ssm:resourceTag/${TagKey}": {
+                        "condition": "ssm:resourceTag/${TagKey}",
+                        "description": "Filters access by allowing access based on a tag key-value pair assigned to the Systems Manager resource",
+                        "type": "String"
+                    },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters access by based on a tag key-value pair assigned to the AWS resource",
@@ -1552,6 +2144,42 @@
             }
         },
         "permManPrivileges": {},
-        "tagPrivileges": {}
+        "tagPrivileges": {
+            "AddTagsToResource": {
+                "privilege": "AddTagsToResource",
+                "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by 'Create' requests based on the allowed set of values for a specified tags",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            },
+            "RemoveTagsFromResource": {
+                "privilege": "RemoveTagsFromResource",
+                "description": "Grants permission to remove a specified tag key from a specified resource",
+                "accessLevel": "Tagging",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html",
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by 'Create' requests based on whether mandatory tags are included in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        }
     }
 }

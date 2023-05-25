@@ -28,7 +28,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "lambda:Principal"
+                    "lambda:Principal",
+                    "lambda:FunctionUrlAuthType"
                 ],
                 "dependentActions": []
             }
@@ -98,12 +99,37 @@
                     "lambda:VpcIds",
                     "lambda:SubnetIds",
                     "lambda:SecurityGroupIds",
-                    "lambda:CodeSigningConfigArn"
+                    "lambda:CodeSigningConfigArn",
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
                 ],
                 "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html"
+    },
+    "createFunctionUrlConfig": {
+        "privilege": "CreateFunctionUrlConfig",
+        "description": "Grants permission to create a function url configuration for a Lambda function",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "function": {
+                "resourceType": "function",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "lambda:FunctionUrlAuthType",
+                    "lambda:FunctionArn"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunctionUrlConfig.html"
     },
     "deleteAlias": {
         "privilege": "DeleteAlias",
@@ -210,6 +236,29 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunctionEventInvokeConfig.html"
+    },
+    "deleteFunctionUrlConfig": {
+        "privilege": "DeleteFunctionUrlConfig",
+        "description": "Grants permission to delete function url configuration for a Lambda function",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "function": {
+                "resourceType": "function",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "lambda:FunctionUrlAuthType",
+                    "lambda:FunctionArn"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunctionUrlConfig.html"
     },
     "deleteLayerVersion": {
         "privilege": "DeleteLayerVersion",
@@ -407,6 +456,29 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionEventInvokeConfig.html"
     },
+    "getFunctionUrlConfig": {
+        "privilege": "GetFunctionUrlConfig",
+        "description": "Grants permission to read function url configuration for a Lambda function",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "function": {
+                "resourceType": "function",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "lambda:FunctionUrlAuthType",
+                    "lambda:FunctionArn"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionUrlConfig.html"
+    },
     "getLayerVersion": {
         "privilege": "GetLayerVersion",
         "description": "Grants permission to view details about a version of an AWS Lambda layer. Note this action also supports GetLayerVersionByArn API",
@@ -497,6 +569,29 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html"
     },
+    "invokeFunctionUrl": {
+        "privilege": "InvokeFunctionUrl",
+        "description": "Grants permission to invoke an AWS Lambda function through url",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "function": {
+                "resourceType": "function",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "lambda:FunctionUrlAuthType",
+                    "lambda:FunctionArn"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_InvokeFunctionUrl.html"
+    },
     "listAliases": {
         "privilege": "ListAliases",
         "description": "Grants permission to retrieve a list of aliases for an AWS Lambda function",
@@ -552,6 +647,28 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionEventInvokeConfigs.html"
+    },
+    "listFunctionUrlConfigs": {
+        "privilege": "ListFunctionUrlConfigs",
+        "description": "Grants permission to read function url configurations for a function",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "function": {
+                "resourceType": "function",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "lambda:FunctionUrlAuthType"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionUrlConfigs.html"
     },
     "listFunctions": {
         "privilege": "ListFunctions",
@@ -784,7 +901,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
-                    "lambda:Principal"
+                    "lambda:Principal",
+                    "lambda:FunctionUrlAuthType"
                 ],
                 "dependentActions": []
             }
@@ -801,6 +919,15 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_TagResources.html"
@@ -814,6 +941,14 @@
                 "resourceType": "function",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },
@@ -941,5 +1076,28 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionEventInvokeConfig.html"
+    },
+    "updateFunctionUrlConfig": {
+        "privilege": "UpdateFunctionUrlConfig",
+        "description": "Grants permission to update a function url configuration for a Lambda function",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "function": {
+                "resourceType": "function",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "lambda:FunctionUrlAuthType",
+                    "lambda:FunctionArn"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionUrlConfig.html"
     }
 }

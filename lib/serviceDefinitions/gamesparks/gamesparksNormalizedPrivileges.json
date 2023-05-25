@@ -15,7 +15,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -36,7 +36,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -70,7 +70,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -503,7 +503,7 @@
         "privilege": "ImportGameConfiguration",
         "description": "Grants permission to import a snapshot of a game configuration",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/gamesparks/latest/api/svc/API_ImportGameDocument.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/gamesparks/latest/api/svc/API_ImportGameConfiguration.html",
         "service": "gamesparks",
         "dependentActions": [],
         "privConditions": {
@@ -848,7 +848,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -885,7 +885,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/gamesparks/latest/api/svc/API_UntagResource.html",
         "service": "gamesparks",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "game": {
                 "resourceName": "game",

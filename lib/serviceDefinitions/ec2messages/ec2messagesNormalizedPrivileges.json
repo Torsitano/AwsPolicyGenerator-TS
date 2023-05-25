@@ -3,7 +3,7 @@
         "privilege": "AcknowledgeMessage",
         "description": "Grants permission to acknowledge a message, ensuring it will not be delivered again",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonmessagedeliveryservice.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ec2messages",
         "dependentActions": [],
         "privConditions": {},
@@ -13,7 +13,7 @@
         "privilege": "DeleteMessage",
         "description": "Grants permission to delete a message",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonmessagedeliveryservice.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ec2messages",
         "dependentActions": [],
         "privConditions": {},
@@ -23,7 +23,7 @@
         "privilege": "FailMessage",
         "description": "Grants permission to fail a message, signifying the message could not be processed successfully, ensuring it cannot be replied to or delivered again",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonmessagedeliveryservice.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ec2messages",
         "dependentActions": [],
         "privConditions": {},
@@ -33,7 +33,7 @@
         "privilege": "GetEndpoint",
         "description": "Grants permission to route traffic to the correct endpoint based on the given destination for the messages",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonmessagedeliveryservice.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ec2messages",
         "dependentActions": [],
         "privConditions": {},
@@ -43,20 +43,32 @@
         "privilege": "GetMessages",
         "description": "Grants permission to deliver messages to clients/instances using long polling",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonmessagedeliveryservice.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ec2messages",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "ssm:SourceInstanceARN": {
+                "condition": "ssm:SourceInstanceARN",
+                "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                "type": "String"
+            }
+        },
         "resources": {}
     },
     "sendReply": {
         "privilege": "SendReply",
         "description": "Grants permission to send replies from clients/instances to upstream service",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonmessagedeliveryservice.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-messageAPIs.html",
         "service": "ec2messages",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "ssm:SourceInstanceARN": {
+                "condition": "ssm:SourceInstanceARN",
+                "description": "Filters access by verifying the Amazon Resource Name (ARN) of the AWS Systems Manager's managed instance from which the request is made. This key is not present when the request comes from the managed instance authenticated with an IAM role associated with EC2 instance profile",
+                "type": "String"
+            }
+        },
         "resources": {}
     }
 }

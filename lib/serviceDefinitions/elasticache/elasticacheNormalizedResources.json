@@ -4,9 +4,24 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:parametergroup:${CacheParameterGroupName}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "elasticache:CacheParameterGroupName": {
+                "condition": "elasticache:CacheParameterGroupName",
+                "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                 "type": "String"
             }
         },
@@ -42,7 +57,23 @@
                 "required": true
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "CreateCacheCluster": {
                 "privilege": "CreateCacheCluster",
@@ -53,51 +84,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -110,6 +96,11 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheParameterGroup.html",
                 "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
                         "description": "Filters actions based on the tags that are passed in the request",
@@ -140,86 +131,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -256,36 +167,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -320,41 +201,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -436,10 +282,20 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:securitygroup:${CacheSecurityGroupName}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "listPrivileges": {
@@ -459,7 +315,23 @@
                 "required": true
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "AuthorizeCacheSecurityGroupIngress": {
                 "privilege": "AuthorizeCacheSecurityGroupIngress",
@@ -488,51 +360,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -544,6 +371,11 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSecurityGroup.html",
                 "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
                         "description": "Filters actions based on the tags that are passed in the request",
@@ -569,86 +401,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -680,36 +432,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -724,41 +446,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -835,10 +522,20 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:subnetgroup:${CacheSubnetGroupName}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "listPrivileges": {
@@ -858,7 +555,23 @@
                 "required": true
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "CreateCacheCluster": {
                 "privilege": "CreateCacheCluster",
@@ -869,51 +582,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -926,6 +594,11 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html",
                 "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
                         "description": "Filters actions based on the tags that are passed in the request",
@@ -951,86 +624,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -1128,10 +721,90 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:replicationgroup:${ReplicationGroupId}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "elasticache:AtRestEncryptionEnabled": {
+                "condition": "elasticache:AtRestEncryptionEnabled",
+                "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
+                "type": "Bool"
+            },
+            "elasticache:AuthTokenEnabled": {
+                "condition": "elasticache:AuthTokenEnabled",
+                "description": "Filters access by the presence of non empty AuthToken parameter in the request",
+                "type": "Bool"
+            },
+            "elasticache:AutomaticFailoverEnabled": {
+                "condition": "elasticache:AutomaticFailoverEnabled",
+                "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
+                "type": "Bool"
+            },
+            "elasticache:CacheNodeType": {
+                "condition": "elasticache:CacheNodeType",
+                "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
+                "type": "String"
+            },
+            "elasticache:CacheParameterGroupName": {
+                "condition": "elasticache:CacheParameterGroupName",
+                "description": "Filters access by the the CacheParameterGroupName parameter in the request",
+                "type": "String"
+            },
+            "elasticache:ClusterModeEnabled": {
+                "condition": "elasticache:ClusterModeEnabled",
+                "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
+                "type": "Bool"
+            },
+            "elasticache:EngineType": {
+                "condition": "elasticache:EngineType",
+                "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
+                "type": "String"
+            },
+            "elasticache:EngineVersion": {
+                "condition": "elasticache:EngineVersion",
+                "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
+                "type": "String"
+            },
+            "elasticache:KmsKeyId": {
+                "condition": "elasticache:KmsKeyId",
+                "description": "Filters access by the KmsKeyId parameter in the request",
+                "type": "String"
+            },
+            "elasticache:MultiAZEnabled": {
+                "condition": "elasticache:MultiAZEnabled",
+                "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
+                "type": "Bool"
+            },
+            "elasticache:NumNodeGroups": {
+                "condition": "elasticache:NumNodeGroups",
+                "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
+                "type": "Numeric"
+            },
+            "elasticache:ReplicasPerNodeGroup": {
+                "condition": "elasticache:ReplicasPerNodeGroup",
+                "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
+                "type": "Numeric"
+            },
+            "elasticache:SnapshotRetentionLimit": {
+                "condition": "elasticache:SnapshotRetentionLimit",
+                "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
+                "type": "Numeric"
+            },
+            "elasticache:TransitEncryptionEnabled": {
+                "condition": "elasticache:TransitEncryptionEnabled",
+                "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
+                "type": "Bool"
             }
         },
         "listPrivileges": {
@@ -1181,7 +854,23 @@
                 "required": false
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "BatchApplyUpdateAction": {
                 "privilege": "BatchApplyUpdateAction",
@@ -1238,51 +927,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -1313,86 +957,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -1407,21 +971,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
                         "type": "String"
                     }
                 },
@@ -1459,13 +1008,7 @@
                 "description": "Grants permission to delete an existing replication group",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DeleteReplicationGroup.html",
-                "privConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    }
-                },
+                "privConditions": {},
                 "dependentActions": [],
                 "required": false
             },
@@ -1504,41 +1047,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -1662,10 +1170,55 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:cluster:${CacheClusterId}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "elasticache:AuthTokenEnabled": {
+                "condition": "elasticache:AuthTokenEnabled",
+                "description": "Filters access by the presence of non empty AuthToken parameter in the request",
+                "type": "Bool"
+            },
+            "elasticache:CacheNodeType": {
+                "condition": "elasticache:CacheNodeType",
+                "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
+                "type": "String"
+            },
+            "elasticache:CacheParameterGroupName": {
+                "condition": "elasticache:CacheParameterGroupName",
+                "description": "Filters access by the the CacheParameterGroupName parameter in the request",
+                "type": "String"
+            },
+            "elasticache:EngineType": {
+                "condition": "elasticache:EngineType",
+                "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
+                "type": "String"
+            },
+            "elasticache:EngineVersion": {
+                "condition": "elasticache:EngineVersion",
+                "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
+                "type": "String"
+            },
+            "elasticache:MultiAZEnabled": {
+                "condition": "elasticache:MultiAZEnabled",
+                "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
+                "type": "Bool"
+            },
+            "elasticache:SnapshotRetentionLimit": {
+                "condition": "elasticache:SnapshotRetentionLimit",
+                "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
+                "type": "Numeric"
             }
         },
         "listPrivileges": {
@@ -1788,51 +1341,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -1847,86 +1355,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -1943,21 +1371,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -1968,13 +1381,7 @@
                 "description": "Grants permission to delete a previously provisioned cluster",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DeleteCacheCluster.html",
-                "privConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    }
-                },
+                "privConditions": {},
                 "dependentActions": [],
                 "required": false
             },
@@ -1987,36 +1394,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -2093,10 +1470,20 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:reserved-instance:${ReservedCacheNodeId}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "listPrivileges": {
@@ -2116,7 +1503,23 @@
                 "required": true
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "PurchaseReservedCacheNodesOffering": {
                 "privilege": "PurchaseReservedCacheNodesOffering",
@@ -2124,15 +1527,20 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_PurchaseReservedCacheNodesOffering.html",
                 "privConditions": {
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
                         "description": "Filters actions based on the tags that are passed in the request",
                         "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [
@@ -2195,9 +1603,24 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:snapshot:${SnapshotName}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "elasticache:KmsKeyId": {
+                "condition": "elasticache:KmsKeyId",
+                "description": "Filters access by the KmsKeyId parameter in the request",
                 "type": "String"
             }
         },
@@ -2281,51 +1704,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -2340,86 +1718,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -2436,21 +1734,6 @@
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
                         "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -2461,13 +1744,7 @@
                 "description": "Grants permission to delete a previously provisioned cluster",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DeleteCacheCluster.html",
-                "privConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    }
-                },
+                "privConditions": {},
                 "dependentActions": [],
                 "required": false
             },
@@ -2476,13 +1753,7 @@
                 "description": "Grants permission to delete an existing replication group",
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DeleteReplicationGroup.html",
-                "privConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    }
-                },
+                "privConditions": {},
                 "dependentActions": [],
                 "required": false
             },
@@ -2555,7 +1826,78 @@
         "resourceName": "globalreplicationgroup",
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache::${Account}:globalreplicationgroup:${GlobalReplicationGroupId}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "elasticache:AtRestEncryptionEnabled": {
+                "condition": "elasticache:AtRestEncryptionEnabled",
+                "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
+                "type": "Bool"
+            },
+            "elasticache:AuthTokenEnabled": {
+                "condition": "elasticache:AuthTokenEnabled",
+                "description": "Filters access by the presence of non empty AuthToken parameter in the request",
+                "type": "Bool"
+            },
+            "elasticache:AutomaticFailoverEnabled": {
+                "condition": "elasticache:AutomaticFailoverEnabled",
+                "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
+                "type": "Bool"
+            },
+            "elasticache:CacheNodeType": {
+                "condition": "elasticache:CacheNodeType",
+                "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
+                "type": "String"
+            },
+            "elasticache:CacheParameterGroupName": {
+                "condition": "elasticache:CacheParameterGroupName",
+                "description": "Filters access by the the CacheParameterGroupName parameter in the request",
+                "type": "String"
+            },
+            "elasticache:ClusterModeEnabled": {
+                "condition": "elasticache:ClusterModeEnabled",
+                "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
+                "type": "Bool"
+            },
+            "elasticache:EngineType": {
+                "condition": "elasticache:EngineType",
+                "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
+                "type": "String"
+            },
+            "elasticache:EngineVersion": {
+                "condition": "elasticache:EngineVersion",
+                "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
+                "type": "String"
+            },
+            "elasticache:KmsKeyId": {
+                "condition": "elasticache:KmsKeyId",
+                "description": "Filters access by the KmsKeyId parameter in the request",
+                "type": "String"
+            },
+            "elasticache:MultiAZEnabled": {
+                "condition": "elasticache:MultiAZEnabled",
+                "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
+                "type": "Bool"
+            },
+            "elasticache:NumNodeGroups": {
+                "condition": "elasticache:NumNodeGroups",
+                "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
+                "type": "Numeric"
+            },
+            "elasticache:ReplicasPerNodeGroup": {
+                "condition": "elasticache:ReplicasPerNodeGroup",
+                "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
+                "type": "Numeric"
+            },
+            "elasticache:SnapshotRetentionLimit": {
+                "condition": "elasticache:SnapshotRetentionLimit",
+                "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
+                "type": "Numeric"
+            },
+            "elasticache:TransitEncryptionEnabled": {
+                "condition": "elasticache:TransitEncryptionEnabled",
+                "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
+                "type": "Bool"
+            }
+        },
         "listPrivileges": {
             "DescribeGlobalReplicationGroups": {
                 "privilege": "DescribeGlobalReplicationGroups",
@@ -2593,86 +1935,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -2779,10 +2041,20 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:user:${UserId}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "listPrivileges": {
@@ -2802,7 +2074,23 @@
                 "required": true
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "CreateUser": {
                 "privilege": "CreateUser",
@@ -2810,15 +2098,20 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateUser.html",
                 "privConditions": {
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "condition": "aws:RequestTag/${TagKey}",
                         "description": "Filters actions based on the tags that are passed in the request",
                         "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters actions based on the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
                     }
                 },
                 "dependentActions": [
@@ -2832,16 +2125,6 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateUserGroup.html",
                 "privConditions": {
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
@@ -2951,10 +2234,20 @@
         "service": "elasticache",
         "resourceArn": "arn:${Partition}:elasticache:${Region}:${Account}:usergroup:${UserGroupId}",
         "resourceConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters actions based on the tags that are passed in the request",
+                "type": "String"
+            },
             "aws:ResourceTag/${TagKey}": {
                 "condition": "aws:ResourceTag/${TagKey}",
                 "description": "Filters actions based on the tags associated with the resource",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters actions based on the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "listPrivileges": {
@@ -2974,7 +2267,23 @@
                 "required": true
             }
         },
-        "readPrivileges": {},
+        "readPrivileges": {
+            "ListTagsForResource": {
+                "privilege": "ListTagsForResource",
+                "description": "Grants permission to list tags for an ElastiCache resource",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ListTagsForResource.html",
+                "privConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters actions based on the tags associated with the resource",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": false
+            }
+        },
         "writePrivileges": {
             "CreateReplicationGroup": {
                 "privilege": "CreateReplicationGroup",
@@ -2985,86 +2294,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "elasticache:NumNodeGroups": {
-                        "condition": "elasticache:NumNodeGroups",
-                        "description": "Filters access by the NumNodeGroups or NodeGroupCount parameter specified in the request. This key can be used to restrict the number of node groups (shards) clusters can have after creation or scaling operations",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:ReplicasPerNodeGroup": {
-                        "condition": "elasticache:ReplicasPerNodeGroup",
-                        "description": "Filters access by the number of replicas per node group (shards) specified in creations or scaling requests",
-                        "type": "Numeric"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:EngineType": {
-                        "condition": "elasticache:EngineType",
-                        "description": "Filters access by the engine type present in creation requests. For replication group creations, default engine ‘redis’ is used as key if parameter is not present",
-                        "type": "String"
-                    },
-                    "elasticache:AtRestEncryptionEnabled": {
-                        "condition": "elasticache:AtRestEncryptionEnabled",
-                        "description": "Filters access by the AtRestEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:TransitEncryptionEnabled": {
-                        "condition": "elasticache:TransitEncryptionEnabled",
-                        "description": "Filters access by the TransitEncryptionEnabled parameter present in the request or default false value if parameter is not present",
-                        "type": "Bool"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:ClusterModeEnabled": {
-                        "condition": "elasticache:ClusterModeEnabled",
-                        "description": "Filters access by the cluster mode parameter present in the request. Default value for single node group (shard) creations is false",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:KmsKeyId": {
-                        "condition": "elasticache:KmsKeyId",
-                        "description": "Filters access by the KmsKeyId parameter in the request",
-                        "type": "String"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },
@@ -3077,16 +2306,6 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateUserGroup.html",
                 "privConditions": {
-                    "aws:TagKeys": {
-                        "condition": "aws:TagKeys",
-                        "description": "Filters actions based on the tag keys that are passed in the request",
-                        "type": "ArrayOfString"
-                    },
-                    "aws:RequestTag/${TagKey}": {
-                        "condition": "aws:RequestTag/${TagKey}",
-                        "description": "Filters actions based on the tags that are passed in the request",
-                        "type": "String"
-                    },
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
@@ -3120,41 +2339,6 @@
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
                         "description": "Filters actions based on the tags associated with the resource",
-                        "type": "String"
-                    },
-                    "elasticache:CacheNodeType": {
-                        "condition": "elasticache:CacheNodeType",
-                        "description": "Filters access by the cacheNodeType parameter present in the request. This key can be used to restrict which cache node types can be used on cluster creation or scaling operations",
-                        "type": "String"
-                    },
-                    "elasticache:EngineVersion": {
-                        "condition": "elasticache:EngineVersion",
-                        "description": "Filters access by the engineVersion parameter present in creation or cluster modification requests",
-                        "type": "String"
-                    },
-                    "elasticache:AutomaticFailoverEnabled": {
-                        "condition": "elasticache:AutomaticFailoverEnabled",
-                        "description": "Filters access by the AutomaticFailoverEnabled parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:MultiAZEnabled": {
-                        "condition": "elasticache:MultiAZEnabled",
-                        "description": "Filters access by the AZMode parameter, MultiAZEnabled parameter or the number of availability zones that the cluster or replication group can be placed in",
-                        "type": "Bool"
-                    },
-                    "elasticache:AuthTokenEnabled": {
-                        "condition": "elasticache:AuthTokenEnabled",
-                        "description": "Filters access by the presence of non empty AuthToken parameter in the request",
-                        "type": "Bool"
-                    },
-                    "elasticache:SnapshotRetentionLimit": {
-                        "condition": "elasticache:SnapshotRetentionLimit",
-                        "description": "Filters access by the SnapshotRetentionLimit parameter in the request",
-                        "type": "Numeric"
-                    },
-                    "elasticache:CacheParameterGroupName": {
-                        "condition": "elasticache:CacheParameterGroupName",
-                        "description": "Filters access by the the CacheParameterGroupName parameter in the request",
                         "type": "String"
                     }
                 },

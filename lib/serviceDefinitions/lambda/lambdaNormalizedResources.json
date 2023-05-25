@@ -135,7 +135,13 @@
         "resourceName": "function",
         "service": "lambda",
         "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {
             "ListAliases": {
                 "privilege": "ListAliases",
@@ -152,6 +158,21 @@
                 "accessLevel": "List",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionEventInvokeConfigs.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "ListFunctionUrlConfigs": {
+                "privilege": "ListFunctionUrlConfigs",
+                "description": "Grants permission to read function url configurations for a function",
+                "accessLevel": "List",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionUrlConfigs.html",
+                "privConditions": {
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -229,6 +250,26 @@
                 "dependentActions": [],
                 "required": true
             },
+            "GetFunctionUrlConfig": {
+                "privilege": "GetFunctionUrlConfig",
+                "description": "Grants permission to read function url configuration for a Lambda function",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionUrlConfig.html",
+                "privConditions": {
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
+                    },
+                    "lambda:FunctionArn": {
+                        "condition": "lambda:FunctionArn",
+                        "description": "Filters access by the ARN of an AWS Lambda function",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "GetPolicy": {
                 "privilege": "GetPolicy",
                 "description": "Grants permission to view the resource-based policy for an AWS Lambda function, version, or alias",
@@ -288,6 +329,36 @@
                         "condition": "lambda:CodeSigningConfigArn",
                         "description": "Filters access by the ARN of an AWS Lambda code signing config",
                         "type": "String"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateFunctionUrlConfig": {
+                "privilege": "CreateFunctionUrlConfig",
+                "description": "Grants permission to create a function url configuration for a Lambda function",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunctionUrlConfig.html",
+                "privConditions": {
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
+                    },
+                    "lambda:FunctionArn": {
+                        "condition": "lambda:FunctionArn",
+                        "description": "Filters access by the ARN of an AWS Lambda function",
+                        "type": "ARN"
                     }
                 },
                 "dependentActions": [],
@@ -338,6 +409,26 @@
                 "dependentActions": [],
                 "required": true
             },
+            "DeleteFunctionUrlConfig": {
+                "privilege": "DeleteFunctionUrlConfig",
+                "description": "Grants permission to delete function url configuration for a Lambda function",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunctionUrlConfig.html",
+                "privConditions": {
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
+                    },
+                    "lambda:FunctionArn": {
+                        "condition": "lambda:FunctionArn",
+                        "description": "Filters access by the ARN of an AWS Lambda function",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
             "InvokeAsync": {
                 "privilege": "InvokeAsync",
                 "description": "Grants permission to invoke a function asynchronously (Deprecated)",
@@ -353,6 +444,26 @@
                 "accessLevel": "Write",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html",
                 "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "InvokeFunctionUrl": {
+                "privilege": "InvokeFunctionUrl",
+                "description": "Grants permission to invoke an AWS Lambda function through url",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_InvokeFunctionUrl.html",
+                "privConditions": {
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
+                    },
+                    "lambda:FunctionArn": {
+                        "condition": "lambda:FunctionArn",
+                        "description": "Filters access by the ARN of an AWS Lambda function",
+                        "type": "ARN"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -463,6 +574,26 @@
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
+            },
+            "UpdateFunctionUrlConfig": {
+                "privilege": "UpdateFunctionUrlConfig",
+                "description": "Grants permission to update a function url configuration for a Lambda function",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionUrlConfig.html",
+                "privConditions": {
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
+                    },
+                    "lambda:FunctionArn": {
+                        "condition": "lambda:FunctionArn",
+                        "description": "Filters access by the ARN of an AWS Lambda function",
+                        "type": "ARN"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
             }
         },
         "permManPrivileges": {
@@ -475,6 +606,11 @@
                     "lambda:Principal": {
                         "condition": "lambda:Principal",
                         "description": "Filters access by restricting the AWS service or account that can invoke a function",
+                        "type": "String"
+                    },
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
                         "type": "String"
                     }
                 },
@@ -509,6 +645,11 @@
                         "condition": "lambda:Principal",
                         "description": "Filters access by restricting the AWS service or account that can invoke a function",
                         "type": "String"
+                    },
+                    "lambda:FunctionUrlAuthType": {
+                        "condition": "lambda:FunctionUrlAuthType",
+                        "description": "Filters access by authorization type specified in request. Available during CreateFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, GetFunctionUrlConfig, ListFunctionUrlConfig, AddPermission and RemovePermission operations",
+                        "type": "String"
                     }
                 },
                 "dependentActions": [],
@@ -521,7 +662,18 @@
                 "description": "Grants permission to add tags to an AWS Lambda function",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_TagResources.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             },
@@ -530,7 +682,13 @@
                 "description": "Grants permission to remove tags from an AWS Lambda function",
                 "accessLevel": "Tagging",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/lambda/latest/dg/API_UntagResource.html",
-                "privConditions": {},
+                "privConditions": {
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    }
+                },
                 "dependentActions": [],
                 "required": true
             }
@@ -540,7 +698,13 @@
         "resourceName": "function alias",
         "service": "lambda",
         "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Alias}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetProvisionedConcurrencyConfig": {
@@ -580,7 +744,13 @@
         "resourceName": "function version",
         "service": "lambda",
         "resourceArn": "arn:${Partition}:lambda:${Region}:${Account}:function:${FunctionName}:${Version}",
-        "resourceConditions": {},
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
         "listPrivileges": {},
         "readPrivileges": {
             "GetProvisionedConcurrencyConfig": {

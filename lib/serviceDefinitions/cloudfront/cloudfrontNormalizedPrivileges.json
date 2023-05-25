@@ -87,14 +87,7 @@
         "service": "cloudfront",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {
-            "fieldLevelEncryption": {
-                "resourceName": "field-level-encryption",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption/${Id}",
-                "required": true,
-                "resourceConditions": {}
-            }
-        }
+        "resources": {}
     },
     "createFieldLevelEncryptionProfile": {
         "privilege": "CreateFieldLevelEncryptionProfile",
@@ -104,14 +97,7 @@
         "service": "cloudfront",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {
-            "fieldLevelEncryptionProfile": {
-                "resourceName": "field-level-encryption-profile",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption-profile/${Id}",
-                "required": true,
-                "resourceConditions": {}
-            }
-        }
+        "resources": {}
     },
     "createFunction": {
         "privilege": "CreateFunction",
@@ -168,6 +154,16 @@
         "description": "Grants permission to enable additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost",
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateMonitoringSubscription.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "createOriginAccessControl": {
+        "privilege": "CreateOriginAccessControl",
+        "description": "Grants permission to create a new origin access control",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateOriginAccessControl.html",
         "service": "cloudfront",
         "dependentActions": [],
         "privConditions": {},
@@ -233,6 +229,16 @@
                 "resourceConditions": {}
             }
         }
+    },
+    "createSavingsPlan": {
+        "privilege": "CreateSavingsPlan",
+        "description": "Grants permission to create a new savings plan",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "createStreamingDistribution": {
         "privilege": "CreateStreamingDistribution",
@@ -357,9 +363,9 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {
-            "fieldLevelEncryption": {
-                "resourceName": "field-level-encryption",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption/${Id}",
+            "fieldLevelEncryptionConfig": {
+                "resourceName": "field-level-encryption-config",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption-config/${Id}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -418,6 +424,23 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "deleteOriginAccessControl": {
+        "privilege": "DeleteOriginAccessControl",
+        "description": "Grants permission to delete an origin access control",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_DeleteOriginAccessControl.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "originAccessControl": {
+                "resourceName": "origin-access-control",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:origin-access-control/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "deleteOriginRequestPolicy": {
         "privilege": "DeleteOriginRequestPolicy",
@@ -643,9 +666,9 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {
-            "fieldLevelEncryption": {
-                "resourceName": "field-level-encryption",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption/${Id}",
+            "fieldLevelEncryptionConfig": {
+                "resourceName": "field-level-encryption-config",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption-config/${Id}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -660,9 +683,9 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {
-            "fieldLevelEncryption": {
-                "resourceName": "field-level-encryption",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption/${Id}",
+            "fieldLevelEncryptionConfig": {
+                "resourceName": "field-level-encryption-config",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption-config/${Id}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -772,6 +795,40 @@
         "privConditions": {},
         "resources": {}
     },
+    "getOriginAccessControl": {
+        "privilege": "GetOriginAccessControl",
+        "description": "Grants permission to get the origin access control",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetOriginAccessControl.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "originAccessControl": {
+                "resourceName": "origin-access-control",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:origin-access-control/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getOriginAccessControlConfig": {
+        "privilege": "GetOriginAccessControlConfig",
+        "description": "Grants permission to get the origin access control configuration",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetOriginAccessControlConfig.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "originAccessControl": {
+                "resourceName": "origin-access-control",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:origin-access-control/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
     "getOriginRequestPolicy": {
         "privilege": "GetOriginRequestPolicy",
         "description": "Grants permission to get the origin request policy",
@@ -876,6 +933,16 @@
                 "resourceConditions": {}
             }
         }
+    },
+    "getSavingsPlan": {
+        "privilege": "GetSavingsPlan",
+        "description": "Grants permission to get a savings plan",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "getStreamingDistribution": {
         "privilege": "GetStreamingDistribution",
@@ -1000,7 +1067,7 @@
         "privilege": "ListDistributionsByLambdaFunction",
         "description": "Grants permission to list the distributions associated a Lambda function",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByLambdaFunction.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
         "service": "cloudfront",
         "dependentActions": [],
         "privConditions": {},
@@ -1109,6 +1176,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "listOriginAccessControls": {
+        "privilege": "ListOriginAccessControls",
+        "description": "Grants permission to list all origin access controls in the account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListOriginAccessControls.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listOriginRequestPolicies": {
         "privilege": "ListOriginRequestPolicies",
         "description": "Grants permission to list all origin request policies that have been created in CloudFront for this account",
@@ -1129,6 +1206,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "listRateCards": {
+        "privilege": "ListRateCards",
+        "description": "Grants permission to list CloudFront rate cards for the account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listRealtimeLogConfigs": {
         "privilege": "ListRealtimeLogConfigs",
         "description": "Grants permission to get a list of real-time log configurations",
@@ -1144,6 +1231,16 @@
         "description": "Grants permission to list all response headers policies that have been created in CloudFront for this account",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListResponseHeadersPolicies.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listSavingsPlans": {
+        "privilege": "ListSavingsPlans",
+        "description": "Grants permission to list savings plans in the account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
         "service": "cloudfront",
         "dependentActions": [],
         "privConditions": {},
@@ -1179,20 +1276,18 @@
                         "type": "String"
                     }
                 }
-            },
-            "streamingDistribution": {
-                "resourceName": "streaming-distribution",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:streaming-distribution/${DistributionId}",
-                "required": false,
-                "resourceConditions": {
-                    "aws:ResourceTag/${TagKey}": {
-                        "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters access by tag key-value pairs attached to the resource",
-                        "type": "String"
-                    }
-                }
             }
         }
+    },
+    "listUsages": {
+        "privilege": "ListUsages",
+        "description": "Grants permission to list CloudFront usage",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "publishFunction": {
         "privilege": "PublishFunction",
@@ -1380,14 +1475,7 @@
         "service": "cloudfront",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {
-            "fieldLevelEncryption": {
-                "resourceName": "field-level-encryption",
-                "resourceArn": "arn:${Partition}:cloudfront::${Account}:field-level-encryption/${Id}",
-                "required": true,
-                "resourceConditions": {}
-            }
-        }
+        "resources": {}
     },
     "updateFieldLevelEncryptionProfile": {
         "privilege": "UpdateFieldLevelEncryptionProfile",
@@ -1432,6 +1520,23 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "updateOriginAccessControl": {
+        "privilege": "UpdateOriginAccessControl",
+        "description": "Grants permission to update an origin access control",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateOriginAccessControl.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "originAccessControl": {
+                "resourceName": "origin-access-control",
+                "resourceArn": "arn:${Partition}:cloudfront::${Account}:origin-access-control/${Id}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "updateOriginRequestPolicy": {
         "privilege": "UpdateOriginRequestPolicy",
@@ -1493,6 +1598,16 @@
                 "resourceConditions": {}
             }
         }
+    },
+    "updateSavingsPlan": {
+        "privilege": "UpdateSavingsPlan",
+        "description": "Grants permission to update a savings plan",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cf-api-permissions-ref.html",
+        "service": "cloudfront",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "updateStreamingDistribution": {
         "privilege": "UpdateStreamingDistribution",

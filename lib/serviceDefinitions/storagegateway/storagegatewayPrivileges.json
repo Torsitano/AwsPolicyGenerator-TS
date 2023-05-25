@@ -128,7 +128,16 @@
                 "resourceType": "gateway",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
+                "dependentActions": [
+                    "ds:DescribeDirectories",
+                    "ec2:DescribeNetworkInterfaces",
+                    "fsx:DescribeFileSystems",
+                    "iam:CreateServiceLinkedRole",
+                    "logs:CreateLogDelivery",
+                    "logs:GetLogDelivery",
+                    "logs:ListLogDeliveries",
+                    "logs:UpdateLogDelivery"
+                ]
             },
             "": {
                 "resourceType": "",
@@ -301,6 +310,15 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_CreateSnapshot.html"
@@ -314,6 +332,15 @@
                 "resourceType": "volume",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },
@@ -1334,7 +1361,13 @@
                 "resourceType": "fs-association",
                 "required": true,
                 "conditionKeys": [],
-                "dependentActions": []
+                "dependentActions": [
+                    "logs:CreateLogDelivery",
+                    "logs:DeleteLogDelivery",
+                    "logs:GetLogDelivery",
+                    "logs:ListLogDeliveries",
+                    "logs:UpdateLogDelivery"
+                ]
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_UpdateFileSystemAssociation.html"
@@ -1460,6 +1493,15 @@
                 "resourceType": "volume",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },

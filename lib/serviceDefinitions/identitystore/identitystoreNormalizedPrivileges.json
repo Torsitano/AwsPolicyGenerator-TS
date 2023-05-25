@@ -1,42 +1,493 @@
 {
+    "createGroup": {
+        "privilege": "CreateGroup",
+        "description": "Grants permission to create a group in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateGroup.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createGroupMembership": {
+        "privilege": "CreateGroupMembership",
+        "description": "Grants permission to create a member to a group in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateGroupMembership.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "createUser": {
+        "privilege": "CreateUser",
+        "description": "Grants permission to create a user in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateUser.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteGroup": {
+        "privilege": "DeleteGroup",
+        "description": "Grants permission to delete a group in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DeleteGroup.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteGroupMembership": {
+        "privilege": "DeleteGroupMembership",
+        "description": "Grants permission to remove a member that is part of a group in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DeleteGroupMembership.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "groupMembership": {
+                "resourceName": "GroupMembership",
+                "resourceArn": "arn:${Partition}:identitystore:::membership/${MembershipId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "deleteUser": {
+        "privilege": "DeleteUser",
+        "description": "Grants permission to delete a user in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DeleteUser.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
     "describeGroup": {
         "privilege": "DescribeGroup",
-        "description": "Grants permission to retrieves information about group from the directory that AWS Identity Store provides by default",
+        "description": "Grants permission to retrieve information about a group in the specified IdentityStore",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DescribeGroup.html",
         "service": "identitystore",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "describeGroupMembership": {
+        "privilege": "DescribeGroupMembership",
+        "description": "Grants permission to retrieve information about a member that is part of a group in the specified IdentityStore",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DescribeGroupMembership.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "groupMembership": {
+                "resourceName": "GroupMembership",
+                "resourceArn": "arn:${Partition}:identitystore:::membership/${MembershipId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "describeUser": {
         "privilege": "DescribeUser",
-        "description": "Grants permission to retrieves information about user from the directory that AWS Identity Store provides by default",
+        "description": "Grants permission to retrieve information about user in the specified IdentityStore",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DescribeUser.html",
         "service": "identitystore",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getGroupId": {
+        "privilege": "GetGroupId",
+        "description": "Grants permission to retrieve ID information about group in the specified IdentityStore",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_GetGroupId.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getGroupMembershipId": {
+        "privilege": "GetGroupMembershipId",
+        "description": "Grants permission to retrieve ID information of a member which is part of a group in the specified IdentityStore",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_GetGroupMembershipId.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "groupMembership": {
+                "resourceName": "GroupMembership",
+                "resourceArn": "arn:${Partition}:identitystore:::membership/${MembershipId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "getUserId": {
+        "privilege": "GetUserId",
+        "description": "Grants permission to retrieves ID information about user in the specified IdentityStore",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_GetUserId.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "isMemberInGroups": {
+        "privilege": "IsMemberInGroups",
+        "description": "Grants permission to check if a member is a part of groups in the specified IdentityStore",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_IsMemberInGroups.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "allGroupMemberships": {
+                "resourceName": "AllGroupMemberships",
+                "resourceArn": "arn:${Partition}:identitystore:::membership/*",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listGroupMemberships": {
+        "privilege": "ListGroupMemberships",
+        "description": "Grants permission to retrieve all members that are part of a group in the specified IdentityStore",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListGroupMemberships.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "allGroupMemberships": {
+                "resourceName": "AllGroupMemberships",
+                "resourceArn": "arn:${Partition}:identitystore:::membership/*",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "listGroupMembershipsForMember": {
+        "privilege": "ListGroupMembershipsForMember",
+        "description": "Grants permission to list groups of the target member in the specified IdentityStore",
+        "accessLevel": "List",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListGroupMembershipsForMember.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "allGroupMemberships": {
+                "resourceName": "AllGroupMemberships",
+                "resourceArn": "arn:${Partition}:identitystore:::membership/*",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "listGroups": {
         "privilege": "ListGroups",
-        "description": "Grants permission to search for groups within the associated directory",
+        "description": "Grants permission to search for groups within the specified IdentityStore",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListGroups.html",
         "service": "identitystore",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "allGroups": {
+                "resourceName": "AllGroups",
+                "resourceArn": "arn:${Partition}:identitystore:::group/*",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "listUsers": {
         "privilege": "ListUsers",
-        "description": "Grants permission to search for users within the associated directory",
+        "description": "Grants permission to search for users in the specified IdentityStore",
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListUsers.html",
         "service": "identitystore",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "allUsers": {
+                "resourceName": "AllUsers",
+                "resourceArn": "arn:${Partition}:identitystore:::user/*",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateGroup": {
+        "privilege": "UpdateGroup",
+        "description": "Grants permission to update information about a group in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_UpdateGroup.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "group": {
+                "resourceName": "Group",
+                "resourceArn": "arn:${Partition}:identitystore:::group/${GroupId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
+    "updateUser": {
+        "privilege": "UpdateUser",
+        "description": "Grants permission to update user information in the specified IdentityStore",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_UpdateUser.html",
+        "service": "identitystore",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "identitystore": {
+                "resourceName": "Identitystore",
+                "resourceArn": "arn:${Partition}:identitystore::${Account}:identitystore/${IdentityStoreId}",
+                "required": true,
+                "resourceConditions": {}
+            },
+            "user": {
+                "resourceName": "User",
+                "resourceArn": "arn:${Partition}:identitystore:::user/${UserId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     }
 }

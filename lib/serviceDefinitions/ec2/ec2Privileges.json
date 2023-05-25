@@ -187,10 +187,7 @@
             "elasticIp": {
                 "resourceType": "elastic-ip",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -208,6 +205,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -224,8 +223,6 @@
                 "resourceType": "dedicated-host",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AutoPlacement",
                     "ec2:AvailabilityZone",
                     "ec2:HostRecovery",
@@ -240,6 +237,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -256,6 +255,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -414,6 +414,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -573,6 +574,7 @@
                     "ec2:MetadataHttpTokens",
                     "ec2:NewInstanceProfile",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -749,6 +751,40 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateTransitGatewayMulticastDomain.html"
     },
+    "associateTransitGatewayPolicyTable": {
+        "privilege": "AssociateTransitGatewayPolicyTable",
+        "description": "Grants permission to associate a policy table with a transit gateway attachment",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "transitGatewayAttachment": {
+                "resourceType": "transit-gateway-attachment",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateTransitGatewayPolicyTable.html"
+    },
     "associateTransitGatewayRouteTable": {
         "privilege": "AssociateTransitGatewayRouteTable",
         "description": "Grants permission to associate an attachment with a transit gateway route table",
@@ -821,6 +857,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -963,6 +1000,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -1013,6 +1051,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -1132,10 +1171,18 @@
                     "ec2:CreateTags"
                 ]
             },
+            "securityGroupRule": {
+                "resourceType": "security-group-rule",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1161,10 +1208,18 @@
                     "ec2:CreateTags"
                 ]
             },
+            "securityGroupRule": {
+                "resourceType": "security-group-rule",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1479,11 +1534,8 @@
                 "resourceType": "snapshot",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:OutpostArn",
-                    "ec2:SnapshotID",
-                    "ec2:SourceOutpostArn"
+                    "ec2:SnapshotID"
                 ],
                 "dependentActions": [
                     "ec2:CreateTags"
@@ -1493,6 +1545,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1509,8 +1563,6 @@
                 "resourceType": "capacity-reservation",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:CapacityReservationFleet"
                 ],
                 "dependentActions": [
@@ -1521,6 +1573,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1536,10 +1590,7 @@
             "capacityReservationFleet": {
                 "resourceType": "capacity-reservation-fleet",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -1548,6 +1599,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1563,10 +1616,7 @@
             "carrierGateway": {
                 "resourceType": "carrier-gateway",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -1586,6 +1636,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1602,8 +1654,6 @@
                 "resourceType": "client-vpn-endpoint",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:ClientRootCertificateChainArn",
                     "ec2:CloudwatchLogGroupArn",
                     "ec2:CloudwatchLogStreamArn",
@@ -1639,6 +1689,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1687,9 +1739,61 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateClientVpnRoute.html"
     },
+    "createCoipCidr": {
+        "privilege": "CreateCoipCidr",
+        "description": "Grants permission to create a range of customer-owned IP (CoIP) addresses",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "coipPool": {
+                "resourceType": "coip-pool",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateCoipCidr.html"
+    },
+    "createCoipPool": {
+        "privilege": "CreateCoipPool",
+        "description": "Grants permission to create a pool of customer-owned IP (CoIP) addresses",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "localGatewayRouteTable": {
+                "resourceType": "local-gateway-route-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": [
+                    "ec2:CreateTags"
+                ]
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateCoipPool.html"
+    },
     "createCoipPoolPermission": {
         "privilege": "CreateCoipPoolPermission",
-        "description": "Grants permission to allow a service to access a customer owned IP (CoIP) pool",
+        "description": "Grants permission to allow a service to access a customer-owned IP (CoIP) pool",
         "accessLevel": "Write",
         "resourceTypes": {
             "": {
@@ -1711,10 +1815,7 @@
             "customerGateway": {
                 "resourceType": "customer-gateway",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -1723,6 +1824,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1771,8 +1874,6 @@
                 "resourceType": "dhcp-options",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:DhcpOptionsID"
                 ],
                 "dependentActions": [
@@ -1783,6 +1884,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1798,10 +1901,7 @@
             "egressOnlyInternetGateway": {
                 "resourceType": "egress-only-internet-gateway",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -1821,6 +1921,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1836,10 +1938,7 @@
             "fleet": {
                 "resourceType": "fleet",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -1848,8 +1947,6 @@
                 "resourceType": "instance",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AvailabilityZone",
                     "ec2:EbsOptimized",
                     "ec2:InstanceID",
@@ -1962,8 +2059,6 @@
                 "resourceType": "volume",
                 "required": false,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AvailabilityZone",
                     "ec2:Encrypted",
                     "ec2:KmsKeyId",
@@ -1980,6 +2075,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -1995,10 +2092,7 @@
             "vpcFlowLog": {
                 "resourceType": "vpc-flow-log",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags",
                     "iam:PassRole"
@@ -2044,6 +2138,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2060,8 +2156,6 @@
                 "resourceType": "fpga-image",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:Owner",
                     "ec2:Public"
                 ],
@@ -2073,6 +2167,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2089,8 +2185,6 @@
                 "resourceType": "image",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:ImageID",
                     "ec2:Owner"
                 ],
@@ -2115,6 +2209,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -2125,8 +2220,6 @@
                 "resourceType": "snapshot",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:OutpostArn",
                     "ec2:Owner",
                     "ec2:ParentVolume",
@@ -2141,6 +2234,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2156,10 +2251,7 @@
             "instanceEventWindow": {
                 "resourceType": "instance-event-window",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2168,6 +2260,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2183,10 +2277,7 @@
             "exportInstanceTask": {
                 "resourceType": "export-instance-task",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2207,6 +2298,7 @@
                     "ec2:MetadataHttpEndpoint",
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -2217,6 +2309,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2233,8 +2327,6 @@
                 "resourceType": "internet-gateway",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:InternetGatewayID"
                 ],
                 "dependentActions": [
@@ -2245,6 +2337,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2260,10 +2354,7 @@
             "ipam": {
                 "resourceType": "ipam",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags",
                     "iam:CreateServiceLinkedRole"
@@ -2273,6 +2364,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2288,10 +2381,7 @@
             "ipamPool": {
                 "resourceType": "ipam-pool",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2300,6 +2390,7 @@
                 "resourceType": "ipam-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -2308,6 +2399,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2324,6 +2417,7 @@
                 "resourceType": "ipam",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": [
@@ -2333,16 +2427,15 @@
             "ipamScope": {
                 "resourceType": "ipam-scope",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2359,8 +2452,6 @@
                 "resourceType": "key-pair",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:KeyPairType"
                 ],
                 "dependentActions": [
@@ -2371,6 +2462,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2386,10 +2479,7 @@
             "launchTemplate": {
                 "resourceType": "launch-template",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2398,6 +2488,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2464,6 +2556,41 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLocalGatewayRoute.html"
     },
+    "createLocalGatewayRouteTable": {
+        "privilege": "CreateLocalGatewayRouteTable",
+        "description": "Grants permission to create a local gateway route table",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "localGateway": {
+                "resourceType": "local-gateway",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": [
+                    "ec2:CreateTags"
+                ]
+            },
+            "localGatewayRouteTable": {
+                "resourceType": "local-gateway-route-table",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "API_CreateLocalGatewayRouteTable.html"
+    },
     "createLocalGatewayRouteTablePermission": {
         "privilege": "CreateLocalGatewayRouteTablePermission",
         "description": "Grants permission to allow a service to access a local gateway route table",
@@ -2489,6 +2616,50 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/outposts/latest/userguide/identity-access-management.html"
     },
+    "createLocalGatewayRouteTableVirtualInterfaceGroupAssociation": {
+        "privilege": "CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociation",
+        "description": "Grants permission to create a local gateway route table virtual interface group association",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "localGatewayRouteTable": {
+                "resourceType": "local-gateway-route-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": [
+                    "ec2:CreateTags"
+                ]
+            },
+            "localGatewayRouteTableVirtualInterfaceGroupAssociation": {
+                "resourceType": "local-gateway-route-table-virtual-interface-group-association",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "localGatewayVirtualInterfaceGroup": {
+                "resourceType": "local-gateway-virtual-interface-group",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociation.html"
+    },
     "createLocalGatewayRouteTableVpcAssociation": {
         "privilege": "CreateLocalGatewayRouteTableVpcAssociation",
         "description": "Grants permission to associate a VPC with a local gateway route table",
@@ -2508,10 +2679,7 @@
             "localGatewayRouteTableVpcAssociation": {
                 "resourceType": "local-gateway-route-table-vpc-association",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "vpc": {
@@ -2529,6 +2697,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2544,10 +2714,7 @@
             "prefixList": {
                 "resourceType": "prefix-list",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2556,6 +2723,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2571,10 +2740,7 @@
             "natgateway": {
                 "resourceType": "natgateway",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2607,6 +2773,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2623,8 +2791,6 @@
                 "resourceType": "network-acl",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:NetworkAclID"
                 ],
                 "dependentActions": [
@@ -2646,6 +2812,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2688,10 +2856,7 @@
             "networkInsightsAccessScope": {
                 "resourceType": "network-insights-access-scope",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2700,6 +2865,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2715,10 +2882,7 @@
             "networkInsightsPath": {
                 "resourceType": "network-insights-path",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2808,6 +2972,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2824,8 +2990,6 @@
                 "resourceType": "network-interface",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:NetworkInterfaceID"
                 ],
                 "dependentActions": [
@@ -2859,6 +3023,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2907,8 +3073,6 @@
                 "resourceType": "placement-group",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:PlacementGroupName",
                     "ec2:PlacementGroupStrategy"
                 ],
@@ -2920,6 +3084,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2935,10 +3101,7 @@
             "networkInsightsAccessScope": {
                 "resourceType": "network-insights-access-scope",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -2947,6 +3110,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -2976,6 +3141,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -2987,18 +3153,13 @@
             "replaceRootVolumeTask": {
                 "resourceType": "replace-root-volume-task",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "volume": {
                 "resourceType": "volume",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:VolumeID"
                 ],
                 "dependentActions": []
@@ -3021,6 +3182,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3053,8 +3216,6 @@
                 "resourceType": "image",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:ImageID",
                     "ec2:Owner"
                 ],
@@ -3066,6 +3227,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3109,8 +3272,6 @@
                 "resourceType": "route-table",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:RouteTableID"
                 ],
                 "dependentActions": [
@@ -3132,6 +3293,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3148,8 +3311,6 @@
                 "resourceType": "security-group",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:SecurityGroupID"
                 ],
                 "dependentActions": [
@@ -3171,6 +3332,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3187,8 +3350,6 @@
                 "resourceType": "snapshot",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:OutpostArn",
                     "ec2:ParentVolume",
                     "ec2:SnapshotID",
@@ -3218,6 +3379,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3253,8 +3416,6 @@
                 "resourceType": "snapshot",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:OutpostArn",
                     "ec2:ParentVolume",
                     "ec2:SnapshotID",
@@ -3282,6 +3443,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3344,8 +3507,6 @@
                 "resourceType": "subnet",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:SubnetID"
                 ],
                 "dependentActions": [
@@ -3367,6 +3528,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -3413,6 +3576,17 @@
                 ],
                 "dependentActions": []
             },
+            "carrierGateway": {
+                "resourceType": "carrier-gateway",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}",
+                    "ec2:Tenancy",
+                    "ec2:Vpc"
+                ],
+                "dependentActions": []
+            },
             "clientVpnEndpoint": {
                 "resourceType": "client-vpn-endpoint",
                 "required": false,
@@ -3425,6 +3599,15 @@
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:SamlProviderArn",
                     "ec2:ServerCertificateArn"
+                ],
+                "dependentActions": []
+            },
+            "coipPool": {
+                "resourceType": "coip-pool",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             },
@@ -3588,6 +3771,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -3617,6 +3801,7 @@
                 "resourceType": "ipam",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -3625,6 +3810,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -3633,6 +3819,7 @@
                 "resourceType": "ipam-scope",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -3753,6 +3940,7 @@
                 "resourceType": "network-insights-access-scope",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -3761,6 +3949,25 @@
                 "resourceType": "network-insights-access-scope-analysis",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "networkInsightsAnalysis": {
+                "resourceType": "network-insights-analysis",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "networkInsightsPath": {
+                "resourceType": "network-insights-path",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -3973,8 +4180,26 @@
                 ],
                 "dependentActions": []
             },
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "transitGatewayRouteTable": {
                 "resourceType": "transit-gateway-route-table",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayRouteTableAnnouncement": {
+                "resourceType": "transit-gateway-route-table-announcement",
                 "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
@@ -4019,6 +4244,15 @@
                 ],
                 "dependentActions": []
             },
+            "vpcEndpointConnection": {
+                "resourceType": "vpc-endpoint-connection",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "vpcEndpointService": {
                 "resourceType": "vpc-endpoint-service",
                 "required": false,
@@ -4026,6 +4260,15 @@
                     "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:VpceServicePrivateDnsName"
+                ],
+                "dependentActions": []
+            },
+            "vpcEndpointServicePermission": {
+                "resourceType": "vpc-endpoint-service-permission",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             },
@@ -4107,10 +4350,7 @@
             "trafficMirrorFilter": {
                 "resourceType": "traffic-mirror-filter",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -4119,6 +4359,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4180,10 +4422,7 @@
             "trafficMirrorSession": {
                 "resourceType": "traffic-mirror-session",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "trafficMirrorTarget": {
@@ -4199,6 +4438,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4214,10 +4455,7 @@
             "trafficMirrorTarget": {
                 "resourceType": "traffic-mirror-target",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -4232,10 +4470,23 @@
                 ],
                 "dependentActions": []
             },
+            "vpcEndpoint": {
+                "resourceType": "vpc-endpoint",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}",
+                    "ec2:VpceServiceName",
+                    "ec2:VpceServiceOwner"
+                ],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4251,10 +4502,7 @@
             "transitGateway": {
                 "resourceType": "transit-gateway",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -4263,6 +4511,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4278,10 +4528,7 @@
             "transitGatewayAttachment": {
                 "resourceType": "transit-gateway-attachment",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -4290,6 +4537,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4316,16 +4565,15 @@
             "transitGatewayConnectPeer": {
                 "resourceType": "transit-gateway-connect-peer",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4352,16 +4600,15 @@
             "transitGatewayMulticastDomain": {
                 "resourceType": "transit-gateway-multicast-domain",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4388,22 +4635,56 @@
             "transitGatewayAttachment": {
                 "resourceType": "transit-gateway-attachment",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayPeeringAttachment.html"
+    },
+    "createTransitGatewayPolicyTable": {
+        "privilege": "CreateTransitGatewayPolicyTable",
+        "description": "Grants permission to create a transit gateway policy table",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "transitGateway": {
+                "resourceType": "transit-gateway",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": [
+                    "ec2:CreateTags"
+                ]
+            },
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayPolicyTable.html"
     },
     "createTransitGatewayPrefixListReference": {
         "privilege": "CreateTransitGatewayPrefixListReference",
@@ -4501,22 +4782,65 @@
             "transitGatewayRouteTable": {
                 "resourceType": "transit-gateway-route-table",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRouteTable.html"
+    },
+    "createTransitGatewayRouteTableAnnouncement": {
+        "privilege": "CreateTransitGatewayRouteTableAnnouncement",
+        "description": "Grants permission to create an announcement for a transit gateway route table",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "transitGatewayAttachment": {
+                "resourceType": "transit-gateway-attachment",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": [
+                    "ec2:CreateTags"
+                ]
+            },
+            "transitGatewayRouteTable": {
+                "resourceType": "transit-gateway-route-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayRouteTableAnnouncement": {
+                "resourceType": "transit-gateway-route-table-announcement",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTransitGatewayRouteTableAnnouncement.html"
     },
     "createTransitGatewayVpcAttachment": {
         "privilege": "CreateTransitGatewayVpcAttachment",
@@ -4537,10 +4861,7 @@
             "transitGatewayAttachment": {
                 "resourceType": "transit-gateway-attachment",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "vpc": {
@@ -4570,6 +4891,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4586,8 +4909,6 @@
                 "resourceType": "volume",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AvailabilityZone",
                     "ec2:Encrypted",
                     "ec2:KmsKeyId",
@@ -4606,6 +4927,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4622,8 +4945,6 @@
                 "resourceType": "vpc",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:Ipv4IpamPoolId",
                     "ec2:Ipv6IpamPoolId",
                     "ec2:VpcID"
@@ -4636,6 +4957,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -4653,6 +4975,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4682,8 +5006,6 @@
                 "resourceType": "vpc-endpoint",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:VpceServiceName",
                     "ec2:VpceServiceOwner"
                 ],
@@ -4723,6 +5045,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4764,8 +5088,6 @@
                 "resourceType": "vpc-endpoint-service",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:VpceServicePrivateDnsName"
                 ],
                 "dependentActions": [
@@ -4776,6 +5098,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4805,8 +5129,6 @@
                 "resourceType": "vpc-peering-connection",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AccepterVpc",
                     "ec2:RequesterVpc",
                     "ec2:VpcPeeringConnectionID"
@@ -4817,6 +5139,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4844,8 +5168,6 @@
                 "resourceType": "vpn-connection",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AuthenticationType",
                     "ec2:DPDTimeoutSeconds",
                     "ec2:GatewayType",
@@ -4877,6 +5199,15 @@
                 ],
                 "dependentActions": []
             },
+            "transitGatewayAttachment": {
+                "resourceType": "transit-gateway-attachment",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "vpnGateway": {
                 "resourceType": "vpn-gateway",
                 "required": false,
@@ -4890,6 +5221,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -4930,10 +5263,7 @@
             "vpnGateway": {
                 "resourceType": "vpn-gateway",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -4942,6 +5272,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -5048,9 +5380,59 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteClientVpnRoute.html"
     },
+    "deleteCoipCidr": {
+        "privilege": "DeleteCoipCidr",
+        "description": "Grants permission to delete a range of customer-owned IP (CoIP) addresses",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "coipPool": {
+                "resourceType": "coip-pool",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "API_DeleteCoipCidr.html"
+    },
+    "deleteCoipPool": {
+        "privilege": "DeleteCoipPool",
+        "description": "Grants permission to delete a pool of customer-owned IP (CoIP) addresses",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "coipPool": {
+                "resourceType": "coip-pool",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "API_DeleteCoipPool.html"
+    },
     "deleteCoipPoolPermission": {
         "privilege": "DeleteCoipPoolPermission",
-        "description": "Grants permission to deny a service from accessing a customer owned IP (CoIP) pool",
+        "description": "Grants permission to deny a service from accessing a customer-owned IP (CoIP) pool",
         "accessLevel": "Write",
         "resourceTypes": {
             "": {
@@ -5277,6 +5659,7 @@
                 "resourceType": "ipam",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -5301,6 +5684,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -5325,6 +5709,7 @@
                 "resourceType": "ipam-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -5442,6 +5827,31 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteLocalGatewayRoute.html"
     },
+    "deleteLocalGatewayRouteTable": {
+        "privilege": "DeleteLocalGatewayRouteTable",
+        "description": "Grants permission to delete a local gateway route table",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "localGatewayRouteTable": {
+                "resourceType": "local-gateway-route-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "API_DeleteLocalGatewayRouteTable.html"
+    },
     "deleteLocalGatewayRouteTablePermission": {
         "privilege": "DeleteLocalGatewayRouteTablePermission",
         "description": "Grants permission to deny a service from accessing a local gateway route table",
@@ -5466,6 +5876,31 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/outposts/latest/userguide/identity-access-management.html"
+    },
+    "deleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation": {
+        "privilege": "DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation",
+        "description": "Grants permission to delete a local gateway route table virtual interface group association",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "localGatewayRouteTableVirtualInterfaceGroupAssociation": {
+                "resourceType": "local-gateway-route-table-virtual-interface-group-association",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation.html"
     },
     "deleteLocalGatewayRouteTableVpcAssociation": {
         "privilege": "DeleteLocalGatewayRouteTableVpcAssociation",
@@ -5605,6 +6040,7 @@
                 "resourceType": "network-insights-access-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -5629,6 +6065,7 @@
                 "resourceType": "network-insights-access-scope-analysis",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -5831,6 +6268,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -5859,15 +6297,6 @@
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RouteTableID",
                     "ec2:Vpc"
-                ],
-                "dependentActions": []
-            },
-            "prefixList": {
-                "resourceType": "prefix-list",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             },
@@ -6051,8 +6480,26 @@
                 ],
                 "dependentActions": []
             },
+            "carrierGateway": {
+                "resourceType": "carrier-gateway",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "clientVpnEndpoint": {
                 "resourceType": "client-vpn-endpoint",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "coipPool": {
+                "resourceType": "coip-pool",
                 "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
@@ -6217,6 +6664,7 @@
                 "resourceType": "ipam",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -6225,6 +6673,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -6233,6 +6682,7 @@
                 "resourceType": "ipam-scope",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -6349,6 +6799,7 @@
                 "resourceType": "network-insights-access-scope",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -6357,6 +6808,25 @@
                 "resourceType": "network-insights-access-scope-analysis",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "networkInsightsAnalysis": {
+                "resourceType": "network-insights-analysis",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "networkInsightsPath": {
+                "resourceType": "network-insights-path",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -6541,8 +7011,26 @@
                 ],
                 "dependentActions": []
             },
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "transitGatewayRouteTable": {
                 "resourceType": "transit-gateway-route-table",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayRouteTableAnnouncement": {
+                "resourceType": "transit-gateway-route-table-announcement",
                 "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
@@ -6577,8 +7065,26 @@
                 ],
                 "dependentActions": []
             },
+            "vpcEndpointConnection": {
+                "resourceType": "vpc-endpoint-connection",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "vpcEndpointService": {
                 "resourceType": "vpc-endpoint-service",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "vpcEndpointServicePermission": {
+                "resourceType": "vpc-endpoint-service-permission",
                 "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
@@ -6626,6 +7132,7 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -6864,6 +7371,31 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayPeeringAttachment.html"
     },
+    "deleteTransitGatewayPolicyTable": {
+        "privilege": "DeleteTransitGatewayPolicyTable",
+        "description": "Grants permission to delete a transit gateway policy table",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayPolicyTable.html"
+    },
     "deleteTransitGatewayPrefixListReference": {
         "privilege": "DeleteTransitGatewayPrefixListReference",
         "description": "Grants permission to delete a transit gateway prefix list reference",
@@ -6947,6 +7479,31 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRouteTable.html"
+    },
+    "deleteTransitGatewayRouteTableAnnouncement": {
+        "privilege": "DeleteTransitGatewayRouteTableAnnouncement",
+        "description": "Grants permission to delete a transit gateway route table announcement",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "transitGatewayRouteTableAnnouncement": {
+                "resourceType": "transit-gateway-route-table-announcement",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteTransitGatewayRouteTableAnnouncement.html"
     },
     "deleteTransitGatewayVpcAttachment": {
         "privilege": "DeleteTransitGatewayVpcAttachment",
@@ -7246,6 +7803,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -7834,7 +8392,7 @@
     "describeElasticGpus": {
         "privilege": "DescribeElasticGpus",
         "description": "Grants permission to describe an Elastic Graphics accelerator that is associated with an instance",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -7882,7 +8440,7 @@
     "describeFastLaunchImages": {
         "privilege": "DescribeFastLaunchImages",
         "description": "Grants permission to describe fast-launch enabled Windows AMIs",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "image": {
                 "resourceType": "image",
@@ -7912,7 +8470,7 @@
     "describeFastSnapshotRestores": {
         "privilege": "DescribeFastSnapshotRestores",
         "description": "Grants permission to describe the state of fast snapshot restores for snapshots",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -7980,15 +8538,6 @@
         "description": "Grants permission to describe one or more EC2 Fleets",
         "accessLevel": "List",
         "resourceTypes": {
-            "fleet": {
-                "resourceType": "fleet",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -8256,6 +8805,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -8980,7 +9530,7 @@
     "describeScheduledInstanceAvailability": {
         "privilege": "DescribeScheduledInstanceAvailability",
         "description": "Grants permission to find available schedules for Scheduled Instances",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -8996,7 +9546,7 @@
     "describeScheduledInstances": {
         "privilege": "DescribeScheduledInstances",
         "description": "Grants permission to describe one or more Scheduled Instances in your account",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -9302,7 +9852,7 @@
     "describeTags": {
         "privilege": "DescribeTags",
         "description": "Grants permission to describe one or more tags for an Amazon EC2 resource",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -9443,6 +9993,38 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayPeeringAttachments.html"
     },
+    "describeTransitGatewayPolicyTables": {
+        "privilege": "DescribeTransitGatewayPolicyTables",
+        "description": "Grants permission to describe a transit gateway policy table",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayPolicyTables.html"
+    },
+    "describeTransitGatewayRouteTableAnnouncements": {
+        "privilege": "DescribeTransitGatewayRouteTableAnnouncements",
+        "description": "Grants permission to describe a transit gateway route table announcement",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayRouteTableAnnouncements.html"
+    },
     "describeTransitGatewayRouteTables": {
         "privilege": "DescribeTransitGatewayRouteTables",
         "description": "Grants permission to describe one or more transit gateway route tables",
@@ -9576,7 +10158,7 @@
     "describeVolumesModifications": {
         "privilege": "DescribeVolumesModifications",
         "description": "Grants permission to describe the current modification status of one or more EBS volumes",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -9596,7 +10178,7 @@
         "resourceTypes": {
             "vpc": {
                 "resourceType": "vpc",
-                "required": false,
+                "required": true,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}",
@@ -9779,7 +10361,7 @@
     "describeVpnConnections": {
         "privilege": "DescribeVpnConnections",
         "description": "Grants permission to describe one or more VPN connections",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -9915,6 +10497,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -9982,6 +10565,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -10194,6 +10778,15 @@
             "transitGatewayRouteTable": {
                 "resourceType": "transit-gateway-route-table",
                 "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayRouteTableAnnouncement": {
+                "resourceType": "transit-gateway-route-table-announcement",
+                "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
@@ -10423,6 +11016,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -10470,6 +11064,24 @@
         "description": "Grants permission to disassociate a subnet from a route table",
         "accessLevel": "Write",
         "resourceTypes": {
+            "ipv4poolEc2": {
+                "resourceType": "ipv4pool-ec2",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "ipv6poolEc2": {
+                "resourceType": "ipv6pool-ec2",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "routeTable": {
                 "resourceType": "route-table",
                 "required": false,
@@ -10577,6 +11189,40 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateTransitGatewayMulticastDomain.html"
+    },
+    "disassociateTransitGatewayPolicyTable": {
+        "privilege": "DisassociateTransitGatewayPolicyTable",
+        "description": "Grants permission to disassociate a policy table from a transit gateway",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "transitGatewayAttachment": {
+                "resourceType": "transit-gateway-attachment",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateTransitGatewayPolicyTable.html"
     },
     "disassociateTransitGatewayRouteTable": {
         "privilege": "DisassociateTransitGatewayRouteTable",
@@ -10813,8 +11459,8 @@
         "description": "Grants permission to enable an attachment to propagate routes to a propagation route table",
         "accessLevel": "Write",
         "resourceTypes": {
-            "transitGatewayAttachment": {
-                "resourceType": "transit-gateway-attachment",
+            "transitGatewayRouteTable": {
+                "resourceType": "transit-gateway-route-table",
                 "required": true,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
@@ -10822,9 +11468,18 @@
                 ],
                 "dependentActions": []
             },
-            "transitGatewayRouteTable": {
-                "resourceType": "transit-gateway-route-table",
-                "required": true,
+            "transitGatewayAttachment": {
+                "resourceType": "transit-gateway-attachment",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "transitGatewayRouteTableAnnouncement": {
+                "resourceType": "transit-gateway-route-table-announcement",
+                "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
@@ -11035,10 +11690,7 @@
             "exportImageTask": {
                 "resourceType": "export-image-task",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -11061,6 +11713,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -11153,6 +11807,15 @@
         "description": "Grants permission to describe the allocations from the specified customer-owned address pool",
         "accessLevel": "Read",
         "resourceTypes": {
+            "coipPool": {
+                "resourceType": "coip-pool",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -11186,6 +11849,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -11226,6 +11890,7 @@
                     "ec2:MetadataHttpTokens",
                     "ec2:NewInstanceProfile",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -11361,7 +12026,7 @@
     "getInstanceTypesFromInstanceRequirements": {
         "privilege": "GetInstanceTypesFromInstanceRequirements",
         "description": "Grants permission to view a list of instance types with specified instance attributes",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -11374,6 +12039,47 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html"
     },
+    "getInstanceUefiData": {
+        "privilege": "GetInstanceUefiData",
+        "description": "Grants permission to retrieve the binary representation of the UEFI variable store",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:AvailabilityZone",
+                    "ec2:EbsOptimized",
+                    "ec2:InstanceAutoRecovery",
+                    "ec2:InstanceID",
+                    "ec2:InstanceMarketType",
+                    "ec2:InstanceMetadataTags",
+                    "ec2:InstanceProfile",
+                    "ec2:InstanceType",
+                    "ec2:MetadataHttpEndpoint",
+                    "ec2:MetadataHttpPutResponseHopLimit",
+                    "ec2:MetadataHttpTokens",
+                    "ec2:NewInstanceProfile",
+                    "ec2:PlacementGroup",
+                    "ec2:ProductCode",
+                    "ec2:ResourceTag/${TagKey}",
+                    "ec2:RootDeviceType",
+                    "ec2:Tenancy"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData.html"
+    },
     "getIpamAddressHistory": {
         "privilege": "GetIpamAddressHistory",
         "description": "Grants permission to retrieve historical information about a CIDR within an Amazon VPC IP Address Manager (IPAM) scope",
@@ -11383,6 +12089,7 @@
                 "resourceType": "ipam-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -11401,12 +12108,13 @@
     "getIpamPoolAllocations": {
         "privilege": "GetIpamPoolAllocations",
         "description": "Grants permission to get a list of all the CIDR allocations in an Amazon VPC IP Address Manager (IPAM) pool",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "ipamPool": {
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -11431,6 +12139,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -11455,6 +12164,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -11463,6 +12173,7 @@
                 "resourceType": "ipam-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -11500,6 +12211,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -11621,6 +12333,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -11663,6 +12376,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -11758,6 +12472,56 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetTransitGatewayMulticastDomainAssociations.html"
     },
+    "getTransitGatewayPolicyTableAssociations": {
+        "privilege": "GetTransitGatewayPolicyTableAssociations",
+        "description": "Grants permission to get information about associations for a transit gateway policy table",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetTransitGatewayPolicyTableAssociations.html"
+    },
+    "getTransitGatewayPolicyTableEntries": {
+        "privilege": "GetTransitGatewayPolicyTableEntries",
+        "description": "Grants permission to get information about associations for a transit gateway policy table entry",
+        "accessLevel": "List",
+        "resourceTypes": {
+            "transitGatewayPolicyTable": {
+                "resourceType": "transit-gateway-policy-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetTransitGatewayPolicyTableEntries.html"
+    },
     "getTransitGatewayPrefixListReferences": {
         "privilege": "GetTransitGatewayPrefixListReferences",
         "description": "Grants permission to get information about prefix list references for a transit gateway route table",
@@ -11772,7 +12536,7 @@
                 "dependentActions": []
             }
         },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetTransitGatewayPrefixListReference.html"
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetTransitGatewayPrefixListReferences.html"
     },
     "getTransitGatewayRouteTableAssociations": {
         "privilege": "GetTransitGatewayRouteTableAssociations",
@@ -11823,10 +12587,7 @@
             "vpnConnectionDeviceType": {
                 "resourceType": "vpn-connection-device-type",
                 "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "": {
@@ -11896,8 +12657,6 @@
                 "resourceType": "image",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:ImageID",
                     "ec2:ImageType",
                     "ec2:Owner",
@@ -11911,10 +12670,7 @@
             "importImageTask": {
                 "resourceType": "import-image-task",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": []
             },
             "snapshot": {
@@ -11935,6 +12691,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -12017,10 +12775,7 @@
             "keyPair": {
                 "resourceType": "key-pair",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -12029,6 +12784,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -12044,10 +12801,7 @@
             "importSnapshotTask": {
                 "resourceType": "import-snapshot-task",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -12056,8 +12810,6 @@
                 "resourceType": "snapshot",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:Owner",
                     "ec2:ParentVolume",
                     "ec2:SnapshotID",
@@ -12070,6 +12822,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -12614,6 +13368,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -12683,6 +13438,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -12733,6 +13489,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -12802,6 +13559,48 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceEventWindow.html"
     },
+    "modifyInstanceMaintenanceOptions": {
+        "privilege": "ModifyInstanceMaintenanceOptions",
+        "description": "Grants permission to modify the recovery behaviour for an instance",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:Attribute",
+                    "ec2:Attribute/${AttributeName}",
+                    "ec2:AvailabilityZone",
+                    "ec2:EbsOptimized",
+                    "ec2:InstanceAutoRecovery",
+                    "ec2:InstanceID",
+                    "ec2:InstanceMarketType",
+                    "ec2:InstanceMetadataTags",
+                    "ec2:InstanceProfile",
+                    "ec2:InstanceType",
+                    "ec2:MetadataHttpEndpoint",
+                    "ec2:MetadataHttpPutResponseHopLimit",
+                    "ec2:MetadataHttpTokens",
+                    "ec2:PlacementGroup",
+                    "ec2:ProductCode",
+                    "ec2:ResourceTag/${TagKey}",
+                    "ec2:RootDeviceType",
+                    "ec2:Tenancy"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceMaintenanceOptions.html"
+    },
     "modifyInstanceMetadataOptions": {
         "privilege": "ModifyInstanceMetadataOptions",
         "description": "Grants permission to modify the metadata options for an instance",
@@ -12826,6 +13625,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -12867,6 +13667,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -12913,6 +13714,7 @@
                 "resourceType": "ipam",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:Attribute",
                     "ec2:Attribute/${AttributeName}",
                     "ec2:ResourceTag/${TagKey}"
@@ -12939,6 +13741,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:Attribute",
                     "ec2:Attribute/${AttributeName}",
                     "ec2:ResourceTag/${TagKey}"
@@ -12965,6 +13768,7 @@
                 "resourceType": "ipam-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:Attribute",
                     "ec2:Attribute/${AttributeName}",
                     "ec2:ResourceTag/${TagKey}"
@@ -12991,6 +13795,7 @@
                 "resourceType": "ipam-scope",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:Attribute",
                     "ec2:Attribute/${AttributeName}",
                     "ec2:ResourceTag/${TagKey}"
@@ -13034,6 +13839,57 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyLaunchTemplate.html"
+    },
+    "modifyLocalGatewayRoute": {
+        "privilege": "ModifyLocalGatewayRoute",
+        "description": "Grants permission to modify a local gateway route",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "localGatewayRouteTable": {
+                "resourceType": "local-gateway-route-table",
+                "required": true,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "localGatewayVirtualInterfaceGroup": {
+                "resourceType": "local-gateway-virtual-interface-group",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "networkInterface": {
+                "resourceType": "network-interface",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:AssociatePublicIpAddress",
+                    "ec2:AuthorizedService",
+                    "ec2:AuthorizedUser",
+                    "ec2:AvailabilityZone",
+                    "ec2:NetworkInterfaceID",
+                    "ec2:Permission",
+                    "ec2:ResourceTag/${TagKey}",
+                    "ec2:Subnet",
+                    "ec2:Vpc"
+                ],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ec2:Region"
+                ],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyLocalGatewayRoute.html"
     },
     "modifyManagedPrefixList": {
         "privilege": "ModifyManagedPrefixList",
@@ -13099,6 +13955,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -13152,6 +14009,7 @@
                     "ec2:MetadataHttpTokens",
                     "ec2:NewInstanceProfile",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -14056,7 +14914,7 @@
                 "dependentActions": []
             }
         },
-        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpnTunnelCertificate"
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpnTunnelCertificate.html"
     },
     "modifyVpnTunnelOptions": {
         "privilege": "ModifyVpnTunnelOptions",
@@ -14126,6 +14984,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -14168,6 +15027,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -14208,6 +15068,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -14232,6 +15093,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -14324,6 +15186,7 @@
                 "resourceType": "ipam-pool",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -14361,6 +15224,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -14712,6 +15576,7 @@
                 "resourceType": "ipam-pool",
                 "required": true,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -14750,6 +15615,7 @@
                     "ec2:MetadataHttpTokens",
                     "ec2:NewInstanceProfile",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -14851,138 +15717,6 @@
                 ],
                 "dependentActions": []
             },
-            "carrierGateway": {
-                "resourceType": "carrier-gateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}",
-                    "ec2:Tenancy",
-                    "ec2:Vpc"
-                ],
-                "dependentActions": []
-            },
-            "egressOnlyInternetGateway": {
-                "resourceType": "egress-only-internet-gateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "instance": {
-                "resourceType": "instance",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:AvailabilityZone",
-                    "ec2:EbsOptimized",
-                    "ec2:InstanceID",
-                    "ec2:InstanceMarketType",
-                    "ec2:InstanceProfile",
-                    "ec2:InstanceType",
-                    "ec2:MetadataHttpEndpoint",
-                    "ec2:MetadataHttpPutResponseHopLimit",
-                    "ec2:MetadataHttpTokens",
-                    "ec2:PlacementGroup",
-                    "ec2:ResourceTag/${TagKey}",
-                    "ec2:RootDeviceType",
-                    "ec2:Tenancy"
-                ],
-                "dependentActions": []
-            },
-            "internetGateway": {
-                "resourceType": "internet-gateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:InternetGatewayID",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "localGateway": {
-                "resourceType": "local-gateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "natgateway": {
-                "resourceType": "natgateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "networkInterface": {
-                "resourceType": "network-interface",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:AssociatePublicIpAddress",
-                    "ec2:AuthorizedService",
-                    "ec2:AvailabilityZone",
-                    "ec2:NetworkInterfaceID",
-                    "ec2:ResourceTag/${TagKey}",
-                    "ec2:Subnet",
-                    "ec2:Vpc"
-                ],
-                "dependentActions": []
-            },
-            "prefixList": {
-                "resourceType": "prefix-list",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "transitGateway": {
-                "resourceType": "transit-gateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "vpcEndpoint": {
-                "resourceType": "vpc-endpoint",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
-            "vpcPeeringConnection": {
-                "resourceType": "vpc-peering-connection",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:AccepterVpc",
-                    "ec2:RequesterVpc",
-                    "ec2:ResourceTag/${TagKey}",
-                    "ec2:VpcPeeringConnectionID"
-                ],
-                "dependentActions": []
-            },
-            "vpnGateway": {
-                "resourceType": "vpn-gateway",
-                "required": false,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
-                "dependentActions": []
-            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -15007,6 +15741,24 @@
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RouteTableID",
                     "ec2:Vpc"
+                ],
+                "dependentActions": []
+            },
+            "ipv4poolEc2": {
+                "resourceType": "ipv4pool-ec2",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
+            "ipv6poolEc2": {
+                "resourceType": "ipv6pool-ec2",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             },
@@ -15200,10 +15952,7 @@
             "spotInstancesRequest": {
                 "resourceType": "spot-instances-request",
                 "required": true,
-                "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -15304,6 +16053,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -15437,6 +16188,7 @@
                     "ec2:MetadataHttpEndpoint",
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
@@ -15762,8 +16514,6 @@
                 "resourceType": "instance",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AvailabilityZone",
                     "ec2:EbsOptimized",
                     "ec2:InstanceAutoRecovery",
@@ -15778,6 +16528,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"
                 ],
@@ -15787,8 +16538,6 @@
                 "resourceType": "network-interface",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AssociatePublicIpAddress",
                     "ec2:AuthorizedService",
                     "ec2:AvailabilityZone",
@@ -15831,8 +16580,6 @@
                 "resourceType": "volume",
                 "required": true,
                 "conditionKeys": [
-                    "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys",
                     "ec2:AvailabilityZone",
                     "ec2:Encrypted",
                     "ec2:IsLaunchTemplateResource",
@@ -15944,6 +16691,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -16060,6 +16809,15 @@
         "description": "Grants permission to search for routes in a local gateway route table",
         "accessLevel": "List",
         "resourceTypes": {
+            "localGatewayRouteTable": {
+                "resourceType": "local-gateway-route-table",
+                "required": false,
+                "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "ec2:ResourceTag/${TagKey}"
+                ],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -16233,20 +16991,29 @@
         "description": "Grants permission to start a Network Access Scope analysis",
         "accessLevel": "Write",
         "resourceTypes": {
+            "networkInsightsAccessScopeAnalysis": {
+                "resourceType": "network-insights-access-scope-analysis",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": [
+                    "ec2:CreateTags"
+                ]
+            },
             "networkInsightsAccessScope": {
                 "resourceType": "network-insights-access-scope",
                 "required": false,
                 "conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
                     "ec2:ResourceTag/${TagKey}"
                 ],
-                "dependentActions": [
-                    "ec2:CreateTags"
-                ]
+                "dependentActions": []
             },
             "": {
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -16262,10 +17029,7 @@
             "networkInsightsAnalysis": {
                 "resourceType": "network-insights-analysis",
                 "required": true,
-                "conditionKeys": [
-                    "aws:ResourceTag/${TagKey}",
-                    "ec2:ResourceTag/${TagKey}"
-                ],
+                "conditionKeys": [],
                 "dependentActions": [
                     "ec2:CreateTags"
                 ]
@@ -16283,6 +17047,8 @@
                 "resourceType": "",
                 "required": false,
                 "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
                     "ec2:Region"
                 ],
                 "dependentActions": []
@@ -16497,6 +17263,7 @@
                     "ec2:MetadataHttpPutResponseHopLimit",
                     "ec2:MetadataHttpTokens",
                     "ec2:PlacementGroup",
+                    "ec2:ProductCode",
                     "ec2:ResourceTag/${TagKey}",
                     "ec2:RootDeviceType",
                     "ec2:Tenancy"

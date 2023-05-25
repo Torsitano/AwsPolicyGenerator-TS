@@ -1140,6 +1140,15 @@
                 "dependentActions": [],
                 "required": true
             },
+            "GetCoreNetworkChangeEvents": {
+                "privilege": "GetCoreNetworkChangeEvents",
+                "description": "Grants permission to retrieve a list of core network change events",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetCoreNetworkChangeEvents.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
             "GetCoreNetworkChangeSet": {
                 "privilege": "GetCoreNetworkChangeSet",
                 "description": "Grants permission to retrieve a list of core network change sets",
@@ -1223,6 +1232,31 @@
                     "networkmanager:vpnConnectionArn": {
                         "condition": "networkmanager:vpnConnectionArn",
                         "description": "Filters access by which Site-to-Site VPN can be used to a create/update attachment",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "CreateTransitGatewayPeering": {
+                "privilege": "CreateTransitGatewayPeering",
+                "description": "Grants permission to create a Transit Gateway peering",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_CreateTransitGatewayPeering.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "networkmanager:tgwArn": {
+                        "condition": "networkmanager:tgwArn",
+                        "description": "Filters access by which transit gateways can be registered or deregistered",
                         "type": "String"
                     }
                 },
@@ -1413,6 +1447,15 @@
                 "description": "Grants permission to retrieve a site-to-site VPN attachment",
                 "accessLevel": "Read",
                 "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetSiteToSiteVpnAttachment.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            },
+            "GetTransitGatewayRouteTableAttachment": {
+                "privilege": "GetTransitGatewayRouteTableAttachment",
+                "description": "Grants permission to retrieve a TGW RTB attachment",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetTransitGatewayRouteTableAttachment.html",
                 "privConditions": {},
                 "dependentActions": [],
                 "required": true
@@ -1682,5 +1725,67 @@
                 "required": false
             }
         }
+    },
+    "peering": {
+        "resourceName": "peering",
+        "service": "networkmanager",
+        "resourceArn": "arn:${Partition}:networkmanager::${Account}:peering/${ResourceId}",
+        "resourceConditions": {
+            "aws:ResourceTag/${TagKey}": {
+                "condition": "aws:ResourceTag/${TagKey}",
+                "description": "Filters access by the tags associated with the resource",
+                "type": "String"
+            }
+        },
+        "listPrivileges": {},
+        "readPrivileges": {
+            "GetTransitGatewayPeering": {
+                "privilege": "GetTransitGatewayPeering",
+                "description": "Grants permission to retrieve a Transit Gateway peering",
+                "accessLevel": "Read",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_GetTransitGatewayPeering.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "writePrivileges": {
+            "CreateTransitGatewayRouteTableAttachment": {
+                "privilege": "CreateTransitGatewayRouteTableAttachment",
+                "description": "Grants permission to create a TGW RTB attachment",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_CreateTransitGatewayRouteTableAttachment.html",
+                "privConditions": {
+                    "aws:RequestTag/${TagKey}": {
+                        "condition": "aws:RequestTag/${TagKey}",
+                        "description": "Filters access by the tags that are passed in the request",
+                        "type": "String"
+                    },
+                    "aws:TagKeys": {
+                        "condition": "aws:TagKeys",
+                        "description": "Filters access by the tag keys that are passed in the request",
+                        "type": "ArrayOfString"
+                    },
+                    "networkmanager:tgwRtbArn": {
+                        "condition": "networkmanager:tgwRtbArn",
+                        "description": "Filters access by which Transit Gateway Route Table can be used to create an attachment",
+                        "type": "String"
+                    }
+                },
+                "dependentActions": [],
+                "required": true
+            },
+            "DeletePeering": {
+                "privilege": "DeletePeering",
+                "description": "Grants permission to delete a peering",
+                "accessLevel": "Write",
+                "apiDocumentationLink": "https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_DeletePeering.html",
+                "privConditions": {},
+                "dependentActions": [],
+                "required": true
+            }
+        },
+        "permManPrivileges": {},
+        "tagPrivileges": {}
     }
 }

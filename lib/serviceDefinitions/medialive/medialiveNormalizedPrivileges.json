@@ -10,7 +10,7 @@
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -50,19 +50,19 @@
         "privilege": "BatchUpdateSchedule",
         "description": "Grants permission to add and remove actions from a channel's schedule",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/batching-actions.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/submitting-batch-command.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -80,7 +80,7 @@
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -97,7 +97,7 @@
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -113,36 +113,36 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -159,36 +159,36 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -205,24 +205,24 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -233,30 +233,30 @@
         "privilege": "CreateMultiplex",
         "description": "Grants permission to create a multiplex",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/creating-multiplex.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/multiplex-create.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -274,12 +274,12 @@
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -290,30 +290,30 @@
         "privilege": "CreatePartnerInput",
         "description": "Grants permission to create a partner input",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/create-partner-input.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/input-create-cdi-partners.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -330,72 +330,72 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             }
         },
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -413,12 +413,12 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -436,12 +436,12 @@
         "resources": {
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -459,12 +459,12 @@
         "resources": {
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -475,19 +475,19 @@
         "privilege": "DeleteMultiplex",
         "description": "Grants permission to delete a multiplex",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-multiplex.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/delete-multiplex-program.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -505,12 +505,12 @@
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -528,12 +528,12 @@
         "resources": {
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -551,12 +551,12 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -573,67 +573,67 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -651,12 +651,12 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -674,12 +674,12 @@
         "resources": {
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -690,14 +690,14 @@
         "privilege": "DescribeInputDevice",
         "description": "Grants permission to describe an input device",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -707,14 +707,14 @@
         "privilege": "DescribeInputDeviceThumbnail",
         "description": "Grants permission to describe an input device thumbnail",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -731,12 +731,12 @@
         "resources": {
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -747,19 +747,19 @@
         "privilege": "DescribeMultiplex",
         "description": "Grants permission to describe a multiplex",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-multiplex-configuration.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex-program-channel.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -777,12 +777,12 @@
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -800,7 +800,7 @@
         "resources": {
             "offering": {
                 "resourceName": "offering",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:${OfferingId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -817,12 +817,12 @@
         "resources": {
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -833,19 +833,19 @@
         "privilege": "DescribeSchedule",
         "description": "Grants permission to view a list of actions scheduled on a channel",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-actions-schedule.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/schedule-using-console-view.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -876,7 +876,7 @@
         "privilege": "ListInputDevices",
         "description": "Grants permission to list input devices",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
@@ -916,7 +916,7 @@
         "privilege": "ListMultiplexes",
         "description": "Grants permission to list multiplexes",
         "accessLevel": "List",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/viewing-multiplex-configuration.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex-program-channel.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
@@ -953,60 +953,60 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1023,33 +1023,50 @@
         "privConditions": {
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "The tag for a MediaLive request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             },
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "The tag keys for a MediaLive resource or request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
             "offering": {
                 "resourceName": "offering",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:offering:${OfferingId}",
                 "required": true,
                 "resourceConditions": {}
             },
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
+            }
+        }
+    },
+    "rebootInputDevice": {
+        "privilege": "RebootInputDevice",
+        "description": "Grants permission to reboot an input device",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+        "service": "medialive",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "inputDevice": {
+                "resourceName": "input-device",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
+                "required": true,
+                "resourceConditions": {}
             }
         }
     },
@@ -1064,7 +1081,7 @@
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -1081,15 +1098,32 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
+            }
+        }
+    },
+    "startInputDeviceMaintenanceWindow": {
+        "privilege": "StartInputDeviceMaintenanceWindow",
+        "description": "Grants permission to start a maintenance window for an input device",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/eml-devices.html",
+        "service": "medialive",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "inputDevice": {
+                "resourceName": "input-device",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
+                "required": true,
+                "resourceConditions": {}
             }
         }
     },
@@ -1097,19 +1131,19 @@
         "privilege": "StartMultiplex",
         "description": "Grants permission to start a multiplex",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-a-multiplex.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/start-multiplex.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1127,12 +1161,12 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1143,19 +1177,19 @@
         "privilege": "StopMultiplex",
         "description": "Grants permission to stop a multiplex",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/starting-stopping-a-multiplex.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/stop-multiplex.title.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1173,7 +1207,7 @@
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -1190,12 +1224,12 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1213,12 +1247,12 @@
         "resources": {
             "channel": {
                 "resourceName": "channel",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:channel:${ChannelId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1236,12 +1270,12 @@
         "resources": {
             "input": {
                 "resourceName": "input",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:input:${InputId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1252,14 +1286,14 @@
         "privilege": "UpdateInputDevice",
         "description": "Grants permission to update an input device",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-device.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/device-edit.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "inputDevice": {
                 "resourceName": "input-device",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputDevice:${DeviceId}",
                 "required": true,
                 "resourceConditions": {}
             }
@@ -1272,16 +1306,27 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-input-security-group.html",
         "service": "medialive",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "inputSecurityGroup": {
                 "resourceName": "input-security-group",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:inputSecurityGroup:${InputSecurityGroupId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1292,19 +1337,19 @@
         "privilege": "UpdateMultiplex",
         "description": "Grants permission to update a multiplex",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/medialive/latest/ug/edit-multiplex-program-channel.html",
         "service": "medialive",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1322,12 +1367,12 @@
         "resources": {
             "multiplex": {
                 "resourceName": "multiplex",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:multiplex:${MultiplexId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -1345,12 +1390,12 @@
         "resources": {
             "reservation": {
                 "resourceName": "reservation",
-                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:*",
+                "resourceArn": "arn:${Partition}:medialive:${Region}:${Account}:reservation:${ReservationId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "The tag for a MediaLive resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }

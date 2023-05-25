@@ -6,7 +6,18 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AddTags.html",
         "service": "cloudtrail",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by value associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by value associated with the resource",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "eventdatastore": {
                 "resourceName": "eventdatastore",
@@ -24,7 +35,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -54,7 +71,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by value associated with the resource",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -72,6 +89,23 @@
             }
         }
     },
+    "createServiceLinkedChannel": {
+        "privilege": "CreateServiceLinkedChannel",
+        "description": "Grants permission to create a service-linked channel that specifies the settings for delivery of log data to an AWS service",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "API_CreateServiceLinkedChannel.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:channel/${ChannelId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
     "createTrail": {
         "privilege": "CreateTrail",
         "description": "Grants permission to create a trail that specifies the settings for delivery of log data to an Amazon S3 bucket",
@@ -81,13 +115,30 @@
         "dependentActions": [
             "s3:PutObject"
         ],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by value associated with the resource",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by value associated with the resource",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "trail": {
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -114,6 +165,23 @@
             }
         }
     },
+    "deleteServiceLinkedChannel": {
+        "privilege": "DeleteServiceLinkedChannel",
+        "description": "Grants permission to delete a service-linked channel",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "API_DeleteServiceLinkedChannel.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:channel/${ChannelId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
     "deleteTrail": {
         "privilege": "DeleteTrail",
         "description": "Grants permission to delete a trail",
@@ -127,7 +195,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -174,7 +248,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -191,7 +271,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -204,6 +290,23 @@
         "dependentActions": [],
         "privConditions": {},
         "resources": {}
+    },
+    "getServiceLinkedChannel": {
+        "privilege": "GetServiceLinkedChannel",
+        "description": "Grants permission to list settings for the service-linked channel",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "API_GetServiceLinkedChannel.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:channel/${ChannelId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
     },
     "getTrail": {
         "privilege": "GetTrail",
@@ -228,7 +331,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -262,6 +371,16 @@
         "privConditions": {},
         "resources": {}
     },
+    "listServiceLinkedChannels": {
+        "privilege": "ListServiceLinkedChannels",
+        "description": "Grants permission to list service-linked channels associated with the current region for a specified account",
+        "accessLevel": "List",
+        "apiDocumentationLink": "API_ListServiceLinkedChannels.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
     "listTags": {
         "privilege": "ListTags",
         "description": "Grants permission to list the tags for trails or event data stores in the current region",
@@ -287,7 +406,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -324,7 +449,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -341,7 +472,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -352,7 +489,13 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_RemoveTags.html",
         "service": "cloudtrail",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by value associated with the resource",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
             "eventdatastore": {
                 "resourceName": "eventdatastore",
@@ -370,7 +513,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": false,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -410,7 +559,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -437,7 +592,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     },
@@ -464,6 +625,23 @@
             }
         }
     },
+    "updateServiceLinkedChannel": {
+        "privilege": "UpdateServiceLinkedChannel",
+        "description": "Grants permission to update the settings that specify delivery of log files",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "API_UpdateServiceLinkedChannel.html",
+        "service": "cloudtrail",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "channel": {
+                "resourceName": "channel",
+                "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:channel/${ChannelId}",
+                "required": true,
+                "resourceConditions": {}
+            }
+        }
+    },
     "updateTrail": {
         "privilege": "UpdateTrail",
         "description": "Grants permission to update the settings that specify delivery of log files",
@@ -477,7 +655,13 @@
                 "resourceName": "trail",
                 "resourceArn": "arn:${Partition}:cloudtrail:${Region}:${Account}:trail/${TrailName}",
                 "required": true,
-                "resourceConditions": {}
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by value associated with the resource",
+                        "type": "String"
+                    }
+                }
             }
         }
     }

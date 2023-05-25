@@ -3,7 +3,7 @@
         "privilege": "AssociateGatewayToServer",
         "description": "Grants permission to AssociateGatewayToServer",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_AssociateGatewayToServer.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_AssociateGatewayToServer.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -38,7 +38,7 @@
         "privilege": "Backup",
         "description": "Grants permission to Backup",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_Backup.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_StartBackupJob.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {
@@ -50,7 +50,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -72,7 +72,7 @@
         "privilege": "CreateGateway",
         "description": "Grants permission to to CreateGateway",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_CreateGateway.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_CreateGateway.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {
@@ -84,7 +84,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {}
@@ -93,7 +93,7 @@
         "privilege": "DeleteGateway",
         "description": "Grants permission to DeleteGateway",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteGateway.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_DeleteGateway.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -116,7 +116,7 @@
         "privilege": "DeleteHypervisor",
         "description": "Grants permission to DeleteHypervisor",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DeleteHypervisor.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_DeleteHypervisor.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -139,7 +139,7 @@
         "privilege": "DisassociateGatewayFromServer",
         "description": "Grants permission to DisassociateGatewayFromServer",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DisassociateGatewayFromServer.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_DisassociateGatewayFromServer.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -158,19 +158,19 @@
             }
         }
     },
-    "importHypervisorConfiguration": {
-        "privilege": "ImportHypervisorConfiguration",
-        "description": "Grants permission to ImportHypervisorConfiguration",
-        "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ImportHypervisorConfiguration.html",
+    "getGateway": {
+        "privilege": "GetGateway",
+        "description": "Grants permission to GetGateway",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_GetGateway.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
-            "hypervisor": {
-                "resourceName": "hypervisor",
-                "resourceArn": "arn:${Partition}:backup-gateway::${Account}:hypervisor/${HypervisorId}",
-                "required": false,
+            "gateway": {
+                "resourceName": "gateway",
+                "resourceArn": "arn:${Partition}:backup-gateway::${Account}:gateway/${GatewayId}",
+                "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
@@ -181,31 +181,34 @@
             }
         }
     },
-    "listGateways": {
-        "privilege": "ListGateways",
-        "description": "Grants permission to ListGateways",
+    "getVirtualMachine": {
+        "privilege": "GetVirtualMachine",
+        "description": "Grants permission to GetVirtualMachine",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListGateways.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_GetVirtualMachine.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "virtualmachine": {
+                "resourceName": "virtualmachine",
+                "resourceArn": "arn:${Partition}:backup-gateway::${Account}:vm/${VirtualmachineId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
-    "listHypervisors": {
-        "privilege": "ListHypervisors",
-        "description": "Grants permission to ListHypervisors",
-        "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListHypervisors.html",
-        "service": "backupGateway",
-        "dependentActions": [],
-        "privConditions": {},
-        "resources": {}
-    },
-    "listTagsForResource": {
-        "privilege": "ListTagsForResource",
-        "description": "Grants permission to ListTagsForResource",
-        "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListTagsForResource.html",
+    "importHypervisorConfiguration": {
+        "privilege": "ImportHypervisorConfiguration",
+        "description": "Grants permission to ImportHypervisorConfiguration",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ImportHypervisorConfiguration.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {
@@ -217,7 +220,48 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
+            }
+        },
+        "resources": {}
+    },
+    "listGateways": {
+        "privilege": "ListGateways",
+        "description": "Grants permission to ListGateways",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html",
+        "service": "backupGateway",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listHypervisors": {
+        "privilege": "ListHypervisors",
+        "description": "Grants permission to ListHypervisors",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListHypervisors.html",
+        "service": "backupGateway",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listTagsForResource": {
+        "privilege": "ListTagsForResource",
+        "description": "Grants permission to ListTagsForResource",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListTagsForResource.html",
+        "service": "backupGateway",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the allowed set of values for each of the tags",
                 "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of mandatory tags in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -263,7 +307,7 @@
         "privilege": "ListVirtualMachines",
         "description": "Grants permission to ListVirtualMachines",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListVirtualMachines.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListVirtualMachines.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -273,7 +317,7 @@
         "privilege": "PutMaintenanceStartTime",
         "description": "Grants permission to PutMaintenanceStartTime",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_PutMaintenanceStartTime.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_PutMaintenanceStartTime.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -296,7 +340,7 @@
         "privilege": "Restore",
         "description": "Grants permission to Restore",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_Restore.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_StartRestoreJob.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {
@@ -308,7 +352,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -330,7 +374,7 @@
         "privilege": "TagResource",
         "description": "Grants permission to TagResource",
         "accessLevel": "Tagging",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TagResource.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_TagResource.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {
@@ -342,7 +386,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -388,7 +432,7 @@
         "privilege": "TestHypervisorConfiguration",
         "description": "Grants permission to TestHypervisorConfiguration",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_TestHypervisorConfiguration.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_TestHypervisorConfiguration.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -411,7 +455,7 @@
         "privilege": "UntagResource",
         "description": "Grants permission to UntagResource",
         "accessLevel": "Tagging",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UntagResource.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_UntagResource.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {
@@ -423,7 +467,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of mandatory tags in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -469,7 +513,30 @@
         "privilege": "UpdateGatewayInformation",
         "description": "Grants permission to UpdateGatewayInformation",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateGatewayInformation.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_UpdateGatewayInformation.html",
+        "service": "backupGateway",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "gateway": {
+                "resourceName": "gateway",
+                "resourceArn": "arn:${Partition}:backup-gateway::${Account}:gateway/${GatewayId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by tag-value associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateGatewaySoftwareNow": {
+        "privilege": "UpdateGatewaySoftwareNow",
+        "description": "Grants permission to UpdateGatewaySoftwareNow",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_UpdateGatewaySoftwareNow.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},
@@ -492,7 +559,7 @@
         "privilege": "UpdateHypervisor",
         "description": "Grants permission to UpdateHypervisor",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateHypervisor.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_UpdateHypervisor.html",
         "service": "backupGateway",
         "dependentActions": [],
         "privConditions": {},

@@ -55,6 +55,20 @@
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_BatchGetRepositoryScanningConfiguration.html"
     },
+    "batchImportUpstreamImage": {
+        "privilege": "BatchImportUpstreamImage",
+        "description": "Grants permission to retrieve the image from the upstream registry and import it to your private registry",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_BatchImportUpstreamImage.html"
+    },
     "completeLayerUpload": {
         "privilege": "CompleteLayerUpload",
         "description": "Grants permission to inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed",
@@ -88,12 +102,6 @@
         "description": "Grants permission to create an image repository",
         "accessLevel": "Write",
         "resourceTypes": {
-            "repository": {
-                "resourceType": "repository",
-                "required": true,
-                "conditionKeys": [],
-                "dependentActions": []
-            },
             "": {
                 "resourceType": "",
                 "required": false,
@@ -396,6 +404,15 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_ListTagsForResource.html"
@@ -586,6 +603,15 @@
                 "resourceType": "repository",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },

@@ -17,7 +17,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -64,7 +64,9 @@
         "accessLevel": "Write",
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html",
         "service": "route53resolver",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DescribeVpcs"
+        ],
         "privConditions": {},
         "resources": {
             "resolverQueryLogConfig": {
@@ -120,7 +122,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -177,7 +179,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -211,7 +213,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -245,7 +247,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -279,7 +281,7 @@
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
                 "description": "Filters access by the presence of tag keys in the request",
-                "type": "String"
+                "type": "ArrayOfString"
             }
         },
         "resources": {
@@ -715,7 +717,9 @@
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverQueryLogConfig.html",
         "service": "route53resolver",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DescribeVpcs"
+        ],
         "privConditions": {},
         "resources": {
             "resolverQueryLogConfig": {
@@ -1052,7 +1056,9 @@
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html",
         "service": "route53resolver",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DescribeVpcs"
+        ],
         "privConditions": {},
         "resources": {
             "resolverQueryLogConfig": {
@@ -1075,7 +1081,9 @@
         "accessLevel": "List",
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html",
         "service": "route53resolver",
-        "dependentActions": [],
+        "dependentActions": [
+            "ec2:DescribeVpcs"
+        ],
         "privConditions": {},
         "resources": {
             "resolverQueryLogConfig": {
@@ -1271,8 +1279,31 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_TagResource.html",
         "service": "route53resolver",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the presence of tag key-value pairs in the request",
+                "type": "String"
+            },
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
+            "firewallConfig": {
+                "resourceName": "firewall-config",
+                "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:firewall-config/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "firewallDomainList": {
                 "resourceName": "firewall-domain-list",
                 "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:firewall-domain-list/${ResourceId}",
@@ -1300,6 +1331,18 @@
             "firewallRuleGroupAssociation": {
                 "resourceName": "firewall-rule-group-association",
                 "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:firewall-rule-group-association/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "resolverDnssecConfig": {
+                "resourceName": "resolver-dnssec-config",
+                "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:resolver-dnssec-config/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
@@ -1354,8 +1397,26 @@
         "apiDocumentationLink": "https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UntagResource.html",
         "service": "route53resolver",
         "dependentActions": [],
-        "privConditions": {},
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the presence of tag keys in the request",
+                "type": "ArrayOfString"
+            }
+        },
         "resources": {
+            "firewallConfig": {
+                "resourceName": "firewall-config",
+                "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:firewall-config/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
             "firewallDomainList": {
                 "resourceName": "firewall-domain-list",
                 "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:firewall-domain-list/${ResourceId}",
@@ -1383,6 +1444,18 @@
             "firewallRuleGroupAssociation": {
                 "resourceName": "firewall-rule-group-association",
                 "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:firewall-rule-group-association/${ResourceId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the presence of tag key-value pairs attached to the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "resolverDnssecConfig": {
+                "resourceName": "resolver-dnssec-config",
+                "resourceArn": "arn:${Partition}:route53resolver:${Region}:${Account}:resolver-dnssec-config/${ResourceId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {

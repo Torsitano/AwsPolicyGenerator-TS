@@ -2,12 +2,17 @@
     "association": {
         "resource": "association",
         "arn": "arn:${Partition}:ssm:${Region}:${Account}:association/${AssociationId}",
-        "conditionKeys": []
+        "conditionKeys": [
+            "aws:ResourceTag/${TagKey}"
+        ]
     },
     "automationExecution": {
         "resource": "automation-execution",
         "arn": "arn:${Partition}:ssm:${Region}:${Account}:automation-execution/${AutomationExecutionId}",
-        "conditionKeys": []
+        "conditionKeys": [
+            "aws:ResourceTag/${TagKey}",
+            "ssm:resourceTag/tag-key"
+        ]
     },
     "automationDefinition": {
         "resource": "automation-definition",
@@ -24,7 +29,7 @@
         "arn": "arn:${Partition}:ssm:${Region}:${Account}:document/${DocumentName}",
         "conditionKeys": [
             "aws:ResourceTag/${TagKey}",
-            "ssm:resourceTag/tag-key"
+            "ssm:DocumentCategories"
         ]
     },
     "instance": {
@@ -32,7 +37,7 @@
         "arn": "arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId}",
         "conditionKeys": [
             "aws:ResourceTag/${TagKey}",
-            "ssm:resourceTag/tag-key"
+            "ssm:resourceTag/${TagKey}"
         ]
     },
     "maintenancewindow": {
@@ -68,7 +73,7 @@
         "arn": "arn:${Partition}:ssm:${Region}:${Account}:opsmetadata/${ResourceId}",
         "conditionKeys": [
             "aws:ResourceTag/${TagKey}",
-            "ssm:resourceTag/tag-key"
+            "ssm:resourceTag/${TagKey}"
         ]
     },
     "parameter": {

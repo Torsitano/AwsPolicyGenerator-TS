@@ -12,17 +12,97 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             }
         }
+    },
+    "createAgreement": {
+        "privilege": "CreateAgreement",
+        "description": "Grants permission to add an agreement associated with a server",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateAgreement.html",
+        "service": "transfer",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "createConnector": {
+        "privilege": "CreateConnector",
+        "description": "Grants permission to create a connector",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateConnector.html",
+        "service": "transfer",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "createProfile": {
+        "privilege": "CreateProfile",
+        "description": "Grants permission to create a profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateProfile.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
     },
     "createServer": {
         "privilege": "CreateServer",
@@ -36,12 +116,12 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the tags that are passed in the request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             }
         },
@@ -59,24 +139,24 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the tags that are passed in the request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             }
         },
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -93,12 +173,12 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the tags that are passed in the request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             }
         },
@@ -115,12 +195,127 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteAgreement": {
+        "privilege": "DeleteAgreement",
+        "description": "Grants permission to delete agreement",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteAgreement.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteCertificate": {
+        "privilege": "DeleteCertificate",
+        "description": "Grants permission to delete certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteCertificate.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "certificate": {
+                "resourceName": "certificate",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteConnector": {
+        "privilege": "DeleteConnector",
+        "description": "Grants permission to delete connector",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteConnector.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteHostKey": {
+        "privilege": "DeleteHostKey",
+        "description": "Grants permission to delete a host key associated with a server",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteHostKey.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "hostKey": {
+                "resourceName": "host-key",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "deleteProfile": {
+        "privilege": "DeleteProfile",
+        "description": "Grants permission to delete profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DeleteProfile.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "profile": {
+                "resourceName": "profile",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -138,12 +333,12 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -161,12 +356,12 @@
         "resources": {
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -184,12 +379,12 @@
         "resources": {
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -207,12 +402,12 @@
         "resources": {
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -230,12 +425,81 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeAgreement": {
+        "privilege": "DescribeAgreement",
+        "description": "Grants permission to describe an agreement assigned to a server",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeAgreement.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeCertificate": {
+        "privilege": "DescribeCertificate",
+        "description": "Grants permission to describe a certificate",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeCertificate.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "certificate": {
+                "resourceName": "certificate",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeConnector": {
+        "privilege": "DescribeConnector",
+        "description": "Grants permission to describe a connector",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeConnector.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -253,12 +517,58 @@
         "resources": {
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeHostKey": {
+        "privilege": "DescribeHostKey",
+        "description": "Grants permission to describe a host key associated with a server",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeHostKey.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "hostKey": {
+                "resourceName": "host-key",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "describeProfile": {
+        "privilege": "DescribeProfile",
+        "description": "Grants permission to describe a profile",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_DescribeProfile.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "profile": {
+                "resourceName": "profile",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -286,12 +596,12 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -309,12 +619,12 @@
         "resources": {
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -332,12 +642,67 @@
         "resources": {
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "importCertificate": {
+        "privilege": "ImportCertificate",
+        "description": "Grants permission to add a certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ImportCertificate.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {}
+    },
+    "importHostKey": {
+        "privilege": "ImportHostKey",
+        "description": "Grants permission to add a host key to a server",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ImportHostKey.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {
+            "aws:TagKeys": {
+                "condition": "aws:TagKeys",
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
+            },
+            "aws:RequestTag/${TagKey}": {
+                "condition": "aws:RequestTag/${TagKey}",
+                "description": "Filters access by the tags that are passed in the request",
+                "type": "String"
+            }
+        },
+        "resources": {
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -355,12 +720,12 @@
         "resources": {
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -378,17 +743,60 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             }
         }
+    },
+    "listAgreements": {
+        "privilege": "ListAgreements",
+        "description": "Grants permission to list agreements",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListAgreements.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listCertificates": {
+        "privilege": "ListCertificates",
+        "description": "Grants permission to list certificates",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListCertificates.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
+    },
+    "listConnectors": {
+        "privilege": "ListConnectors",
+        "description": "Grants permission to list connectors",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListConnectors.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "listExecutions": {
         "privilege": "ListExecutions",
@@ -401,17 +809,50 @@
         "resources": {
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             }
         }
+    },
+    "listHostKeys": {
+        "privilege": "ListHostKeys",
+        "description": "Grants permission to list host keys associated with a server",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListHostKeys.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "listProfiles": {
+        "privilege": "ListProfiles",
+        "description": "Grants permission to list profiles",
+        "accessLevel": "Read",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListProfiles.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {}
     },
     "listSecurityPolicies": {
         "privilege": "ListSecurityPolicies",
@@ -435,45 +876,105 @@
     },
     "listTagsForResource": {
         "privilege": "ListTagsForResource",
-        "description": "Grants permission to list tags for a server, a user, or a workflow",
+        "description": "Grants permission to list tags for an AWS Transfer Family resource",
         "accessLevel": "Read",
         "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_ListTagsForResource.html",
         "service": "transfer",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
-            "server": {
-                "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "certificate": {
+                "resourceName": "certificate",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hostKey": {
+                "resourceName": "host-key",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "profile": {
+                "resourceName": "profile",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -491,12 +992,12 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -524,12 +1025,35 @@
         "resources": {
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "startFileTransfer": {
+        "privilege": "StartFileTransfer",
+        "description": "Grants permission to initiate a connector file transfer",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_StartFileTransfer.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -547,12 +1071,12 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -570,12 +1094,12 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -584,7 +1108,7 @@
     },
     "tagResource": {
         "privilege": "TagResource",
-        "description": "Grants permission to tag a server or a user",
+        "description": "Grants permission to tag an AWS Transfer Family resource",
         "accessLevel": "Tagging",
         "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_TagResource.html",
         "service": "transfer",
@@ -592,48 +1116,108 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             },
             "aws:RequestTag/${TagKey}": {
                 "condition": "aws:RequestTag/${TagKey}",
-                "description": "Filters actions based on the tags that are passed in the request",
+                "description": "Filters access by the tags that are passed in the request",
                 "type": "String"
             }
         },
         "resources": {
-            "server": {
-                "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "certificate": {
+                "resourceName": "certificate",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hostKey": {
+                "resourceName": "host-key",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "profile": {
+                "resourceName": "profile",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -651,12 +1235,12 @@
         "resources": {
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -665,7 +1249,7 @@
     },
     "untagResource": {
         "privilege": "UntagResource",
-        "description": "Grants permission to untag a server, a user, or a workflow",
+        "description": "Grants permission to untag an AWS Transfer Family resource",
         "accessLevel": "Tagging",
         "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UntagResource.html",
         "service": "transfer",
@@ -673,43 +1257,103 @@
         "privConditions": {
             "aws:TagKeys": {
                 "condition": "aws:TagKeys",
-                "description": "Filters actions based on the tag keys that are passed in the request",
-                "type": "String"
+                "description": "Filters access by the tag keys that are passed in the request",
+                "type": "ArrayOfString"
             }
         },
         "resources": {
-            "server": {
-                "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "certificate": {
+                "resourceName": "certificate",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "hostKey": {
+                "resourceName": "host-key",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "profile": {
+                "resourceName": "profile",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            },
+            "server": {
+                "resourceName": "server",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
+                "required": false,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
             },
             "workflow": {
                 "resourceName": "workflow",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:workflow/${workflowId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:workflow/${WorkflowId}",
                 "required": false,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -728,6 +1372,125 @@
         "privConditions": {},
         "resources": {}
     },
+    "updateAgreement": {
+        "privilege": "UpdateAgreement",
+        "description": "Grants permission to update an agreement",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateAgreement.html",
+        "service": "transfer",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "agreement": {
+                "resourceName": "agreement",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:agreement/${AgreementId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateCertificate": {
+        "privilege": "UpdateCertificate",
+        "description": "Grants permission to update a certificate",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateCertificate.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "certificate": {
+                "resourceName": "certificate",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:certificate/${CertificateId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateConnector": {
+        "privilege": "UpdateConnector",
+        "description": "Grants permission to update a connector",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateConnector.html",
+        "service": "transfer",
+        "dependentActions": [
+            "iam:PassRole"
+        ],
+        "privConditions": {},
+        "resources": {
+            "connector": {
+                "resourceName": "connector",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:connector/${ConnectorId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateHostKey": {
+        "privilege": "UpdateHostKey",
+        "description": "Grants permission to update a host key",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateHostKey.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "hostKey": {
+                "resourceName": "host-key",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:host-key/${ServerId}/${HostKeyId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
+    "updateProfile": {
+        "privilege": "UpdateProfile",
+        "description": "Grants permission to update a profile",
+        "accessLevel": "Write",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateProfile.html",
+        "service": "transfer",
+        "dependentActions": [],
+        "privConditions": {},
+        "resources": {
+            "profile": {
+                "resourceName": "profile",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:profile/${ProfileId}",
+                "required": true,
+                "resourceConditions": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "condition": "aws:ResourceTag/${TagKey}",
+                        "description": "Filters access by the tags associated with the resource",
+                        "type": "String"
+                    }
+                }
+            }
+        }
+    },
     "updateServer": {
         "privilege": "UpdateServer",
         "description": "Grants permission to update the configuration of a server",
@@ -741,12 +1504,12 @@
         "resources": {
             "server": {
                 "resourceName": "server",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:server/${serverId}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:server/${ServerId}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }
@@ -766,12 +1529,12 @@
         "resources": {
             "user": {
                 "resourceName": "user",
-                "resourceArn": "arn:${Partition}:transfer:${region}:${account}:user/${serverId}/${username}",
+                "resourceArn": "arn:${Partition}:transfer:${Region}:${Account}:user/${ServerId}/${UserName}",
                 "required": true,
                 "resourceConditions": {
                     "aws:ResourceTag/${TagKey}": {
                         "condition": "aws:ResourceTag/${TagKey}",
-                        "description": "Filters actions based on the tags associated with the resource",
+                        "description": "Filters access by the tags associated with the resource",
                         "type": "String"
                     }
                 }

@@ -3,7 +3,7 @@
         "privilege": "CreateAction",
         "description": "Grants permission to create an action",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateAction.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateAction.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -13,7 +13,7 @@
         "privilege": "CreateActionTemplate",
         "description": "Grants permission to create an action template",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateActionTemplate.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateActionTemplate.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -23,7 +23,7 @@
         "privilege": "CreateActionTemplateDependency",
         "description": "Grants permission to create an action template dependency",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateActionTemplateDependency.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateActionTemplateDependency.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -33,7 +33,7 @@
         "privilege": "CreateActivity",
         "description": "Grants permission to create an activity",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateActivity.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateActivity.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -43,7 +43,7 @@
         "privilege": "CreateActivityDependency",
         "description": "Grants permission to create an activity dependency",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateActivityDependency.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateActivityDependency.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -53,17 +53,30 @@
         "privilege": "CreateDestination",
         "description": "Grants permission to create a destination",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateDestination.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateDestination.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "siteResource": {
+                "resourceName": "SiteResource",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}",
+                "required": true,
+                "resourceConditions": {
+                    "iotroborunner:SiteResourceId": {
+                        "condition": "iotroborunner:SiteResourceId",
+                        "description": "Filters access by the site's identifier",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "createDestinationRelationship": {
         "privilege": "CreateDestinationRelationship",
         "description": "Grants permission to create a destination relationship",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateDestinationRelationship.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateDestinationRelationship.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -73,7 +86,7 @@
         "privilege": "CreateSite",
         "description": "Grants permission to create a site",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateSite.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateSite.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -83,7 +96,7 @@
         "privilege": "CreateTask",
         "description": "Grants permission to create a task",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateTask.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateTask.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -93,7 +106,7 @@
         "privilege": "CreateTaskDependency",
         "description": "Grants permission to create a task dependency",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateTaskDependency.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateTaskDependency.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -103,27 +116,53 @@
         "privilege": "CreateWorker",
         "description": "Grants permission to create a worker",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateWorker.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateWorker.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "workerFleetResource": {
+                "resourceName": "WorkerFleetResource",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}",
+                "required": true,
+                "resourceConditions": {
+                    "iotroborunner:WorkerFleetResourceId": {
+                        "condition": "iotroborunner:WorkerFleetResourceId",
+                        "description": "Filters access by the worker fleet's identifier",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "createWorkerFleet": {
         "privilege": "CreateWorkerFleet",
         "description": "Grants permission to create a worker fleet",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_CreateWorkerFleet.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_CreateWorkerFleet.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "siteResource": {
+                "resourceName": "SiteResource",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}",
+                "required": true,
+                "resourceConditions": {
+                    "iotroborunner:SiteResourceId": {
+                        "condition": "iotroborunner:SiteResourceId",
+                        "description": "Filters access by the site's identifier",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "deleteAction": {
         "privilege": "DeleteAction",
         "description": "Grants permission to delete an action",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteAction.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteAction.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -146,7 +185,7 @@
         "privilege": "DeleteActionTemplate",
         "description": "Grants permission to delete an action template",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteActionTemplate.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteActionTemplate.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -169,7 +208,7 @@
         "privilege": "DeleteActionTemplateDependency",
         "description": "Grants permission to delete an action template dependency",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteActionTemplateDependency.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteActionTemplateDependency.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -179,7 +218,7 @@
         "privilege": "DeleteActivity",
         "description": "Grants permission to delete an activity",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteActivity.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteActivity.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -202,7 +241,7 @@
         "privilege": "DeleteActivityDependency",
         "description": "Grants permission to delete an activity dependency",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteActivityDependency.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteActivityDependency.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -212,7 +251,7 @@
         "privilege": "DeleteDestination",
         "description": "Grants permission to delete a destination",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteDestination.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteDestination.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -235,7 +274,7 @@
         "privilege": "DeleteDestinationRelationship",
         "description": "Grants permission to delete a destination relationship",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteDestinationRelationship.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteDestinationRelationship.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -258,7 +297,7 @@
         "privilege": "DeleteSite",
         "description": "Grants permission to delete a site",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteSite.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteSite.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -281,7 +320,7 @@
         "privilege": "DeleteTask",
         "description": "Grants permission to delete a task",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteTask.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteTask.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -304,7 +343,7 @@
         "privilege": "DeleteTaskDependency",
         "description": "Grants permission to delete a task dependency",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteTaskDependency.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteTaskDependency.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -314,14 +353,14 @@
         "privilege": "DeleteWorker",
         "description": "Grants permission to delete a worker",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteWorker.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteWorker.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "workerResource": {
                 "resourceName": "WorkerResource",
-                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:worker/${WorkerId}",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}/worker/${WorkerId}",
                 "required": true,
                 "resourceConditions": {
                     "iotroborunner:WorkerResourceId": {
@@ -337,14 +376,14 @@
         "privilege": "DeleteWorkerFleet",
         "description": "Grants permission to delete a worker fleet",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_DeleteWorkerFleet.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_DeleteWorkerFleet.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "workerFleetResource": {
                 "resourceName": "WorkerFleetResource",
-                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:worker-fleet/${WorkerFleetId}",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}",
                 "required": true,
                 "resourceConditions": {
                     "iotroborunner:WorkerFleetResourceId": {
@@ -360,7 +399,7 @@
         "privilege": "GetAction",
         "description": "Grants permission to get an action",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetAction.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetAction.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -383,7 +422,7 @@
         "privilege": "GetActionTemplate",
         "description": "Grants permission to get an action template",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetActionTemplate.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetActionTemplate.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -406,7 +445,7 @@
         "privilege": "GetActivity",
         "description": "Grants permission to get an activity",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetActivity.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetActivity.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -429,7 +468,7 @@
         "privilege": "GetDestination",
         "description": "Grants permission to get a destination",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetDestination.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetDestination.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -452,7 +491,7 @@
         "privilege": "GetDestinationRelationship",
         "description": "Grants permission to get a destination relationship",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetDestinationRelationship.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetDestinationRelationship.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -475,7 +514,7 @@
         "privilege": "GetSite",
         "description": "Grants permission to get a site",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetSite.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetSite.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -498,7 +537,7 @@
         "privilege": "GetTask",
         "description": "Grants permission to get a task",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetTask.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetTask.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -521,14 +560,14 @@
         "privilege": "GetWorker",
         "description": "Grants permission to get a worker",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetWorker.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetWorker.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "workerResource": {
                 "resourceName": "WorkerResource",
-                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:worker/${WorkerId}",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}/worker/${WorkerId}",
                 "required": true,
                 "resourceConditions": {
                     "iotroborunner:WorkerResourceId": {
@@ -544,14 +583,14 @@
         "privilege": "GetWorkerFleet",
         "description": "Grants permission to get a worker fleet",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_GetWorkerFleet.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_GetWorkerFleet.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "workerFleetResource": {
                 "resourceName": "WorkerFleetResource",
-                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:worker-fleet/${WorkerFleetId}",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}",
                 "required": true,
                 "resourceConditions": {
                     "iotroborunner:WorkerFleetResourceId": {
@@ -567,7 +606,7 @@
         "privilege": "ListActionTemplates",
         "description": "Grants permission to list action templates",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListActionTemplates.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListActionTemplates.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -577,7 +616,7 @@
         "privilege": "ListActions",
         "description": "Grants permission to list actions",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListActions.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListActions.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -587,7 +626,7 @@
         "privilege": "ListActivities",
         "description": "Grants permission to list activities",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListActivities.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListActivities.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -597,7 +636,7 @@
         "privilege": "ListDestinationRelationships",
         "description": "Grants permission to list destination relationships",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListDestinationRelationships.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListDestinationRelationships.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -607,7 +646,7 @@
         "privilege": "ListDestinations",
         "description": "Grants permission to list destinations",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListDestinations.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListDestinations.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -617,7 +656,7 @@
         "privilege": "ListSites",
         "description": "Grants permission to list sites",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListSites.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListSites.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -627,7 +666,7 @@
         "privilege": "ListTasks",
         "description": "Grants permission to list tasks",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListTasks.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListTasks.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -637,27 +676,53 @@
         "privilege": "ListWorkerFleets",
         "description": "Grants permission to list worker fleets",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListWorkerFleets.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListWorkerFleets.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "siteResource": {
+                "resourceName": "SiteResource",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}",
+                "required": true,
+                "resourceConditions": {
+                    "iotroborunner:SiteResourceId": {
+                        "condition": "iotroborunner:SiteResourceId",
+                        "description": "Filters access by the site's identifier",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "listWorkers": {
         "privilege": "ListWorkers",
         "description": "Grants permission to list workers",
         "accessLevel": "Read",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_ListWorkers.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_ListWorkers.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
-        "resources": {}
+        "resources": {
+            "siteResource": {
+                "resourceName": "SiteResource",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}",
+                "required": true,
+                "resourceConditions": {
+                    "iotroborunner:SiteResourceId": {
+                        "condition": "iotroborunner:SiteResourceId",
+                        "description": "Filters access by the site's identifier",
+                        "type": "String"
+                    }
+                }
+            }
+        }
     },
     "updateActionState": {
         "privilege": "UpdateActionState",
         "description": "Grants permission to update an action's state",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateActionState.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateActionState.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -680,7 +745,7 @@
         "privilege": "UpdateActivity",
         "description": "Grants permission to update an activity",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateActivity.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateActivity.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -703,7 +768,7 @@
         "privilege": "UpdateDestination",
         "description": "Grants permission to update a destination",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateDestination.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateDestination.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -726,7 +791,7 @@
         "privilege": "UpdateSite",
         "description": "Grants permission to update a site",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateSite.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateSite.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -749,7 +814,7 @@
         "privilege": "UpdateTask",
         "description": "Grants permission to update a task",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateTask.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateTask.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
@@ -772,14 +837,14 @@
         "privilege": "UpdateWorker",
         "description": "Grants permission to update a worker",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateWorker.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateWorker.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "workerResource": {
                 "resourceName": "WorkerResource",
-                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:worker/${WorkerId}",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}/worker/${WorkerId}",
                 "required": true,
                 "resourceConditions": {
                     "iotroborunner:WorkerResourceId": {
@@ -795,14 +860,14 @@
         "privilege": "UpdateWorkerFleet",
         "description": "Grants permission to update a worker fleet",
         "accessLevel": "Write",
-        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/dev/API_UpdateWorkerFleet.html",
+        "apiDocumentationLink": "https://docs.aws.amazon.com/iotroborunner/latest/api/API_UpdateWorkerFleet.html",
         "service": "iotroborunner",
         "dependentActions": [],
         "privConditions": {},
         "resources": {
             "workerFleetResource": {
                 "resourceName": "WorkerFleetResource",
-                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:worker-fleet/${WorkerFleetId}",
+                "resourceArn": "arn:${Partition}:iotroborunner:${Region}:${Account}:site/${SiteId}/worker-fleet/${WorkerFleetId}",
                 "required": true,
                 "resourceConditions": {
                     "iotroborunner:WorkerFleetResourceId": {

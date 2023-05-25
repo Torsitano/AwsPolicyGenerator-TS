@@ -4,8 +4,26 @@
         "description": "Grants permission to add or overwrite one or more tags for a specified AWS resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "association": {
+                "resourceType": "association",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "document": {
                 "resourceType": "document",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "instance": {
+                "resourceType": "instance",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -45,6 +63,21 @@
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "task": {
+                "resourceType": "task",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AddTagsToResource.html"
@@ -82,9 +115,9 @@
         "description": "Grants permission to cancel an in-progress maintenance window execution",
         "accessLevel": "Write",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "maintenancewindow": {
+                "resourceType": "maintenancewindow",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -99,7 +132,10 @@
             "": {
                 "resourceType": "",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },
@@ -126,6 +162,15 @@
                 "resourceType": "managed-instance",
                 "required": false,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "dependentActions": []
             }
         },
@@ -448,6 +493,14 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ssm:resourceTag/tag-key"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DeregisterManagedInstance.html"
@@ -545,9 +598,9 @@
         "description": "Grants permission to view information about a specified association execution",
         "accessLevel": "Read",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "association": {
+                "resourceType": "association",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -559,9 +612,9 @@
         "description": "Grants permission to view all executions for a specified association",
         "accessLevel": "Read",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "association": {
+                "resourceType": "association",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -587,9 +640,9 @@
         "description": "Grants permission to view information about all active and terminated step executions in an Automation workflow",
         "accessLevel": "Read",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -659,13 +712,13 @@
         "resourceTypes": {
             "instance": {
                 "resourceType": "instance",
-                "required": false,
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             },
             "managedInstance": {
                 "resourceType": "managed-instance",
-                "required": false,
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -693,13 +746,13 @@
         "resourceTypes": {
             "instance": {
                 "resourceType": "instance",
-                "required": false,
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             },
             "managedInstance": {
                 "resourceType": "managed-instance",
-                "required": false,
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -809,9 +862,9 @@
         "description": "Grants permission to view details about the tasks that ran during a specified maintenance window execution",
         "accessLevel": "List",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "maintenancewindow": {
+                "resourceType": "maintenancewindow",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -1019,14 +1072,28 @@
         "description": "Grants permission to view details of a specified Automation execution",
         "accessLevel": "Read",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_AutomationExecution.html"
+    },
+    "getCalendar": {
+        "privilege": "GetCalendar",
+        "description": "Grants permission to view details of a specific calendar",
+        "accessLevel": "Read",
+        "resourceTypes": {
+            "document": {
+                "resourceType": "document",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": null
     },
     "getCalendarState": {
         "privilege": "GetCalendarState",
@@ -1061,10 +1128,31 @@
         "description": "Grants permission to view the Session Manager connection status for a specified managed instance",
         "accessLevel": "Read",
         "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "managedInstance": {
+                "resourceType": "managed-instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "task": {
+                "resourceType": "task",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "ssm:resourceTag/${TagKey}",
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "dependentActions": []
             }
         },
@@ -1326,6 +1414,14 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ssm:Recursive"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParametersByPath.html"
@@ -1391,9 +1487,9 @@
         "description": "Grants permission to list versions of the specified association",
         "accessLevel": "List",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "association": {
+                "resourceType": "association",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -1417,7 +1513,7 @@
     "listCommandInvocations": {
         "privilege": "ListCommandInvocations",
         "description": "Grants permission to list information about command invocations sent to a specified instance",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -1431,7 +1527,7 @@
     "listCommands": {
         "privilege": "ListCommands",
         "description": "Grants permission to list the commands sent to a specified instance",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -1549,7 +1645,7 @@
     "listOpsItemEvents": {
         "privilege": "ListOpsItemEvents",
         "description": "Grants permission to view details about OpsItemEvents",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -1563,7 +1659,7 @@
     "listOpsItemRelatedItems": {
         "privilege": "ListOpsItemRelatedItems",
         "description": "Grants permission to view details about OpsItem RelatedItems",
-        "accessLevel": "Read",
+        "accessLevel": "List",
         "resourceTypes": {
             "": {
                 "resourceType": "",
@@ -1623,6 +1719,18 @@
         "description": "Grants permission to view a list of resource tags for a specified resource",
         "accessLevel": "List",
         "resourceTypes": {
+            "association": {
+                "resourceType": "association",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "document": {
                 "resourceType": "document",
                 "required": false,
@@ -1681,6 +1789,20 @@
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ModifyDocumentPermission.html"
+    },
+    "putCalendar": {
+        "privilege": "PutCalendar",
+        "description": "Grants permission to create/edit a specific calendar",
+        "accessLevel": "Write",
+        "resourceTypes": {
+            "document": {
+                "resourceType": "document",
+                "required": true,
+                "conditionKeys": [],
+                "dependentActions": []
+            }
+        },
+        "apiDocumentationLink": null
     },
     "putComplianceItems": {
         "privilege": "PutComplianceItems",
@@ -1746,7 +1868,8 @@
                 "required": false,
                 "conditionKeys": [
                     "aws:RequestTag/${TagKey}",
-                    "aws:TagKeys"
+                    "aws:TagKeys",
+                    "ssm:Overwrite"
                 ],
                 "dependentActions": []
             }
@@ -1831,8 +1954,26 @@
         "description": "Grants permission to remove a specified tag key from a specified resource",
         "accessLevel": "Tagging",
         "resourceTypes": {
+            "association": {
+                "resourceType": "association",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "document": {
                 "resourceType": "document",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "instance": {
+                "resourceType": "instance",
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
@@ -1872,6 +2013,20 @@
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "task": {
+                "resourceType": "task",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RemoveTagsFromResource.html"
@@ -1909,9 +2064,9 @@
         "description": "Grants permission to send a signal to change the current behavior or status of a specified Automation execution",
         "accessLevel": "Write",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -1952,7 +2107,7 @@
                 "required": false,
                 "conditionKeys": [
                     "aws:ResourceTag/${TagKey}",
-                    "ssm:resourceTag/tag-key"
+                    "ssm:resourceTag/${TagKey}"
                 ],
                 "dependentActions": []
             }
@@ -1997,6 +2152,14 @@
                 "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ssm:AutoApprove"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_StartChangeRequestExecution.html"
@@ -2035,7 +2198,7 @@
                 "required": false,
                 "conditionKeys": [
                     "ssm:SessionDocumentAccessCheck",
-                    "ssm:resourceTag/tag-key",
+                    "ssm:resourceTag/${TagKey}",
                     "aws:ResourceTag/${TagKey}"
                 ],
                 "dependentActions": []
@@ -2048,9 +2211,9 @@
         "description": "Grants permission to stop a specified Automation execution that is already in progress",
         "accessLevel": "Write",
         "resourceTypes": {
-            "": {
-                "resourceType": "",
-                "required": false,
+            "automationExecution": {
+                "resourceType": "automation-execution",
+                "required": true,
                 "conditionKeys": [],
                 "dependentActions": []
             }
@@ -2139,6 +2302,14 @@
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ssm:SourceInstanceARN"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": "https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociationStatus.html"
@@ -2207,6 +2378,14 @@
                 "required": false,
                 "conditionKeys": [],
                 "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ssm:SourceInstanceARN"
+                ],
+                "dependentActions": []
             }
         },
         "apiDocumentationLink": null
@@ -2216,10 +2395,24 @@
         "description": "Grants permission to SSM Agent to send a heartbeat signal to the Systems Manager service in the cloud",
         "accessLevel": "Write",
         "resourceTypes": {
+            "instance": {
+                "resourceType": "instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
+            "managedInstance": {
+                "resourceType": "managed-instance",
+                "required": false,
+                "conditionKeys": [],
+                "dependentActions": []
+            },
             "": {
                 "resourceType": "",
                 "required": false,
-                "conditionKeys": [],
+                "conditionKeys": [
+                    "ssm:SourceInstanceARN"
+                ],
                 "dependentActions": []
             }
         },
@@ -2276,6 +2469,14 @@
                 "resourceType": "managed-instance",
                 "required": true,
                 "conditionKeys": [],
+                "dependentActions": []
+            },
+            "": {
+                "resourceType": "",
+                "required": false,
+                "conditionKeys": [
+                    "ssm:resourceTag/tag-key"
+                ],
                 "dependentActions": []
             }
         },
