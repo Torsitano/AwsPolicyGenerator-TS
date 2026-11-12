@@ -1,5 +1,5 @@
 export { Policy } from './awsPolicyGenerator/Policy'
 export { Statement } from './awsPolicyGenerator/statementComponents/Statement'
-export { actionsForResource, actionsForService, describeAction, inspectResource, listResources, listServices } from './awsPolicyGenerator/catalog'
+export { actionsForResource, actionsForService, describeAction, inspectResource, inspectService, listResources, listServices } from './awsPolicyGenerator/catalog'
 export type { ActionDetails } from './awsPolicyGenerator/catalog'
 export * from './awsPolicyGenerator/interfaces/interfaces'

@@ -1,12 +1,20 @@
 import { stringify } from 'yaml'
-import { Effect, Grant, PolicyDocument } from './interfaces/interfaces'
+import { Effect, Grant, PolicyDocument, ServiceGrant } from './interfaces/interfaces'
+import { actionsForService } from './catalog'
 import { Statement } from './statementComponents/Statement'
 
 export class Policy {
     private readonly statements: Statement[] = []
 
-    grant(grant: Grant, effect: `${Effect}` = 'Allow'): this {
-        return this.addStatement(Statement.forResource(grant, effect))
+    grant(grant: Grant | ServiceGrant, effect: `${Effect}` = 'Allow'): this {
+        if ('resource' in grant) {
+            if (typeof grant.resource !== 'string') throw new Error('Supply a resource type for a resource grant')
+            return this.addStatement(Statement.forResource({ ...grant, resource: grant.resource }, effect))
+        }
+        if ('arn' in grant) throw new Error('Supply the resource type when granting access to an ARN')
+        const actions = actionsForService(grant.service, grant.access)
+        if (!actions.length) throw new Error(`No matching actions for ${grant.service} at ${grant.access.join(', ')}`)
+        return this.addStatement(new Statement(effect).addActions(actions).onResources('*'))
     }
 
     addStatement(statement: Statement): this {

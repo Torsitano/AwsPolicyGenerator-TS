@@ -4,7 +4,7 @@ const { spawnSync } = require('node:child_process')
 const { tmpdir } = require('node:os')
 const { join } = require('node:path')
 const { parse } = require('yaml')
-const { Policy, Statement, actionsForResource, actionsForService, inspectResource, describeAction, listServices, listResources } = require('..')
+const { Policy, Statement, actionsForResource, actionsForService, inspectResource, inspectService, describeAction, listServices, listResources } = require('..')
 
 const objects = { service: 's3', resource: 'object', access: ['Write'] }
 const inbox = 'arn:aws:s3:::example-inbox/uploads/*'
@@ -21,6 +21,49 @@ test('resource selection follows catalog classifications, including deletion and
     assert.deepEqual(actionsForResource({ ...objects, access: ['Write', 'Write'] }), actions)
     assert.ok(actionsForResource({ ...objects, access: ['Tagging'] }).includes('s3:PutObjectTagging'))
     assert.ok(actionsForResource({ ...objects, access: ['Permissions management'] }).includes('s3:PutObjectAcl'))
+})
+
+test('service grants cover every prefix, including services without resource types', () => {
+    const catalog = require('../data/catalog.json')
+    for (const [service, definition] of Object.entries(catalog)) {
+        const byLevel = Map.groupBy(Object.entries(definition.actions), ([, action]) => action.level)
+        for (const [level, entries] of byLevel) {
+            const [grant] = new Policy().grant({ service, access: [level] }).build().Statement
+            assert.deepEqual(grant, {
+                Effect: 'Allow', Resource: ['*'],
+                Action: entries.map(([name]) => `${service}:${name}`).sort(),
+            }, `${service} ${level}`)
+        }
+    }
+})
+
+test('service, type, and concrete grants compose across services', () => {
+    const tableArn = 'arn:aws:dynamodb:us-east-1:123456789012:table/orders'
+    const queue = { service: 'sqs', resource: 'queue', access: ['Write'] }
+    const [monitoring, queues, table] = new Policy()
+        .grant({ service: 'cloudwatch', access: ['Read', 'List'] }, 'Deny')
+        .grant(queue)
+        .grant({ service: 'dynamodb', resource: 'table', access: ['Write'], arn: tableArn })
+        .build().Statement
+    assert.deepEqual(monitoring.Resource, ['*'])
+    assert.equal(monitoring.Effect, 'Deny')
+    assert.ok(monitoring.Action.includes('cloudwatch:GetMetricData'))
+    assert.deepEqual(monitoring.Action, inspectService('cloudwatch', ['Read', 'List']).actions.map(a => a.action))
+    assert.deepEqual(queues.Resource, ['arn:aws:sqs:*:*:*'])
+    assert.ok(queues.Action.includes('sqs:SendMessage'))
+    assert.deepEqual(table.Resource, [tableArn])
+    assert.ok(table.Action.includes('dynamodb:PutItem'))
+    assert.ok(!table.Action.includes('dynamodb:GetItem'))
+    assert.ok(!table.Action.includes('dynamodb:DescribeLimits'))
+})
+
+test('an empty or malformed selector never falls through to service-wide access', () => {
+    for (const change of [{ service: 'unknown' }, { access: [] }, { access: ['Admin'] },
+        { resource: undefined }, { resource: '' }, { resource: 'missing' }, { arn: inbox }]) {
+        assert.throws(() => new Policy().grant({ service: 's3', access: ['Write'], ...change }).build())
+    }
+    assert.throws(() => new Policy().grant({ service: 'sqs', access: ['List'] }).build(), /No matching actions/)
+    assert.deepEqual(inspectService('sqs', ['List']).actions, [])
 })
 
 test('separate grants retain their action and ARN pairings', () => {
@@ -134,6 +177,12 @@ test('CLI builds a policy from outside the repository and sends errors to stderr
     const result = cli('grant', 's3', 'object', 'Write', inbox)
     assert.equal(result.status, 0, result.stderr)
     assert.deepEqual(JSON.parse(result.stdout), new Policy().grant({ ...objects, arn: inbox }).build())
+    const service = cli('grant', 'cloudwatch', 'Read,List')
+    assert.equal(service.status, 0, service.stderr)
+    assert.deepEqual(JSON.parse(service.stdout), new Policy().grant({ service: 'cloudwatch', access: ['Read', 'List'] }).build())
+    const explanation = cli('explain', 'compute-optimizer', 'Read')
+    assert.equal(explanation.status, 0, explanation.stderr)
+    assert.deepEqual(JSON.parse(explanation.stdout), inspectService('compute-optimizer', ['Read']))
     const error = cli('grant', 's3', 'object', 'Wrong', inbox)
     assert.notEqual(error.status, 0)
     assert.equal(error.stdout, '')

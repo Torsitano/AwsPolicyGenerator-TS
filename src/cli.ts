@@ -1,20 +1,30 @@
 #!/usr/bin/env node
-import { Access, inspectResource, listResources, listServices, Policy } from './index'
+import { Access, inspectResource, inspectService, listResources, listServices, Policy } from './index'
 
 const usage = [
     'iam-policy services',
     'iam-policy resources SERVICE',
-    'iam-policy explain SERVICE RESOURCE LEVEL[,LEVEL...]',
+    'iam-policy explain SERVICE [RESOURCE] LEVEL[,LEVEL...]',
+    'iam-policy grant SERVICE LEVEL[,LEVEL...]',
     'iam-policy grant SERVICE RESOURCE LEVEL[,LEVEL...] [ARN]',
     'Levels: List, Read, Write, Tagging, "Permissions management"',
 ].join('\n')
+
+function accessLevels(value: string): Access[] {
+    return value.split(',').map(s => s.trim()) as Access[]
+}
 
 function run(args: string[]): unknown {
     const [command, service, resource, levels, arn] = args
     if (command === 'services' && args.length === 1) return listServices()
     if (command === 'resources' && args.length === 2 && service) return listResources(service)
+    if (args.length === 3 && service && resource) {
+        const access = accessLevels(resource)
+        if (command === 'explain') return inspectService(service, access)
+        if (command === 'grant') return new Policy().grant({ service, access }).build()
+    }
     if (service && resource && levels) {
-        const selection = { service, resource, access: levels.split(',').map(s => s.trim()) as Access[] }
+        const selection = { service, resource, access: accessLevels(levels) }
         if (command === 'explain' && args.length === 4) return inspectResource(selection)
         if (command === 'grant' && (args.length === 4 || args.length === 5)) return new Policy().grant({ ...selection, arn }).build()
     }

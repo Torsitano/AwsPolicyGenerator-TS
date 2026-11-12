@@ -9,11 +9,16 @@ export enum AccessLevel {
 export type Access = `${AccessLevel}`
 export type PrivilegeLevel = 'listPrivileges' | 'readPrivileges' | 'writePrivileges' | 'permManPrivileges' | 'tagPrivileges'
 
-export interface ResourceSelection {
+export interface ServiceSelection {
     service: string
-    resource: string
     access: readonly Access[]
 }
+
+export interface ResourceSelection extends ServiceSelection {
+    resource: string
+}
+
+export type ServiceGrant = ServiceSelection & { resource?: never, arn?: never }
 
 export interface AddActionsForResourceParams {
     service: string

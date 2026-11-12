@@ -1,6 +1,6 @@
 # AWS Policy Generator
 
-Ask for **Write on S3 objects**, **Read on IAM roles**, or any other combination of AWS service, resource type, and access level. The generator looks up the matching IAM actions in a bundled catalog. Generate a type-wide identity policy, or supply an ARN pattern to narrow its scope.
+Generate AWS IAM identity policies by choosing a service and one or more access levels. A grant can cover a whole service, a resource type, a specific resource ARN, or an ARN pattern. The bundled catalog supplies the matching actions.
 
 ## Try it
 
@@ -9,6 +9,10 @@ Use Node.js 22 or newer. From the repository root:
 ```sh
 npm ci
 npm run build
+node dist/cli.js services
+node dist/cli.js grant cloudwatch Read,List
+node dist/cli.js grant sqs queue Write
+node dist/cli.js grant dynamodb table Write 'arn:aws:dynamodb:us-east-1:123456789012:table/orders'
 node dist/cli.js resources s3
 node dist/cli.js explain s3 object Write
 node dist/cli.js grant s3 object Write
@@ -16,6 +20,15 @@ node dist/cli.js grant s3 object Write 'arn:aws:s3:::media-inbox/uploads/*'
 ```
 
 The last command prints a complete IAM policy to stdout. The selected actions include `s3:PutObject` and `s3:DeleteObject`. `s3:GetObject` belongs to Read, `s3:PutObjectTagging` to Tagging, and `s3:PutObjectAcl` to Permissions management. Write includes deletion. For an upload-only workflow, select individual actions.
+
+| Intent | Example | IAM resource scope |
+| --- | --- | --- |
+| Whole service | `grant cloudwatch Read,List` | `*` with explicit CloudWatch Read and List actions |
+| Every resource of a type | `grant sqs queue Write` | `arn:aws:sqs:*:*:*` across queues in the standard partition |
+| One resource | `grant dynamodb table Write ARN` | The supplied table ARN |
+| A set of resources | `grant iam role Read ARN_PATTERN` | The supplied pattern, such as `arn:aws:iam::123456789012:role/application/*` |
+
+Use `explain cloudwatch Read,List` to inspect a service selection, including actions that require `Resource: "*"`. Because actions are enumerated, a service-wide document for a large service can exceed the IAM size limit for its destination. [IAM policy quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 
 Use `services` to list service prefixes. Use `explain` to see matching actions, the resource's ARN template, condition keys, dependencies, other required resource types, and the AWS reference. To combine levels, pass `Read,List`. Quote `"Permissions management"` as a single argument.
 
@@ -31,6 +44,8 @@ const actions = actionsForResource(objectWrites)
 
 // Each grant binds only its selected actions to its own ARN.
 const policy = new Policy()
+    .grant({ service: 'cloudwatch', access: ['Read', 'List'] })
+    .grant({ service: 'sqs', resource: 'queue', access: ['Write'] })
     .grant({ ...objectWrites, arn: 'arn:aws:s3:::media-inbox/uploads/*' })
     .grant({ service: 's3', resource: 'object', access: ['Read'], arn: 'arn:aws:s3:::media-archive/*' })
 
@@ -41,7 +56,7 @@ Omitting `arn` from a resource grant uses the catalog's ARN template across the 
 
 An ARN pattern can cover a whole resource type within an account. For example, `arn:aws:iam::123456789012:role/*` covers every IAM role in that account, including roles under paths. Resource selection checks the supplied pattern against the selected type's documented ARN shape. AWS evaluates the resulting wildcards. Use the narrowest pattern that expresses your intent.
 
-`actionsForService('s3', ['List'])` returns action names across a service. `describeAction('kms:CreateKey')` describes a single action. `inspectResource(selection).actions` returns per-action details for a particular resource type. A valid selection with zero matching actions returns an empty list for discovery and raises an error when building a grant.
+`actionsForService('s3', ['List'])` returns action names across a service. `inspectService('s3', ['List'])` returns their conditions, required resource types, and dependencies. `describeAction('kms:CreateKey')` describes a single action. `inspectResource(selection).actions` returns per-action details for a particular resource type. A valid selection with zero matching actions returns an empty list for discovery and raises an error when building a grant.
 
 ## Dependencies, conditions, and explicit actions
 

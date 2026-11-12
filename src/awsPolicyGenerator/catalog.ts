@@ -114,6 +114,11 @@ export function actionsForService(prefix: string, access: readonly Access[]): st
         .map(([name]) => `${prefix}:${name}`)
 }
 
+export function inspectService(prefix: string, access: readonly Access[]) {
+    const actions = actionsForService(prefix, access).map(action => describeAction(action))
+    return { service: prefix, reference: serviceFor(prefix).reference, actions }
+}
+
 export function inspectResource({ service: prefix, resource, access }: ResourceSelection) {
     const service = serviceFor(prefix)
     const arnTemplate = lookup(service.resources, resource, `resource type for ${prefix}`).arn
