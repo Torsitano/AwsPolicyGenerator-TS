@@ -1,3 +1,4 @@
+import type { PolicyDocument as CdkPolicyDocument } from 'aws-cdk-lib/aws-iam'
 import { stringify } from 'yaml'
 import { Effect, Grant, PolicyDocument, ServiceGrant } from './interfaces/interfaces'
 import { actionsForService } from './catalog'
@@ -30,6 +31,11 @@ export class Policy {
     build(): PolicyDocument {
         if (!this.statements.length) throw new Error('Add at least one statement to the policy')
         return { Version: '2012-10-17', Statement: this.statements.map(s => s.build()) }
+    }
+
+    toCdk(): CdkPolicyDocument {
+        const { PolicyDocument } = require('aws-cdk-lib/aws-iam') as typeof import('aws-cdk-lib/aws-iam')
+        return PolicyDocument.fromJson(this.build())
     }
 
     toJson(): string { return JSON.stringify(this.build(), null, 2) }

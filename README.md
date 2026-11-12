@@ -2,7 +2,31 @@
 
 Generate AWS IAM identity policies by choosing a service and one or more access levels. A grant can cover a whole service, a resource type, a specific resource ARN, or an ARN pattern. The bundled catalog supplies the matching actions.
 
-## Try it
+## Use in an AWS CDK stack
+
+Chain `Policy.grant()` calls in your TypeScript stack, then call `toCdk()` for a native `iam.PolicyDocument`. In this example, `orders` is a DynamoDB table, `inbox` is an S3 bucket, and `workerRole` is the IAM role for the application.
+
+```ts
+import * as iam from 'aws-cdk-lib/aws-iam'
+import { Policy } from 'awspolicygenerator-ts'
+
+// Inside the CDK stack constructor
+const document = new Policy()
+    .grant({ service: 'dynamodb', resource: 'table', access: ['Read'], arn: orders.tableArn })
+    .grant({ service: 's3', resource: 'object', access: ['Write'], arn: inbox.arnForObjects('uploads/*') })
+    .grant({ service: 'cloudwatch', access: ['Read', 'List'] })
+    .toCdk()
+
+new iam.Policy(this, 'WorkerAccess', { document, roles: [workerRole] })
+```
+
+The first grant binds reads to the table created by the stack. The second binds writes to the bucket's uploads prefix. The third covers CloudWatch across resources. You can also pass the document to a role's `inlinePolicies`, or pass `Statement.toCdk()` to `role.addToPrincipalPolicy()` when you need one statement.
+
+The library uses your app's `aws-cdk-lib` v2 peer dependency. CDK preserves references such as `orders.tableArn` through synthesis and emits the corresponding CloudFormation intrinsics. For an opaque ARN token, the caller supplies its service and resource type. Literal ARNs and visible fields of assembled ARNs are checked against the catalog. [CDK PolicyDocument](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_iam.PolicyDocument.html)
+
+To install this checkout into a separate CDK app using Node 22 or newer, run `npm ci` and `npm pack` in the generator repository. Then run `npm install /path/to/awspolicygenerator-ts-0.2.0.tgz` in the CDK app.
+
+## Use from the CLI
 
 Use Node.js 22 or newer. From the repository root:
 
@@ -77,7 +101,7 @@ const discoverBuckets = new Statement('Allow')
 const policy = new Policy().addStatement(upload).addStatement(discoverBuckets)
 ```
 
-`Statement.build()` returns an IAM statement. `Policy.build()` returns a versioned policy document. Both support `toJson()` and `toYaml()`. `Statement.toCdk()` creates an AWS CDK `PolicyStatement` from the same output. Access levels and available conditions are descriptive. Only conditions supplied with operators and values appear in the policy.
+`Statement.build()` returns an IAM statement. `Policy.build()` returns a versioned policy document. Both support `toJson()` and `toYaml()`. `Statement.toCdk()` returns a CDK `PolicyStatement`, and `Policy.toCdk()` returns a CDK `PolicyDocument`. Access levels and available conditions are descriptive. Only conditions supplied with operators and values appear in the policy.
 
 `Statement.fromJson()` and `Statement.fromYaml()` read identity statements with explicit catalog actions, ARN strings or lists, `Effect`, optional `Sid`, and optional `Condition`. They also accept the prototype's lowercase field names. Unsupported fields, wildcard actions, and unknown actions raise errors. Explicit-action statements accept caller-supplied ARNs. The resource-type selector supplies the additional type check.
 

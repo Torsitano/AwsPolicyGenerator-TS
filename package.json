@@ -9,17 +9,20 @@
     "engines": { "node": ">=22" },
     "scripts": {
         "build": "tsc",
-        "test": "npm run build && node --test test/policy.test.cjs",
+        "test": "npm run build && tsc -p test/tsconfig.json && node --test test/policy.test.cjs .test-build/cdk.test.js",
         "prepack": "npm run build",
         "catalog": "cargo run --locked --manifest-path tools/catalog/Cargo.toml --"
     },
     "license": "ISC",
+    "peerDependencies": {
+        "aws-cdk-lib": "^2.80.0"
+    },
     "devDependencies": {
+        "aws-cdk-lib": "^2.276.0",
         "@types/node": "^22.0.0",
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "aws-cdk-lib": "^2.276.0",
         "yaml": "^2.9.1"
     }
 }

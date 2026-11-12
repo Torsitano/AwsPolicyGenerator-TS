@@ -1,3 +1,5 @@
+import { StringConcat, Token, Tokenization } from 'aws-cdk-lib'
+
 // Match literal ARN fields against the upstream resource template. IAM resource names
 // may contain paths (e.g. role/team/name) and some AWS templates use colon separators.
 function escapeRegex(value: string): string {
@@ -31,14 +33,32 @@ export function typeWideScope(template: string, alternatives: Iterable<string | 
     return arn
 }
 
-export function validateArn(arn: string): void {
-    if (typeof arn !== 'string' || !/^arn:aws(?:-[a-z0-9]+)*:[a-z0-9-]+:[^:\s]*:[^:\s]*:[^\s]+$/.test(arn)) {
+// Validate the visible fields of a CDK ARN. A leading token can contain the entire
+// ARN, including when bucket.arnForObjects() appends a path to bucket.bucketArn.
+function arnForValidation(arn: string): string | undefined {
+    if (typeof arn !== 'string') throw new Error('Expected a resource ARN string')
+    if (!Token.isUnresolved(arn)) return arn
+    const fragments = Tokenization.reverseString(arn)
+    if (fragments.firstToken) return undefined
+    // "aws" is a valid placeholder for an unresolved partition, service or name.
+    return fragments.mapTokens({ mapToken: () => 'aws' }).join(new StringConcat())
+}
+
+function checkedArn(arn: string): string | undefined {
+    const visible = arnForValidation(arn)
+    if (visible !== undefined && !/^arn:aws(?:-[a-z0-9]+)*:[a-z0-9-]+:[^:\s]*:[^:\s]*:[^\s]+$/.test(visible)) {
         throw new Error(`Expected a full resource ARN, got ${arn}`)
     }
+    return visible
+}
+
+export function validateArn(arn: string): void {
+    checkedArn(arn)
 }
 
 export function checkScope(arn: string, template: string): void {
-    validateArn(arn)
+    const visible = checkedArn(arn)
+    if (visible === undefined) return
     const fields = arnFields(template)
     const pattern = fields.map((field, index) =>
         field.split(/(\$\{[^}]+\}|\*)/).map(piece => {
@@ -49,7 +69,7 @@ export function checkScope(arn: string, template: string): void {
             return '.+'
         }).join('')
     ).join(':')
-    if (!new RegExp(`^${pattern}$`).test(arn)) {
+    if (!new RegExp(`^${pattern}$`).test(visible)) {
         throw new Error(`Resource ARN ${arn} does not match ${template}`)
     }
 }
