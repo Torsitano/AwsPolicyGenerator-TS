@@ -1,520 +1,183 @@
-import { StatementCondition } from './../interfaces/interfaces'
-import { NormalizedDefinition, PolicyStatement, AccessLevel, AddActionsForResourceParams } from '../interfaces/interfaces'
-import { Action, ResourceOnAction } from './Action'
-import { Condition } from './Condition'
-import { Resource } from './Resource'
-import * as fs from 'fs'
-import { camelize } from 'humps'
 import { parse, stringify } from 'yaml'
-import { PolicyStatement as CdkPolicyStatement } from 'aws-cdk-lib/aws-iam'
+import type { PolicyStatement as CdkPolicyStatement } from 'aws-cdk-lib/aws-iam'
+import { ActionDetails, catalogArn, describeAction, inspectResource, resourceTemplate, sorted } from '../catalog'
+import {
+    Access, AddActionsForResourceParams, Effect, Grant, PolicyStatement, PrivilegeLevel,
+    ResourceSelection, StatementCondition,
+} from '../interfaces/interfaces'
+import { checkScope, typeWideScope, validateArn } from '../scope'
 
-//export type Effect = 'Allow' | 'Deny'
-
-export enum Effect {
-    ALLOW = 'Allow',
-    DENY = 'Deny'
+export { Effect }
+const levels: Record<PrivilegeLevel, Access> = {
+    readPrivileges: 'Read', writePrivileges: 'Write', listPrivileges: 'List',
+    tagPrivileges: 'Tagging', permManPrivileges: 'Permissions management',
 }
 
+function record(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
 
-const iamDefinition: NormalizedDefinition = JSON.parse( fs.readFileSync( `./lib/normalizedDefinition.json`, 'utf-8' ) )
+function strings(value: unknown, label: string): string[] {
+    const values = typeof value === 'string' ? [value] : value
+    if (!Array.isArray(values) || !values.length || !values.every(v => typeof v === 'string' && v.length)) {
+        throw new Error(`${label} must be a string or a nonempty string array`)
+    }
+    return sorted(values)
+}
 
-
-const globalServices: string[] = [ 'account', 'cloudfront', 'iam', 's3' ]
+function conditionBlock(value: unknown): StatementCondition {
+    if (!record(value) || !Object.keys(value).length) throw new Error('Condition must contain an operator')
+    for (const [operator, keys] of Object.entries(value)) {
+        if (!operator || !record(keys) || !Object.keys(keys).length) {
+            throw new Error('Condition operators require a key and value')
+        }
+        for (const [name, operand] of Object.entries(keys)) {
+            const values = Array.isArray(operand) ? operand : [operand]
+            if (!name || !values.length || !values.every(v => typeof v === 'string' || typeof v === 'boolean' || (typeof v === 'number' && Number.isFinite(v)))) {
+                throw new Error(`Invalid condition value for ${operator} ${name}`)
+            }
+        }
+    }
+    return structuredClone(value) as StatementCondition
+}
 
 export class Statement {
-    public readonly effect: Effect
-    public readonly includeRequiredResources: boolean
-    private readonly conditions: Condition[] = []
-    private readonly actions: Action[] = []
-    private readonly resources: Resource[] = []
-    public readonly allowedConditions: Set<string> = new Set<string>()
-    public readonly accessLevels: Set<AccessLevel> = new Set<AccessLevel>()
-    public readonly affectedResources: Set<string> = new Set<string>()
+    public readonly effect: `${Effect}`
+    private readonly actions = new Map<string, ActionDetails>()
+    private scope: string[] = []
+    private selected?: { service: string, resource: string }
+    private conditions?: StatementCondition
+    private sid?: string
 
-
-    constructor ( effect: Effect, includeRequiredResources: boolean = false ) {
+    constructor(effect: `${Effect}` = 'Allow', includeRequiredResources = false) {
+        if (effect !== 'Allow' && effect !== 'Deny') throw new Error(`Invalid effect: ${effect}`)
+        if (includeRequiredResources) throw new Error('Scope additional required resource types explicitly in separate statements')
         this.effect = effect
-        this.includeRequiredResources = includeRequiredResources
     }
 
-    /**
-     * Creates a new Statement object from a JSON IAM policy statement
-     * @param jsonStatement 
-     * @returns 
-     */
-    public static fromJson( jsonStatement: string ): Statement {
-        const parsedStatement: PolicyStatement = JSON.parse( jsonStatement )
-        return Statement.buildFrom( parsedStatement )
+    static forResource(grant: Grant, effect: `${Effect}` = 'Allow'): Statement {
+        return new Statement(effect).selectResource(grant, grant.arn)
     }
 
-    /**
-     * Creates a new Statement object from a YAML IAM policy statement
-     * @param yamlStatement 
-     * @returns 
-     */
-    public static fromYaml( yamlStatement: string ): Statement {
-        const parsedStatement: PolicyStatement = parse( yamlStatement )
-        return Statement.buildFrom( parsedStatement )
-    }
+    static fromJson(input: string): Statement { return Statement.buildFrom(JSON.parse(input)) }
+    static fromYaml(input: string): Statement { return Statement.buildFrom(parse(input)) }
 
-    /**
-     * Creates a new Statement object from a parsed PolicyStatement
-     * Used to generate new Statement objects for the Policy class
-     * @param parsedStatement 
-     * @returns 
-     */
-    public static buildFrom( parsedStatement: PolicyStatement ): Statement {
-
-        const returnStatement = new Statement( parsedStatement.effect )
-        returnStatement.addActions( parsedStatement.action )
-
-        for ( let resource of parsedStatement.resource ) {
-            if ( resource === '*' ) {
-                continue
+    /** Read the supported identity-statement subset. Reject fields that would be lost on export. */
+    static buildFrom(value: unknown): Statement {
+        if (!record(value)) throw new Error('Expected an IAM statement object')
+        const fields = new Map<string, unknown>()
+        for (const [key, item] of Object.entries(value)) {
+            const name = key.toLowerCase()
+            if (!['sid', 'effect', 'action', 'resource', 'condition'].includes(name) || fields.has(name)) {
+                throw new Error(`Unsupported or duplicate statement field: ${key}`)
             }
-            let resourceInfo = Statement.parseResourceArn( resource )
-            if ( resourceInfo.resource != '*' ) {
-                returnStatement.addResource( resourceInfo.service, resourceInfo.resource )
-            }
+            fields.set(name, item)
         }
-
-        return returnStatement
-    }
-
-    /**
-     * 
-     * @param action 
-     * @returns 
-     */
-    private static actionSplit( action: string ): [ string, string ] {
-        let service = action.split( ':' )[ 0 ]
-        let privilege = action.split( ':' )[ 1 ]
-
-        return [ service, privilege ]
-    }
-
-    /**
-     * 
-     */
-    private static parseResourceArn( arn: string ): { service: string, resource: string } {
-        const item: { service: string, resource: string } = { service: '', resource: '' }
-
-        item.service = arn.split( ':' )[ 2 ]
-        item.resource = arn.split( ':' )[ 5 ].split( '/' )[ 0 ]
-
-        return item
-    }
-
-    /**
-     * 
-     * @param props 
-     * @returns 
-     */
-    public addActionsForResource( props: AddActionsForResourceParams ): Statement {
-        let resource = this.createResource( props.service, props.resource, props.resourceArn )
-
-        for ( let privLevel of props.privLevels ) {
-            for ( let privilege of resource[ privLevel ] ) {
-                this.createAction( props.service, privilege )
-            }
+        const effect = fields.get('effect')
+        if (effect !== 'Allow' && effect !== 'Deny') throw new Error('Effect must be Allow or Deny')
+        const statement = new Statement(effect)
+            .addActions(strings(fields.get('action'), 'Action'))
+            .onResources(strings(fields.get('resource'), 'Resource'))
+        if (fields.has('condition')) statement.conditions = conditionBlock(fields.get('condition'))
+        if (fields.has('sid')) {
+            const sid = fields.get('sid')
+            if (typeof sid !== 'string') throw new Error('Sid must be a string')
+            statement.sid = sid
         }
-        this.resources.push( resource )
-
-        return this
-    }
-
-    public addResource( service: string, resource: string ): void {
-        const createdResource = this.createResource( service, resource )
-        const check = this.resources.some(
-            item => item.arn === createdResource.arn
-        )
-
-        if ( !check ) {
-            this.resources.push( createdResource )
-        }
-    }
-
-    /**
-     * 
-     * @param service 
-     * @param resource 
-     * @returns 
-     */
-    private createResource( service: string, resource: string, resourceArn?: string ): Resource {
-        const createdResource = new Resource( iamDefinition.resources[ service ][ resource ], resourceArn )
-        this.addConditions( createdResource )
-        this.resources.push( createdResource )
-
-        return createdResource
-    }
-
-
-    /**
-     * 
-     * @param item 
-     */
-    private addConditions( item: Resource | Action ): void {
-        for ( let condition of item.allowedConditions ) {
-            this.allowedConditions.add( condition )
-        }
-    }
-
-    /**
-     * 
-     * @param actions 
-     * @returns 
-     */
-    public addActions( actions: string[] ): Statement {
-        for ( let action of actions ) {
-            const [ service, privilege ] = Statement.actionSplit( action )
-
-            this.createAction( service, privilege )
-
-        }
-
-        return this
-    }
-
-    /**
-     * 
-     * @param service 
-     * @param privilege 
-     * @returns 
-     */
-    private createAction( service: string, privilege: string ): Action {
-
-        const action = new Action( iamDefinition.privileges[ service ][ camelize( privilege ) ] )
-        this.addConditions( action )
-
-        this.accessLevels.add( action.accessLevel )
-
-        // Checks to see if there is already an action of this type in the statement
-        const check = this.actions.some( item => item.action === action.action )
-
-        // If there is, it won't be added to the array
-        if ( !check ) {
-            this.actions.push( action )
-        }
-
-        return action
-    }
-
-    /**
-     * 
-     */
-    private addDependentActions(): void {
-        const actionList = this.getActions()
-        const dependentActions = this.getDependentActions()
-
-        for ( let dependentAction of dependentActions ) {
-            if ( !actionList.includes( dependentAction ) ) {
-
-                const [ service, privilege ] = Statement.actionSplit( dependentAction )
-                this.createAction( service, privilege )
-                actionList.push( dependentAction )
-
-                //console.log( `Added Dependent Action ${dependentAction}` )
-            }
-        }
-    }
-
-    /**
-     * 
-     * @returns 
-     */
-    public getDependentActions(): string[] {
-        const dependentActions: string[] = []
-
-        for ( let action of this.actions ) {
-            dependentActions.push( ...action.dependentActions )
-        }
-        return dependentActions.sort()
-    }
-
-    /**
-     * 
-     */
-    //@ts-ignore
-    private addRequiredResources(): void {
-        const requiredResources = Action.getRequiredResources( this.actions )
-
-        const resourcesToAdd: ResourceOnAction[] = []
-
-        for ( let requiredResource of requiredResources ) {
-            // Get the service from the Resource ARN
-
-            let match = false
-            const currentResources = this.getResourceArns()
-            for ( let currentResource of currentResources ) {
-                if ( this.compareArns( currentResource, requiredResource.resourceArn ) ) {
-                    match = true
-                }
-            }
-
-            if ( !match ) {
-                resourcesToAdd.push( requiredResource )
-            }
-        }
-        if ( this.includeRequiredResources ) {
-            console.log( `The following resources were listed as required and automatically added:\n` )
-            resourcesToAdd.map( ( resource: ResourceOnAction ): void => {
-                console.log( resource.resourceName )
-                let service = resource.resourceArn.split( ':' )[ 2 ]
-                this.createResource( service, resource.resourceName )
-            } )
-        } else {
-            console.log( `The following resources are listed as required but were not included:\n` )
-            resourcesToAdd.map( ( resource: ResourceOnAction ): void => {
-                console.log( resource.resourceName )
-            } )
-        }
-
-    }
-
-
-    // TODO: Add check for Account as well
-    /**
-     * This method will check the service and resource types of ARNs to determine if a new wildcard ARN should be 
-     * added to the statement. If a specific Resource ARN has been passed in, only that ARN will be in the statement.
-     * If no Resource ARN has been passed in that is a required resource for an Action, then a wildcard ARN will
-     * be added.
-     * @param arn1 
-     * @param arn2 
-     * @returns 
-     */
-    private compareArns( arn1: string, arn2: string ): boolean {
-
-        const arn1Service = arn1.split( ':' )[ 2 ]
-        const arn1ResourceType = arn1.split( ':' )[ 5 ].split( '/' )[ 0 ]
-
-        const arn2Service = arn2.split( ':' )[ 2 ]
-        const arn2ResourceType = arn2.split( ':' )[ 5 ].split( '/' )[ 0 ]
-
-        return ( ( arn1Service == arn2Service ) && ( ( arn1ResourceType == arn2ResourceType ) || ( arn1ResourceType == '*' ) ) )
-    }
-
-
-    // /**
-    //  * 
-    //  * @returns 
-    //  */
-    // public getRequiredResources(): ResourceOnAction[] {
-    //     const requiredResources: ResourceOnAction[] = []
-
-    //     for ( let action of this.actions ) {
-    //         for ( let resource of action.resources ) {
-    //             if ( resource.required ) {
-    //                 const check = requiredResources.some(
-    //                     item => item.resourceArn === resource.resourceArn
-    //                 )
-
-    //                 if ( !check ) {
-    //                     requiredResources.push( resource )
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     return requiredResources.sort()
-    // }
-
-    /**
-     * 
-     */
-    private addServicesForActions(): string[] {
-        const serviceArns: string[] = []
-
-        const actions = this.getActionsWithoutResource()
-        for ( let action of actions ) {
-
-            if ( action.service === 's3' ) {
-                let serviceArn = `arn:\${Partition}:${action.service}:::*`
-
-                if ( !serviceArns.includes( serviceArn ) ) {
-                    serviceArns.push( serviceArn )
-                }
-                continue
-            }
-
-            if ( globalServices.includes( action.service ) ) {
-                let serviceArn = `arn:\${Partition}:${action.service}::\${Account}:*`
-
-                if ( !serviceArns.includes( serviceArn ) ) {
-                    serviceArns.push( serviceArn )
-                }
-
-            } else {
-                let serviceArn = `arn:\${Partition}:${action.service}:\${Region}:\${Account}:*`
-
-                if ( !serviceArns.includes( serviceArn ) ) {
-                    serviceArns.push( serviceArn )
-                }
-            }
-        }
-
-        return serviceArns
-    }
-
-    /**
-     * 
-     * @returns 
-     */
-    public getActions(): string[] {
-        const actionList: string[] = []
-
-        for ( let action of this.actions ) {
-            actionList.push( action.action )
-        }
-
-        return actionList.sort()
-    }
-
-    /**
-     * 
-     */
-    public getActionsWithoutResource(): Action[] {
-        const actions: Action[] = []
-
-        for ( let action of this.actions ) {
-            if ( Object.keys( action.resources ).length === 0 ) {
-                actions.push( action )
-            }
-        }
-
-        return actions
-    }
-
-
-    /**
-     * 
-     * @returns 
-     */
-    public getResources(): string[] {
-        const resourceList: string[] = []
-
-        for ( let resource of this.resources ) {
-            resourceList.push( resource.resource )
-        }
-
-        return resourceList
-    }
-
-    /**
-     * Returns a list of all possible resources that can be affected by the actions on the statement
-     * @returns 
-     */
-    public getAllResourcesForActions(): ResourceOnAction[] {
-        const resourceList: ResourceOnAction[] = []
-
-        for ( let action of this.actions ) {
-            for ( let resource of action.resources ) {
-                const check = resourceList.some(
-                    item => item.resourceArn === resource.resourceArn
-                )
-                if ( !check ) {
-                    resourceList.push( resource )
-                }
-            }
-
-        }
-
-        return resourceList
-    }
-
-    /**
-     * 
-     * @returns A list of all the ARNs from the resources that exist on the statement object
-     */
-    public getResourceArns(): string[] {
-        const arns: string[] = []
-
-        for ( let resource of this.resources ) {
-            if ( !arns.includes( resource.arn ) ) {
-                arns.push( resource.arn )
-            }
-        }
-        arns.push( ...this.addServicesForActions() )
-
-        return arns.sort()
-    }
-
-    /**
-     * 
-     * @param condition 
-     * @param override 
-     * @returns 
-     */
-    public addCondition( condition: string, override: boolean = false ): void {
-        if ( !this.allowedConditions.has( condition ) && override == false ) {
-            console.error(
-                `Condition '${condition}' is not allowed with the current set of actions and resources.` +
-                `\n If you would like to override this and add it anyway, pass a second argument of boolean true.`
-            )
-            return
-        }
-
-        this.conditions.push( new Condition( iamDefinition.conditions[ condition ] ) )
-
-    }
-
-    public getConditions(): StatementCondition {
-        const conditions: StatementCondition = {}
-        for ( let condition of this.conditions ) {
-            conditions[ condition.condition ] = {}
-        }
-
-        return conditions
-    }
-
-
-    /**
-     * 
-     * @returns 
-     */
-    public build(): PolicyStatement {
-
-        this.addDependentActions()
-        this.addRequiredResources()
-
-        const policyStatement: PolicyStatement = {
-            effect: this.effect,
-            action: this.getActions(),
-            resource: this.getResourceArns()
-        }
-
-        if ( this.conditions.length > 0 ) {
-            policyStatement.condition = this.getConditions()
-        }
-
-        return policyStatement
-    }
-
-    /**
-     * 
-     * @returns 
-     */
-    public toJson(): string {
-        return JSON.stringify( this.build(), null, 4 )
-    }
-
-    /**
-     * 
-     * @returns 
-     */
-    public toYaml(): string {
-        return stringify( this.build() )
-    }
-
-    public toCdk(): CdkPolicyStatement {
-        const statement = new CdkPolicyStatement( {
-            actions: this.actions.map( ( action ) => {
-                return action.action
-            } ),
-            effect: this.effect,
-            //resources: this.resources
-        } )
-
         return statement
     }
 
+    selectResource(selection: ResourceSelection, arn?: string): this {
+        const { actions } = inspectResource(selection)
+        if (!actions.length) throw new Error(`No matching actions for ${selection.service}:${selection.resource} at ${selection.access.join(', ')}`)
+        if (this.selected && (this.selected.service !== selection.service || this.selected.resource !== selection.resource)) {
+            throw new Error('Use a separate policy statement for each resource type')
+        }
+        if (arn !== undefined && this.scope.length && (this.scope.length !== 1 || this.scope[0] !== arn)) {
+            throw new Error('Use Policy.grant for a separate resource scope')
+        }
+        const scope = arn === undefined ? this.scope : [arn]
+        for (const target of scope) checkScope(target, resourceTemplate(selection.service, selection.resource))
+        // Resolve all existing actions before mutating, including their resource-specific metadata.
+        const existing = this.getActions().map(action => {
+            if (!action.startsWith(selection.service + ':')) throw new Error(`${action} belongs to a different service`)
+            return describeAction(action, selection.resource)
+        })
+        this.selected = { service: selection.service, resource: selection.resource }
+        this.scope = scope
+        for (const action of [...existing, ...actions]) this.actions.set(action.action, action)
+        return this
+    }
+
+    addActionsForResource(props: AddActionsForResourceParams): this {
+        return this.selectResource({
+            service: props.service, resource: props.resource, access: props.privLevels.map(level => levels[level]),
+        }, props.resourceArn)
+    }
+
+    addActions(names: readonly string[]): this {
+        const additions = names.map(name => {
+            if (this.selected && !name.startsWith(this.selected.service + ':')) {
+                throw new Error(`Use a separate statement for ${name}`)
+            }
+            return describeAction(name, this.selected?.resource)
+        })
+        for (const action of additions) this.actions.set(action.action, action)
+        return this
+    }
+
+    addSpecificActions(names: readonly string[]): this { return this.addActions(names) }
+
+    /** Explicitly set the shared Resource field for every action in this statement. */
+    onResources(arns: string | readonly string[]): this {
+        const next = strings(arns, 'Resource')
+        for (const target of next) {
+            if (this.selected) checkScope(target, resourceTemplate(this.selected.service, this.selected.resource))
+            else if (target !== '*') validateArn(target)
+        }
+        this.scope = next
+        return this
+    }
+
+    withConditions(conditions: StatementCondition): this {
+        this.conditions = conditionBlock(conditions)
+        return this
+    }
+
+    get accessLevels(): Set<Access> { return new Set([...this.actions.values()].map(a => a.accessLevel)) }
+    get allowedConditions(): Set<string> { return new Set([...this.actions.values()].flatMap(a => a.conditionKeys)) }
+    getActions(): string[] { return sorted(this.actions.keys()) }
+    getResourceArns(): string[] {
+        if (this.scope.length || !this.selected) return [...this.scope]
+        const { service, resource } = this.selected
+        const alternatives = sorted([...this.actions.values()].flatMap(a => a.supportedResourceTypes))
+            .filter(name => name !== resource)
+            .map(name => catalogArn(service, name))
+        return [typeWideScope(resourceTemplate(service, resource), alternatives)]
+    }
+    getConditions(): StatementCondition { return structuredClone(this.conditions ?? {}) }
+    getDependentActions(): string[] { return sorted([...this.actions.values()].flatMap(a => a.dependentActions)) }
+
+    build(): PolicyStatement {
+        if (!this.actions.size) throw new Error('Select actions before building a statement')
+        const scope = this.getResourceArns()
+        if (!scope.length) throw new Error('Supply a resource ARN or call onResources before building a statement')
+        if (!scope.includes('*')) {
+            for (const action of this.actions.values()) {
+                if (!action.supportedResourceTypes.length) throw new Error(`${action.action} requires Resource "*"; use a separate statement`)
+            }
+        }
+        return {
+            ...(this.sid === undefined ? {} : { Sid: this.sid }),
+            Effect: this.effect, Action: this.getActions(), Resource: scope,
+            ...(this.conditions === undefined ? {} : { Condition: this.getConditions() }),
+        }
+    }
+
+    toJson(): string { return JSON.stringify(this.build(), null, 2) }
+    toYaml(): string { return stringify(this.build()) }
+    toCdk(): CdkPolicyStatement {
+        const { PolicyStatement } = require('aws-cdk-lib/aws-iam') as typeof import('aws-cdk-lib/aws-iam')
+        return PolicyStatement.fromJson(this.build())
+    }
 }

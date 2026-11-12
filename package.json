@@ -1,32 +1,25 @@
 {
     "name": "awspolicygenerator-ts",
-    "version": "0.1.0",
-    "description": "",
-    "main": "./dist/src/index.js",
-    "types": "./dist/src/index.d.ts",
-    "directories": {
-        "lib": "lib",
-        "test": "test"
-    },
+    "version": "0.2.0",
+    "description": "Build AWS IAM policies by resource type and access level",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "bin": { "iam-policy": "./dist/cli.js" },
+    "files": ["dist", "data"],
+    "engines": { "node": ">=22" },
     "scripts": {
         "build": "tsc",
-        "typedoc": "typedoc",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "npm run build && node --test test/policy.test.cjs",
+        "prepack": "npm run build",
+        "catalog": "cargo run --locked --manifest-path tools/catalog/Cargo.toml --"
     },
-    "keywords": [],
-    "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@types/humps": "^2.0.2",
-        "@types/node": "^20.2.3",
-        "prettier": "^2.8.8",
-        "typedoc": "^0.24.7",
-        "typescript": "^5.0.4"
+        "@types/node": "^22.0.0",
+        "typescript": "^5.9.3"
     },
     "dependencies": {
-        "aws-cdk-lib": "^2.80.0",
-        "humps": "^2.0.1",
-        "lodash": "^4.17.21",
-        "yaml": "^2.3.0"
+        "aws-cdk-lib": "^2.276.0",
+        "yaml": "^2.9.1"
     }
 }

@@ -1,42 +1,29 @@
-import { PolicyStatement } from './interfaces/interfaces'
+import { stringify } from 'yaml'
+import { Effect, Grant, PolicyDocument } from './interfaces/interfaces'
+import { Statement } from './statementComponents/Statement'
 
-import { Statement } from './Statement'
+export class Policy {
+    private readonly statements: Statement[] = []
 
-
-
-
-export class Policy extends PolicyBase {
-    private policyStatements: PolicyStatement[] = []
-
-
-    constructor () {
-        super()
+    grant(grant: Grant, effect: `${Effect}` = 'Allow'): this {
+        return this.addStatement(Statement.forResource(grant, effect))
     }
 
-
-    toYaml(): string {
-        return ''
+    addStatement(statement: Statement): this {
+        this.statements.push(statement)
+        return this
     }
 
-    fromYaml( input: string ): void {
-
+    addStatementsToPolicy(statements: readonly Statement[]): this {
+        this.statements.push(...statements)
+        return this
     }
 
-    toJson(): string {
-        return ''
+    build(): PolicyDocument {
+        if (!this.statements.length) throw new Error('Add at least one statement to the policy')
+        return { Version: '2012-10-17', Statement: this.statements.map(s => s.build()) }
     }
 
-    fromJson( input: string ): void {
-
-    }
-
-    private addStatementToPolicy( statement: Statement ) {
-
-    }
-
-    addStatementsToPolicy( statements: Statement[] ) {
-        for ( let statement of statements ) {
-            this.addStatementToPolicy( statement )
-        }
-    }
+    toJson(): string { return JSON.stringify(this.build(), null, 2) }
+    toYaml(): string { return stringify(this.build()) }
 }
